@@ -1,4 +1,14 @@
+/**
+ * @author <a href="mailto:zi.white.drago@gmail.com">Mihail zi</a>
+ * @version 0.0.1
+ */
 (function($, __FIREobj__){
+/**
+ *  __GLOBAL__ - Текущее состояние главного обьекта
+ * highlight - массив подсветки кода
+ * fireIe - класс отвечающий за работу в браузерах MCIE
+ * fireOther - класс отвечающий за работу в других браузерах
+ */
 	{//global vars
 		var __GLOBAL__;
 		var highlight = __FIREobj__.highlight;
@@ -11,7 +21,7 @@
 			else						var p = fireIe(setting);
 		}
 		{//public vars:
-			p.version = "0.01";
+			p.version = "0.0.1";
 			p.constructor = fireMain;
 			p.textarea = setting.textarea;
 			p.width = (function(p){
