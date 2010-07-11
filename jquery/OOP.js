@@ -1,29 +1,27 @@
 /**
-*
-*	Плагин для создание классического ООП в JavaScript
-*
-**/
+* @projectDescription
+* Пакет ООП утилит для jquery
+* @author <a href="mailto:zi.white.drago@gmail.com">Zi White</a>
+* @version 0.0.3
+*/
 (function($){
+	/**
+	* @class
+	* Это плагин для создания классического ООП в jquery
+	* @constructor
+	*/
 	$.Class=function(object){
-		/**
-		*
-		*	final : false,  Является ли класс финальным экземляром, возможно ли его дальнейшее наследование, по-умолчанию false
-		*	type : "class", Определяет тип создаваемого объекта class или interface, по-умолчанию class
-		*	name : "example", // Имя создаваемого обьекта
-		*	extends : "B",  Класс родитель
-		*	implements : [C,D,E],  Наследуемые интерфейсы
-		*	constructor : function(){}, //Вызывается при создании класса
-		*	public : {},  публичные переменные и методы
-		*	protected : {},  Защищенные методы класса и его наследников
-		*	private : {}  Защищенные методы класса
-		*	action : {}  Объект действий с классами
-		*	__GLOBAL__  : {} Объект содержащий информацию о всех классах
-		*
-		**/
 		try{
-			var	final=false,
-				ext=false,
-				implements=[],
+			/**
+			* Является ли класс финальным экземляром, возможно ли его 
+			* дальнейшее наследование, по-умолчанию <i>false</i>
+			*/
+			var final=false;
+			/**
+			* Наследует ли класс 
+			*/
+			var extend=false;
+			var implements=[],
 				constructor,
 				public={},
 				protected={},
@@ -31,25 +29,34 @@
 				action={},
 				type="class",
 				__GLOBAL__={},
-				IEfix=document.createElement("DIV"),
-				name
-				/*model={
+				name,
+				model={
 					IE:		window.ActiveXObject,
-					MOZZILA:	
-				}*/;
+					MOZZILA:	Object.__defineSetter__ && Object.__defineGetter__
+				};
+			/**
+			*
+			*	Браузер не поддерживает ООП
+			*
+			**/
+			if(!model.IE && !model.MOZZILA) throw(3);
 			__GLOBAL__.__LOG__=[];
-			IEfix.style.display="none";
-			$("body").append(IEfix);
-/**
-*
-*	Проверка начальных условий
-*
-**/
+			if(!window.__GLOBAL__ && model.IE){
+				var	VBClass_id=0;
+			}
+			if(window.__GLOBAL__ && model.IE){
+				var	VBClass_id=++window.__GLOBAL__.VBClass_id;
+			}
+			/**
+			*
+			*	Проверка начальных условий
+			*
+			**/
 			if(object.final)											final=object.final;
 			if(object.type=="class" || object.type=="interface")			type=object.type;
 			if(!object.name)										throw(0);
 			else													name=object.name;
-			if(typeof object.ext=="function")							ext=object.ext;
+			if(typeof object.extend=="function")						extend=object.ext;
 			for(var i=0;typeof object.implements=="array" && i<object.implements.length;i++)
 				if(typeof object.implements[i]=="function") implements.push(object.implements[i]);
 			if(!object.constructor || typeof object.constructor!="function")	throw(1);
@@ -57,20 +64,26 @@
 			if(typeof object.public=="object")							public=object.public;
 			if(typeof object.protected=="object")						protected=object.protected;
 			if(typeof object.private=="object")						private=object.private;
-/**
-*
-*	Eval-строки, дополнительные переменные
-*
-**/
+			/**
+			*
+			*	Дополнительные переменные
+			*	Class - внутреня часть класса
+			*	i - итератор
+			*
+			**/
 			var	i=-1,
 				Class={},
-				toLocal={},
-				__set=[];
-/**
-*
-*	Операции
-*
-**/
+				publicClass={};
+			/**
+			*
+			*	Операции
+			*
+			**/
+			/**
+			*
+			*	Создаем глобальный объект с информацией о классе
+			*
+			**/
 			__GLOBAL__[name]={
 				public:public,
 				protected:protected,
@@ -81,40 +94,173 @@
 				name:name,
 				constructor:constructor
 			};
-			toLocal=__GLOBAL__[name];
-			window[name]=function(){
-				if(!Object.__defineSetter__){
-					var	div=document.createElement("DIV");
+			/**
+			*
+			*	ХАК для IE
+			*
+			**/
+			if(model.IE){
+				/**
+				*
+				*	Создаем iframe
+				*
+				**/
+				var	iframe=document.createElement("iframe"),
+					ieFix={
+						iframeControl:null,
+						code:"",
+						evaluate:function(code, isObject){
+							return this.iframeControl.evaluate(code, !!isObject);
+						},
+						execute:function(code){
+							this.iframeControl.execute(code);
+						},
+						addProp:function(prop){
+							this.code="\tPublic "+prop;
+						},
+						addMethod:function(prop){
+							this.code="\tPublic "+prop;
+						},
+						addGet:function(prop){
+							this.code+=
+							"\tPublic Property Get "+prop+"\n"+
+							"\t\tDim proxy\n"+
+							"\t\tSet proxy = new TypeProxy\n"+
+							"\t\tproxy.load(get_"+prop+"(me))\n"+
+							"\t\tIf IsObject(proxy.value) Then\n"+
+							"\t\t\tSet "+prop+" = proxy.value\n"+
+							"\t\tElse\n"+
+							"\t\t\t"+prop+" = proxy.value\n"+
+							"\t\tEnd If\n"+
+							"\tEnd Property\n"+
+							"\tPublic get_"+prop+"\n";
+						},
+						addSet:function(prop){
+							this.code+=
+							"\tPublic Property Let "+prop+"(val)\n"+
+							"\t\tCall set_"+ prop +"(val)\n"+
+							"\tEnd Property\n"+
+							"\tPublic Property Set "+prop+"(val)\n"+
+							"\t\tCall set_"+prop+"(val)\n"+
+							"\tEnd Property\n"+
+							"\tPublic set_"+prop;
+						},
+						newVBClass:function(){
+							this.execute(
+								"Class Class_"+VBClass_id+"\n"+
+								this.code+
+								"\nEnd Class\n"
+							);
+						},
+						newIns:function(){
+							return this.evaluate("New Class_"+VBClass_id,true);
+						},
+						addTypeProxy:function(){
+							this.execute(
+								"Class TypeProxy\n"+
+								"\tPublic value\n"+
+								"\tPublic Function load(val)\n"+
+								"\t\tIf IsObject(val) Then\n"+
+								"\t\t\tSet value = val\n"+
+								"\t\tElse\n"+
+								"\t\t\tvalue = val\n"+
+								"\t\tEnd If\n"+
+								"\tEnd Function\n"+
+								"End Class\n"
+							);
+						}
+					};
+				$(iframe).hide();
+				$("head").append(iframe);
+				ieFix.iframeControl=iframe.contentWindow;
+				ieFix.iframeControl.document.write(
+				"<html><head><title>VBiframe</title>\n"+
+				"<script type='text/vbscript'>\n"+
+				"Function execute(code)\nExecuteGlobal(code)\nEnd Function\n"+
+				"Function evaluate(code,isObject)\nIf isObject Then\nSet evaluate = Eval(code)\n"+
+				"Else\nevaluate = Eval(code)\nEnd If\nEnd Function\n"+
+				"</script>"+
+				"</head><body></body></html>"
+				);
+				ieFix.iframeControl.document.close();
+				ieFix.addTypeProxy();
+				try{
+					ieFix.evaluate('true');
 				}
-				for(var key in private)
+				catch(e){
+					throw(4);
+				}
+			}
+			/**
+			*
+			*	Создаем класс
+			*
+			**/
+			window[name]=function(){
+				if(model.IE){}
+				/**
+				*
+				*	Заполняем приватные свойства класса
+				*
+				**/
+				for(var key in private){
 					if(typeof private[key]=="function"){
 						Class[key]=private[key];
 					}
-				for(var key in protected)
+				}
+				/**
+				*
+				*	Заполняем защищенные свойства классов
+				*
+				**/
+				for(var key in protected){
 					if(typeof protected[key]=="function"){
 						Class[key]=protected[key];
 					}
+				}
+				/**
+				*
+				*	Заполняем публичный свойства
+				*
+				**/
 				for(var key in public){
 					if(typeof public[key]=="function"){
-						if(Object.__defineSetter__){
+						/**
+						*
+						*	Если модель поддерживает setter/getter в javascript, функции
+						*
+						**/
+						if(model.MOZZILA){
 							Class[key]=public[key];
 							var method=public[key];
 							window[name].prototype[key]=function(){
 								return method.apply(Class,arguments);
 							}
 						}
+						/**
+						*
+						*	если не поддерживает
+						*
+						**/
 						else{
 							Class[key]=public[key];
 							var method=public[key];
-							div[key]=function(){
-								return method.apply(Class,arguments);
-							}
 						}
 					}
 					else{
-						if(Object.__defineSetter__){
+						/**
+						*
+						*	Если это свойство
+						*
+						**/
+						if(model.MOZZILA){
 							window[name].prototype[key]=public[key];
 							Class[key]=window[name].prototype[key];
+							/**
+							*
+							*	вешаем setter/getter в браузерах поддерживающих getter, setter
+							*
+							**/
 							(function(key,name,Class){
 								window[name].prototype.__defineGetter__(key,function(prop){
 									if(__GLOBAL__[name].public[key] && typeof val!="function"){
@@ -128,43 +274,45 @@
 								});
 							})(key,name,Class);
 						}
+						/**
+						*
+						*	
+						*
+						**/
 						else{
-							Class[key]=public[key];
-							div[key]=(function(Class){
-								return Class[key];
-							})(Class,key);
 						}
 					}
 				}
+				/**
+				*
+				*	
+				*
+				**/
 				constructor.apply(Class,arguments);
-				if(!Object.__defineSetter__){
-					$(IEfix).append(div);
-					div.name=name;
-					div.Class=Class;
-					div.onpropertychange=function(){
-						var 	key=window.event.propertyName,
-							val=window.event.srcElement[window.event.propertyName],
-							name=this.name,
-							Class=this.Class;
-						if(typeof val!="function" && __GLOBAL__[name].public[key]){
-							Class[key]=val;
-						}
-					}
-					return div;
+				/**
+				*
+				*	
+				*
+				**/
+				window.__GLOBAL__=__GLOBAL__;
+				if(model.IE){
+					ieFix.newVBClass();
 				}
 			}
-			window.__GLOBAL__=__GLOBAL__;
 		}
-/**
-*
-*	Выполняем обработку ошибок
-*	0 - Отсутствует имя класса
-*	1 - Отсутствует конструктор
-*
-**/
+		/**
+		*
+		*	Выполняем обработку ошибок
+		*	0 - Отсутствует имя класса
+		*	1 - Отсутствует конструктор
+		*	3 - Не поддерживает классы
+		*	4 - Браузер не поддерживает VBscript
+		*
+		**/
 		catch(err){
 			__GLOBAL__.__LOG__.push(err);
 			window.__GLOBAL__=__GLOBAL__;
+			if(console) console.log(__GLOBAL__.__LOG__);
 		}
 	}
 })($);
