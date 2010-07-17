@@ -44,9 +44,8 @@ var ClassModel={
 * @throws <b>Exception</b> 2 Браузер не поддерживает не одну из прелогаемых моделей работы
 * @throws <b>Exception</b> 3 Браузер семейства ie не поддерживает VBscript
 * @throws <b>Exception</b> 4 Неверный тип свойства final
-* @throws <b>Exception</b> 5 Наследуемый объект не является классом
-* @throws <b>Exception</b> 6 Некорректный сегмент public
-* @throws <b>Exception</b> 7 Некорректный сегмент protected
+* @throws <b>Exception</b> 5 Некорректный сегмент public
+* @throws <b>Exception</b> 6 Некорректный сегмент protected
 * @example
 * Class({
 *	final:false,
@@ -82,7 +81,7 @@ Class=function(object){
 		* <br/><b>Присутствие для нового класса:</b> <i>Необязательное</i>
 		* <br/>Родительский класс
 		*/
-		 var extend=false;
+		 var parent=false;
 		/**
 		* @default <i>new Array()</i>
 		* @description
@@ -151,11 +150,8 @@ Class=function(object){
 		else{
 			throw({number:0,description:"Отсутствует или неверное имя класса"});
 		}
-		if(typeof object.extend=="function"){
-			extend=object.ext;
-		}
-		else{
-			throw({number:5,description:"Наследуемый объект не является классом"});
+		if(typeof object.parent=="function"){
+			parent=object.parent;
 		}
 		if(!object.constructor || typeof object.constructor!="function"){
 			throw({number:1,description:"Отсутствует конструктор"});
@@ -167,13 +163,13 @@ Class=function(object){
 			public=object.public;
 		}
 		else{
-			throw({number:6,description:"Некорректный сегмент public"});
+			throw({number:5,description:"Некорректный сегмент public"});
 		}
 		 if(typeof object.protected=="object"){
 			 protected=object.protected;
 		}
 		else{
-			throw({number:7,description:"Некорректный сегмент protected"});
+			throw({number:6,description:"Некорректный сегмент protected"});
 		}
 		for(var i=0;typeof object.implements=="array" && i<object.implements.length;i++){
 			if(typeof object.implements[i]=="function"){
