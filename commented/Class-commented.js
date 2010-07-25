@@ -412,7 +412,14 @@ try{
 			}
 			/** Добавляем новый класс в историю */
 			__Class__[name]={
-				public:public,
+				public:(function(public,implements,parent){
+					var object={};
+					
+					if(parent){
+					
+					}
+					
+				})(public,implements,parent),
 				protected:protected,
 				private:private,
 				get:get,
