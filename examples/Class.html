@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="ru">
 	<head>
-		<title>[EDITOR]</title>
+		<title>[Class example]</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="copyright" href="http://www.gnu.org/copyleft/fdl.html" />
 		<meta name="author" content="zi, 2010" />
@@ -16,15 +16,10 @@ $(document).ready(function(){
 	Class({/* A */
 		name:"A",
 		constructor:function(a,b){
-			console.log("I'm A");
-// 			console.log("I'm constructor and my arguments is "+a+", "+b);
+			$("#examples").html("I'm A and my constructor and my arguments is "+a+", "+b+"<br/>");
 		},
 		public:{
 			A_method:function(a){
-// 				this.A_method_protected()
-// 				this.A_method_protected()
-// 				console.log(self)
-// 				return "hello i'm a method from return ";
 			},
 			abs:10,
 			lol:1
@@ -41,7 +36,7 @@ $(document).ready(function(){
 		},
 		set:{
 			b:function(key,val){
-				console.log(key,val)
+// 				console.log(key,val)
 			}
 		}
 	});
@@ -67,47 +62,18 @@ $(document).ready(function(){
 		implements:[browser],
 		constructor:function(a,b){
 			this.Super()
-// 			console.log("1","2")
 		}
 	});
-	var b=new B("1","2");
-	b.A_method()
-	console.log(b.lol)
-// 	console.log(A.a);
-// 	console.log(browser);
-// 	var B_instance=new B("123","567");
-// 	var A_instance=new A();
-// 	var A_instance1=new A();
-// 	A_instance1.lol=5;
-// 	console.log(A_instance.a);
-// 	console.log(A_instance1.abs);
-// 	console.log(A_instance.abs);
-// 	A_instance.b=11212
-// 	$.Class({
-// 		name:"B",
-// 		extends:A,
-// 		constructor : function(){
-// // // 			console.log("I'm B");
-// 		}
-// 	});
-// 	A_instance.abs=119;
-// 	A_instance.lol=19;
- // setter alert "Content container"
-// 	A_instance.A_method();
-// 	console.log(A_instance.abs)
-// 	console.log(A_instance)
-// 	A_instance.A_method();
-// 	$("textarea.editor").fireEdit({
-// 		css : [
-// 			"./css/editor.css",
-// 			"./css/html.css"
-// 		]
-// 	});
+	//Создаём класс
+	var a=new A("123","567");
+// 	var b=new B("1","2");
+// 	b.A_method()
+// 	console.log(b.lol)
 });
 //]]>
 		</script>
 	</head>
 	<body>
-		<br/>
+		<div id="examples">&nbsp;</div>
 	</body>
 </html>
