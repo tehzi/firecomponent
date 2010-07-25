@@ -521,7 +521,11 @@ try{
 								for(var key in parentObject.protected){
 									if(!(childObject.public[key] || childObject.private[key] || childObject.protected[key]) && $.inArray(key,history[1])==-1){
 										history[1].push(key);
-										instance[key]=parentObject.protected[key];
+										(function(instance,key,parentObject){
+											instance[key]=function(){
+												parentObject.protected[key].apply(instance,arguments);
+											}
+										})(instance,key,parentObject);
 									}
 								}
 							}
@@ -530,9 +534,11 @@ try{
 									if(!(childObject.public[key] || childObject.private[key] || childObject.protected[key]) && $.inArray(key,history[1])==-1){
 										history[1].push(key);
 										if(typeof parentObject.public[key]=="function"){
-											instance[key]=parentObject.public[key];
 											var method=parentObject.public[key];
 											(function(method,instance,key){
+												instance[key]=function(){
+													return method.apply(instance,arguments);
+												}
 												if(ClassModel.OTHER){
 													OTHERprototype[key]=function(){
 														return method.apply(instance,arguments);
@@ -586,7 +592,11 @@ try{
 								for(var key in parentObject.protected){
 									if(!(childObject.public[key] || childObject.private[key] || childObject.protected[key]) && $.inArray(key,history[1])==-1){
 										history[1].push(key);
-										instance[key]=parentObject.protected[key];
+										(function(instance,key,parentObject){
+											instance[key]=function(){
+												parentObject.protected[key].apply(instance,arguments);
+											}
+										})(instance,key,parentObject);
 									}
 								}
 							}
@@ -595,9 +605,11 @@ try{
 									if(!(childObject.public[key] || childObject.private[key] || childObject.protected[key]) && $.inArray(key,history[1])==-1){
 										history[1].push(key);
 										if(typeof parentObject.public[key]=="function"){
-											instance[key]=parentObject.public[key];
 											var method=parentObject.public[key];
 											(function(method,instance,key){
+												instance[key]=function(){
+													return method.apply(instance,arguments);
+												}
 												if(ClassModel.OTHER){
 													OTHERprototype[key]=function(){
 														return method.apply(instance,arguments);
@@ -651,9 +663,11 @@ try{
 					}
 					for(var key in public){
 						if(typeof public[key]=="function"){
-							instance[key]=public[key];
 							var method=public[key];
-							(function(method,instance,key){
+							(function(method,instance,key,OTHERprototype,IEprototype){
+								instance[key]=function(){
+									return method.apply(instance,arguments);
+								}
 								if(ClassModel.OTHER){
 									OTHERprototype[key]=function(){
 										return method.apply(instance,arguments);
@@ -664,7 +678,7 @@ try{
 										return method.apply(instance,arguments);
 									}
 								}
-							})(method,instance,key);
+							})(method,instance,key,OTHERprototype,IEprototype);
 						}
 						else{
 							instance[key]=public[key];

@@ -16,17 +16,18 @@ $(document).ready(function(){
 	Class({/* A */
 		name:"A",
 		constructor:function(a,b){
-			$("#examples").html("I'm A and my constructor and my arguments is "+a+", "+b+"<br/>");
+			$("#examples").html($("#examples").html()+"I'm A and my constructor and my arguments is "+a+", "+b+"<br/>");
+			$("body").click(this.A_method);
 		},
 		public:{
-			A_method:function(a){
+			A_method:function(e){
+				$("#examples").html($("#examples").html()+"My this is this of class A and this.publicProperty is "+this.publicProperty+"<br/>");
 			},
-			abs:10,
-			lol:1
+			publicProperty:1
 		},
 		protected:{
 			A_method_protected:function(){
-				
+				$("#examples").html($("#examples").html()+"I'm protected method.");
 			}
 		},
 		get:{
@@ -36,7 +37,7 @@ $(document).ready(function(){
 		},
 		set:{
 			b:function(key,val){
-// 				console.log(key,val)
+				$("#examples").html($("#examples").html()+" "+key+":"+val+"<br/>");
 			}
 		}
 	});
@@ -45,15 +46,9 @@ $(document).ready(function(){
 		name:"browser",
 		public:{
 			firefox:function(){
-				console.log("browser")
+				$("#examples").html($("#examples").html()+"I'm method from interface"+"<br/>");
 			},
-			abs:1
-		},
-		protected:{
-			A_method_protected:function(){}
-		},
-		private:{
-			
+			publicProperty:123
 		}
 	});
 	Class({/* B */
@@ -61,14 +56,17 @@ $(document).ready(function(){
 		parent:A,
 		implements:[browser],
 		constructor:function(a,b){
-			this.Super()
+			this.Super(a,b);
 		}
 	});
-	//Создаём класс
+	//Создаём класс A
 	var a=new A("123","567");
-// 	var b=new B("1","2");
-// 	b.A_method()
-// 	console.log(b.lol)
+	$("#examples").html($("#examples").html()+"A get method from A: "+a.a+"<br/>");
+	a.b=567;
+	//Создаём класс B
+	var b=new B("1","2");
+	b.firefox();
+	$("#examples").html($("#examples").html()+"Extends property from A: "+b.publicProperty+"<br/>");
 });
 //]]>
 		</script>
