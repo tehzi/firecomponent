@@ -9,11 +9,11 @@
 @import "../css/style.css";
 		</style>
 		<script type="text/javascript" src="../jquery/jquery.js"></script>
-		<script type="text/javascript" src="../eng/Class.js"></script>
+		<script type="text/javascript" src="../Class-min.js"></script>
 		<script type="text/javascript">
 //<![CDATA[
 $(document).ready(function(){
-	Class({/* A */
+	var Main=Class({/* A */
 		name:"A",
 		constructor:function(a,b){
 			$("#examples").html($("#examples").html()+"I'm A and my constructor and my arguments is "+a+", "+b+"<br/>");
@@ -67,6 +67,7 @@ $(document).ready(function(){
 	var b=new B("1","2");
 	b.firefox();
 	$("#examples").html($("#examples").html()+"Extends property from A: "+b.publicProperty+"<br/>");
+	new Main("8","9").b=456;
 });
 //]]>
 		</script>
