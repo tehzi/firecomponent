@@ -414,13 +414,50 @@ try{
 			__Class__[name]={
 				public:(function(public,implements,parent){
 					var object={};
-					
-					if(parent){
-					
+					for(var key in public){
+						object[key]=public[key];
 					}
-					
+					if(parent){
+						for(var key in parent.public){
+							if(!object[key]){
+								object[key]=parent.public[key];
+							}
+						}
+					}
+					if(implements.length>0){
+						for(var i=0;i<implements.length;i++){
+							for(var key in implements[i].public){
+								if(!object[key]){
+									object[key]=implements[i].public[key];
+								}
+							}
+						}
+					}
+					return object;
 				})(public,implements,parent),
-				protected:protected,
+				protected:(function(protected,implements,parent){
+					var object={};
+					for(var key in protected){
+						object[key]=protected[key];
+					}
+					if(parent){
+						for(var key in parent.protected){
+							if(!object[key]){
+								object[key]=protected.protected[key];
+							}
+						}
+					}
+					if(implements.length>0){
+						for(var i=0;i<implements.length;i++){
+							for(var key in implements[i].protected){
+								if(!object[key]){
+									object[key]=implements[i].protected[key];
+								}
+							}
+						}
+					}
+					return object;
+				})(protected,implements,parent),
 				private:private,
 				get:get,
 				set:set,
