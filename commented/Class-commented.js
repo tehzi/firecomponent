@@ -632,6 +632,9 @@ try{
 						className=getClassName(implements[i]);
 						if(__Class__[className]){
 							parentObject=__Class__[className];
+							if(parentObject.constructor){
+								parentObject.constructor();
+							}
 							if(parentObject.protected){
 								for(var key in parentObject.protected){
 									if(!(childObject.public[key] || childObject.private[key] || childObject.protected[key]) && $.inArray(key,history[1])==-1){
@@ -806,7 +809,7 @@ try{
 				return window[name];
 			}
 			if(type=="interface"){
-				(function(private,protected,public,name){
+				(function(private,protected,public,name,constructor){
 					var interface={};
 					window[name]={};
 					if(ClassModel.IE){
@@ -875,7 +878,8 @@ try{
 					if(ClassModel.IE){
 						window[name]=IEobject;
 					}
-				})(private,protected,public,name);
+// 					if(constructor) constructor.call(interface);
+				})(private,protected,public,name,constructor);
 				return window[name];
 			}
 		}
