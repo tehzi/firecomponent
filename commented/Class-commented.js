@@ -566,8 +566,35 @@ try{
 									if(!(childObject.public[key] || childObject.private[key] || childObject.protected[key]) && $.inArray(key,history[1])==-1){
 										history[1].push(key);
 										(function(instance,key,parentObject){
-											instance[key]=function(){
-												parentObject.protected[key].apply(instance,arguments);
+											if(typeof parentObject.protected[key]=="function"){
+												instance[key]=function(){
+													parentObject.protected[key].apply(instance,arguments);
+												}
+											}
+											else{
+												if(typeof parentObject.protected[key]=="string"){
+													var match=parentObject.protected[key].match(/^~([^~]+)~$/i);
+													var match1;
+													var match2;
+													if(match){
+														match1=match[1].match(/^this\.([a-z0-9_]+)(.*)$/i);
+														match2=match[1].match(/^this$/i);
+														if(match1){
+															if(instance[match1[1]]){
+																instance[key]=eval(match1[0].replace("this","instance"));
+															}
+														}
+														if(match2){
+															instance[key]=instance;
+														}
+													}
+													else{
+														instance[key]=parentObject.protected[key];
+													}
+												}
+												else{
+													instance[key]=parentObject.public[key];
+												}
 											}
 										})(instance,key,parentObject);
 									}
@@ -596,7 +623,29 @@ try{
 											})(method,instance,key);
 										}
 										else{
-											instance[key]=parentObject.public[key];
+											if(typeof parentObject.public[key]=="string"){
+												var match=parentObject.public[key].match(/^~([^~]+)~$/i);
+												var match1;
+												var match2;
+												if(match){
+													match1=match[1].match(/^this\.([a-z0-9_]+)(.*)$/i);
+													match2=match[1].match(/^this$/i);
+													if(match1){
+														if(instance[match1[1]]){
+															instance[key]=eval(match1[0].replace("this","instance"));
+														}
+													}
+													if(match2){
+														instance[key]=instance;
+													}
+												}
+												else{
+													instance[key]=parentObject.public[key];
+												}
+											}
+											else{
+												instance[key]=parentObject.public[key];
+											}
 											if(ClassModel.OTHER){
 												(function(OTHERprototype,key,instance,name){
 													OTHERprototype.__defineGetter__(key,function(prop){
@@ -640,8 +689,35 @@ try{
 									if(!(childObject.public[key] || childObject.private[key] || childObject.protected[key]) && $.inArray(key,history[1])==-1){
 										history[1].push(key);
 										(function(instance,key,parentObject){
-											instance[key]=function(){
-												parentObject.protected[key].apply(instance,arguments);
+											if(typeof parentObject.protected[key]=="function"){
+												instance[key]=function(){
+													parentObject.protected[key].apply(instance,arguments);
+												}
+											}
+											else{
+												if(typeof parentObject.protected[key]=="string"){
+													var match=parentObject.protected[key].match(/^~([^~]+)~$/i);
+													var match1;
+													var match2;
+													if(match){
+														match1=match[1].match(/^this\.([a-z0-9_]+)(.*)$/i);
+														match2=match[1].match(/^this$/i);
+														if(match1){
+															if(instance[match1[1]]){
+																instance[key]=eval(match1[0].replace("this","instance"));
+															}
+														}
+														if(match2){
+															instance[key]=instance;
+														}
+													}
+													else{
+														instance[key]=parentObject.protected[key];
+													}
+												}
+												else{
+													instance[key]=parentObject.public[key];
+												}
 											}
 										})(instance,key,parentObject);
 									}
@@ -670,7 +746,29 @@ try{
 											})(method,instance,key);
 										}
 										else{
-											instance[key]=parentObject.public[key];
+											if(typeof parentObject.public[key]=="string"){
+												var match=parentObject.public[key].match(/^~([^~]+)~$/i);
+												var match1;
+												var match2;
+												if(match){
+													match1=match[1].match(/^this\.([a-z0-9_]+)(.*)$/i);
+													match2=match[1].match(/^this$/i);
+													if(match1){
+														if(instance[match1[1]]){
+															instance[key]=eval(match1[0].replace("this","instance"));
+														}
+													}
+													if(match2){
+														instance[key]=instance;
+													}
+												}
+												else{
+													instance[key]=parentObject.public[key];
+												}
+											}
+											else{
+												instance[key]=parentObject.public[key];
+											}
 											if(ClassModel.OTHER){
 												(function(OTHERprototype,key,instance,name){
 													OTHERprototype.__defineGetter__(key,function(prop){
