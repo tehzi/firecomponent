@@ -237,17 +237,19 @@ try{
 * @example
 * Class({
 *	final<a href="#-final">[1]</a>:false<sup></sup>,
-*	parent<sup><a href="#-parent">[2]</a></sup>:false,
-* 	implements<sup><a href="#-implements">[3]</a></sup>:false,
-* 	name<sup><a href="#-name">[4]</a></sup>:"A",
-*	constructor<sup><a href="#-constructor">[5]</a></sup>:function(a,b){},
-*	public<sup><a href="#-public">[6]</a></sup>:{
-*		sample:function(){}
+*	pack<sup><a href="#-pack">[2]</a></sup>:tools,
+*	parent<sup><a href="#-parent">[3]</a></sup>:false,
+* 	implements<sup><a href="#-implements">[4]</a></sup>:false,
+* 	name<sup><a href="#-name">[5]</a></sup>:"A",
+*	constructor<sup><a href="#-constructor">[6]</a></sup>:function(a,b){},
+*	public<sup><a href="#-public">[7]</a></sup>:{
+*		sample:function(){},
+*		sample2:"~this.sample==123~"
 *	},
-*	protected<sup><a href="#-protected">[7]</a></sup>:{},
-*	private<sup><a href="#-private">[8]</a></sup>:{},
-*	set<sup><a href="#-set">[9]</a></sup>:{},
-*	get<sup><a href="#-get">[10]</a></sup>:{}
+*	protected<sup><a href="#-protected">[8]</a></sup>:{},
+*	private<sup><a href="#-private">[9]</a></sup>:{},
+*	set<sup><a href="#-set">[10]</a></sup>:{},
+*	get<sup><a href="#-get">[11]</a></sup>:{}
 * }
 * var instance=new A(123,123);
 * instance.sample();
@@ -261,6 +263,13 @@ try{
 			* <br/>Является ли класс финальным экземпляром, возможно ли его дальнейшее наследование 
 			*/
 			var final=false;
+			/**
+			* @description
+			* <b>Тип данных:</b> <i>Object</i>
+			* <br/><b>Присутствие для нового класса:</b> <i>Необязательное</i>
+			* <br/>Добавляет класс в пакет
+			*/
+			var pack;
 			/**
 			* @default <i>false</i>
 			* @description
@@ -409,6 +418,9 @@ try{
 						implements.push(object.implements[i]);
 					}
 				}
+				if(typeof object.pack=="object"){
+					pack=object.pack;
+				}
 			}
 			/** Добавляем новый класс в историю */
 			__Class__[name]={
@@ -531,11 +543,15 @@ try{
 				}
 				ieFix.newVBClass(__Class__[name].VBid);
 			}
+			/** Абстрактное представление объекта */ 
+			var abstract;
 			/** Создаем Javascript класс */
 			if(type=="class"){
-				/** Если IE создаем новую копию класса */
-				window[name]=function(){
-					/** Создаем область видимости для класса */
+				abstract=function(){
+					/** 
+					* @ignore
+					* Создаем область видимости для класса 
+					*/
 					var instance={};
 					childObject=__Class__[name];
 					if(ClassModel.IE){
@@ -577,12 +593,10 @@ try{
 													var match1;
 													var match2;
 													if(match){
-														match1=match[1].match(/^this\.([a-z0-9_]+)(.*)$/i);
+														match1=match[1].match(/^(.*)$/i);
 														match2=match[1].match(/^this$/i);
 														if(match1){
-															if(instance[match1[1]]){
-																instance[key]=eval(match1[0].replace("this","instance"));
-															}
+															instance[key]=eval(match1[0].replace(/this/g,"instance"));
 														}
 														if(match2){
 															instance[key]=instance;
@@ -628,12 +642,10 @@ try{
 												var match1;
 												var match2;
 												if(match){
-													match1=match[1].match(/^this\.([a-z0-9_]+)(.*)$/i);
+													match1=match[1].match(/^(.*)$/i);
 													match2=match[1].match(/^this$/i);
 													if(match1){
-														if(instance[match1[1]]){
-															instance[key]=eval(match1[0].replace("this","instance"));
-														}
+														instance[key]=eval(match1[0].replace(/this/g,"instance"));
 													}
 													if(match2){
 														instance[key]=instance;
@@ -676,7 +688,10 @@ try{
 							}
 						}
 					}
-					/** Интерфейсы */
+					/**
+					* @ignore
+					* Интерфейсы 
+					*/
 					for(var i=0;i<implements.length;i++){
 						className=getClassName(implements[i]);
 						if(__Class__[className]){
@@ -690,8 +705,9 @@ try{
 										history[1].push(key);
 										(function(instance,key,parentObject){
 											if(typeof parentObject.protected[key]=="function"){
+												var method=parentObject.protected[key];
 												instance[key]=function(){
-													parentObject.protected[key].apply(instance,arguments);
+													return method.apply(instance,arguments);
 												}
 											}
 											else{
@@ -700,12 +716,10 @@ try{
 													var match1;
 													var match2;
 													if(match){
-														match1=match[1].match(/^this\.([a-z0-9_]+)(.*)$/i);
+														match1=match[1].match(/^(.*)$/i);
 														match2=match[1].match(/^this$/i);
 														if(match1){
-															if(instance[match1[1]]){
-																instance[key]=eval(match1[0].replace("this","instance"));
-															}
+															instance[key]=eval(match1[0].replace(/this/g,"instance"));
 														}
 														if(match2){
 															instance[key]=instance;
@@ -751,12 +765,10 @@ try{
 												var match1;
 												var match2;
 												if(match){
-													match1=match[1].match(/^this\.([a-z0-9_]+)(.*)$/i);
+													match1=match[1].match(/^(.*)$/i);
 													match2=match[1].match(/^this$/i);
 													if(match1){
-														if(instance[match1[1]]){
-															instance[key]=eval(match1[0].replace("this","instance"));
-														}
+														instance[key]=eval(match1[0].replace(/this/g,"instance"));
 													}
 													if(match2){
 														instance[key]=instance;
@@ -904,12 +916,19 @@ try{
 						return OTHERprototype;
 					}
 				}
-				return window[name];
+				/** Добавляем класс в пакет */
+				if(pack){
+					pack[name]=abstract;
+				}
+				else{
+					window[name]=abstract
+				}
+				return abstract;
 			}
 			if(type=="interface"){
-				(function(private,protected,public,name,constructor){
+				var abstract=(function(private,protected,public,name,constructor){
 					var interface={};
-					window[name]={};
+					abstract={};
 					if(ClassModel.IE){
 						var IEobject=ieFix.newIns(__Class__[name].VBid);
 						IEobject["typeString"]=function(){
@@ -919,7 +938,7 @@ try{
 					/** Если не IE создаем новую копию класса */
 					if(ClassModel.OTHER){
 						var OTHERobject={};
-						window[name]["typeString"]=function(){
+						abstract["typeString"]=function(){
 							return "[interface "+name+"]";
 						}
 					}
@@ -939,7 +958,7 @@ try{
 								}
 							}
 							if(ClassModel.OTHER){
-								window[name][key]=function(){
+								abstract[key]=function(){
 									return method.apply(interface,arguments);
 								}
 							}
@@ -963,22 +982,30 @@ try{
 									OTHERobject.__defineGetter__(key,function(val){
 										return interface[key];
 									});
-								})(window[name],key,interface,name);
+								})(abstract,key,interface,name);
 								(function(OTHERobject,key,interface,name){
 									OTHERobject.__defineSetter__(key,function(val){
 										interface[key]=val;
 									});
-								})(window[name],key,interface,name);
+								})(abstract,key,interface,name);
 							}
 						}
 					}
 					/** Объект в теле window равен объекту созданным при помощи IE */
 					if(ClassModel.IE){
-						window[name]=IEobject;
+						abstract=IEobject;
 					}
 // 					if(constructor) constructor.call(interface);
+					return abstract;
 				})(private,protected,public,name,constructor);
-				return window[name];
+				/** Добавляем интерфейс в пакет */
+				if(pack){
+					pack[name]=abstract;
+				}
+				else{
+					window[name]=abstract
+				}
+				return abstract;
 			}
 		}
 	}
