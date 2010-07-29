@@ -1,0 +1,192 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="COMM">/**
+<span class='line'>  2</span> * @fileoverview
+<span class='line'>  3</span> * Пакет содержит набор утилит разработаных для проекта firecomponent
+<span class='line'>  4</span> */</span><span class="WHIT">
+<span class='line'>  5</span> </span><span class="COMM">/**
+<span class='line'>  6</span> * @namespace
+<span class='line'>  7</span> * @description
+<span class='line'>  8</span> * &lt;b>Тип данных:&lt;/b> &lt;i>Object&lt;/i>
+<span class='line'>  9</span> * &lt;br/>Пакет предоставляет набор утилит для проекта firecomponent 
+<span class='line'> 10</span> */</span><span class="WHIT">
+<span class='line'> 11</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">tools</span><span class="PUNC">=</span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 12</span> </span><span class="COMM">/**
+<span class='line'> 13</span> * @name browser
+<span class='line'> 14</span> * @class
+<span class='line'> 15</span> * @memberOf tools
+<span class='line'> 16</span> * @example
+<span class='line'> 17</span> * 	Class({
+<span class='line'> 18</span> *		name:"some",
+<span class='line'> 19</span> *		implements:[tools.browser],
+<span class='line'> 20</span> *		constructor:function(){}
+<span class='line'> 21</span> *	});
+<span class='line'> 22</span> *	alert(new some().IE)
+<span class='line'> 23</span> * @description
+<span class='line'> 24</span> * Интерфейс, предоставляющий информацию для работы с текущей версией браузера
+<span class='line'> 25</span> */</span><span class="WHIT">
+<span class='line'> 26</span> </span><span class="NAME">Class</span><span class="PUNC">(</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 27</span> </span><span class="WHIT">	</span><span class="NAME">name</span><span class="PUNC">:</span><span class="STRN">"browser"</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 28</span> </span><span class="WHIT">	</span><span class="NAME">type</span><span class="PUNC">:</span><span class="STRN">"interface"</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 29</span> </span><span class="WHIT">	</span><span class="NAME">pack</span><span class="PUNC">:</span><span class="NAME">tools</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 30</span> </span><span class="WHIT">	</span><span class="COMM">/**
+<span class='line'> 31</span> 	* @name constructor
+<span class='line'> 32</span> 	* @memberOf tools.browser
+<span class='line'> 33</span> 	* @description
+<span class='line'> 34</span> 	* &lt;b>Конструктор класса&lt;/b> : &lt;i>Да&lt;/i>
+<span class='line'> 35</span> 	*/</span><span class="WHIT">
+<span class='line'> 36</span> </span><span class="WHIT">	</span><span class="NAME">constructor</span><span class="PUNC">:</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 37</span> </span><span class="WHIT">	</span><span class="NAME">public</span><span class="PUNC">:</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 38</span> </span><span class="WHIT">		</span><span class="COMM">/**
+<span class='line'> 39</span> 		* @name browser
+<span class='line'> 40</span> 		* @memberOf tools.browser
+<span class='line'> 41</span> 		* @description
+<span class='line'> 42</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Публичная&lt;/i>
+<span class='line'> 43</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>String&lt;/i>
+<span class='line'> 44</span> 		* &lt;br/>&lt;b>Значение:&lt;/b> &lt;i>Another/Firefox/Opera/Safari/Chrome/Internet Explorer&lt;/i>
+<span class='line'> 45</span> 		* &lt;br/>Возвращает строку с названием браузера
+<span class='line'> 46</span> 		*/</span><span class="WHIT">
+<span class='line'> 47</span> </span><span class="WHIT">		</span><span class="NAME">browser</span><span class="PUNC">:</span><span class="PUNC">(</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 48</span> </span><span class="WHIT">			</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">name</span><span class="PUNC">=</span><span class="STRN">"Another"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 49</span> </span><span class="WHIT">			</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">agent</span><span class="PUNC">=</span><span class="NAME">navigator.userAgent.toLowerCase</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 50</span> </span><span class="WHIT">			</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">agent.search</span><span class="PUNC">(</span><span class="STRN">"firefox"</span><span class="PUNC">)</span><span class="PUNC">></span><span class="PUNC">-</span><span class="NUMB">1</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 51</span> </span><span class="WHIT">				</span><span class="NAME">name</span><span class="PUNC">=</span><span class="STRN">"Firefox"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 52</span> </span><span class="WHIT">			</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 53</span> </span><span class="WHIT">			</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">agent.search</span><span class="PUNC">(</span><span class="STRN">"opera"</span><span class="PUNC">)</span><span class="PUNC">></span><span class="PUNC">-</span><span class="NUMB">1</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 54</span> </span><span class="WHIT">				</span><span class="NAME">name</span><span class="PUNC">=</span><span class="STRN">"Opera"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 55</span> </span><span class="WHIT">			</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 56</span> </span><span class="WHIT">			</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">agent.search</span><span class="PUNC">(</span><span class="STRN">"safari"</span><span class="PUNC">)</span><span class="PUNC">></span><span class="PUNC">-</span><span class="NUMB">1</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 57</span> </span><span class="WHIT">				</span><span class="NAME">name</span><span class="PUNC">=</span><span class="STRN">"Safari"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 58</span> </span><span class="WHIT">			</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 59</span> </span><span class="WHIT">			</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">agent.search</span><span class="PUNC">(</span><span class="STRN">"chrome"</span><span class="PUNC">)</span><span class="PUNC">></span><span class="PUNC">-</span><span class="NUMB">1</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 60</span> </span><span class="WHIT">				</span><span class="NAME">name</span><span class="PUNC">=</span><span class="STRN">"Chrome"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 61</span> </span><span class="WHIT">			</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 62</span> </span><span class="WHIT">			</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">agent.search</span><span class="PUNC">(</span><span class="STRN">"msie"</span><span class="PUNC">)</span><span class="PUNC">></span><span class="PUNC">-</span><span class="NUMB">1</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 63</span> </span><span class="WHIT">				</span><span class="NAME">name</span><span class="PUNC">=</span><span class="STRN">"Internet Explorer"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 64</span> </span><span class="WHIT">			</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 65</span> </span><span class="WHIT">			</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">name</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 66</span> </span><span class="WHIT">		</span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 67</span> </span><span class="WHIT">		</span><span class="COMM">/**
+<span class='line'> 68</span> 		* @name IE
+<span class='line'> 69</span> 		* @memberOf tools.browser
+<span class='line'> 70</span> 		* @description
+<span class='line'> 71</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Публичная&lt;/i>
+<span class='line'> 72</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>Boolean&lt;/i>
+<span class='line'> 73</span> 		* &lt;br/>Проверяет является ли браузер членом семейства Internet Explorer
+<span class='line'> 74</span> 		*/</span><span class="WHIT">
+<span class='line'> 75</span> </span><span class="WHIT">		</span><span class="NAME">IE</span><span class="PUNC">:</span><span class="STRN">"~this.browser=='Internet Explorer'~"</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 76</span> </span><span class="WHIT">		</span><span class="COMM">/**
+<span class='line'> 77</span> 		* @name IE6
+<span class='line'> 78</span> 		* @memberOf tools.browser
+<span class='line'> 79</span> 		* @description
+<span class='line'> 80</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Публичная&lt;/i>
+<span class='line'> 81</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>Boolean&lt;/i>
+<span class='line'> 82</span> 		* &lt;br/>Проверяет является ли браузер Internet Explorer'ом 6 версии
+<span class='line'> 83</span> 		*/</span><span class="WHIT">
+<span class='line'> 84</span> </span><span class="WHIT">		</span><span class="NAME">IE6</span><span class="PUNC">:</span><span class="STRN">"~this.IE && this.intertrigoBrowserVersion()=='6.0'~"</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 85</span> </span><span class="WHIT">		</span><span class="COMM">/**
+<span class='line'> 86</span> 		* @name IE7
+<span class='line'> 87</span> 		* @memberOf tools.browser
+<span class='line'> 88</span> 		* @description
+<span class='line'> 89</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Публичная&lt;/i>
+<span class='line'> 90</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>Boolean&lt;/i>
+<span class='line'> 91</span> 		* &lt;br/>Проверяет является ли браузер Internet Explorer'ом 7 версии
+<span class='line'> 92</span> 		*/</span><span class="WHIT">
+<span class='line'> 93</span> </span><span class="WHIT">		</span><span class="NAME">IE7</span><span class="PUNC">:</span><span class="STRN">"~this.IE && this.intertrigoBrowserVersion()=='7.0'~"</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 94</span> </span><span class="WHIT">		</span><span class="COMM">/**
+<span class='line'> 95</span> 		* @name IE8
+<span class='line'> 96</span> 		* @memberOf tools.browser
+<span class='line'> 97</span> 		* @description
+<span class='line'> 98</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Публичная&lt;/i>
+<span class='line'> 99</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>Boolean&lt;/i>
+<span class='line'>100</span> 		* &lt;br/>Проверяет является ли браузер Internet Explorer'ом 8 версии
+<span class='line'>101</span> 		*/</span><span class="WHIT">
+<span class='line'>102</span> </span><span class="WHIT">		</span><span class="NAME">IE8</span><span class="PUNC">:</span><span class="STRN">"~this.IE && this.intertrigoBrowserVersion()=='8.0'~"</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>103</span> </span><span class="WHIT">		</span><span class="COMM">/**
+<span class='line'>104</span> 		* @name Opera
+<span class='line'>105</span> 		* @memberOf tools.browser
+<span class='line'>106</span> 		* @description
+<span class='line'>107</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Публичная&lt;/i>
+<span class='line'>108</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>Boolean&lt;/i>
+<span class='line'>109</span> 		* &lt;br/>Проверяет является ли браузер Oper'ой
+<span class='line'>110</span> 		*/</span><span class="WHIT">
+<span class='line'>111</span> </span><span class="WHIT">		</span><span class="NAME">Opera</span><span class="PUNC">:</span><span class="STRN">"~this.browser=='Opera'~"</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>112</span> </span><span class="WHIT">		</span><span class="COMM">/**
+<span class='line'>113</span> 		* @name Firefox
+<span class='line'>114</span> 		* @memberOf tools.browser
+<span class='line'>115</span> 		* @description
+<span class='line'>116</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Публичная&lt;/i>
+<span class='line'>117</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>Boolean&lt;/i>
+<span class='line'>118</span> 		* &lt;br/>Проверяет является ли браузер Firefox'ом
+<span class='line'>119</span> 		*/</span><span class="WHIT">
+<span class='line'>120</span> </span><span class="WHIT">		</span><span class="NAME">Firefox</span><span class="PUNC">:</span><span class="STRN">"~this.browser=='Firefox'~"</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>121</span> </span><span class="WHIT">		</span><span class="COMM">/**
+<span class='line'>122</span> 		* @name Chrome
+<span class='line'>123</span> 		* @memberOf tools.browser
+<span class='line'>124</span> 		* @description
+<span class='line'>125</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Публичная&lt;/i>
+<span class='line'>126</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>Boolean&lt;/i>
+<span class='line'>127</span> 		* &lt;br/>Проверяет является ли браузер Chrome'ом
+<span class='line'>128</span> 		*/</span><span class="WHIT">
+<span class='line'>129</span> </span><span class="WHIT">		</span><span class="NAME">Chrome</span><span class="PUNC">:</span><span class="STRN">"~this.browser=='Chrome'~"</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>130</span> </span><span class="WHIT">		</span><span class="COMM">/**
+<span class='line'>131</span> 		* @name Safari
+<span class='line'>132</span> 		* @memberOf tools.browser
+<span class='line'>133</span> 		* @description
+<span class='line'>134</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Публичная&lt;/i>
+<span class='line'>135</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>Boolean&lt;/i>
+<span class='line'>136</span> 		* &lt;br/>Проверяет является ли браузер Safari
+<span class='line'>137</span> 		*/</span><span class="WHIT">
+<span class='line'>138</span> </span><span class="WHIT">		</span><span class="NAME">Safari</span><span class="PUNC">:</span><span class="STRN">"~this.browser=='Safari'~"</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>139</span> </span><span class="WHIT">		</span><span class="COMM">/**
+<span class='line'>140</span> 		* @name browserVersion
+<span class='line'>141</span> 		* @memberOf tools.browser
+<span class='line'>142</span> 		* @description
+<span class='line'>143</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Публичная&lt;/i>
+<span class='line'>144</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>String&lt;/i>
+<span class='line'>145</span> 		* &lt;br/>Возвращает строку c версией браузера
+<span class='line'>146</span> 		*/</span><span class="WHIT">
+<span class='line'>147</span> </span><span class="WHIT">		</span><span class="NAME">browserVersion</span><span class="PUNC">:</span><span class="STRN">"~this.intertrigoBrowserVersion()~"</span><span class="WHIT">
+<span class='line'>148</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>149</span> </span><span class="WHIT">	</span><span class="NAME">protected</span><span class="PUNC">:</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>150</span> </span><span class="WHIT">		</span><span class="COMM">/**
+<span class='line'>151</span> 		* @name intertrigoBrowserVersion
+<span class='line'>152</span> 		* @memberOf tools.browser
+<span class='line'>153</span> 		* @type String
+<span class='line'>154</span> 		* @description
+<span class='line'>155</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Защищенная&lt;/i>
+<span class='line'>156</span> 		* &lt;br/>Определяет версию браузера
+<span class='line'>157</span> 		*/</span><span class="WHIT">
+<span class='line'>158</span> </span><span class="WHIT">		</span><span class="NAME">intertrigoBrowserVersion</span><span class="PUNC">:</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>159</span> </span><span class="WHIT">			</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">version</span><span class="PUNC">=</span><span class="STRN">"None"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>160</span> </span><span class="WHIT">			</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">agent</span><span class="PUNC">=</span><span class="NAME">navigator.userAgent.toLowerCase</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>161</span> </span><span class="WHIT">			</span><span class="NAME">version</span><span class="PUNC">=</span><span class="NAME">agent</span><span class="WHIT">
+<span class='line'>162</span> </span><span class="WHIT">			</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">this.IE</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>163</span> </span><span class="WHIT">				</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">version_detect</span><span class="PUNC">=</span><span class="NAME">agent.match</span><span class="PUNC">(</span><span class="REGX">/msie ([0-9]+\.[0-9]+)/i</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>164</span> </span><span class="WHIT">			</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>165</span> </span><span class="WHIT">			</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">this.Opera</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>166</span> </span><span class="WHIT">				</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">version_detect</span><span class="PUNC">=</span><span class="NAME">agent.match</span><span class="PUNC">(</span><span class="REGX">/opera\/([0-9]+\.[0-9]+)/i</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>167</span> </span><span class="WHIT">			</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>168</span> </span><span class="WHIT">			</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">this.Firefox</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>169</span> </span><span class="WHIT">				</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">version_detect</span><span class="PUNC">=</span><span class="NAME">agent.match</span><span class="PUNC">(</span><span class="REGX">/firefox\/([0-9]+\.[0-9]+\.[0-9]+)/i</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>170</span> </span><span class="WHIT">			</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>171</span> </span><span class="WHIT">			</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">this.Chrome</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>172</span> </span><span class="WHIT">				</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">version_detect</span><span class="PUNC">=</span><span class="NAME">agent.match</span><span class="PUNC">(</span><span class="REGX">/chrome\/([0-9]+\.[0-9]+)/i</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>173</span> </span><span class="WHIT">			</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>174</span> </span><span class="WHIT">			</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">this.Safari</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>175</span> </span><span class="WHIT">				</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">version_detect</span><span class="PUNC">=</span><span class="NAME">agent.match</span><span class="PUNC">(</span><span class="REGX">/version\/([0-9]+\.[0-9]+)/i</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>176</span> </span><span class="WHIT">			</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>177</span> </span><span class="WHIT">			</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">version_detect</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>178</span> </span><span class="WHIT">				</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">version_detect</span><span class="PUNC">[</span><span class="NUMB">1</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>179</span> </span><span class="WHIT">					</span><span class="NAME">version</span><span class="PUNC">=</span><span class="NAME">version_detect</span><span class="PUNC">[</span><span class="NUMB">1</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>180</span> </span><span class="WHIT">				</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>181</span> </span><span class="WHIT">			</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>182</span> </span><span class="WHIT">			</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">version</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>183</span> </span><span class="WHIT">		</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>184</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>185</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span></pre></body></html>
