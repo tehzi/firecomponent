@@ -64,3 +64,91 @@ Class({
 		}
 	}
 });
+Class({
+	pack:tools,
+	name:"eventDispatcher",
+	constructor:function(){
+		for(var i=0;i<this.eventList.length;i++){
+			this.eventAll[this.eventList[i]]=[];
+		}
+	},
+	public:{
+		bind:function(_event,_function){
+			if(typeof _event=="string" && typeof _function=="function"){
+				if(this.eventAll[_event]){
+					this.eventAll[_event].push(_function);
+					$(this).bind(_event,_function);
+				}
+			}
+		},
+		unbind:function(_event,_function){
+			if(typeof _event=="string" && typeof _function=="function"){
+				if(this.eventAll[_event]){
+					this.eventAll[_event]=$.grep(this.eventAll[_event],function(key,i){
+ 						return key!==_function;
+					});
+					$(this).unbind(_event,_function);
+				}
+			}
+		}
+	},
+	protected:{
+		eventList:[],
+		eventAll:{},
+		dispatch:function(_event,_arr){
+			var __arr=[];
+			if(typeof _arr=="object"){
+				__arr=_arr;
+			}
+			if(typeof _event=="string"){
+				if(this.eventAll[_event]){
+					$(this).trigger(_event,__arr);
+				}
+			}
+		}
+	}
+});
+Class({
+	pack:tools,
+	parent:tools.eventDispatcher,
+	name:"Timer",
+	constructor:function(delay,repeatCount){
+		this.Super();
+		if(typeof delay=="number"){
+			this.delay=delay;
+		}
+		if(typeof repeatCount=="number"){
+			this.repeatCount=repeatCount;
+		}
+	},
+	public:{
+		currentCount:0,
+		delay:0,
+		repeatCount:0,
+		running:false,
+		start:function(){
+			if(this.delay>0){
+				this.currentCount=0;
+				this.running=true;
+				this.timeLink=setInterval(this.timeExec,this.delay);
+			}
+		},
+		halt:function(){
+			this.running=false;
+			clearInterval(this.timeLink);
+		}
+	},
+	protected:{
+		eventList:["timer","timerComplete"]
+	},
+	private:{
+		timeLink:null,
+		timeExec:function(){
+			this.dispatch("timer",[++this.currentCount]);
+			if(this.repeatCount>0 && this.currentCount==this.repeatCount){
+				this.dispatch("timerComplete",[this.currentCount]);
+				this.halt();
+			}
+		}
+	}
+});

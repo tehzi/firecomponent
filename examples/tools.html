@@ -10,19 +10,29 @@
 		</style>
 		<script type="text/javascript" src="../jquery/jquery.js"></script>
 		<script type="text/javascript" src="../commented/Class-commented.js"></script>
+		<script type="text/javascript" src="../commented/tools-commented.js"></script>
 <!-- 		<script type="text/javascript" src="../eng/Class.js"></script> -->
-		<script type="text/javascript" src="../eng/tools.js"></script>
+<!-- 		<script type="text/javascript" src="../eng/tools.js"></script> -->
 		<script type="text/javascript">
 //<![CDATA[
 $(document).ready(function(){
 	Class({
 		name:"some",
 		implements:[tools.browser],
-		constructor:function(){
-// 			console.log(this)
-		}
+		constructor:function(){}
 	});
-	alert(new some().browserVersion)
+	console.log(new some().browserVersion)
+	var timer=new tools.Timer(2000,2);
+	var _some=function(e,currentCount){
+		console.log(currentCount)
+// 		if(timer.currentCount==5) timer.stop();
+	}
+	timer.bind("timer",_some);
+	timer.unbind("timerComplete",function(e,currentCount){
+		console.log(currentCount)
+	});
+	timer.start()
+// 	if(timer.currentCount==5) timer.stop()
 });
 //]]>
 		</script>

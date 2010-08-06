@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - tools.browser</title>
+		<title>JsDoc Reference - tools.Timer</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -216,7 +216,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Class tools.browser
+				Class tools.Timer
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -224,7 +224,7 @@ ul.inheritsList
 				
 				
 			
-				Интерфейс, предоставляющий информацию для работы с текущей версией браузера
+				Простой таймер облегчающий работу с периодичными функциями
 				
 				
 					<br /><i>Объявлен в файле: </i> <a href="../symbols/src/_home_www_docs_zinc.lo_tools_firecomponent_commented_tools-commented.js.html">tools-commented.js</a>.
@@ -233,7 +233,7 @@ ul.inheritsList
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class tools.browser.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class tools.Timer.">
 				<caption>Class Summary</caption>
 				<thead>
 					<tr>
@@ -246,9 +246,13 @@ ul.inheritsList
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/tools.browser.html#constructor">tools.browser</a></b>()
+								<b><a href="../symbols/tools.Timer.html#constructor">tools.Timer</a></b>()
 							</div>
-							<div class="description"></div>
+							<div class="description"><br/><b>Наследует</b> : <i>tools.eventDispatcher</i>
+<br/><b>Событие</b> : <i>timer</i>
+<br/>Срабатывает каждые this.delay миллисекунд
+<br/><b>Событие</b> : <i>timerComplete</i>
+<br/>Срабатывает когда таймер пройдет количество циклов указанной в переменной repeatCount</div>
 						</td>
 					</tr>
 				</tbody>
@@ -259,7 +263,7 @@ ul.inheritsList
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class tools.browser.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class tools.Timer.">
 					<caption>Все свойства</caption>
 					<thead>
 						<tr>
@@ -273,12 +277,10 @@ ul.inheritsList
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								tools.browser.<b><a href="../symbols/tools.browser.html#.browser">browser</a></b>
+								tools.Timer.<b><a href="../symbols/tools.Timer.html#.currentCount">currentCount</a></b>
 								</div>
 								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>String</i>
-<br/><b>Значение:</b> <i>Another/Firefox/Opera/Safari/Chrome/Internet Explorer</i>
-<br/>Возвращает строку с названием браузера</div>
+<br/>Общее число срабатываний таймера с момента его запуска с нуля.</div>
 							</td>
 						</tr>
 					
@@ -286,11 +288,10 @@ ul.inheritsList
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								tools.browser.<b><a href="../symbols/tools.browser.html#.browserVersion">browserVersion</a></b>
+								tools.Timer.<b><a href="../symbols/tools.Timer.html#.delay">delay</a></b>
 								</div>
 								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>String</i>
-<br/>Возвращает строку c версией браузера</div>
+<br/>Задержка в миллисекундах между событиями таймера.</div>
 							</td>
 						</tr>
 					
@@ -298,11 +299,10 @@ ul.inheritsList
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								tools.browser.<b><a href="../symbols/tools.browser.html#.Chrome">Chrome</a></b>
+								tools.Timer.<b><a href="../symbols/tools.Timer.html#.eventList">eventList</a></b>
 								</div>
-								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>Boolean</i>
-<br/>Проверяет является ли браузер Chrome'ом</div>
+								<div class="description"><b>Область видимости</b> : <i>Защищенная</i>
+<br/>Список событий таймера</div>
 							</td>
 						</tr>
 					
@@ -310,9 +310,10 @@ ul.inheritsList
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								tools.browser.<b><a href="../symbols/tools.browser.html#.constructor">constructor</a></b>
+								tools.Timer.<b><a href="../symbols/tools.Timer.html#.repeatCount">repeatCount</a></b>
 								</div>
-								<div class="description"><b>Конструктор класса</b> : <i>Да</i></div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/>Общее число запусков, на которое настроен таймер.</div>
 							</td>
 						</tr>
 					
@@ -320,83 +321,10 @@ ul.inheritsList
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								tools.browser.<b><a href="../symbols/tools.browser.html#.Firefox">Firefox</a></b>
+								tools.Timer.<b><a href="../symbols/tools.Timer.html#.running">running</a></b>
 								</div>
 								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>Boolean</i>
-<br/>Проверяет является ли браузер Firefox'ом</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								tools.browser.<b><a href="../symbols/tools.browser.html#.IE">IE</a></b>
-								</div>
-								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>Boolean</i>
-<br/>Проверяет является ли браузер членом семейства Internet Explorer</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								tools.browser.<b><a href="../symbols/tools.browser.html#.IE6">IE6</a></b>
-								</div>
-								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>Boolean</i>
-<br/>Проверяет является ли браузер Internet Explorer'ом 6 версии</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								tools.browser.<b><a href="../symbols/tools.browser.html#.IE7">IE7</a></b>
-								</div>
-								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>Boolean</i>
-<br/>Проверяет является ли браузер Internet Explorer'ом 7 версии</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								tools.browser.<b><a href="../symbols/tools.browser.html#.IE8">IE8</a></b>
-								</div>
-								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>Boolean</i>
-<br/>Проверяет является ли браузер Internet Explorer'ом 8 версии</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								tools.browser.<b><a href="../symbols/tools.browser.html#.Opera">Opera</a></b>
-								</div>
-								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>Boolean</i>
-<br/>Проверяет является ли браузер Oper'ой</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								tools.browser.<b><a href="../symbols/tools.browser.html#.Safari">Safari</a></b>
-								</div>
-								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>Boolean</i>
-<br/>Проверяет является ли браузер Safari</div>
+<br/>Текущее состояние таймера: если таймер выполняется, то true, в противном случае false.</div>
 							</td>
 						</tr>
 					
@@ -411,7 +339,7 @@ ul.inheritsList
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class tools.browser.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class tools.Timer.">
 					<caption>Все методы</caption>
 					<thead>
 						<tr>
@@ -424,10 +352,30 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">tools.browser.<b><a href="../symbols/tools.browser.html#.intertrigoBrowserVersion">intertrigoBrowserVersion</a></b>()
+								<div class="fixedFont">tools.Timer.<b><a href="../symbols/tools.Timer.html#.constructor">constructor</a></b>(delay, repeatCount)
 								</div>
-								<div class="description"><b>Область видимости</b> : <i>Защищенная</i>
-<br/>Определяет версию браузера</div>
+								<div class="description"><b>Конструктор класса</b> : <i>Да</i></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">tools.Timer.<b><a href="../symbols/tools.Timer.html#.halt">halt</a></b>()
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/>Останавливает таймер
+<br/><i>Примечание: свойтсво stop недоступно в ie</i></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">tools.Timer.<b><a href="../symbols/tools.Timer.html#.start">start</a></b>()
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/>Запускает таймер</div>
 							</td>
 						</tr>
 					
@@ -448,22 +396,31 @@ ul.inheritsList
 				</div>
 				
 				<div class="fixedFont">
-						<b>tools.browser</b>()
+						<b>tools.Timer</b>()
 				</div>
 				
 				<div class="description">
-					
+					<br/><b>Наследует</b> : <i>tools.eventDispatcher</i>
+<br/><b>Событие</b> : <i>timer</i>
+<br/>Срабатывает каждые this.delay миллисекунд
+<br/><b>Событие</b> : <i>timerComplete</i>
+<br/>Срабатывает когда таймер пройдет количество циклов указанной в переменной repeatCount
 					
 				</div>
 				
 				
 				
-				<pre class="code">	Class({
-		name:"some",
-		implements:[tools.browser],
-		constructor:function(){}
-	});
-	alert(new some().IE)</pre>
+				<pre class="code">// Таймер повторится 5 раз с интервало в 2 секунды
+var timer=new tools.Timer(2000,5);
+// Каждые 2 секунды
+timer.bind("timer",function(){
+	//do somethink
+});
+// В конце 5-го цикла
+timer.bind("timerComplete",function(){
+	//do somethink
+});
+timer.start();</pre>
 				
 				
 				
@@ -485,18 +442,76 @@ ul.inheritsList
 					Описание свойств
 				</div>
 				
-					<a name=".browser"> </a>
+					<a name=".currentCount"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">tools.browser.</span><b>browser</b>
+					<span class="light">tools.Timer.</span><b>currentCount</b>
 					
 					</div>
 					<div class="description">
 						<b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>String</i>
-<br/><b>Значение:</b> <i>Another/Firefox/Opera/Safari/Chrome/Internet Explorer</i>
-<br/>Возвращает строку с названием браузера
+<br/>Общее число срабатываний таймера с момента его запуска с нуля.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Значение по умолчанию:</dt>
+							<dd>
+								0
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
+					<a name=".delay"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Timer.</span><b>delay</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/>Задержка в миллисекундах между событиями таймера.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Значение по умолчанию:</dt>
+							<dd>
+								0
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
+					<a name=".eventList"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Timer.</span><b>eventList</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Защищенная</i>
+<br/>Список событий таймера
 						
 						
 					</div>
@@ -510,17 +525,16 @@ ul.inheritsList
 
 					<hr />
 				
-					<a name=".browserVersion"> </a>
+					<a name=".repeatCount"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">tools.browser.</span><b>browserVersion</b>
+					<span class="light">tools.Timer.</span><b>repeatCount</b>
 					
 					</div>
 					<div class="description">
 						<b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>String</i>
-<br/>Возвращает строку c версией браузера
+<br/>Общее число запусков, на которое настроен таймер.
 						
 						
 					</div>
@@ -531,20 +545,26 @@ ul.inheritsList
 						
 						
 						
+							<dl class="detailList">
+							<dt class="heading">Значение по умолчанию:</dt>
+							<dd>
+								0
+							</dd>
+							</dl>
+						
 
 					<hr />
 				
-					<a name=".Chrome"> </a>
+					<a name=".running"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">tools.browser.</span><b>Chrome</b>
+					<span class="light">tools.Timer.</span><b>running</b>
 					
 					</div>
 					<div class="description">
 						<b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>Boolean</i>
-<br/>Проверяет является ли браузер Chrome'ом
+<br/>Текущее состояние таймера: если таймер выполняется, то true, в противном случае false.
 						
 						
 					</div>
@@ -555,195 +575,12 @@ ul.inheritsList
 						
 						
 						
-
-					<hr />
-				
-					<a name=".constructor"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">tools.browser.</span><b>constructor</b>
-					
-					</div>
-					<div class="description">
-						<b>Конструктор класса</b> : <i>Да</i>
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".Firefox"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">tools.browser.</span><b>Firefox</b>
-					
-					</div>
-					<div class="description">
-						<b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>Boolean</i>
-<br/>Проверяет является ли браузер Firefox'ом
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".IE"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">tools.browser.</span><b>IE</b>
-					
-					</div>
-					<div class="description">
-						<b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>Boolean</i>
-<br/>Проверяет является ли браузер членом семейства Internet Explorer
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".IE6"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">tools.browser.</span><b>IE6</b>
-					
-					</div>
-					<div class="description">
-						<b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>Boolean</i>
-<br/>Проверяет является ли браузер Internet Explorer'ом 6 версии
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".IE7"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">tools.browser.</span><b>IE7</b>
-					
-					</div>
-					<div class="description">
-						<b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>Boolean</i>
-<br/>Проверяет является ли браузер Internet Explorer'ом 7 версии
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".IE8"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">tools.browser.</span><b>IE8</b>
-					
-					</div>
-					<div class="description">
-						<b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>Boolean</i>
-<br/>Проверяет является ли браузер Internet Explorer'ом 8 версии
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".Opera"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">tools.browser.</span><b>Opera</b>
-					
-					</div>
-					<div class="description">
-						<b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>Boolean</i>
-<br/>Проверяет является ли браузер Oper'ой
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".Safari"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">tools.browser.</span><b>Safari</b>
-					
-					</div>
-					<div class="description">
-						<b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>Boolean</i>
-<br/>Проверяет является ли браузер Safari
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
+							<dl class="detailList">
+							<dt class="heading">Значение по умолчанию:</dt>
+							<dd>
+								false
+							</dd>
+							</dl>
 						
 
 					
@@ -756,16 +593,85 @@ ul.inheritsList
 					Описание методов
 				</div>
 				
-					<a name=".intertrigoBrowserVersion"> </a>
+					<a name=".constructor"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
-					<span class="light">{String}</span>
-					<span class="light">tools.browser.</span><b>intertrigoBrowserVersion</b>()
+					
+					<span class="light">tools.Timer.</span><b>constructor</b>(delay, repeatCount)
 					
 					</div>
 					<div class="description">
-						<b>Область видимости</b> : <i>Защищенная</i>
-<br/>Определяет версию браузера
+						<b>Конструктор класса</b> : <i>Да</i>
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Параметры:</dt>
+							
+								<dt>
+									<b>delay</b>
+									
+								</dt>
+								<dd>Задержка в миллисекундах между событиями таймера.</dd>
+							
+								<dt>
+									<b>repeatCount</b>
+									
+								</dt>
+								<dd>Общее число запусков, на которое настроен таймер.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".halt"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Timer.</span><b>halt</b>()
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/>Останавливает таймер
+<br/><i>Примечание: свойтсво stop недоступно в ie</i>
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".start"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Timer.</span><b>start</b>()
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/>Запускает таймер
 						
 						
 					</div>
@@ -794,7 +700,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Fri Aug 06 2010 19:03:18 GMT+0400 (MSD)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Fri Aug 06 2010 19:03:19 GMT+0400 (MSD)
 		</div>
 	</body>
 </html>

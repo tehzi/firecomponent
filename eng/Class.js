@@ -175,13 +175,15 @@ try{
 			__Class__[name]={
 				public:(function(public,implements,parent){
 					var object={};
+					var name;
 					for(var key in public){
 						object[key]=public[key];
 					}
 					if(parent){
-						for(var key in parent.public){
+						name=getClassName(parent);
+						for(var key in __Class__[name].public){
 							if(!object[key]){
-								object[key]=parent.public[key];
+								object[key]=__Class__[name].public[key];
 							}
 						}
 					}
@@ -198,13 +200,15 @@ try{
 				})(public,implements,parent),
 				protected:(function(protected,implements,parent){
 					var object={};
+					var name;
 					for(var key in protected){
 						object[key]=protected[key];
 					}
 					if(parent){
-						for(var key in parent.protected){
+						name=getClassName(parent);
+						for(var key in __Class__[name].protected){
 							if(!object[key]){
-								object[key]=protected.protected[key];
+								object[key]=__Class__[name].protected[key];
 							}
 						}
 					}
@@ -238,7 +242,7 @@ try{
 					parentObject=__Class__[className];
 					if(parentObject){
 						for(var key in parentObject.public){
-							if(!(childObject.public[key] || childObject.private[key] || childObject.protected[key]) && $.inArray(key,history[0])==-1){
+							if(!(public[key] || private[key] || protected[key]) && $.inArray(key,history[0])==-1){
 								history[0].push(key);
 								if(typeof parentObject.public[key]=="function"){
 									ieFix.addMethod(key);
@@ -257,7 +261,7 @@ try{
 						parentObject=__Class__[className];
 						if(parentObject.public){
 							for(var key in parentObject.public){
-								if(!(childObject.public[key] || childObject.private[key] || childObject.protected[key]) && $.inArray(key,history[0])==-1){
+								if(!(public[key] || private[key] || protected[key]) && $.inArray(key,history[0])==-1){
 									history[0].push(key);
 									if(typeof parentObject.public[key]=="function"){
 										ieFix.addMethod(key);
@@ -288,8 +292,10 @@ try{
 				}
 				ieFix.newVBClass(__Class__[name].VBid);
 			}
+			var abstract;
 			if(type=="class"){
-				var abstract=function(){
+				abstract=function(){
+					history=[[],[]];
 					var instance={};
 					childObject=__Class__[name];
 					if(ClassModel.IE){
@@ -307,20 +313,40 @@ try{
 					if(parent){
 						className=getClassName(parent);
 						parentObject=__Class__[className];
-						(function(parentObject,instance){
+						(function(parentObject,instance,parentClassName,name){
+							var i=0;
+							var rName=name;
+							var method;
 							instance.Super=function(){
-								parentObject.constructor.apply(instance,arguments);
+								i++;
+								if(i<2 || !instance.Super.prototype.times){
+									parentObject.constructor.apply(instance,arguments);
+								}
+								else{
+									for(var S=1;S<=i;S++){
+										if(getClassName(__Class__[rName].parent)){
+											rName=getClassName(__Class__[rName].parent);
+										}
+										else{
+											break;
+										}
+										if(S==i){
+											__Class__[rName].constructor.apply(instance,arguments);
+										}
+									}
+								}
 							}
-						})(parentObject,instance);
+							instance.Super.prototype.times=true;
+						})(parentObject,instance,className,name);
 						if(parentObject){
 							if(parentObject.protected){
 								for(var key in parentObject.protected){
-									if(!(childObject.public[key] || childObject.private[key] || childObject.protected[key]) && $.inArray(key,history[1])==-1){
+									if(!(public[key] || private[key] || protected[key]) && $.inArray(key,history[1])==-1){
 										history[1].push(key);
 										(function(instance,key,parentObject){
 											if(typeof parentObject.protected[key]=="function"){
 												instance[key]=function(){
-													parentObject.protected[key].apply(instance,arguments);
+													return parentObject.protected[key].apply(instance,arguments);
 												}
 											}
 											else{
@@ -343,7 +369,7 @@ try{
 													}
 												}
 												else{
-													instance[key]=parentObject.public[key];
+													instance[key]=parentObject.protected[key];
 												}
 											}
 										})(instance,key,parentObject);
@@ -352,7 +378,7 @@ try{
 							}
 							if(parentObject.public){
 								for(var key in parentObject.public){
-									if(!(childObject.public[key] || childObject.private[key] || childObject.protected[key]) && $.inArray(key,history[1])==-1){
+									if(!(public[key] || private[key] || protected[key]) && $.inArray(key,history[1])==-1){
 										history[1].push(key);
 										if(typeof parentObject.public[key]=="function"){
 											var method=parentObject.public[key];
@@ -433,7 +459,7 @@ try{
 							}
 							if(parentObject.protected){
 								for(var key in parentObject.protected){
-									if(!(childObject.public[key] || childObject.private[key] || childObject.protected[key]) && $.inArray(key,history[1])==-1){
+									if(!(public[key] || private[key] || protected[key]) && $.inArray(key,history[1])==-1){
 										history[1].push(key);
 										(function(instance,key,parentObject){
 											if(typeof parentObject.protected[key]=="function"){
@@ -471,7 +497,7 @@ try{
 							}
 							if(parentObject.public){
 								for(var key in parentObject.public){
-									if(!(childObject.public[key] || childObject.private[key] || childObject.protected[key]) && $.inArray(key,history[1])==-1){
+									if(!(public[key] || private[key] || protected[key]) && $.inArray(key,history[1])==-1){
 										history[1].push(key);
 										if(typeof parentObject.public[key]=="function"){
 											var method=parentObject.public[key];
@@ -544,10 +570,28 @@ try{
 						}
 					}
 					for(var key in private){
-						instance[key]=private[key];
+						if(typeof private[key]=="function"){
+							(function(method,instance){
+								instance[key]=function(){
+									return method.apply(instance,arguments);
+								}
+							})(private[key],instance);
+						}
+						else{
+							instance[key]=private[key];
+						}
 					}
 					for(var key in protected){
-						instance[key]=protected[key];
+						if(typeof protected[key]=="function"){
+							(function(method,instance){
+								instance[key]=function(){
+									return method.apply(instance,arguments);
+								}
+							})(protected[key],instance);
+						}
+						else{
+							instance[key]=protected[key];
+						}
 					}
 					for(var key in public){
 						if(typeof public[key]=="function"){
@@ -649,7 +693,7 @@ try{
 			if(type=="interface"){
 				var abstract=(function(private,protected,public,name,constructor){
 					var interface={};
-					var abstract={};
+					abstract={};
 					if(ClassModel.IE){
 						var IEobject=ieFix.newIns(__Class__[name].VBid);
 						IEobject["typeString"]=function(){
