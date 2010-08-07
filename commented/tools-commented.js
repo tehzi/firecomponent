@@ -202,6 +202,7 @@ Class({
 	* <br/>Заполняет внутренний объект содержащий информацию о событиях в классе
 	*/
 	constructor:function(){
+		this.eventAll={};
 		for(var i=0;i<this.eventList.length;i++){
 			this.eventAll[this.eventList[i]]=[];
 		}
