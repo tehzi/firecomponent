@@ -237,7 +237,7 @@ try{
 * @throws <b>Exception</b> 4 Неверный тип свойства final
 * @example
 * Class({
-*	final<a href="#-final">[1]</a>:false<sup></sup>,
+*	final<sup><a href="#-final">[1]</a></sup>:false,
 *	pack<sup><a href="#-pack">[2]</a></sup>:tools,
 *	parent<sup><a href="#-parent">[3]</a></sup>:false,
 * 	implements<sup><a href="#-implements">[4]</a></sup>:false,

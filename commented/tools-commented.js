@@ -413,7 +413,7 @@ Class({
 	},
 	private:{
 		/**
-		* @name eventList
+		* @name timeLink
 		* @memberOf tools.Timer
 		* @description
 		* <b>Область видимости</b> : <i>Приватная</i>
