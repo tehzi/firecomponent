@@ -482,6 +482,7 @@ try{
 				final:final,
 				parent:parent,
 				name:name,
+				pack:pack,
 				constructor:constructor,
 				VBid: ++__Class__.VBid
 			};
@@ -579,7 +580,7 @@ try{
 					if(parent){
 						className=getClassName(parent);
 						parentObject=__Class__[className];
-						instance.parent=eval("new "+className+"('@!!')");
+						instance.parent=!parentObject.pack ? eval("new "+className+"('@!!')") : new parentObject.pack[className]("@!!");
 						(function(parentObject,instance,parentClassName,name){
 							var i=0;
 							var rName=name;
