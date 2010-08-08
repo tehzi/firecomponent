@@ -123,7 +123,7 @@ try{
 			var parentObject;
 			var childObject;
 			var history=[[],[]];
-			{
+			{/** Проверяем валидность всех условий */
 				if(!ClassModel.IE && !ClassModel.OTHER){
 					throw({number:2,description:" Браузер не поддерживает не одну из прелогаемых моделей работы"});
 				}
@@ -237,7 +237,6 @@ try{
 				ieFix.addMethod("typeString");
 				childObject=__Class__[name];
 				if(parent){
-					ieFix.addMethod("super");
 					className=getClassName(parent);
 					parentObject=__Class__[className];
 					if(parentObject){
@@ -313,6 +312,7 @@ try{
 					if(parent){
 						className=getClassName(parent);
 						parentObject=__Class__[className];
+						instance.parent=eval("new "+className+"('@!!')");
 						(function(parentObject,instance,parentClassName,name){
 							var i=0;
 							var rName=name;
