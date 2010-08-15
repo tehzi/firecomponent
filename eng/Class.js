@@ -236,6 +236,7 @@ try{
 			};
 			if(ClassModel.IE){
 				ieFix.addMethod("typeString");
+				ieFix.addMethod("getClone");
 				childObject=__Class__[name];
 				if(parent){
 					className=getClassName(parent);
@@ -297,18 +298,40 @@ try{
 				abstract=function(){
 					history=[[],[]];
 					var instance={};
+					var getClone=(function(){
+						return function(){
+							var name=getClassName(this);
+							if(arguments[0]){
+								var cloneFrom=arguments[0];
+								for(key in cloneFrom){
+									if(typeof cloneFrom[key]!="function"){
+										this[key]=cloneFrom[key];
+									}
+								}
+								return false;
+							}
+							else{
+								var cloneClassInfo=__Class__[name];
+								var cloneClass=!cloneClassInfo.pack ? eval("new "+name+"('@!!')") : new cloneClassInfo.pack[className]("@!!");
+								cloneClass.getClone(this);
+								return cloneClass;
+							}
+						}
+					}).call(instance);
 					childObject=__Class__[name];
 					if(ClassModel.IE){
 						var IEprototype=ieFix.newIns(__Class__[name].VBid);
 						IEprototype["typeString"]=function(){
 							return "[class "+name+"]";
 						}
+						IEprototype["getClone"]=getClone;
 					}
 					if(ClassModel.OTHER){
 						var OTHERprototype={};
 						OTHERprototype["typeString"]=function(){
 							return "[class "+name+"]";
 						}
+						OTHERprototype["getClone"]=getClone;
 					}
 					if(parent){
 						className=getClassName(parent);

@@ -83,6 +83,8 @@ $(document).ready(function(){
 	//Создаём класс С
 	var c=new C();
 	c.A_method();
+	c.publicProperty=6;
+	var clone_instance=c.getClone();
 });
 //]]>
 		</script>

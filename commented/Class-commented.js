@@ -489,6 +489,7 @@ try{
 			/** Создаем класс для IE */
 			if(ClassModel.IE){
 				ieFix.addMethod("typeString");
+				ieFix.addMethod("getClone");
 				childObject=__Class__[name];
 				/** Наследование в IE */
 				if(parent){
@@ -562,12 +563,33 @@ try{
 					* Создаем область видимости для класса 
 					*/
 					var instance={};
+					var getClone=(function(){
+						return function(){
+							var name=getClassName(this);
+							if(arguments[0]){
+								var cloneFrom=arguments[0];
+								for(key in cloneFrom){
+									if(typeof cloneFrom[key]!="function"){
+										this[key]=cloneFrom[key];
+									}
+								}
+								return false;
+							}
+							else{
+								var cloneClassInfo=__Class__[name];
+								var cloneClass=!cloneClassInfo.pack ? eval("new "+name+"('@!!')") : new cloneClassInfo.pack[className]("@!!");
+								cloneClass.getClone(this);
+								return cloneClass;
+							}
+						}
+					}).call(instance);
 					childObject=__Class__[name];
 					if(ClassModel.IE){
 						var IEprototype=ieFix.newIns(__Class__[name].VBid);
 						IEprototype["typeString"]=function(){
 							return "[class "+name+"]";
 						}
+						IEprototype["getClone"]=getClone;
 					}
 					/** Если не IE создаем новую копию класса */
 					if(ClassModel.OTHER){
@@ -575,6 +597,7 @@ try{
 						OTHERprototype["typeString"]=function(){
 							return "[class "+name+"]";
 						}
+						OTHERprototype["getClone"]=getClone;
 					}
 					/** Наследование */
 					if(parent){
