@@ -68,6 +68,7 @@ Class({
 	pack:tools,
 	name:"eventDispatcher",
 	constructor:function(){
+		this.eventAll={};
 		for(var i=0;i<this.eventList.length;i++){
 			this.eventAll[this.eventList[i]]=[];
 		}
