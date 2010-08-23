@@ -67,10 +67,11 @@ Class({
 Class({
 	name : "Instance",
 	pack : motion,
-	parent : "Animator",
+	parent : motion.Animator,
 	constructor : function(object, params) {
-		var prop = params.property;
-		var initialValue = params.initialValue || object.css(prop);
+		console.log(params.property);
+		this.property = params.property;
+		var initialValue = params.initialValue || object.css(this.property);
 		var finalValue = params.finalValue || console.log('Не задано финальное значение анимируемого свойства');
 		var interval = params.interval || this.defaultInterval;
 		var duration = params.duration || this.defaultDuration;
@@ -79,7 +80,7 @@ Class({
 		this.step = this.parent.step(initialValue, finalValue, interval, duration);
 		this.array = this.parent.tweeningArray(initialValue, finalValue, this.step);
 		this.timer = new tools.Timer(interval, this.array.length);
-		this.timer.bind('timer', this.tick());
+		this.timer.bind('timer', this.tick);
 	},
 	private : {
 		defaultInterval : 10,
@@ -89,7 +90,9 @@ Class({
 		nowAt : 0,
 		timer : {},
 		targetObject : {},
+		property : "",
 		tick : function (){
+			console.log('tick');
 			this.parent.update(this.targetObject, this.property, this.array[this.nowAt]);
 			this.nowAt++;
 		}
