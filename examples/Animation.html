@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="ru">
+	<head>
+		<title>[Animation example]</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="copyright" href="http://www.gnu.org/copyleft/fdl.html" />
+		<meta name="author" content="zi, 2010" />
+		<style type="text/css">
+@import "../css/style.css";
+		</style>
+		<script type="text/javascript" src="../jquery/jquery.js"></script>
+		<script type="text/javascript" src="../commented/Class-commented.js"></script>
+		<script type="text/javascript" src="../commented/tools-commented.js"></script>
+		<script type="text/javascript" src="../commented/Animation-commented.js"></script>
+		<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function(){
+	var test = new motion.Animator($('#animatable'), {property: "left", finalValue : 200});
+});
+//]]>
+		</script>
+	</head>
+	<body>
+		<div id="examples">
+			<div id="animatable" style="width: 200px; height: 200px; background-color: red; border: 1px solid black; position: relative">
+			<p>Some animatable content</p>
+			</div>
+			<button>Click ME</button>
+		</div>
+	</body>
+</html>

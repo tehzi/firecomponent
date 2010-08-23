@@ -5,13 +5,22 @@
 * @version 0.0.1
 */
 /**
+* @namespace
+* Пакет предоставляет набор утилит для анимации свойств DOM-элементов с поддержкой относительных ускорения и траектории движения.
+* @description
+* <b>Тип данных:</b> <i>Object</i>
+*/
+var motion={};
+/**
 * @name Animation
 * @class
 * Класс управления анимируемыми инстансами 
+* @memberOf animation
 * @description
 */
 Class({
-	name : "Animation",
+	name : "Animator",
+	pack : motion,
 	/**
 	* @name constructor
 	* @description
@@ -19,7 +28,7 @@ Class({
 	*/
 	constructor : function(object, params){
 		object.each(function(){
-			temp = new Animation.instance($(this), params);
+			temp = new motion.Instance($(this), params);
 		});
 	},
 	public : {},
@@ -28,15 +37,14 @@ Class({
 		animate : function(){
 			
 		},
-		defaultInterval = 10,
-		defaultDuration = 1000,
 		update : function (targetObject, property, val){
+			console.log('changing '+property+' to '+val);
 			targetObject.css(property, val);
-		}
-		tweeningArray = function (first, last, step){
+		},
+		tweeningArray : function (first, last, step){
 			var a = [];
-			for (var i = first; i<=last, i += step){
-				a[] = i;
+			for (var i = first; i<=last; i += step){
+				a+= i;
 			}
 			return a;
 		},
@@ -49,24 +57,33 @@ Class({
 		
 	}
 });
+/**
+* @name Intance
+* @class
+* Класс, отвечающий за анимацию определенного свойства.
+* @memberOf animation
+* @description
+*/
 Class({
-	name : "instance",
-	pack : "Animation",
-	parent : "Animation",
+	name : "Instance",
+	pack : motion,
+	parent : "Animator",
 	constructor : function(object, params) {
 		var prop = params.property;
 		var initialValue = params.initialValue || object.css(prop);
 		var finalValue = params.finalValue || console.log('Не задано финальное значение анимируемого свойства');
-		var interval = params.interval || defaultInterval;
-		var duration = params.duration || defaultDuration;
+		var interval = params.interval || this.defaultInterval;
+		var duration = params.duration || this.defaultDuration;
 		
 		this.targetObject = object;
 		this.step = this.parent.step(initialValue, finalValue, interval, duration);
 		this.array = this.parent.tweeningArray(initialValue, finalValue, this.step);
-		this.timer = new Timer(interval, this.array.length);
+		this.timer = new tools.Timer(interval, this.array.length);
 		this.timer.bind('timer', this.tick());
 	},
 	private : {
+		defaultInterval : 10,
+		defaultDuration : 1000,
 		step : 0,
 		array : [],
 		nowAt : 0,
@@ -74,7 +91,7 @@ Class({
 		targetObject : {},
 		tick : function (){
 			this.parent.update(this.targetObject, this.property, this.array[this.nowAt]);
-			this.nowAt += 1;
+			this.nowAt++;
 		}
 	}
 })
