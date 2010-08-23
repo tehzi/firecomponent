@@ -15,7 +15,13 @@
 		<script type="text/javascript">
 //<![CDATA[
 $(document).ready(function(){
-	var test = new motion.Animator($('#animatable'), {property: "left", finalValue : 200});
+	$('#slideRight').click(function() {
+		new motion.Animator($('#animatable'), {
+			property: "left", 
+			finalValue : 200, 
+			initialValue: 0
+		});
+	});
 });
 //]]>
 		</script>
@@ -25,7 +31,7 @@ $(document).ready(function(){
 			<div id="animatable" style="width: 200px; height: 200px; background-color: red; border: 1px solid black; position: relative">
 			<p>Some animatable content</p>
 			</div>
-			<button>Click ME</button>
+			<button id="slideRight">Slide -></button>
 		</div>
 	</body>
 </html>

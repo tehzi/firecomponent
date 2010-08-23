@@ -44,11 +44,12 @@ Class({
 		tweeningArray : function (first, last, step){
 			var a = [];
 			for (var i = first; i<=last; i += step){
-				a+= i;
+				a.push(i);
 			}
 			return a;
 		},
 		step : function (first, last, interval, duration){
+			console.log(first+' '+last+' '+interval+' '+duration);
 			var step = (last-first)*interval/duration;
 			return step;
 		}
@@ -69,9 +70,9 @@ Class({
 	pack : motion,
 	parent : motion.Animator,
 	constructor : function(object, params) {
-		console.log(params.property);
 		this.property = params.property;
-		var initialValue = params.initialValue || object.css(this.property);
+		var initialValue = (params.initialValue == undefined) ? object.css(this.property) : params.initialValue;
+
 		var finalValue = params.finalValue || console.log('Не задано финальное значение анимируемого свойства');
 		var interval = params.interval || this.defaultInterval;
 		var duration = params.duration || this.defaultDuration;
@@ -79,8 +80,10 @@ Class({
 		this.targetObject = object;
 		this.step = this.parent.step(initialValue, finalValue, interval, duration);
 		this.array = this.parent.tweeningArray(initialValue, finalValue, this.step);
+		console.log( this.array.length);
 		this.timer = new tools.Timer(interval, this.array.length);
 		this.timer.bind('timer', this.tick);
+		this.timer.start();
 	},
 	private : {
 		defaultInterval : 10,
