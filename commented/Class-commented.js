@@ -604,6 +604,7 @@ try{
 						className=getClassName(parent);
 						parentObject=__Class__[className];
 						if(!parentObject.final){
+							instance.parent={};
 							for(var key in parentObject.protected){
 								instance.parent[key]=parentObject.protected[key];
 							}
