@@ -43,13 +43,15 @@ Class({
 		},
 		tweeningArray : function (first, last, step){
 			var a = [];
-			for (var i = first; i<=last; i += step){
+			var l = Math.ceil(Math.abs((last-first)/step));
+			for (var i = first, j = 0; j < l; i += step, j++){
 				a.push(i);
 			}
+			console.log('l='+l+' length='+a.length);
+			if (a[l] != last) {a.push(last);}
 			return a;
 		},
 		step : function (first, last, interval, duration){
-			console.log(first+' '+last+' '+interval+' '+duration);
 			var step = (last-first)*interval/duration;
 			return step;
 		}
@@ -71,31 +73,45 @@ Class({
 	parent : motion.Animator,
 	constructor : function(object, params) {
 		this.property = params.property;
-		var initialValue = (params.initialValue == undefined) ? object.css(this.property) : params.initialValue;
-
-		var finalValue = params.finalValue || console.log('Не задано финальное значение анимируемого свойства');
-		var interval = params.interval || this.defaultInterval;
-		var duration = params.duration || this.defaultDuration;
-		
-		this.targetObject = object;
-		this.step = this.parent.step(initialValue, finalValue, interval, duration);
-		this.array = this.parent.tweeningArray(initialValue, finalValue, this.step);
-		console.log( this.array.length);
-		this.timer = new tools.Timer(interval, this.array.length);
-		this.timer.bind('timer', this.tick);
-		this.timer.start();
+		var from = (params.from == undefined) ? object.css(this.property) || 0 : params.from;
+		if (typeof from == "string"){
+			switch (from.substring(from.length-2)){
+				case "px":
+					from = Number(from.substring(0, from.length-2));
+				break;
+				default : from = 0; break;
+			}
+		}
+		var to = params.to;
+		if(!(to == undefined)){
+			if (typeof to == "string"){
+				switch (to[0]){
+					case "+": to = from + Number(to.substring(1)); break;
+					case "-": to = from - Number(to.substring(1)); break;
+				}
+			}
+			var interval = params.interval || this.defaultInterval;
+			var duration = params.duration || this.defaultDuration;
+			
+			this.targetObject = object;
+			this.step = this.parent.step(from, to, interval, duration);
+			this.array = this.parent.tweeningArray(from, to, this.step);
+			console.log(this.step);
+			console.log(this.array);
+			this.timer = new tools.Timer(interval, this.array.length-1);
+			this.timer.bind('timer', this.tick);
+			this.timer.start();}
 	},
 	private : {
 		defaultInterval : 10,
 		defaultDuration : 1000,
 		step : 0,
 		array : [],
-		nowAt : 0,
+		nowAt : 1,
 		timer : {},
 		targetObject : {},
 		property : "",
 		tick : function (){
-			console.log('tick');
 			this.parent.update(this.targetObject, this.property, this.array[this.nowAt]);
 			this.nowAt++;
 		}
