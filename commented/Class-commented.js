@@ -604,7 +604,13 @@ try{
 						className=getClassName(parent);
 						parentObject=__Class__[className];
 						if(!parentObject.final){
-							instance.parent=!parentObject.pack ? eval("new "+className+"('@!!')") : new parentObject.pack[className]("@!!");
+							for(var key in parentObject.protected){
+								instance.parent[key]=parentObject.protected[key];
+							}
+							for(var key in parentObject.public){
+								instance.parent[key]=parentObject.public[key];
+							}
+// 							instance.parent=!parentObject.pack ? eval("new "+className+"('@!!')") : new parentObject.pack[className]("@!!");
 							(function(parentObject,instance,parentClassName,name){
 								var i=0;
 								var rName=name;
