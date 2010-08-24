@@ -241,7 +241,7 @@ try{
 				if(parent){
 					className=getClassName(parent);
 					parentObject=__Class__[className];
-					if(parentObject){
+					if(parentObject && !parentObject.final){
 						for(var key in parentObject.public){
 							if(!(public[key] || private[key] || protected[key]) && $.inArray(key,history[0])==-1){
 								history[0].push(key);
@@ -336,46 +336,144 @@ try{
 					if(parent){
 						className=getClassName(parent);
 						parentObject=__Class__[className];
-						instance.parent=!parentObject.pack ? eval("new "+className+"('@!!')") : new parentObject.pack[className]("@!!");
-						(function(parentObject,instance,parentClassName,name){
-							var i=0;
-							var rName=name;
-							var method;
-							instance.Super=function(){
-								i++;
-								if(i<2 || !instance.Super.prototype.times){
-									parentObject.constructor.apply(instance,arguments);
+						if(!parentObject.final){
+							instance.parent={};
+							for(var key in parentObject.protected){
+								if(typeof parentObject.protected[key]=="string"){
+									var match=parentObject.protected[key].match(/^~([^~]+)~$/i);
+									var match1;
+									var match2;
+									if(match){
+										match1=match[1].match(/^(.*)$/i);
+										match2=match[1].match(/^this$/i);
+										if(match1){
+											instance.parent[key]=eval(match1[0].replace(/this/g,"instance"));
+										}
+										if(match2){
+											instance.parent[key]=instance;
+										}
+									}
+									else{
+										instance.parent[key]=parentObject.protected[key];
+									}
 								}
 								else{
-									for(var S=1;S<=i;S++){
-										if(getClassName(__Class__[rName].parent)){
-											rName=getClassName(__Class__[rName].parent);
+									instance.parent[key]=parentObject.protected[key];
+								}
+								instance.parent[key]=parentObject.protected[key];
+							}
+							for(var key in parentObject.public){
+								if(typeof parentObject.public[key]=="string"){
+									var match=parentObject.public[key].match(/^~([^~]+)~$/i);
+									var match1;
+									var match2;
+									if(match){
+										match1=match[1].match(/^(.*)$/i);
+										match2=match[1].match(/^this$/i);
+										if(match1){
+											instance.parent[key]=eval(match1[0].replace(/this/g,"instance"));
 										}
-										else{
-											break;
+										if(match2){
+											instance.parent[key]=instance;
 										}
-										if(S==i){
-											__Class__[rName].constructor.apply(instance,arguments);
+									}
+									else{
+										instance.parent[key]=parentObject.public[key];
+									}
+								}
+								else{
+									instance.parent[key]=parentObject.public[key];
+								}
+							}
+// 							instance.parent=!parentObject.pack ? eval("new "+className+"('@!!')") : new parentObject.pack[className]("@!!");
+							(function(parentObject,instance,parentClassName,name){
+								var i=0;
+								var rName=name;
+								var method;
+								instance.Super=function(){
+									i++;
+									if(i<2 || !instance.Super.prototype.times){
+										parentObject.constructor.apply(instance,arguments);
+									}
+									else{
+										for(var S=1;S<=i;S++){
+											if(getClassName(__Class__[rName].parent)){
+												rName=getClassName(__Class__[rName].parent);
+											}
+											else{
+												break;
+											}
+											if(S==i){
+												__Class__[rName].constructor.apply(instance,arguments);
+											}
 										}
 									}
 								}
-							}
-							instance.Super.prototype.times=true;
-						})(parentObject,instance,className,name);
-						if(parentObject){
-							if(parentObject.protected){
-								for(var key in parentObject.protected){
-									if(!(public[key] || private[key] || protected[key]) && $.inArray(key,history[1])==-1){
-										history[1].push(key);
-										(function(instance,key,parentObject){
-											if(typeof parentObject.protected[key]=="function"){
-												instance[key]=function(){
-													return parentObject.protected[key].apply(instance,arguments);
+								instance.Super.prototype.times=true;
+							})(parentObject,instance,className,name);
+							if(parentObject){
+								if(parentObject.protected){
+									for(var key in parentObject.protected){
+										if(!(public[key] || private[key] || protected[key]) && $.inArray(key,history[1])==-1){
+											history[1].push(key);
+											(function(instance,key,parentObject){
+												if(typeof parentObject.protected[key]=="function"){
+													instance[key]=function(){
+														return parentObject.protected[key].apply(instance,arguments);
+													}
 												}
+												else{
+													if(typeof parentObject.protected[key]=="string"){
+														var match=parentObject.protected[key].match(/^~([^~]+)~$/i);
+														var match1;
+														var match2;
+														if(match){
+															match1=match[1].match(/^(.*)$/i);
+															match2=match[1].match(/^this$/i);
+															if(match1){
+																instance[key]=eval(match1[0].replace(/this/g,"instance"));
+															}
+															if(match2){
+																instance[key]=instance;
+															}
+														}
+														else{
+															instance[key]=parentObject.protected[key];
+														}
+													}
+													else{
+														instance[key]=parentObject.protected[key];
+													}
+												}
+											})(instance,key,parentObject);
+										}
+									}
+								}
+								if(parentObject.public){
+									for(var key in parentObject.public){
+										if(!(public[key] || private[key] || protected[key]) && $.inArray(key,history[1])==-1){
+											history[1].push(key);
+											if(typeof parentObject.public[key]=="function"){
+												var method=parentObject.public[key];
+												(function(method,instance,key){
+													instance[key]=function(){
+														return method.apply(instance,arguments);
+													}
+													if(ClassModel.OTHER){
+														OTHERprototype[key]=function(){
+															return method.apply(instance,arguments);
+														}
+													}
+													if(ClassModel.IE){
+														IEprototype[key]=function(){
+															return method.apply(instance,arguments);
+														}
+													}
+												})(method,instance,key);
 											}
 											else{
-												if(typeof parentObject.protected[key]=="string"){
-													var match=parentObject.protected[key].match(/^~([^~]+)~$/i);
+												if(typeof parentObject.public[key]=="string"){
+													var match=parentObject.public[key].match(/^~([^~]+)~$/i);
 													var match1;
 													var match2;
 													if(match){
@@ -389,84 +487,36 @@ try{
 														}
 													}
 													else{
-														instance[key]=parentObject.protected[key];
-													}
-												}
-												else{
-													instance[key]=parentObject.protected[key];
-												}
-											}
-										})(instance,key,parentObject);
-									}
-								}
-							}
-							if(parentObject.public){
-								for(var key in parentObject.public){
-									if(!(public[key] || private[key] || protected[key]) && $.inArray(key,history[1])==-1){
-										history[1].push(key);
-										if(typeof parentObject.public[key]=="function"){
-											var method=parentObject.public[key];
-											(function(method,instance,key){
-												instance[key]=function(){
-													return method.apply(instance,arguments);
-												}
-												if(ClassModel.OTHER){
-													OTHERprototype[key]=function(){
-														return method.apply(instance,arguments);
-													}
-												}
-												if(ClassModel.IE){
-													IEprototype[key]=function(){
-														return method.apply(instance,arguments);
-													}
-												}
-											})(method,instance,key);
-										}
-										else{
-											if(typeof parentObject.public[key]=="string"){
-												var match=parentObject.public[key].match(/^~([^~]+)~$/i);
-												var match1;
-												var match2;
-												if(match){
-													match1=match[1].match(/^(.*)$/i);
-													match2=match[1].match(/^this$/i);
-													if(match1){
-														instance[key]=eval(match1[0].replace(/this/g,"instance"));
-													}
-													if(match2){
-														instance[key]=instance;
+														instance[key]=parentObject.public[key];
 													}
 												}
 												else{
 													instance[key]=parentObject.public[key];
 												}
-											}
-											else{
-												instance[key]=parentObject.public[key];
-											}
-											if(ClassModel.OTHER){
-												(function(OTHERprototype,key,instance,name){
-													OTHERprototype.__defineGetter__(key,function(prop){
-														return instance[key];
-													});
-												})(OTHERprototype,key,instance,name);
-												(function(OTHERprototype,key,instance,name){
-													OTHERprototype.__defineSetter__(key,function(val){
-														instance[key]=val;
-													});
-												})(OTHERprototype,key,instance,name);
-											}
-											if(ClassModel.IE){
-												(function(IEprototype,key,instance,name){
-													IEprototype["get_"+key]=function(){
-														return instance[key];
-													}
-												})(IEprototype,key,instance,name);
-												(function(IEprototype,key,instance,name){
-													IEprototype["set_"+key]=function(val){
-														instance[key]=val;
-													}
-												})(IEprototype,key,instance,name);
+												if(ClassModel.OTHER){
+													(function(OTHERprototype,key,instance,name){
+														OTHERprototype.__defineGetter__(key,function(prop){
+															return instance[key];
+														});
+													})(OTHERprototype,key,instance,name);
+													(function(OTHERprototype,key,instance,name){
+														OTHERprototype.__defineSetter__(key,function(val){
+															instance[key]=val;
+														});
+													})(OTHERprototype,key,instance,name);
+												}
+												if(ClassModel.IE){
+													(function(IEprototype,key,instance,name){
+														IEprototype["get_"+key]=function(){
+															return instance[key];
+														}
+													})(IEprototype,key,instance,name);
+													(function(IEprototype,key,instance,name){
+														IEprototype["set_"+key]=function(val){
+															instance[key]=val;
+														}
+													})(IEprototype,key,instance,name);
+												}
 											}
 										}
 									}
@@ -602,7 +652,27 @@ try{
 							})(private[key],instance);
 						}
 						else{
-							instance[key]=private[key];
+							if(typeof private[key]=="string"){
+								var match=private[key].match(/^~([^~]+)~$/i);
+								var match1;
+								var match2;
+								if(match){
+									match1=match[1].match(/^(.*)$/i);
+									match2=match[1].match(/^this$/i);
+									if(match1){
+										instance[key]=eval(match1[0].replace(/this/g,"instance"));
+									}
+									if(match2){
+										instance[key]=instance;
+									}
+								}
+								else{
+									instance[key]=private[key];
+								}
+							}
+							else{
+								instance[key]=private[key];
+							}
 						}
 					}
 					for(var key in protected){
@@ -614,7 +684,27 @@ try{
 							})(protected[key],instance);
 						}
 						else{
-							instance[key]=protected[key];
+							if(typeof protected[key]=="string"){
+								var match=protected[key].match(/^~([^~]+)~$/i);
+								var match1;
+								var match2;
+								if(match){
+									match1=match[1].match(/^(.*)$/i);
+									match2=match[1].match(/^this$/i);
+									if(match1){
+										instance[key]=eval(match1[0].replace(/this/g,"instance"));
+									}
+									if(match2){
+										instance[key]=instance;
+									}
+								}
+								else{
+									instance[key]=protected[key];
+								}
+							}
+							else{
+								instance[key]=protected[key];
+							}
 						}
 					}
 					for(var key in public){
@@ -637,7 +727,27 @@ try{
 							})(method,instance,key,OTHERprototype,IEprototype);
 						}
 						else{
-							instance[key]=public[key];
+							if(typeof public[key]=="string"){
+								var match=public[key].match(/^~([^~]+)~$/i);
+								var match1;
+								var match2;
+								if(match){
+									match1=match[1].match(/^(.*)$/i);
+									match2=match[1].match(/^this$/i);
+									if(match1){
+										instance[key]=eval(match1[0].replace(/this/g,"instance"));
+									}
+									if(match2){
+										instance[key]=public[key];
+									}
+								}
+								else{
+									instance[key]=public[key];
+								}
+							}
+							else{
+								instance[key]=public[key];
+							}
 							if(ClassModel.OTHER){
 								(function(OTHERprototype,key,instance,name){
 									OTHERprototype.__defineGetter__(key,function(prop){
@@ -665,6 +775,7 @@ try{
 						}
 					}
 					for(var key in get){
+						instance[key]=get[key].call(instance,key);
 						if(ClassModel.IE){
 							(function(IEprototype,key,instance,name){
 								IEprototype["get_"+key]=function(){
@@ -731,10 +842,50 @@ try{
 						}
 					}
 					for(var key in private){
-						interface[key]=private[key];
+						if(typeof private[key]=="string"){
+							var match=private[key].match(/^~([^~]+)~$/i);
+							var match1;
+							var match2;
+							if(match){
+								match1=match[1].match(/^(.*)$/i);
+								match2=match[1].match(/^this$/i);
+								if(match1){
+									interface[key]=eval(match1[0].replace(/this/g,"interface"));
+								}
+								if(match2){
+									interface[key]=private[key];
+								}
+							}
+							else{
+								interface[key]=private[key];
+							}
+						}
+						else{
+							interface[key]=private[key];
+						}
 					}
 					for(var key in protected){
-						interface[key]=protected[key];
+						if(typeof protected[key]=="string"){
+							var match=protected[key].match(/^~([^~]+)~$/i);
+							var match1;
+							var match2;
+							if(match){
+								match1=match[1].match(/^(.*)$/i);
+								match2=match[1].match(/^this$/i);
+								if(match1){
+									interface[key]=eval(match1[0].replace(/this/g,"interface"));
+								}
+								if(match2){
+									interface[key]=protected[key];
+								}
+							}
+							else{
+								interface[key]=protected[key];
+							}
+						}
+						else{
+							interface[key]=protected[key];
+						}
 					}
 					for(var key in public){
 						if(typeof public[key]=="function"){
@@ -752,7 +903,27 @@ try{
 							}
 						}
 						else{
-							interface[key]=public[key];
+							if(typeof public[key]=="string"){
+								var match=public[key].match(/^~([^~]+)~$/i);
+								var match1;
+								var match2;
+								if(match){
+									match1=match[1].match(/^(.*)$/i);
+									match2=match[1].match(/^this$/i);
+									if(match1){
+										interface[key]=eval(match1[0].replace(/this/g,"interface"));
+									}
+									if(match2){
+										interface[key]=public[key];
+									}
+								}
+								else{
+									interface[key]=public[key];
+								}
+							}
+							else{
+								interface[key]=public[key];
+							}
 							if(ClassModel.IE){
 								(function(IEobject,key,interface,name){
 									IEobject["get_"+key]=function(){

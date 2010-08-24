@@ -21,17 +21,32 @@ $(document).ready(function(){
 		implements:[tools.browser],
 		constructor:function(){}
 	});
-	console.log(new some().browserVersion)
 	var timer=new tools.Timer(2000,2);
 	var _some=function(e,currentCount){
-		console.log(currentCount)
 // 		if(timer.currentCount==5) timer.stop();
 	}
 	timer.bind("timer",_some);
-	timer.unbind("timerComplete",function(e,currentCount){
-		console.log(currentCount)
-	});
+	timer.unbind("timerComplete",function(e,currentCount){});
 	timer.start()
+	var cookie=new tools.CookieManager();
+	cookie.bind("change",function(e,newC,old){
+		console.log(e,newC,old);
+	});
+	console.log(cookie.val("lol"))
+	cookie.add={name:"lol",val:123,date:"+10h +5w",path:"/"};
+	cookie.rm("lol");
+// 	cookie.add("some",123)
+// 	cookie.add("some1",123)
+// 	cookie.add("some2",123)
+// 	console.log(cookie.add)
+// 	cookie._some=123;
+// 	console.log(lol=5)
+// 	cookie.controler()
+// 	function any(){
+// 		arguments.callee.date=5
+// 	}
+// 	cookie.val()
+// 	cookie.g("lol")=567;
 // 	if(timer.currentCount==5) timer.stop()
 });
 //]]>

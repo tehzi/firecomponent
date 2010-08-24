@@ -1,7 +1,20 @@
 /**
 * @fileoverview
 * Пакет содержит набор утилит разработаных для проекта firecomponent
+* @author <a href="mailto:zi.white.drago@gmail.com">Zi White</a>
+* @version 0.1.0
 */
+if(!Date.prototype.lastMonthDay){
+	Date.prototype.lastMonthDay=function(month, year){
+		var d=new Date(year ? year : this.getFullYear(), month ? month  : this.getMonth() + 1, 0);
+		return d.getDate();
+	};
+}
+if(!Date.prototype.lastYearDay){
+	Date.prototype.lastYearDay=function(year){
+		return new Date().lastMonthDay(2,year)==28 ? 365 : 366;
+	};
+}
 /**
 * @namespace
 * Пакет предоставляет набор утилит для проекта firecomponent 
@@ -432,6 +445,385 @@ Class({
 			if(this.repeatCount>0 && this.currentCount==this.repeatCount){
 				this.dispatch("timerComplete",[this.currentCount]);
 				this.halt();
+			}
+		}
+	}
+});
+/**
+* @name CookieManager
+* @class
+* Управление cookie для проекта firecomponent
+* @memberOf tools
+* @description
+* <br/><b>Наследует</b> : <i>tools.eventDispatcher</i>
+* <br/><b>Событие</b> : <i>change</i>
+* Срабатывает при внешнем изменение cookie
+* <br/><b>Событие</b> : <i>add</i>
+* Срабатывает при внутреннем добавлении cookie
+* <br/><b>Событие</b> : <i>remove</i>
+* Срабатывает при внутреннем удалении cookie
+* @example
+* // Создаем новую копию класса для управления cookie
+* var cookie=new tools.CookieManager();
+* // Добавляем событие прослушивающая внешние изменения cookie
+* cookie.bind("change",function(e,newC,old){
+*	//do somethink
+* });
+* // Внутренние добавление куки
+* cookie.bind("add",function(e,key,val){
+*	//do somethink
+* });
+* // Добавляем новую куки
+* cookie.add("sample",123);
+* cookie.val("sample1",123);
+* // Управление датой m - минуты, h - часы, d - дни, w - недели, M - месяцы, Y - годы.
+* cookie.add={name:"sample2",val:123,date:"+10h +5w",path:"/"};
+* // Получаем значение
+* cookie.val("sample1");
+* cookie.ls["sample1"];
+* // Удаляем куки
+* cookie.remove("sample1");
+* cookie.rm("sample");
+*/
+Class({
+	name:"CookieManager",
+	pack:tools,
+	parent:tools.eventDispatcher,
+	final:true,
+	/**
+	* @name constructor
+	* @memberOf tools.CookieManager
+	* @function
+	* @description
+	* <b>Конструктор класса</b> : <i>Да</i>
+	* Создает список куки, события и вызывает проверку на изменения куки каждую секунду.
+	*/
+	constructor:function(){
+		if(this.cookieEnabled){
+			this.Super();
+			this.oldCookieString=document.cookie;
+			this.timer.bind("timer",this.cookieEvent);
+			this.timer.start();
+			this.lsCreate();
+		}
+	},
+	public:{
+		/**
+		* @name ls
+		* @memberOf tools.CookieManager
+		* @default new Object()
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/>Список всех куки
+		*/
+		ls:{},
+		/**
+		* @name defaultTime
+		* @memberOf tools.CookieManager
+		* @default "Mon, 01-Jan-2020 00:00:00 GMT"
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/>Время, когда создаётся куки, по-умолчанию
+		*/
+		defaultTime:"Mon, 01-Jan-2020 00:00:00 GMT",
+		/**
+		* @name defaultPath
+		* @memberOf tools.CookieManager
+		* @default "/"
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/>Путь, где создаётся куки, по-умолчанию
+		*/
+		defaultPath:"/",
+		/**
+		* @name rm
+		* @memberOf tools.CookieManager
+		* @function
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/>Синоним для this._remove
+		* @see tools.CookieManager#_remove
+		*/
+		rm:"~this._remove~",
+		/**
+		* @name val^1
+		* @memberOf tools.CookieManager
+		* @function
+		* @param name Имя получаемой куки
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/> Получения значение куки с именем name
+		*/
+		/**
+		* @name val^2
+		* @memberOf tools.CookieManager
+		* @function
+		* @param name Имя устанавливаемой куки
+		* @param val Значения устанавливаемой куки
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/>Сидоним для add
+		* @see tools.CookieManager#add
+		*/
+		val:function(name,val){	
+			if(arguments.length==1){
+				if(this.ls[name]){
+					return this.ls[name];
+				}
+				else{
+					return null;
+				}
+			}
+			if(arguments.length==2){
+				this._add(name,val);
+				return null;
+			}
+		}
+	},
+	get:{
+		/**
+		* @name add
+		* @memberOf tools.CookieManager
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип</b> : <i>Getter/Setter</i>
+		* <br/>Возвращает приватный метод _add/Устанавливает куки из пользовательского объекта
+		*/
+		add:function(key){
+			return this._add;
+		},
+		/**
+		* @name remove
+		* @memberOf tools.CookieManager
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип</b> : <i>Getter/Setter</i>
+		* <br/>Возвращает приватный метод _remove/Удаляет куки с именем key
+		*/
+		remove:function(key){
+			return this._remove;
+		},
+		/**
+		* @name cookieEnabled
+		* @memberOf tools.CookieManager
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип</b> : <i>Getter</i>
+		* <br/>Проверяет включены ли в браузере куки
+		*/
+		cookieEnabled:function(){
+			return window.navigator.cookieEnabled;
+		}
+	},
+	set:{
+		add:function(key,val){
+			if(this.cookieEnabled){
+				if(typeof val.name=="string" && (typeof val=="string" || typeof val=="number") && this.cookieEnabled){
+					this._add(val.name,val.val);
+				}
+				if(typeof val=="object"){
+					if(val.name && val.val){
+						if(typeof val.name=="string" && (typeof val.val=="string" || typeof val.val=="number") && this.cookieEnabled){
+							this._add(val.name,val);
+						}
+					}
+				}
+			}
+		},
+		remove:function(key,val){
+			if(this.cookieEnabled){
+				this._remove(val);
+			}
+		},
+		cookieEnabled:function(){}
+	},
+	protected:{
+		/**
+		* @name eventList
+		* @memberOf tools.CookieManager
+		* @description
+		* <b>Область видимости</b> : <i>Защищенная</i>
+		* <br/>Список событий куки
+		*/
+		eventList:["change","add","remove"]
+	},
+	private:{
+		/**
+		* @name oldCookieString
+		* @memberOf tools.CookieManager
+		* @description
+		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/>Строка со старым значением куки
+		*/
+		oldCookieString:"",
+		/**
+		* @name timer
+		* @memberOf tools.CookieManager
+		* @description
+		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/>Содержит инсталированный таймер
+		*/
+		timer:new tools.Timer(1000),
+		/**
+		* @name cookieEvent
+		* @memberOf tools.CookieManager
+		* @function
+		* @description
+		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/>Событие срабатывающее каждую секунду и проверяющая валидность куки строке oldCookieString
+		*/
+		cookieEvent:function(e){
+			if(this.oldCookieString!=document.cookie){
+				this.dispatch("change",[document.cookie,this.oldCookieString]);
+				this.oldCookieString=document.cookie;
+				this.lsCreate();
+			}
+		},
+		/**
+		* @name _add
+		* @memberOf tools.CookieManager
+		* @function
+		* @param name Имя куки
+		* @param val Значение куки
+		* @description
+		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/>Добавляет куки
+		*/
+		_add:function(name,val){
+			if(typeof name=="string" && (typeof val=="string" || typeof val=="number") && this.cookieEnabled){
+				document.cookie=escape(name)+"="+escape(val)+"; expires="+this.defaultTime+"; path="+this.defaultPath+";";
+				this.dispatch("add",[name,val]);
+				this.oldCookieString=document.cookie;
+				this.lsCreate();
+			}
+			if(typeof name=="string" && typeof val=="object"){
+				var date=val.date ? this.parseTime(val.date) : "";
+				var path=val.path ? val.path : this.defaultPath;
+				var domain=val.domain ? val.domain : false;
+				var secure=secure ? true : false;
+				if(typeof name=="string" && (typeof val.val=="string" || typeof val.val=="number") && this.cookieEnabled){
+					document.cookie=
+						escape(name)+"="+escape(val.val) +
+						"; path="+path +
+						"; expires="+date +
+						((!!domain) ? "; domain="+domain: "") +
+						((!!secure) ? "; secure" : "")
+				}
+				this.dispatch("add",[name,val]);
+				this.oldCookieString=document.cookie;
+				this.lsCreate();
+			}
+		},
+		/**
+		* @name _remove
+		* @memberOf tools.CookieManager
+		* @function
+		* @param name Имя куки
+		* @description
+		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/>Удаляет куки
+		*/
+		_remove:function(name){
+			if(typeof name=="string"){
+				var expireAt = new Date(1970,1);
+				document.cookie=unescape(name)+ "= 0;  path=/;  expires="+expireAt.toGMTString();
+				this.dispatch("remove",[name]);
+				this.oldCookieString=document.cookie;
+				this.lsCreate();
+			}
+		},
+		/**
+		* @name lsCreate
+		* @memberOf tools.CookieManager
+		* @function
+		* @description
+		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/>Создаёт список всех куки
+		*/
+		lsCreate:function(){
+			var ls=this.oldCookieString.match(/([^;]+);?/gi);
+			ls=!!ls ? ls : [];
+			var space;
+			var key;
+			var val;
+			for(var i=0;i<ls.length;i++){
+				space=ls[i].substr(0,1);
+				if(space==" "){
+					key=ls[i].substr(1,ls[i].indexOf("=")-1);
+					val=ls[i].substr(ls[i].indexOf("=")+1,ls[i].length);
+					val=val.substr(val.length-1,val.length)==";" ? val.substr(0,val.length-1) : val;
+				}
+				else{
+					key=ls[i].substr(0,ls[i].indexOf("="));
+					val=ls[i].substr(ls[i].indexOf("=")+1,ls[i].length);
+					val=val.substr(val.length-1,val.length)==";" ? val.substr(0,val.length-1) : val;
+				}
+				this.ls[unescape(key)]=unescape(val);
+			}
+		},
+		/**
+		* @name parseTime
+		* @memberOf tools.CookieManager
+		* @function
+		* @description
+		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/>Вычисляет время согласно внутреннем селекторам.
+		*/
+		parseTime:function(time){
+			if(typeof time=="string"){
+				var options=time.match(/\+[0-9]+(?:m|h|d|w|M|Y)/g);
+				var m=60000;
+				var h=m*60;
+				var d=h*24;
+				var w=d*7;
+				var todaySimp=new Date();
+				var today={
+					day:todaySimp.getDate(),
+					month:todaySimp.getMonth()+1,
+					year:todaySimp.getFullYear()
+				};
+				var endTime=0;
+				for(var i=0;i<options.length;i++){
+					var optArr=options[i].match(/\+([0-9]+)(m|h|d|w|M|Y)/);
+					if(optArr[1] && optArr[2]){
+						var currentTimeInt=parseInt(optArr[1]);
+						switch(optArr[2]){
+							case "m":{
+								endTime+=currentTimeInt*m;
+							}
+							break;
+							case "h":{
+								endTime+=currentTimeInt*h;
+							}
+							break;
+							case "d":{
+								endTime+=currentTimeInt*d;
+							}
+							break;
+							case "w":{
+								endTime+=currentTimeInt*w;
+							}
+							break;
+							case "M":{
+								for(var j=0;j<currentTimeInt;j++){
+									var deltaDate=new Date(today.year,today.month+j);
+									var maxDay=Date.prototype.lastMonthDay(deltaDate.getMonth()+1,deltaDate.getFullYear());
+									endTime+=d*maxDay;
+								}
+							}
+							break;
+							case "Y":{
+								for(var j=1;j<=currentTimeInt;j++){
+									endTime+=d*Date.prototype.lastYearDay(today.year+j);
+								}
+							}
+							break;
+							default:
+						}
+					}
+				}
+				var Time=new Date(new Date().getTime()+endTime);
+				return Time.toGMTString();
 			}
 		}
 	}

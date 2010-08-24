@@ -606,10 +606,51 @@ try{
 						if(!parentObject.final){
 							instance.parent={};
 							for(var key in parentObject.protected){
+								if(typeof parentObject.protected[key]=="string"){
+									var match=parentObject.protected[key].match(/^~([^~]+)~$/i);
+									var match1;
+									var match2;
+									if(match){
+										match1=match[1].match(/^(.*)$/i);
+										match2=match[1].match(/^this$/i);
+										if(match1){
+											instance.parent[key]=eval(match1[0].replace(/this/g,"instance"));
+										}
+										if(match2){
+											instance.parent[key]=instance;
+										}
+									}
+									else{
+										instance.parent[key]=parentObject.protected[key];
+									}
+								}
+								else{
+									instance.parent[key]=parentObject.protected[key];
+								}
 								instance.parent[key]=parentObject.protected[key];
 							}
 							for(var key in parentObject.public){
-								instance.parent[key]=parentObject.public[key];
+								if(typeof parentObject.public[key]=="string"){
+									var match=parentObject.public[key].match(/^~([^~]+)~$/i);
+									var match1;
+									var match2;
+									if(match){
+										match1=match[1].match(/^(.*)$/i);
+										match2=match[1].match(/^this$/i);
+										if(match1){
+											instance.parent[key]=eval(match1[0].replace(/this/g,"instance"));
+										}
+										if(match2){
+											instance.parent[key]=instance;
+										}
+									}
+									else{
+										instance.parent[key]=parentObject.public[key];
+									}
+								}
+								else{
+									instance.parent[key]=parentObject.public[key];
+								}
 							}
 // 							instance.parent=!parentObject.pack ? eval("new "+className+"('@!!')") : new parentObject.pack[className]("@!!");
 							(function(parentObject,instance,parentClassName,name){
