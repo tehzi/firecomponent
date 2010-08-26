@@ -26,7 +26,7 @@ $(document).ready(function(){
 		new motion.Animator($('#animatable'), {
 			property: "left", 
 			to : '+200',
-			interval : 100
+			interval : 10
 		});
 	});
 });
@@ -34,8 +34,17 @@ $(document).ready(function(){
 		</script>
 	</head>
 	<body>
+	<style>
+		#animatable {
+			width: 200px; 
+			height: 200px; 
+			background-color: red; 
+			border: 1px solid black; 
+			position: relative
+		}
+	</style>
 		<div id="examples">
-			<div id="animatable" style="width: 200px; height: 200px; background-color: red; border: 1px solid black; position: relative">
+			<div id="animatable" style="">
 			<p>Some animatable content</p>			
 			</div>
 			<button id="slideLeft">Slide left</button>

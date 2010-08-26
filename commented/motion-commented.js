@@ -12,31 +12,52 @@
 */
 var motion={};
 /**
-* @name Animation
+* @name Animator
 * @class
 * Класс управления анимируемыми инстансами 
-* @memberOf animation
+* @memberOf motion
 * @description
+* Класс-менеджер для управлениями анимациями.
 */
 Class({
 	name : "Animator",
 	pack : motion,
 	/**
 	* @name constructor
+	* @memberOf motion.Animator
+	* @function
+	* @param object объект jQuery, содержащий набор элементов для применения анимации
+	* @param params объект, содержащий наборы инструкций и параметров для анимации элементов, переданных параметром object
 	* @description
 	* <b>Конструктор класса</b> : <i>Да</i>
 	*/
 	constructor : function(object, params){
 		object.each(function(){
-			temp = new motion.Instance($(this), params);
+			console.log(typeof params.property);
+			if (typeof params.property == "object"){
+				var n;
+				var props = params.property;
+				for (n in props){
+					var _params = new tools.copy(params);
+					_params.property = _params.property[n];
+					for (m in _params){
+						if (typeof _params[m] == "object" && m != 'property'){
+							_params[m] = (_params[m][n] != undefined) ? _params[m][n] : (_params[m].pop() || _params[m]);
+						}
+					}
+					console.log(_params);
+					temp = new motion.Instance($(this), _params);
+				}
+			}
+			else{
+				temp = new motion.Instance($(this), params);
+			}
 		});
 	},
 	public : {},
 	protected : {
-		instances : {},
-		animate : function(){
-			
-		},
+		defaultInterval : 10,
+		defaultDuration : 1000,
 		update : function (targetObject, property, val){
 			console.log('changing '+property+' to '+val);
 			targetObject.css(property, val);
@@ -55,22 +76,29 @@ Class({
 			var step = (last-first)*interval/duration;
 			return step;
 		}
-	},
-	private : {
-		
 	}
 });
 /**
-* @name Intance
+* @name Instance
 * @class
 * Класс, отвечающий за анимацию определенного свойства.
-* @memberOf animation
+* @memberOf motion
 * @description
+* Данный класс управляет анимацией определенного свойства элемента.
 */
 Class({
 	name : "Instance",
 	pack : motion,
 	parent : motion.Animator,
+	/**
+	* @name constructor
+	* @memberOf motion.Instance
+	* @function
+	* @param object объект jQuery, содержащий элемент для применения анимации
+	* @param params объект, содержащий инструкции и параметры для анимации
+	* @description
+	* <b>Конструктор класса</b> : <i>Да</i>
+	*/
 	constructor : function(object, params) {
 		this.property = params.property;
 		var from = (params.from == undefined) ? object.css(this.property) || 0 : params.from;
@@ -90,8 +118,8 @@ Class({
 					case "-": to = from - Number(to.substring(1)); break;
 				}
 			}
-			var interval = params.interval || this.defaultInterval;
-			var duration = params.duration || this.defaultDuration;
+			var interval = params.interval || this.parent.defaultInterval;
+			var duration = params.duration || this.parent.defaultDuration;
 			
 			this.targetObject = object;
 			this.step = this.parent.step(from, to, interval, duration);
@@ -100,11 +128,10 @@ Class({
 			console.log(this.array);
 			this.timer = new tools.Timer(interval, this.array.length-1);
 			this.timer.bind('timer', this.tick);
-			this.timer.start();}
+			this.timer.start();
+		}
 	},
 	private : {
-		defaultInterval : 10,
-		defaultDuration : 1000,
 		step : 0,
 		array : [],
 		nowAt : 1,

@@ -21,7 +21,19 @@ if(!Date.prototype.lastYearDay){
 * @description
 * <b>Тип данных:</b> <i>Object</i>
 */
-var tools={};
+var tools={
+	Copy : function () {},
+	/**
+	* @param obj любой объект для копирования.
+	* @description
+	* <b>Тип данных:</b> <i>Object</i> <br>
+	* Утилита для копирования объектов.
+	*/
+	copy : function (obj){
+			tools.Copy.prototype = obj;
+		return new tools.Copy();
+	}
+};
 /**
 * @name browser
 * @class
