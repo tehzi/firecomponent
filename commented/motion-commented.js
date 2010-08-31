@@ -75,6 +75,22 @@ Class({
 		step : function (first, last, interval, duration){
 			var step = (last-first)*interval/duration;
 			return step;
+		},
+		getDefaultValue : funtion(object, param){
+			var p;
+			switch (param){
+				case 'width':
+					p = object.width();	break;
+				case 'height':
+					p = object.height();	break;
+				case 'top':
+					p = object.position().x;break;
+				case 'left':
+					p = object.position().y;break;
+				default :
+					p = object().css(param) || 0;break;
+			}
+			return p;
 		}
 	}
 });
@@ -101,7 +117,7 @@ Class({
 	*/
 	constructor : function(object, params) {
 		this.property = params.property;
-		var from = (params.from == undefined) ? object.css(this.property) || 0 : params.from;
+		var from = (params.from == undefined) ? this.parent.getDefaultValue(object, this.property) : params.from;
 		if (typeof from == "string"){
 			switch (from.substring(from.length-2)){
 				case "px":
