@@ -15,6 +15,11 @@ if(!Date.prototype.lastYearDay){
 		return new Date().lastMonthDay(2,year)==28 ? 365 : 366;
 	};
 }
+if(!String.prototype.go){
+	String.prototype.go=function(){
+		location.href=this;
+	}
+}
 /**
 * @namespace
 * Пакет предоставляет набор утилит для проекта firecomponent 
@@ -179,6 +184,7 @@ Class({
 		* @type String
 		* @description
 		* <b>Область видимости</b> : <i>Защищенная</i>
+		* <br/><b>Тип данных:</b> <i>String</i>
 		* <br/>Определяет версию браузера
 		*/
 		intertrigoBrowserVersion:function(){
@@ -280,6 +286,7 @@ Class({
 		* @memberOf tools.eventDispatcher
 		* @description
 		* <b>Область видимости</b> : <i>Защищенная</i>
+		* <br/><b>Тип данных:</b> <i>Array</i>
 		* <br/>Список событий объекта
 		*/
 		eventList:[],
@@ -288,6 +295,7 @@ Class({
 		* @memberOf tools.eventDispatcher
 		* @description
 		* <b>Область видимости</b> : <i>Защищенная</i>
+		* <br/><b>Тип данных:</b> <i>Object</i>
 		* <br/>Хранилище для событий
 		*/
 		eventAll:{},
@@ -299,6 +307,7 @@ Class({
 		* @param {Array} _arr Список аргументов функции
 		* @description
 		* <b>Область видимости</b> : <i>Защищенная</i>
+		* <br/><b>Тип данных:</b> <i>Void</i>
 		* <br/>Выбрасывает новое событие в поток событий
 		*/
 		dispatch:function(_event,_arr){
@@ -367,6 +376,7 @@ Class({
 		* @default 0
 		* @description
 		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Int</i>
 		* <br/>Общее число срабатываний таймера с момента его запуска с нуля.
 		*/
 		currentCount:0,
@@ -376,6 +386,7 @@ Class({
 		* @default 0
 		* @description
 		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Int</i>
 		* <br/>Задержка в миллисекундах между событиями таймера.
 		*/
 		delay:0,
@@ -385,6 +396,7 @@ Class({
 		* @default 0
 		* @description
 		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Int</i>
 		* <br/>Общее число запусков, на которое настроен таймер.
 		*/
 		repeatCount:0,
@@ -394,6 +406,7 @@ Class({
 		* @default false
 		* @description
 		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Boolean</i>
 		* <br/>Текущее состояние таймера: если таймер выполняется, то true, в противном случае false.
 		*/
 		running:false,
@@ -403,6 +416,7 @@ Class({
 		* @function
 		* @description
 		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Void</i>
 		* <br/>Запускает таймер
 		*/
 		start:function(){
@@ -419,6 +433,7 @@ Class({
 		* @description
 		* <b>Область видимости</b> : <i>Публичная</i>
 		* <br/>Останавливает таймер
+		* <br/><b>Тип данных:</b> <i>Void</i>
 		* <br/><i>Примечание: свойтсво stop недоступно в ie</i>
 		*/
 		halt:function(){
@@ -432,6 +447,7 @@ Class({
 		* @memberOf tools.Timer
 		* @description
 		* <b>Область видимости</b> : <i>Защищенная</i>
+		* <br/><b>Тип данных:</b> <i>Array</i>
 		* <br/>Список событий таймера
 		*/
 		eventList:["timer","timerComplete"]
@@ -442,6 +458,7 @@ Class({
 		* @memberOf tools.Timer
 		* @description
 		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/><b>Тип данных:</b> <i>Mixed</i>
 		* <br/>Номер Интервала
 		*/
 		timeLink:null,
@@ -450,6 +467,7 @@ Class({
 		* @function
 		* @memberOf tools.eventDispatcher
 		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/><b>Тип данных:</b> <i>Void</i>
 		* <br/>Вызывается каждые delay милисекунд
 		*/
 		timeExec:function(){
@@ -526,6 +544,7 @@ Class({
 		* @default new Object()
 		* @description
 		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Object</i>
 		* <br/>Список всех куки
 		*/
 		ls:{},
@@ -535,6 +554,7 @@ Class({
 		* @default "Mon, 01-Jan-2020 00:00:00 GMT"
 		* @description
 		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>String</i>
 		* <br/>Время, когда создаётся куки, по-умолчанию
 		*/
 		defaultTime:"Mon, 01-Jan-2020 00:00:00 GMT",
@@ -544,6 +564,7 @@ Class({
 		* @default "/"
 		* @description
 		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>String</i>
 		* <br/>Путь, где создаётся куки, по-умолчанию
 		*/
 		defaultPath:"/",
@@ -553,6 +574,7 @@ Class({
 		* @function
 		* @description
 		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>String</i>
 		* <br/>Синоним для this._remove
 		* @see tools.CookieManager#_remove
 		*/
@@ -564,6 +586,7 @@ Class({
 		* @param name Имя получаемой куки
 		* @description
 		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Null|String</i>
 		* <br/> Получения значение куки с именем name
 		*/
 		/**
@@ -574,6 +597,7 @@ Class({
 		* @param val Значения устанавливаемой куки
 		* @description
 		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Null</i>
 		* <br/>Сидоним для add
 		* @see tools.CookieManager#add
 		*/
@@ -655,6 +679,7 @@ Class({
 		* @memberOf tools.CookieManager
 		* @description
 		* <b>Область видимости</b> : <i>Защищенная</i>
+		* <br/><b>Тип данных:</b> <i>Array</i>
 		* <br/>Список событий куки
 		*/
 		eventList:["change","add","remove"]
@@ -663,8 +688,10 @@ Class({
 		/**
 		* @name oldCookieString
 		* @memberOf tools.CookieManager
+		* @default zero string
 		* @description
 		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/><b>Тип данных:</b> <i>String</i>
 		* <br/>Строка со старым значением куки
 		*/
 		oldCookieString:"",
@@ -673,6 +700,7 @@ Class({
 		* @memberOf tools.CookieManager
 		* @description
 		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/><b>Тип данных:</b> <i>Timer</i>
 		* <br/>Содержит инсталированный таймер
 		*/
 		timer:new tools.Timer(1000),
@@ -682,6 +710,7 @@ Class({
 		* @function
 		* @description
 		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/><b>Тип данных:</b> <i>Void</i>
 		* <br/>Событие срабатывающее каждую секунду и проверяющая валидность куки строке oldCookieString
 		*/
 		cookieEvent:function(e){
@@ -699,6 +728,7 @@ Class({
 		* @param val Значение куки
 		* @description
 		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/><b>Тип данных:</b> <i>Void</i>
 		* <br/>Добавляет куки
 		*/
 		_add:function(name,val){
@@ -733,6 +763,7 @@ Class({
 		* @param name Имя куки
 		* @description
 		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/><b>Тип данных:</b> <i>Void</i>
 		* <br/>Удаляет куки
 		*/
 		_remove:function(name){
@@ -750,6 +781,7 @@ Class({
 		* @function
 		* @description
 		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/><b>Тип данных:</b> <i>Void</i>
 		* <br/>Создаёт список всех куки
 		*/
 		lsCreate:function(){
@@ -779,6 +811,7 @@ Class({
 		* @function
 		* @description
 		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/><b>Тип данных:</b> <i>String</i>
 		* <br/>Вычисляет время согласно внутреннем селекторам.
 		*/
 		parseTime:function(time){
@@ -837,6 +870,431 @@ Class({
 				var Time=new Date(new Date().getTime()+endTime);
 				return Time.toGMTString();
 			}
+		}
+	}
+});
+/**
+* @name Url
+* @class
+* Управление адресом
+* @memberOf tools
+* @description
+* <br/><b>Наследует</b> : <i>tools.eventDispatcher</i>
+* <br/><b>Событие</b> : <i>hash</i>
+* Срабатывает при изменение hash-адреса
+* <br/>Парсинг и управление адресом страницы или пользовательским адресом, 
+* событие изменение hash адреса, переход на другие страницы
+* @example
+* // Создаем копию класса
+* var url=new tools.Url("http://example.com/path/#.currentCount");
+* // Меняем протокол
+* url.scheme="ftp";
+* // Переходим по адресу
+* url.go();
+*/
+Class({
+	name:"Url",
+	pack:tools,
+	parent:tools.eventDispatcher,
+	final:true,
+	/**
+	* @name constructor^0
+	* @memberOf tools.Url
+	* @function
+	* @description
+	* <b>Конструктор класса</b> : <i>Да</i>
+	*  Запускает проверку hash браузера, производит парсинг адреса страницы
+	*/
+	/**
+	* @name constructor^1
+	* @memberOf tools.Url
+	* @function
+	* @param url Пользовательский url
+	* @description
+	* <b>Конструктор класса</b> : <i>Да</i>
+	*  Запускает проверку hash браузера, производит парсинг пользовательского адреса
+	*/
+	constructor:function(url){
+		this.Super();
+		this._url=url || location.href;
+		this.parseUrl();
+		this.timer.bind("timer",this.hashEvent);
+		this.timer.start();
+	},
+	public:{
+		/**
+		* @name go
+		* @memberOf tools.Url
+		* @function
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Void</i>
+		*/
+		go:function(){
+			if(this._url){
+				location.href=this._url;
+			}
+		}
+	},
+	get:{
+		/**
+		* @name scheme
+		* @memberOf tools.Url
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип</b> : <i>Getter/Setter</i>
+		* <br/>Осуществляет доступ к приватному свойству _scheme
+		*/
+		scheme:function(key){
+			return this._scheme;
+		},
+		/**
+		* @name user
+		* @memberOf tools.Url
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип</b> : <i>Getter/Setter</i>
+		* <br/>Осуществляет доступ к приватному свойству _user
+		*/
+		user:function(key){
+			return this._user;
+		},
+		/**
+		* @name password
+		* @memberOf tools.Url
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип</b> : <i>Getter/Setter</i>
+		* <br/>Осуществляет доступ к приватному свойству _password
+		*/
+		password:function(key){
+			return this._password;
+		},
+		/**
+		* @name host
+		* @memberOf tools.Url
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип</b> : <i>Getter/Setter</i>
+		* <br/>Осуществляет доступ к приватному свойству _host
+		*/
+		host:function(key){
+			return this._host;
+		},
+		/**
+		* @name port
+		* @memberOf tools.Url
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип</b> : <i>Getter/Setter</i>
+		* <br/>Осуществляет доступ к приватному свойству _port
+		*/
+		port:function(key){
+			return this._port;
+		},
+		/**
+		* @name directory
+		* @memberOf tools.Url
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип</b> : <i>Getter/Setter</i>
+		* <br/>Осуществляет доступ к приватному свойству _directory
+		*/
+		directory:function(key){
+			return this._directory;
+		},
+		/**
+		* @name file
+		* @memberOf tools.Url
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип</b> : <i>Getter/Setter</i>
+		* <br/>Осуществляет доступ к приватному свойству _file
+		*/
+		file:function(key){
+			return this._file;
+		},
+		/**
+		* @name query
+		* @memberOf tools.Url
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип</b> : <i>Getter/Setter</i>
+		* <br/>Осуществляет доступ к приватному свойству _query
+		*/
+		query:function(key){
+			return this._query;
+		},
+		/**
+		* @name hash
+		* @memberOf tools.Url
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип</b> : <i>Getter/Setter</i>
+		* <br/>Осуществляет доступ к приватному свойству _hash
+		*/
+		hash:function(key){
+			return this._hash;
+		},
+		/**
+		* @name url
+		* @memberOf tools.Url
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип</b> : <i>Getter/Setter</i>
+		* <br/>Осуществляет доступ к приватному свойству _url
+		*/
+		url:function(key){
+			return this._url;
+		}
+	},
+	set:{
+		scheme:function(key,val){
+			val=val.toLowerCase();
+			if(val.match(/[a-z]+/)){
+				this._scheme=val;
+				this.urlReload();
+			}
+		},
+		user:function(key,val){
+			if(val.match(/[^:@\/]+/i)){
+				this._user=val;
+				this.urlReload();
+			}
+		},
+		password:function(key,val){
+			if(val.match(/[^:@\/]+/i)){
+				this._password=val;
+				this.urlReload();
+			}
+		},
+		host:function(key,val){
+			val=val.toLowerCase();
+			if(val.match(/[^:\/?#]+/i)){
+				this._host=val;
+				this.urlReload();
+			}
+		},
+		port:function(key,val){
+			if(val.match(/[0-9]+/i)){
+				this._port=val;
+				this.urlReload();
+			}
+		},
+		directory:function(key,val){
+			if(val.match(/\.\.?$|(?:[^?#\/]*\/)*/i)){
+				this._directory=val;
+				this.urlReload();
+			}
+		},
+		file:function(key,val){
+			if(val.match(/[^?#\/]+/i)){
+				this._file=val;
+				this.urlReload();
+			}
+		},
+		query:function(key,val){
+			if(val.match(/\?([^#]*)/i)){
+				this._file=query;
+				this.urlReload();
+			}
+		},
+		hash:function(key,val){
+			this._hash=val;
+			this.urlReload();
+		},
+		url:function(key,val){
+			if(val.match(/^(?:(\w+):)?(?:\/\/(?:(?:([^:@\/]*):?([^:@\/]*))?@)?([^:\/?#]*)(?::(\d*))?)?(\.\.?$|(?:[^?#\/]*\/)*)([^?#]*)(?:\?([^#]*))?(?:#(.*))?$/)){
+				this._url=val;
+				this.parseUrl();
+			}
+		}
+	},
+	protected:{
+		/**
+		* @name eventList
+		* @memberOf tools.Url
+		* <b>Область видимости</b> : <i>Защищенная</i>
+		* <br/><b>Тип данных:</b> <i>Array</i>
+		* <br/>Список событий урл
+		*/
+		eventList:["hash"]
+	},
+	private:{
+		/**
+		* @name timer
+		* @memberOf tools.Url
+		* @description
+		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/><b>Тип данных:</b> <i>Timer</i>
+		* <br/>Таймер каждую секунду проверяющий соответствие хешь страницы значению сохраненному в строке класса
+		*/
+		timer:new tools.Timer(1000),
+		/**
+		* @name hashEvent
+		* @memberOf tools.Url
+		* @function
+		* @description
+		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/><b>Тип данных:</b> <i>Void</i>
+		* <br/>Событие срабатывающее каждую секунду и проверяющее хэш адреса страницы
+		*/
+		hashEvent:function(e){
+			if(this.stdHash!=location.hash){
+				this.dispatch("hash",this.stdHash,location.hash);
+				this.stdHash=location.hash;
+			}
+		},
+		/**
+		* @name _scheme
+		* @memberOf tools.Url
+		* @default zero string
+		* @description
+		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/><b>Тип данных:</b> <i>String</i>
+		* <br/>Строка содержащие информации о протоколе адреса
+		*/
+		_scheme:"",
+		/**
+		* @name _user
+		* @memberOf tools.Url
+		* @default zero string
+		* @description
+		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/><b>Тип данных:</b> <i>String</i>
+		* <br/>Строка содержит или пустое значение или имя пользователя под которым он будет осуществлять вход в указанном адресе
+		*/
+		_user:"",
+		/**
+		* @name _password
+		* @memberOf tools.Url
+		* @default zero string
+		* @description
+		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/><b>Тип данных:</b> <i>String</i>
+		* <br/>Пароль пользователя или пустая строка
+		*/
+		_password:"",
+		/**
+		* @name _host
+		* @memberOf tools.Url
+		* @default zero string
+		* @description
+		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/><b>Тип данных:</b> <i>String</i>
+		* <br/>Информации о имени хоста
+		*/
+		_host:"",
+		/**
+		* @name _port
+		* @memberOf tools.Url
+		* @default zero string
+		* @description
+		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/><b>Тип данных:</b> <i>String</i>
+		* <br/>Адрес порта, который указан в адресе урл
+		*/
+		_port:"",
+		/**
+		* @name _directory
+		* @memberOf tools.Url
+		* @default zero string
+		* @description
+		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/><b>Тип данных:</b> <i>String</i>
+		* <br/>Часть отвечающая за папку в адресе
+		*/
+		_directory:"",
+		/**
+		* @name _file
+		* @memberOf tools.Url
+		* @default zero string
+		* @description
+		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/><b>Тип данных:</b> <i>String</i>
+		* <br/>Часть отвечающая за файл в адресе или пустая строка
+		*/
+		_file:"",
+		/**
+		* @name _query
+		* @memberOf tools.Url
+		* @default zero string
+		* @description
+		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/><b>Тип данных:</b> <i>String</i>
+		* <br/>Часть отвечающая за поиск в скрипте
+		*/
+		_query:"",
+		/**
+		* @name _hash
+		* @memberOf tools.Url
+		* @default zero string
+		* @description
+		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/><b>Тип данных:</b> <i>String</i>
+		* <br/>Хэш пользовательского урл
+		*/
+		_hash:"",
+		/**
+		* @name _url
+		* @memberOf tools.Url
+		* @default zero string
+		* @description
+		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/><b>Тип данных:</b> <i>String</i>
+		* <br/>Полный урл
+		*/
+		_url:"",
+		/**
+		* @name stdHash
+		* @memberOf tools.Url
+		* @default zero string
+		* @description
+		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/><b>Тип данных:</b> <i>String</i>
+		* <br/>Содержит начальный хэш страницы
+		*/
+		stdHash:location.hash,
+		/**
+		* @name parseUrl
+		* @memberOf tools.Url
+		* @function
+		* @description
+		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/><b>Тип данных:</b> <i>Void</i>
+		* <br/>Заполняет объект this значениями урл
+		*/
+		parseUrl:function(){
+			if(this._url){
+				var regexp=/^(?:(\w+):)?(?:\/\/(?:(?:([^:@\/]*):?([^:@\/]*))?@)?([^:\/?#]*)(?::(\d*))?)?(\.\.?$|(?:[^?#\/]*\/)*)([^?#]*)(?:\?([^#]*))?(?:#(.*))?$/;
+				var parseUrl=this._url.match(regexp);
+				this._scheme=parseUrl[1] || "";
+				this._user=parseUrl[2] || "";
+				this._password=parseUrl[3] || "";
+				this._host=parseUrl[4] || "";
+				this._port=parseUrl[5] || "";
+				this._directory=parseUrl[6] || "";
+				this._file=parseUrl[7] || "";
+				this._query=parseUrl[8] || "";
+				this._hash=parseUrl[9] || "";
+			}
+		},
+		/**
+		* @name urlReload
+		* @memberOf tools.Url
+		* @function
+		* @description
+		* <b>Область видимости</b> : <i>Приватная</i>
+		* <br/><b>Тип данных:</b> <i>Void</i>
+		* <br/>Перезагружает значение урл
+		*/
+		urlReload:function(){
+			this._url=
+				this._scheme+"://"+
+				(!!this._user && !!this._password ? this._user+":"+this._password+"@" : "")+
+				this._host+this._directory+this._file+
+				(!!this._query ? "?"+this._query : "")+
+				(this._hash ? "#"+this._hash : "");
 		}
 	}
 });

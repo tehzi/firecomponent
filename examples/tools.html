@@ -29,25 +29,10 @@ $(document).ready(function(){
 	timer.unbind("timerComplete",function(e,currentCount){});
 	timer.start()
 	var cookie=new tools.CookieManager();
-	cookie.bind("change",function(e,newC,old){
-		console.log(e,newC,old);
+	var url=new tools.Url();
+	url.bind("hash",function(){
+		console.log("change")
 	});
-	console.log(cookie.val("lol"))
-	cookie.add={name:"lol",val:123,date:"+10h +5w",path:"/"};
-	cookie.rm("lol");
-// 	cookie.add("some",123)
-// 	cookie.add("some1",123)
-// 	cookie.add("some2",123)
-// 	console.log(cookie.add)
-// 	cookie._some=123;
-// 	console.log(lol=5)
-// 	cookie.controler()
-// 	function any(){
-// 		arguments.callee.date=5
-// 	}
-// 	cookie.val()
-// 	cookie.g("lol")=567;
-// 	if(timer.currentCount==5) timer.stop()
 });
 //]]>
 		</script>
