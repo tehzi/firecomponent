@@ -1,0 +1,1490 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="generator" content="JsDoc Toolkit" />
+		
+		<title>JsDoc Reference - tools.Url</title>
+
+		<style type="text/css">
+			/* default.css */
+body
+{
+	font: 12px "Lucida Grande", Tahoma, Arial, Helvetica, sans-serif;
+	width: 800px;
+}
+
+.header
+{
+	clear: both;
+	background-color: #ccc;
+	padding: 8px;
+}
+
+h1
+{
+	font-size: 150%;
+	font-weight: bold;
+	padding: 0;
+	margin: 1em 0 0 .3em;
+}
+
+hr
+{
+	border: none 0;
+	border-top: 1px solid #7F8FB1;
+	height: 1px;
+}
+
+pre.code
+{
+	display: block;
+	padding: 8px;
+	border: 1px dashed #ccc;
+}
+
+#index
+{
+	margin-top: 24px;
+	float: left;
+	width: 160px;
+	position: absolute;
+	left: 8px;
+	background-color: #F3F3F3;
+	padding: 8px;
+}
+
+#content
+{
+	margin-left: 190px;
+	width: 600px;
+}
+
+.classList
+{
+	list-style-type: none;
+	padding: 0;
+	margin: 0 0 0 8px;
+	font-family: arial, sans-serif;
+	font-size: 1em;
+	overflow: auto;
+}
+
+.classList li
+{
+	padding: 0;
+	margin: 0 0 8px 0;
+}
+
+.summaryTable { width: 100%; }
+
+h1.classTitle
+{
+	font-size:170%;
+	line-height:130%;
+}
+
+h2 { font-size: 110%; }
+caption, div.sectionTitle
+{
+	background-color: #7F8FB1;
+	color: #fff;
+	font-size:130%;
+	text-align: left;
+	padding: 2px 6px 2px 6px;
+	border: 1px #7F8FB1 solid;
+}
+
+div.sectionTitle { margin-bottom: 8px; }
+.summaryTable thead { display: none; }
+
+.summaryTable td
+{
+	vertical-align: top;
+	padding: 4px;
+	border-bottom: 1px #7F8FB1 solid;
+	border-right: 1px #7F8FB1 solid;
+}
+
+/*col#summaryAttributes {}*/
+.summaryTable td.attributes
+{
+	border-left: 1px #7F8FB1 solid;
+	width: 140px;
+	text-align: right;
+}
+
+td.attributes, .fixedFont
+{
+	line-height: 15px;
+	color: #002EBE;
+	font-family: "Courier New",Courier,monospace;
+	font-size: 13px;
+}
+
+.summaryTable td.nameDescription
+{
+	text-align: left;
+	font-size: 13px;
+	line-height: 15px;
+}
+
+.summaryTable td.nameDescription, .description
+{
+	line-height: 15px;
+	padding: 4px;
+	padding-left: 4px;
+}
+
+.summaryTable { margin-bottom: 8px; }
+
+ul.inheritsList
+{
+	list-style: square;
+	margin-left: 20px;
+	padding-left: 0;
+}
+
+.detailList {
+	margin-left: 20px; 
+	line-height: 15px;
+}
+.detailList dt { margin-left: 20px; }
+
+.detailList .heading
+{
+	font-weight: bold;
+	padding-bottom: 6px;
+	margin-left: 0;
+}
+
+.light, td.attributes, .light a:link, .light a:visited
+{
+	color: #777;
+	font-style: italic;
+}
+
+.fineprint
+{
+	text-align: right;
+	font-size: 10px;
+}
+		</style>
+	</head>
+
+	<body>
+<!-- ============================== header ================================= -->	
+		<!-- begin static/header.html -->
+		<div id="header">
+</div>
+		<!-- end static/header.html -->
+
+<!-- ============================== classes index ============================ -->
+		<div id="index">
+			<!-- begin publish.classesIndex -->
+			<div align="center"><a href="../index.html">Классы</a>
+| <a href="../files.html">Файлы</a></div>
+<hr />
+<h2>Список классов:</h2>
+<ul class="classList">
+	
+	<li><a href="../symbols/__Class__.html">__Class__</a></li>
+	
+	<li><i><a href="../symbols/_global_.html">_global_</a></i></li>
+	
+	<li><a href="../symbols/Class.html">Class</a></li>
+	
+	<li><a href="../symbols/ClassModel.html">ClassModel</a></li>
+	
+	<li><a href="../symbols/ieFix.html">ieFix</a></li>
+	
+	<li><a href="../symbols/motion.html">motion</a></li>
+	
+	<li><a href="../symbols/motion.Animator.html">motion.Animator</a></li>
+	
+	<li><a href="../symbols/motion.Instance.html">motion.Instance</a></li>
+	
+	<li><a href="../symbols/tools.html">tools</a></li>
+	
+	<li><a href="../symbols/tools.browser.html">tools.browser</a></li>
+	
+	<li><a href="../symbols/tools.CookieManager.html">tools.CookieManager</a></li>
+	
+	<li><a href="../symbols/tools.eventDispatcher.html">tools.eventDispatcher</a></li>
+	
+	<li><a href="../symbols/tools.Timer.html">tools.Timer</a></li>
+	
+	<li><a href="../symbols/tools.Url.html">tools.Url</a></li>
+	
+</ul>
+<hr />
+			<!-- end publish.classesIndex -->
+		</div>
+		
+		<div id="content">
+<!-- ============================== class title ============================ -->
+			<h1 class="classTitle">
+				
+				Class tools.Url
+			</h1>
+
+<!-- ============================== class summary ========================== -->			
+			<p class="description">
+				
+				
+			
+				Управление адресом
+				
+				
+					<br /><i>Объявлен в файле: </i> <a href="../symbols/src/_home_www_docs_zinc.lo_tools_firecomponent_commented_tools-commented.js.html">tools-commented.js</a>.
+				
+			</p>
+
+<!-- ============================== constructor summary ==================== -->			
+			
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class tools.Url.">
+				<caption>Class Summary</caption>
+				<thead>
+					<tr>
+						<th scope="col">Constructor Attributes</th>
+						<th scope="col">Constructor Name and Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="attributes">&nbsp;</td>
+						<td class="nameDescription" >
+							<div class="fixedFont">
+								<b><a href="../symbols/tools.Url.html#constructor">tools.Url</a></b>()
+							</div>
+							<div class="description"><br/><b>Наследует</b> : <i>tools.eventDispatcher</i>
+<br/><b>Событие</b> : <i>hash</i>
+Срабатывает при изменение hash-адреса
+<br/>Парсинг и управление адресом страницы или пользовательским адресом, 
+событие изменение hash адреса, переход на другие страницы</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+
+<!-- ============================== properties summary ===================== -->
+			
+				
+				
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class tools.Url.">
+					<caption>Все свойства</caption>
+					<thead>
+						<tr>
+							<th scope="col">Field Attributes</th>
+							<th scope="col">Field Name and Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Url.<b><a href="../symbols/tools.Url.html#._directory">_directory</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Часть отвечающая за папку в адресе</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Url.<b><a href="../symbols/tools.Url.html#._file">_file</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Часть отвечающая за файл в адресе или пустая строка</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Url.<b><a href="../symbols/tools.Url.html#._hash">_hash</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Хэш пользовательского урл</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Url.<b><a href="../symbols/tools.Url.html#._host">_host</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Информации о имени хоста</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Url.<b><a href="../symbols/tools.Url.html#._password">_password</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Пароль пользователя или пустая строка</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Url.<b><a href="../symbols/tools.Url.html#._port">_port</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Адрес порта, который указан в адресе урл</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Url.<b><a href="../symbols/tools.Url.html#._query">_query</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Часть отвечающая за поиск в скрипте</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Url.<b><a href="../symbols/tools.Url.html#._scheme">_scheme</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Строка содержащие информации о протоколе адреса</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Url.<b><a href="../symbols/tools.Url.html#._url">_url</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Полный урл</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Url.<b><a href="../symbols/tools.Url.html#._user">_user</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Строка содержит или пустое значение или имя пользователя под которым он будет осуществлять вход в указанном адресе</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Url.<b><a href="../symbols/tools.Url.html#.directory">directory</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип</b> : <i>Getter/Setter</i>
+<br/>Осуществляет доступ к приватному свойству _directory</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Url.<b><a href="../symbols/tools.Url.html#.file">file</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип</b> : <i>Getter/Setter</i>
+<br/>Осуществляет доступ к приватному свойству _file</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Url.<b><a href="../symbols/tools.Url.html#.hash">hash</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип</b> : <i>Getter/Setter</i>
+<br/>Осуществляет доступ к приватному свойству _hash</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Url.<b><a href="../symbols/tools.Url.html#.host">host</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип</b> : <i>Getter/Setter</i>
+<br/>Осуществляет доступ к приватному свойству _host</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Url.<b><a href="../symbols/tools.Url.html#.password">password</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип</b> : <i>Getter/Setter</i>
+<br/>Осуществляет доступ к приватному свойству _password</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Url.<b><a href="../symbols/tools.Url.html#.port">port</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип</b> : <i>Getter/Setter</i>
+<br/>Осуществляет доступ к приватному свойству _port</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Url.<b><a href="../symbols/tools.Url.html#.query">query</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип</b> : <i>Getter/Setter</i>
+<br/>Осуществляет доступ к приватному свойству _query</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Url.<b><a href="../symbols/tools.Url.html#.scheme">scheme</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип</b> : <i>Getter/Setter</i>
+<br/>Осуществляет доступ к приватному свойству _scheme</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Url.<b><a href="../symbols/tools.Url.html#.stdHash">stdHash</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Содержит начальный хэш страницы</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Url.<b><a href="../symbols/tools.Url.html#.timer">timer</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>Timer</i>
+<br/>Таймер каждую секунду проверяющий соответствие хешь страницы значению сохраненному в строке класса</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Url.<b><a href="../symbols/tools.Url.html#.url">url</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип</b> : <i>Getter/Setter</i>
+<br/>Осуществляет доступ к приватному свойству _url</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Url.<b><a href="../symbols/tools.Url.html#.user">user</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип</b> : <i>Getter/Setter</i>
+<br/>Осуществляет доступ к приватному свойству _user</div>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				
+				
+				
+			
+
+<!-- ============================== methods summary ======================== -->
+			
+				
+				
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class tools.Url.">
+					<caption>Все методы</caption>
+					<thead>
+						<tr>
+							<th scope="col">Method Attributes</th>
+							<th scope="col">Method Name and Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">tools.Url.<b><a href="../symbols/tools.Url.html#.constructor^0">constructor</a></b>()
+								</div>
+								<div class="description"><b>Конструктор класса</b> : <i>Да</i>
+ Запускает проверку hash браузера, производит парсинг адреса страницы</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">tools.Url.<b><a href="../symbols/tools.Url.html#.constructor^1">constructor</a></b>(url)
+								</div>
+								<div class="description"><b>Конструктор класса</b> : <i>Да</i>
+ Запускает проверку hash браузера, производит парсинг пользовательского адреса</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">tools.Url.<b><a href="../symbols/tools.Url.html#.go">go</a></b>()
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Void</i></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">tools.Url.<b><a href="../symbols/tools.Url.html#.hashEvent">hashEvent</a></b>()
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>Void</i>
+<br/>Событие срабатывающее каждую секунду и проверяющее хэш адреса страницы</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">tools.Url.<b><a href="../symbols/tools.Url.html#.parseUrl">parseUrl</a></b>()
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>Void</i>
+<br/>Заполняет объект this значениями урл</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">tools.Url.<b><a href="../symbols/tools.Url.html#.urlReload">urlReload</a></b>()
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>Void</i>
+<br/>Перезагружает значение урл</div>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				
+				
+				
+			
+<!-- ============================== events summary ======================== -->
+			
+
+<!-- ============================== constructor details ==================== -->		
+			
+			<div class="details"><a name="constructor"> </a>
+				<div class="sectionTitle">
+					Class  Описание
+				</div>
+				
+				<div class="fixedFont">
+						<b>tools.Url</b>()
+				</div>
+				
+				<div class="description">
+					<br/><b>Наследует</b> : <i>tools.eventDispatcher</i>
+<br/><b>Событие</b> : <i>hash</i>
+Срабатывает при изменение hash-адреса
+<br/>Парсинг и управление адресом страницы или пользовательским адресом, 
+событие изменение hash адреса, переход на другие страницы
+					
+				</div>
+				
+				
+				
+				<pre class="code">// Создаем копию класса
+var url=new tools.Url("http://example.com/path/#.currentCount");
+// Меняем протокол
+url.scheme="ftp";
+// Переходим по адресу
+url.go();</pre>
+				
+				
+				
+				
+					
+					
+					
+					
+					
+					
+					
+
+			</div>
+			
+
+<!-- ============================== field details ========================== -->		
+			
+				<div class="sectionTitle">
+					Описание свойств
+				</div>
+				
+					<a name="._directory"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>_directory</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Часть отвечающая за папку в адресе
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Значение по умолчанию:</dt>
+							<dd>
+								zero string
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
+					<a name="._file"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>_file</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Часть отвечающая за файл в адресе или пустая строка
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Значение по умолчанию:</dt>
+							<dd>
+								zero string
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
+					<a name="._hash"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>_hash</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Хэш пользовательского урл
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Значение по умолчанию:</dt>
+							<dd>
+								zero string
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
+					<a name="._host"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>_host</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Информации о имени хоста
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Значение по умолчанию:</dt>
+							<dd>
+								zero string
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
+					<a name="._password"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>_password</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Пароль пользователя или пустая строка
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Значение по умолчанию:</dt>
+							<dd>
+								zero string
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
+					<a name="._port"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>_port</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Адрес порта, который указан в адресе урл
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Значение по умолчанию:</dt>
+							<dd>
+								zero string
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
+					<a name="._query"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>_query</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Часть отвечающая за поиск в скрипте
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Значение по умолчанию:</dt>
+							<dd>
+								zero string
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
+					<a name="._scheme"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>_scheme</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Строка содержащие информации о протоколе адреса
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Значение по умолчанию:</dt>
+							<dd>
+								zero string
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
+					<a name="._url"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>_url</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Полный урл
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Значение по умолчанию:</dt>
+							<dd>
+								zero string
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
+					<a name="._user"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>_user</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Строка содержит или пустое значение или имя пользователя под которым он будет осуществлять вход в указанном адресе
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Значение по умолчанию:</dt>
+							<dd>
+								zero string
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
+					<a name=".directory"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>directory</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип</b> : <i>Getter/Setter</i>
+<br/>Осуществляет доступ к приватному свойству _directory
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".file"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>file</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип</b> : <i>Getter/Setter</i>
+<br/>Осуществляет доступ к приватному свойству _file
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".hash"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>hash</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип</b> : <i>Getter/Setter</i>
+<br/>Осуществляет доступ к приватному свойству _hash
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".host"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>host</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип</b> : <i>Getter/Setter</i>
+<br/>Осуществляет доступ к приватному свойству _host
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".password"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>password</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип</b> : <i>Getter/Setter</i>
+<br/>Осуществляет доступ к приватному свойству _password
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".port"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>port</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип</b> : <i>Getter/Setter</i>
+<br/>Осуществляет доступ к приватному свойству _port
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".query"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>query</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип</b> : <i>Getter/Setter</i>
+<br/>Осуществляет доступ к приватному свойству _query
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".scheme"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>scheme</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип</b> : <i>Getter/Setter</i>
+<br/>Осуществляет доступ к приватному свойству _scheme
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".stdHash"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>stdHash</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Содержит начальный хэш страницы
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Значение по умолчанию:</dt>
+							<dd>
+								zero string
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
+					<a name=".timer"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>timer</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>Timer</i>
+<br/>Таймер каждую секунду проверяющий соответствие хешь страницы значению сохраненному в строке класса
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".url"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>url</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип</b> : <i>Getter/Setter</i>
+<br/>Осуществляет доступ к приватному свойству _url
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".user"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>user</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип</b> : <i>Getter/Setter</i>
+<br/>Осуществляет доступ к приватному свойству _user
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					
+				
+			
+
+<!-- ============================== method details ========================= -->		
+			
+				<div class="sectionTitle">
+					Описание методов
+				</div>
+				
+					<a name=".constructor^0"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>constructor</b>()
+					
+					</div>
+					<div class="description">
+						<b>Конструктор класса</b> : <i>Да</i>
+ Запускает проверку hash браузера, производит парсинг адреса страницы
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".constructor^1"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>constructor</b>(url)
+					
+					</div>
+					<div class="description">
+						<b>Конструктор класса</b> : <i>Да</i>
+ Запускает проверку hash браузера, производит парсинг пользовательского адреса
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Параметры:</dt>
+							
+								<dt>
+									<b>url</b>
+									
+								</dt>
+								<dd>Пользовательский url</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".go"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>go</b>()
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Void</i>
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".hashEvent"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>hashEvent</b>()
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>Void</i>
+<br/>Событие срабатывающее каждую секунду и проверяющее хэш адреса страницы
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".parseUrl"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>parseUrl</b>()
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>Void</i>
+<br/>Заполняет объект this значениями урл
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".urlReload"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Url.</span><b>urlReload</b>()
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>Void</i>
+<br/>Перезагружает значение урл
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					
+				
+			
+			
+<!-- ============================== event details ========================= -->		
+			
+			
+			<hr />
+		</div>
+
+		
+<!-- ============================== footer ================================= -->
+		<div class="fineprint" style="clear:both">
+			
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Wed Sep 01 2010 05:21:27 GMT+0400 (MSD)
+		</div>
+	</body>
+</html>
