@@ -1,3 +1,9 @@
+/**
+* @fileoverview
+* Пакет ООП утилит для jquery, в программе использован хак <a href="http://alex.dojotoolkit.org/08/jscript/lettable.html">dojo</a>.
+* @author <a href="mailto:zi.white.drago@gmail.com">Zi White</a>
+* @version 0.1.1, $Revision$
+*/
 try{
 	var __Class__={
 		error:[],
@@ -738,7 +744,7 @@ try{
 										instance[key]=eval(match1[0].replace(/this/g,"instance"));
 									}
 									if(match2){
-										instance[key]=public[key];
+										instance[key]=instance;
 									}
 								}
 								else{
@@ -853,7 +859,7 @@ try{
 									interface[key]=eval(match1[0].replace(/this/g,"interface"));
 								}
 								if(match2){
-									interface[key]=private[key];
+									interface[key]=interface;
 								}
 							}
 							else{
@@ -876,7 +882,7 @@ try{
 									interface[key]=eval(match1[0].replace(/this/g,"interface"));
 								}
 								if(match2){
-									interface[key]=protected[key];
+									interface[key]=interface;
 								}
 							}
 							else{
@@ -914,7 +920,7 @@ try{
 										interface[key]=eval(match1[0].replace(/this/g,"interface"));
 									}
 									if(match2){
-										interface[key]=public[key];
+										interface[key]=interface;
 									}
 								}
 								else{

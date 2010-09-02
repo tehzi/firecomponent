@@ -1,3 +1,9 @@
+/**
+* @fileoverview
+* Пакет содержит набор утилит разработаных для проекта firecomponent
+* @author <a href="mailto:zi.white.drago@gmail.com">Zi White</a>
+* @version 0.1.1, $Revision$
+*/
 if(!Date.prototype.lastMonthDay){
 	Date.prototype.lastMonthDay=function(month, year){
 		var d=new Date(year ? year : this.getFullYear(), month ? month  : this.getMonth() + 1, 0);
@@ -9,7 +15,18 @@ if(!Date.prototype.lastYearDay){
 		return new Date().lastMonthDay(2,year)==28 ? 365 : 366;
 	};
 }
-var tools={};
+if(!String.prototype.go){
+	String.prototype.go=function(){
+		location.href=this;
+	}
+}
+var tools={
+	Copy : function () {},
+	copy : function (obj){
+			tools.Copy.prototype = obj;
+		return new tools.Copy();
+	}
+};
 Class({
 	name:"browser",
 	type:"interface",
@@ -354,6 +371,252 @@ Class({
 				}
 				var Time=new Date(new Date().getTime()+endTime);
 				return Time.toGMTString();
+			}
+		}
+	}
+});
+Class({
+	name:"Url",
+	pack:tools,
+	parent:tools.eventDispatcher,
+	final:true,
+	constructor:function(url){
+		this.Super();
+		this._url=url || location.href;
+		this.parseUrl();
+		this.timer.bind("timer",this.hashEvent);
+		this.timer.start();
+	},
+	public:{
+		go:function(){
+			if(this._url){
+				location.href=this._url;
+			}
+		}
+	},
+	get:{
+		scheme:function(key){
+			return this._scheme;
+		},
+		user:function(key){
+			return this._user;
+		},
+		password:function(key){
+			return this._password;
+		},
+		host:function(key){
+			return this._host;
+		},
+		port:function(key){
+			return this._port;
+		},
+		directory:function(key){
+			return this._directory;
+		},
+		file:function(key){
+			return this._file;
+		},
+		query:function(key){
+			return this._query;
+		},
+		hash:function(key){
+			return this._hash;
+		},
+		url:function(key){
+			return this._url;
+		}
+	},
+	set:{
+		scheme:function(key,val){
+			val=val.toLowerCase();
+			if(val.match(/[a-z]+/)){
+				this._scheme=val;
+				this.urlReload();
+			}
+		},
+		user:function(key,val){
+			if(val.match(/[^:@\/]+/i)){
+				this._user=val;
+				this.urlReload();
+			}
+		},
+		password:function(key,val){
+			if(val.match(/[^:@\/]+/i)){
+				this._password=val;
+				this.urlReload();
+			}
+		},
+		host:function(key,val){
+			val=val.toLowerCase();
+			if(val.match(/[^:\/?#]+/i)){
+				this._host=val;
+				this.urlReload();
+			}
+		},
+		port:function(key,val){
+			if(val.match(/[0-9]+/i)){
+				this._port=val;
+				this.urlReload();
+			}
+		},
+		directory:function(key,val){
+			if(val.match(/\.\.?$|(?:[^?#\/]*\/)*/i)){
+				this._directory=val;
+				this.urlReload();
+			}
+		},
+		file:function(key,val){
+			if(val.match(/[^?#\/]+/i)){
+				this._file=val;
+				this.urlReload();
+			}
+		},
+		query:function(key,val){
+			if(val.match(/\?([^#]*)/i)){
+				this._file=query;
+				this.urlReload();
+			}
+		},
+		hash:function(key,val){
+			this._hash=val;
+			this.urlReload();
+		},
+		url:function(key,val){
+			if(val.match(/^(?:(\w+):)?(?:\/\/(?:(?:([^:@\/]*):?([^:@\/]*))?@)?([^:\/?#]*)(?::(\d*))?)?(\.\.?$|(?:[^?#\/]*\/)*)([^?#]*)(?:\?([^#]*))?(?:#(.*))?$/)){
+				this._url=val;
+				this.parseUrl();
+			}
+		}
+	},
+	protected:{
+		eventList:["hash"]
+	},
+	private:{
+		timer:new tools.Timer(1000),
+		hashEvent:function(e){
+			if(this.stdHash!=location.hash){
+				this.dispatch("hash",this.stdHash,location.hash);
+				this.stdHash=location.hash;
+			}
+		},
+		_scheme:"",
+		_user:"",
+		_password:"",
+		_host:"",
+		_port:"",
+		_directory:"",
+		_file:"",
+		_query:"",
+		_hash:"",
+		_url:"",
+		stdHash:location.hash,
+		parseUrl:function(){
+			if(this._url){
+				var regexp=/^(?:(\w+):)?(?:\/\/(?:(?:([^:@\/]*):?([^:@\/]*))?@)?([^:\/?#]*)(?::(\d*))?)?(\.\.?$|(?:[^?#\/]*\/)*)([^?#]*)(?:\?([^#]*))?(?:#(.*))?$/;
+				var parseUrl=this._url.match(regexp);
+				this._scheme=parseUrl[1] || "";
+				this._user=parseUrl[2] || "";
+				this._password=parseUrl[3] || "";
+				this._host=parseUrl[4] || "";
+				this._port=parseUrl[5] || "";
+				this._directory=parseUrl[6] || "";
+				this._file=parseUrl[7] || "";
+				this._query=parseUrl[8] || "";
+				this._hash=parseUrl[9] || "";
+			}
+		},
+		urlReload:function(){
+			this._url=
+				this._scheme+"://"+
+				(!!this._user && !!this._password ? this._user+":"+this._password+"@" : "")+
+				this._host+this._directory+this._file+
+				(!!this._query ? "?"+this._query : "")+
+				(this._hash ? "#"+this._hash : "");
+		}
+	}
+});
+Class({
+	name:"Platform",
+	type:"interface",
+	pack:tools,
+	constructor:function(){},
+	public:{
+		name:(function(){
+			var name=navigator.platform.match(/(Linux|FreeBSD|Mac|Win|SunOS)/i);
+			if(name[1]){
+				return name[1];
+			}
+			else{
+				return (window.orientation != undefined) ? "iPod" : "Other";
+			}
+		})(),
+		linux:(navigator.platform.indexOf("Linux") != -1),
+		freebsd:(navigator.platform.indexOf("FreeBSD") != -1),
+		mac: (navigator.platform.indexOf("Mac") != -1),
+		windows:(navigator.platform.indexOf("Win") != -1),
+		ipod:(window.orientation != undefined),
+		other:"~!(this.linux || this.freebsd || this.mac || this.windows || this.ipod || this.sun)~",
+		sun:(navigator.platform.indexOf("SunOS") != -1),
+		arch:(function(){
+			switch(true){
+				case !!(navigator.platform.match(/32|i586/i)):{
+					return "i586";
+				}
+				break;
+				case !!(navigator.platform.match(/64/i)):{
+					return "x86_64";
+				}
+				break;
+				default:{
+					return "Other";
+				}
+			}
+			console.log(arch32,arch64)
+		})()
+	}
+});
+Class({
+	name:"Flash",
+	type:"interface",
+	pack:tools,
+	constructor:function(){},
+	public:{
+		enable:(function(){
+			if(tools.browser.IE){
+				if(!!(new ActiveXObject('ShockwaveFlash.ShockwaveFlash'))){
+					return true;
+				}
+			}
+			else{
+				return !!(navigator.plugins['Shockwave Flash']);
+			}
+		})(),
+		version:"~this._version()~"
+	},
+	protected:{
+		_version:function(){
+			if(this.enable){
+				if(tools.browser.IE){
+					var ActiveX=new ActiveXObject('ShockwaveFlash.ShockwaveFlash').GetVariable('$version').match(/\d+/g);
+					if(ActiveX[0] && ActiveX[1]){
+						return parseFloat(ActiveX[0]+"."+ActiveX[1]);
+					}
+					else{
+						return ActiveX[0];
+					}
+				}
+				else{
+					var StdX=navigator.plugins['Shockwave Flash'].description.match(/\d+/g);
+					if(StdX[0] && StdX[1]){
+						return parseFloat(StdX[0]+"."+StdX[1]);
+					}
+					else{
+						return StdX[0];
+					}
+				}
+			}
+			else{
+				return 0;
 			}
 		}
 	}
