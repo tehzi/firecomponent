@@ -2,7 +2,7 @@
 * @fileoverview
 * Пакет содержит набор утилит разработаных для проекта firecomponent
 * @author <a href="mailto:zi.white.drago@gmail.com">Zi White</a>
-* @version 0.1.0
+* @version 0.1.1, $Revision$
 */
 if(!Date.prototype.lastMonthDay){
 	Date.prototype.lastMonthDay=function(month, year){
@@ -29,7 +29,7 @@ if(!String.prototype.go){
 var tools={
 	Copy : function () {},
 	/**
-	* @param obj любой объект для копирования.
+	* @param {Object} obj любой объект для копирования.
 	* @description
 	* <b>Тип данных:</b> <i>Object</i> <br>
 	* Утилита для копирования объектов.
@@ -243,8 +243,8 @@ Class({
 		* @name bind
 		* @function
 		* @memberOf tools.eventDispatcher
-		* @param _event {String} Имя события
-		* @param _function {Mixed} Ссылка на фунцию
+		* @param {String} _event  Имя события
+		* @param {Mixed} _function Ссылка на фунцию
 		* @description
 		* <b>Область видимости</b> : <i>Публичная</i>
 		* <br/><b>Тип данных:</b> <i>Void</i>
@@ -262,8 +262,8 @@ Class({
 		* @name unbind
 		* @function
 		* @memberOf tools.eventDispatcher
-		* @param _event {String} Имя события
-		* @param _function {Mixed} Ссылка на фунцию
+		* @param {String} _event Имя события
+		* @param {Mixed} _function Ссылка на фунцию
 		* @description
 		* <b>Область видимости</b> : <i>Публичная</i>
 		* <br/><b>Тип данных:</b> <i>Void</i>
@@ -355,8 +355,8 @@ Class({
 	* @name constructor
 	* @memberOf tools.Timer
 	* @function
-	* @param delay Задержка в миллисекундах между событиями таймера.
-	* @param repeatCount Общее число запусков, на которое настроен таймер.
+	* @param {Number} delay Задержка в миллисекундах между событиями таймера.
+	* @param {Number} repeatCount Общее число запусков, на которое настроен таймер.
 	* @description
 	* <b>Конструктор класса</b> : <i>Да</i>
 	*/
@@ -583,7 +583,7 @@ Class({
 		* @name val^1
 		* @memberOf tools.CookieManager
 		* @function
-		* @param name Имя получаемой куки
+		* @param {String} name Имя получаемой куки
 		* @description
 		* <b>Область видимости</b> : <i>Публичная</i>
 		* <br/><b>Тип данных:</b> <i>Null|String</i>
@@ -593,8 +593,8 @@ Class({
 		* @name val^2
 		* @memberOf tools.CookieManager
 		* @function
-		* @param name Имя устанавливаемой куки
-		* @param val Значения устанавливаемой куки
+		* @param {String} name Имя устанавливаемой куки
+		* @param {String} val Значения устанавливаемой куки
 		* @description
 		* <b>Область видимости</b> : <i>Публичная</i>
 		* <br/><b>Тип данных:</b> <i>Null</i>
@@ -724,8 +724,8 @@ Class({
 		* @name _add
 		* @memberOf tools.CookieManager
 		* @function
-		* @param name Имя куки
-		* @param val Значение куки
+		* @param {String} name Имя куки
+		* @param {String} val Значение куки
 		* @description
 		* <b>Область видимости</b> : <i>Приватная</i>
 		* <br/><b>Тип данных:</b> <i>Void</i>
@@ -760,7 +760,7 @@ Class({
 		* @name _remove
 		* @memberOf tools.CookieManager
 		* @function
-		* @param name Имя куки
+		* @param {String} name Имя куки
 		* @description
 		* <b>Область видимости</b> : <i>Приватная</i>
 		* <br/><b>Тип данных:</b> <i>Void</i>
@@ -909,7 +909,7 @@ Class({
 	* @name constructor^1
 	* @memberOf tools.Url
 	* @function
-	* @param url Пользовательский url
+	* @param {String} url Пользовательский url
 	* @description
 	* <b>Конструктор класса</b> : <i>Да</i>
 	*  Запускает проверку hash браузера, производит парсинг пользовательского адреса
@@ -1295,6 +1295,223 @@ Class({
 				this._host+this._directory+this._file+
 				(!!this._query ? "?"+this._query : "")+
 				(this._hash ? "#"+this._hash : "");
+		}
+	}
+});
+/**
+* @name Platform
+* @class
+* Информации о платформе на которой запущен скрипт
+* @memberOf tools
+* @example
+* // return name of user platform
+* alert(tools.Platform.name); 
+* @description
+*/
+Class({
+	name:"Platform",
+	type:"interface",
+	pack:tools,
+	/**
+	* @name constructor
+	* @memberOf tools.Platform
+	* @description
+	* <b>Конструктор класса</b> : <i>Да</i>
+	*/
+	constructor:function(){},
+	public:{
+		/**
+		* @name name
+		* @memberOf tools.Platform
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>String</i>
+		* <br/><b>Значение:</b> <i>Linux/FreeBSD/Mac/Win/SunOS/iPod/Other</i>
+		* <br/>Возвращает имя пользовательской оси или строку Other
+		*/
+		name:(function(){
+			var name=navigator.platform.match(/(Linux|FreeBSD|Mac|Win|SunOS)/i);
+			if(name[1]){
+				return name[1];
+			}
+			else{
+				return (window.orientation != undefined) ? "iPod" : "Other";
+			}
+		})(),
+		/**
+		* @name linux
+		* @memberOf tools.Platform
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Boolean</i>
+		* <br/>true, если линукс
+		*/
+		linux:(navigator.platform.indexOf("Linux") != -1),
+		/**
+		* @name freebsd
+		* @memberOf tools.Platform
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Boolean</i>
+		* <br/>true, если freebsd
+		*/
+		freebsd:(navigator.platform.indexOf("FreeBSD") != -1),
+		/**
+		* @name mac
+		* @memberOf tools.Platform
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Boolean</i>
+		* <br/>true, если mac
+		*/
+		mac: (navigator.platform.indexOf("Mac") != -1),
+		/**
+		* @name windows
+		* @memberOf tools.Platform
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Boolean</i>
+		* <br/>true, если windows
+		*/
+		windows:(navigator.platform.indexOf("Win") != -1),
+		/**
+		* @name ipod
+		* @memberOf tools.Platform
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Boolean</i>
+		* <br/>true, если ipod
+		*/
+		ipod:(window.orientation != undefined),
+		/**
+		* @name other
+		* @memberOf tools.Platform
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Boolean</i>
+		* <br/>true, если не одна из осей включенных в интерфейс
+		*/
+		other:"~!(this.linux || this.freebsd || this.mac || this.windows || this.ipod || this.sun)~",
+		/**
+		* @name sun
+		* @memberOf tools.Platform
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Boolean</i>
+		* <br/>true, если sun
+		*/
+		sun:(navigator.platform.indexOf("SunOS") != -1),
+		/**
+		* @name arch
+		* @memberOf tools.Platform
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>String</i>
+		* <br/><b>Значение:</b> <i>i586/x86_64/Other</i>
+		* <br/>Значение архитектуры пользовательской машины
+		*/
+		arch:(function(){
+			switch(true){
+				case !!(navigator.platform.match(/32|i586/i)):{
+					return "i586";
+				}
+				break;
+				case !!(navigator.platform.match(/64/i)):{
+					return "x86_64";
+				}
+				break;
+				default:{
+					return "Other";
+				}
+			}
+			console.log(arch32,arch64)
+		})()
+	}
+});
+/**
+* @name Flash
+* @class
+* Информация о поддержки flash в браузере
+* @memberOf tools
+* @example
+* // return boolean-like information about enable flash in browser
+* alert(tools.Flash.enable);
+* @description
+*/
+Class({
+	name:"Flash",
+	type:"interface",
+	pack:tools,
+	/**
+	* @name constructor
+	* @memberOf tools.Flash
+	* @description
+	* <b>Конструктор класса</b> : <i>Да</i>
+	*/
+	constructor:function(){},
+	public:{
+		/**
+		* @name enable
+		* @memberOf tools.Flash
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Boolean</i>
+		* <br/>Возвращает true, если в браузере включен flash player
+		*/
+		enable:(function(){
+			if(tools.browser.IE){
+				if(!!(new ActiveXObject('ShockwaveFlash.ShockwaveFlash'))){
+					return true;
+				}
+			}
+			else{
+				return !!(navigator.plugins['Shockwave Flash']);
+			}
+		})(),
+		/**
+		* @name version
+		* @memberOf tools.Flash
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Number</i>
+		* <br/>Вызывает защищенную функцию данного объекта и возвращает версию флэш плэйера
+		*/
+		version:"~this._version()~"
+	},
+	protected:{
+		/**
+		* @name _version
+		* @memberOf tools.Flash
+		* @function
+		* @description
+		* <b>Область видимости</b> : <i>Защищенная</i>
+		* <br/><b>Тип данных:</b> <i>Number</i>
+		* <br/>Возвращает версию флэш плэйера
+		*/
+		_version:function(){
+			if(this.enable){
+				if(tools.browser.IE){
+					var ActiveX=new ActiveXObject('ShockwaveFlash.ShockwaveFlash').GetVariable('$version').match(/\d+/g);
+					if(ActiveX[0] && ActiveX[1]){
+						return parseFloat(ActiveX[0]+"."+ActiveX[1]);
+					}
+					else{
+						return ActiveX[0];
+					}
+				}
+				else{
+					var StdX=navigator.plugins['Shockwave Flash'].description.match(/\d+/g);
+					if(StdX[0] && StdX[1]){
+						return parseFloat(StdX[0]+"."+StdX[1]);
+					}
+					else{
+						return StdX[0];
+					}
+				}
+			}
+			else{
+				return 0;
+			}
 		}
 	}
 });

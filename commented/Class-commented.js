@@ -3,7 +3,7 @@
 * Пакет ООП утилит для jquery, в программе использован хак <a href="http://alex.dojotoolkit.org/08/jscript/lettable.html">dojo</a>.
 * Тестируется в браузерах ie6, ie7, ie8, opera 10.60, chrome 4, firefox 3.6.6.
 * @author <a href="mailto:zi.white.drago@gmail.com">Zi White</a>
-* @version 0.1.0
+* @version 0.1.1, $Revision$
 */
 try{
 	/**
@@ -1010,7 +1010,7 @@ try{
 										instance[key]=eval(match1[0].replace(/this/g,"instance"));
 									}
 									if(match2){
-										instance[key]=public[key];
+										instance[key]=instance;
 									}
 								}
 								else{
@@ -1136,7 +1136,7 @@ try{
 									interface[key]=eval(match1[0].replace(/this/g,"interface"));
 								}
 								if(match2){
-									interface[key]=private[key];
+									interface[key]=interface;
 								}
 							}
 							else{
@@ -1159,7 +1159,7 @@ try{
 									interface[key]=eval(match1[0].replace(/this/g,"interface"));
 								}
 								if(match2){
-									interface[key]=protected[key];
+									interface[key]=interface;
 								}
 							}
 							else{
@@ -1197,7 +1197,7 @@ try{
 										interface[key]=eval(match1[0].replace(/this/g,"interface"));
 									}
 									if(match2){
-										interface[key]=public[key];
+										interface[key]=interface;
 									}
 								}
 								else{

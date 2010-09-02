@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - tools.Timer</title>
+		<title>JsDoc Reference - tools.Platform</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -230,7 +230,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Class tools.Timer
+				Class tools.Platform
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -238,7 +238,7 @@ ul.inheritsList
 				
 				
 			
-				Простой таймер облегчающий работу с периодичными функциями
+				Информации о платформе на которой запущен скрипт
 				
 				
 					<br /><i>Объявлен в файле: </i> <a href="../symbols/src/_home_www_docs_zinc.lo_tools_firecomponent_commented_tools-commented.js.html">tools-commented.js</a>.
@@ -247,7 +247,7 @@ ul.inheritsList
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class tools.Timer.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class tools.Platform.">
 				<caption>Class Summary</caption>
 				<thead>
 					<tr>
@@ -260,13 +260,9 @@ ul.inheritsList
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/tools.Timer.html#constructor">tools.Timer</a></b>()
+								<b><a href="../symbols/tools.Platform.html#constructor">tools.Platform</a></b>()
 							</div>
-							<div class="description"><br/><b>Наследует</b> : <i>tools.eventDispatcher</i>
-<br/><b>Событие</b> : <i>timer</i>
-<br/>Срабатывает каждые this.delay миллисекунд
-<br/><b>Событие</b> : <i>timerComplete</i>
-<br/>Срабатывает когда таймер пройдет количество циклов указанной в переменной repeatCount</div>
+							<div class="description"></div>
 						</td>
 					</tr>
 				</tbody>
@@ -277,7 +273,7 @@ ul.inheritsList
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class tools.Timer.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class tools.Platform.">
 					<caption>Все свойства</caption>
 					<thead>
 						<tr>
@@ -291,11 +287,12 @@ ul.inheritsList
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								tools.Timer.<b><a href="../symbols/tools.Timer.html#.currentCount">currentCount</a></b>
+								tools.Platform.<b><a href="../symbols/tools.Platform.html#.arch">arch</a></b>
 								</div>
 								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>Int</i>
-<br/>Общее число срабатываний таймера с момента его запуска с нуля.</div>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/><b>Значение:</b> <i>i586/x86_64/Other</i>
+<br/>Значение архитектуры пользовательской машины</div>
 							</td>
 						</tr>
 					
@@ -303,11 +300,9 @@ ul.inheritsList
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								tools.Timer.<b><a href="../symbols/tools.Timer.html#.delay">delay</a></b>
+								tools.Platform.<b><a href="../symbols/tools.Platform.html#.constructor">constructor</a></b>
 								</div>
-								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>Int</i>
-<br/>Задержка в миллисекундах между событиями таймера.</div>
+								<div class="description"><b>Конструктор класса</b> : <i>Да</i></div>
 							</td>
 						</tr>
 					
@@ -315,35 +310,11 @@ ul.inheritsList
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								tools.Timer.<b><a href="../symbols/tools.Timer.html#.eventList">eventList</a></b>
-								</div>
-								<div class="description"><b>Область видимости</b> : <i>Защищенная</i>
-<br/><b>Тип данных:</b> <i>Array</i>
-<br/>Список событий таймера</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								tools.Timer.<b><a href="../symbols/tools.Timer.html#.repeatCount">repeatCount</a></b>
-								</div>
-								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>Int</i>
-<br/>Общее число запусков, на которое настроен таймер.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								tools.Timer.<b><a href="../symbols/tools.Timer.html#.running">running</a></b>
+								tools.Platform.<b><a href="../symbols/tools.Platform.html#.freebsd">freebsd</a></b>
 								</div>
 								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
 <br/><b>Тип данных:</b> <i>Boolean</i>
-<br/>Текущее состояние таймера: если таймер выполняется, то true, в противном случае false.</div>
+<br/>true, если freebsd</div>
 							</td>
 						</tr>
 					
@@ -351,11 +322,84 @@ ul.inheritsList
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								tools.Timer.<b><a href="../symbols/tools.Timer.html#.timeLink">timeLink</a></b>
+								tools.Platform.<b><a href="../symbols/tools.Platform.html#.ipod">ipod</a></b>
 								</div>
-								<div class="description"><b>Область видимости</b> : <i>Приватная</i>
-<br/><b>Тип данных:</b> <i>Mixed</i>
-<br/>Номер Интервала</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>true, если ipod</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Platform.<b><a href="../symbols/tools.Platform.html#.linux">linux</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>true, если линукс</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Platform.<b><a href="../symbols/tools.Platform.html#.mac">mac</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>true, если mac</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Platform.<b><a href="../symbols/tools.Platform.html#.name">name</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/><b>Значение:</b> <i>Linux/FreeBSD/Mac/Win/SunOS/iPod/Other</i>
+<br/>Возвращает имя пользовательской оси или строку Other</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Platform.<b><a href="../symbols/tools.Platform.html#.other">other</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>true, если не одна из осей включенных в интерфейс</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Platform.<b><a href="../symbols/tools.Platform.html#.sun">sun</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>true, если sun</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Platform.<b><a href="../symbols/tools.Platform.html#.windows">windows</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>true, если windows</div>
 							</td>
 						</tr>
 					
@@ -368,56 +412,6 @@ ul.inheritsList
 
 <!-- ============================== methods summary ======================== -->
 			
-				
-				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class tools.Timer.">
-					<caption>Все методы</caption>
-					<thead>
-						<tr>
-							<th scope="col">Method Attributes</th>
-							<th scope="col">Method Name and Description</th>
-						</tr>
-					</thead>
-					<tbody>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">tools.Timer.<b><a href="../symbols/tools.Timer.html#.constructor">constructor</a></b>(delay, repeatCount)
-								</div>
-								<div class="description"><b>Конструктор класса</b> : <i>Да</i></div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">tools.Timer.<b><a href="../symbols/tools.Timer.html#.halt">halt</a></b>()
-								</div>
-								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
-<br/>Останавливает таймер
-<br/><b>Тип данных:</b> <i>Void</i>
-<br/><i>Примечание: свойтсво stop недоступно в ie</i></div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">tools.Timer.<b><a href="../symbols/tools.Timer.html#.start">start</a></b>()
-								</div>
-								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>Void</i>
-<br/>Запускает таймер</div>
-							</td>
-						</tr>
-					
-					</tbody>
-				</table>
-				
-				
-				
-			
 <!-- ============================== events summary ======================== -->
 			
 
@@ -429,31 +423,18 @@ ul.inheritsList
 				</div>
 				
 				<div class="fixedFont">
-						<b>tools.Timer</b>()
+						<b>tools.Platform</b>()
 				</div>
 				
 				<div class="description">
-					<br/><b>Наследует</b> : <i>tools.eventDispatcher</i>
-<br/><b>Событие</b> : <i>timer</i>
-<br/>Срабатывает каждые this.delay миллисекунд
-<br/><b>Событие</b> : <i>timerComplete</i>
-<br/>Срабатывает когда таймер пройдет количество циклов указанной в переменной repeatCount
+					
 					
 				</div>
 				
 				
 				
-				<pre class="code">// Таймер повторится 5 раз с интервало в 2 секунды
-var timer=new tools.Timer(2000,5);
-// Каждые 2 секунды
-timer.bind("timer",function(){
-	//do somethink
-});
-// В конце 5-го цикла
-timer.bind("timerComplete",function(){
-	//do somethink
-});
-timer.start();</pre>
+				<pre class="code">// return name of user platform
+alert(tools.Platform.name);</pre>
 				
 				
 				
@@ -475,17 +456,18 @@ timer.start();</pre>
 					Описание свойств
 				</div>
 				
-					<a name=".currentCount"> </a>
+					<a name=".arch"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">tools.Timer.</span><b>currentCount</b>
+					<span class="light">tools.Platform.</span><b>arch</b>
 					
 					</div>
 					<div class="description">
 						<b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>Int</i>
-<br/>Общее число срабатываний таймера с момента его запуска с нуля.
+<br/><b>Тип данных:</b> <i>String</i>
+<br/><b>Значение:</b> <i>i586/x86_64/Other</i>
+<br/>Значение архитектуры пользовательской машины
 						
 						
 					</div>
@@ -496,58 +478,18 @@ timer.start();</pre>
 						
 						
 						
-							<dl class="detailList">
-							<dt class="heading">Значение по умолчанию:</dt>
-							<dd>
-								0
-							</dd>
-							</dl>
-						
 
 					<hr />
 				
-					<a name=".delay"> </a>
+					<a name=".constructor"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">tools.Timer.</span><b>delay</b>
+					<span class="light">tools.Platform.</span><b>constructor</b>
 					
 					</div>
 					<div class="description">
-						<b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>Int</i>
-<br/>Задержка в миллисекундах между событиями таймера.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Значение по умолчанию:</dt>
-							<dd>
-								0
-							</dd>
-							</dl>
-						
-
-					<hr />
-				
-					<a name=".eventList"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">tools.Timer.</span><b>eventList</b>
-					
-					</div>
-					<div class="description">
-						<b>Область видимости</b> : <i>Защищенная</i>
-<br/><b>Тип данных:</b> <i>Array</i>
-<br/>Список событий таймера
+						<b>Конструктор класса</b> : <i>Да</i>
 						
 						
 					</div>
@@ -561,48 +503,17 @@ timer.start();</pre>
 
 					<hr />
 				
-					<a name=".repeatCount"> </a>
+					<a name=".freebsd"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">tools.Timer.</span><b>repeatCount</b>
-					
-					</div>
-					<div class="description">
-						<b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>Int</i>
-<br/>Общее число запусков, на которое настроен таймер.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Значение по умолчанию:</dt>
-							<dd>
-								0
-							</dd>
-							</dl>
-						
-
-					<hr />
-				
-					<a name=".running"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">tools.Timer.</span><b>running</b>
+					<span class="light">tools.Platform.</span><b>freebsd</b>
 					
 					</div>
 					<div class="description">
 						<b>Область видимости</b> : <i>Публичная</i>
 <br/><b>Тип данных:</b> <i>Boolean</i>
-<br/>Текущее состояние таймера: если таймер выполняется, то true, в противном случае false.
+<br/>true, если freebsd
 						
 						
 					</div>
@@ -612,28 +523,166 @@ timer.start();</pre>
 						
 						
 						
-						
-							<dl class="detailList">
-							<dt class="heading">Значение по умолчанию:</dt>
-							<dd>
-								false
-							</dd>
-							</dl>
 						
 
 					<hr />
 				
-					<a name=".timeLink"> </a>
+					<a name=".ipod"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">tools.Timer.</span><b>timeLink</b>
+					<span class="light">tools.Platform.</span><b>ipod</b>
 					
 					</div>
 					<div class="description">
-						<b>Область видимости</b> : <i>Приватная</i>
-<br/><b>Тип данных:</b> <i>Mixed</i>
-<br/>Номер Интервала
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>true, если ipod
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".linux"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Platform.</span><b>linux</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>true, если линукс
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".mac"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Platform.</span><b>mac</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>true, если mac
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".name"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Platform.</span><b>name</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/><b>Значение:</b> <i>Linux/FreeBSD/Mac/Win/SunOS/iPod/Other</i>
+<br/>Возвращает имя пользовательской оси или строку Other
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".other"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Platform.</span><b>other</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>true, если не одна из осей включенных в интерфейс
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".sun"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Platform.</span><b>sun</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>true, если sun
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".windows"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Platform.</span><b>windows</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>true, если windows
 						
 						
 					</div>
@@ -650,108 +699,6 @@ timer.start();</pre>
 			
 
 <!-- ============================== method details ========================= -->		
-			
-				<div class="sectionTitle">
-					Описание методов
-				</div>
-				
-					<a name=".constructor"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">tools.Timer.</span><b>constructor</b>(delay, repeatCount)
-					
-					</div>
-					<div class="description">
-						<b>Конструктор класса</b> : <i>Да</i>
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Параметры:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{Number}</span> <b>delay</b>
-									
-								</dt>
-								<dd>Задержка в миллисекундах между событиями таймера.</dd>
-							
-								<dt>
-									<span class="light fixedFont">{Number}</span> <b>repeatCount</b>
-									
-								</dt>
-								<dd>Общее число запусков, на которое настроен таймер.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".halt"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">tools.Timer.</span><b>halt</b>()
-					
-					</div>
-					<div class="description">
-						<b>Область видимости</b> : <i>Публичная</i>
-<br/>Останавливает таймер
-<br/><b>Тип данных:</b> <i>Void</i>
-<br/><i>Примечание: свойтсво stop недоступно в ie</i>
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".start"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">tools.Timer.</span><b>start</b>()
-					
-					</div>
-					<div class="description">
-						<b>Область видимости</b> : <i>Публичная</i>
-<br/><b>Тип данных:</b> <i>Void</i>
-<br/>Запускает таймер
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-						
-						
-
-					
-				
 			
 			
 <!-- ============================== event details ========================= -->		

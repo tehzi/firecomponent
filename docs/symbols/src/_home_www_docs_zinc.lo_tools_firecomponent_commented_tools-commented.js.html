@@ -9,7 +9,7 @@
 <span class='line'>  2</span> * @fileoverview
 <span class='line'>  3</span> * Пакет содержит набор утилит разработаных для проекта firecomponent
 <span class='line'>  4</span> * @author &lt;a href="mailto:zi.white.drago@gmail.com">Zi White&lt;/a>
-<span class='line'>  5</span> * @version 0.1.0
+<span class='line'>  5</span> * @version 0.1.1, $Revision$
 <span class='line'>  6</span> */</span><span class="WHIT">
 <span class='line'>  7</span> </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="PUNC">!</span><span class="NAME">Date.prototype.lastMonthDay</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'>  8</span> </span><span class="WHIT">	</span><span class="NAME">Date.prototype.lastMonthDay</span><span class="PUNC">=</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">month</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">year</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
@@ -36,7 +36,7 @@
 <span class='line'> 29</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">tools</span><span class="PUNC">=</span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'> 30</span> </span><span class="WHIT">	</span><span class="NAME">Copy</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
 <span class='line'> 31</span> </span><span class="WHIT">	</span><span class="COMM">/**
-<span class='line'> 32</span> 	* @param obj любой объект для копирования.
+<span class='line'> 32</span> 	* @param {Object} obj любой объект для копирования.
 <span class='line'> 33</span> 	* @description
 <span class='line'> 34</span> 	* &lt;b>Тип данных:&lt;/b> &lt;i>Object&lt;/i> &lt;br>
 <span class='line'> 35</span> 	* Утилита для копирования объектов.
@@ -250,8 +250,8 @@
 <span class='line'>243</span> 		* @name bind
 <span class='line'>244</span> 		* @function
 <span class='line'>245</span> 		* @memberOf tools.eventDispatcher
-<span class='line'>246</span> 		* @param _event {String} Имя события
-<span class='line'>247</span> 		* @param _function {Mixed} Ссылка на фунцию
+<span class='line'>246</span> 		* @param {String} _event  Имя события
+<span class='line'>247</span> 		* @param {Mixed} _function Ссылка на фунцию
 <span class='line'>248</span> 		* @description
 <span class='line'>249</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Публичная&lt;/i>
 <span class='line'>250</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>Void&lt;/i>
@@ -269,8 +269,8 @@
 <span class='line'>262</span> 		* @name unbind
 <span class='line'>263</span> 		* @function
 <span class='line'>264</span> 		* @memberOf tools.eventDispatcher
-<span class='line'>265</span> 		* @param _event {String} Имя события
-<span class='line'>266</span> 		* @param _function {Mixed} Ссылка на фунцию
+<span class='line'>265</span> 		* @param {String} _event Имя события
+<span class='line'>266</span> 		* @param {Mixed} _function Ссылка на фунцию
 <span class='line'>267</span> 		* @description
 <span class='line'>268</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Публичная&lt;/i>
 <span class='line'>269</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>Void&lt;/i>
@@ -362,8 +362,8 @@
 <span class='line'>355</span> 	* @name constructor
 <span class='line'>356</span> 	* @memberOf tools.Timer
 <span class='line'>357</span> 	* @function
-<span class='line'>358</span> 	* @param delay Задержка в миллисекундах между событиями таймера.
-<span class='line'>359</span> 	* @param repeatCount Общее число запусков, на которое настроен таймер.
+<span class='line'>358</span> 	* @param {Number} delay Задержка в миллисекундах между событиями таймера.
+<span class='line'>359</span> 	* @param {Number} repeatCount Общее число запусков, на которое настроен таймер.
 <span class='line'>360</span> 	* @description
 <span class='line'>361</span> 	* &lt;b>Конструктор класса&lt;/b> : &lt;i>Да&lt;/i>
 <span class='line'>362</span> 	*/</span><span class="WHIT">
@@ -590,7 +590,7 @@
 <span class='line'>583</span> 		* @name val^1
 <span class='line'>584</span> 		* @memberOf tools.CookieManager
 <span class='line'>585</span> 		* @function
-<span class='line'>586</span> 		* @param name Имя получаемой куки
+<span class='line'>586</span> 		* @param {String} name Имя получаемой куки
 <span class='line'>587</span> 		* @description
 <span class='line'>588</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Публичная&lt;/i>
 <span class='line'>589</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>Null|String&lt;/i>
@@ -600,8 +600,8 @@
 <span class='line'>593</span> 		* @name val^2
 <span class='line'>594</span> 		* @memberOf tools.CookieManager
 <span class='line'>595</span> 		* @function
-<span class='line'>596</span> 		* @param name Имя устанавливаемой куки
-<span class='line'>597</span> 		* @param val Значения устанавливаемой куки
+<span class='line'>596</span> 		* @param {String} name Имя устанавливаемой куки
+<span class='line'>597</span> 		* @param {String} val Значения устанавливаемой куки
 <span class='line'>598</span> 		* @description
 <span class='line'>599</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Публичная&lt;/i>
 <span class='line'>600</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>Null&lt;/i>
@@ -731,8 +731,8 @@
 <span class='line'>724</span> 		* @name _add
 <span class='line'>725</span> 		* @memberOf tools.CookieManager
 <span class='line'>726</span> 		* @function
-<span class='line'>727</span> 		* @param name Имя куки
-<span class='line'>728</span> 		* @param val Значение куки
+<span class='line'>727</span> 		* @param {String} name Имя куки
+<span class='line'>728</span> 		* @param {String} val Значение куки
 <span class='line'>729</span> 		* @description
 <span class='line'>730</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Приватная&lt;/i>
 <span class='line'>731</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>Void&lt;/i>
@@ -767,7 +767,7 @@
 <span class='line'>760</span> 		* @name _remove
 <span class='line'>761</span> 		* @memberOf tools.CookieManager
 <span class='line'>762</span> 		* @function
-<span class='line'>763</span> 		* @param name Имя куки
+<span class='line'>763</span> 		* @param {String} name Имя куки
 <span class='line'>764</span> 		* @description
 <span class='line'>765</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Приватная&lt;/i>
 <span class='line'>766</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>Void&lt;/i>
@@ -916,7 +916,7 @@
 <span class='line'>909</span> 	* @name constructor^1
 <span class='line'>910</span> 	* @memberOf tools.Url
 <span class='line'>911</span> 	* @function
-<span class='line'>912</span> 	* @param url Пользовательский url
+<span class='line'>912</span> 	* @param {String} url Пользовательский url
 <span class='line'>913</span> 	* @description
 <span class='line'>914</span> 	* &lt;b>Конструктор класса&lt;/b> : &lt;i>Да&lt;/i>
 <span class='line'>915</span> 	*  Запускает проверку hash браузера, производит парсинг пользовательского адреса
@@ -1304,4 +1304,221 @@
 <span class='line'>1297</span> </span><span class="WHIT">				</span><span class="PUNC">(</span><span class="NAME">this._hash</span><span class="WHIT"> </span><span class="PUNC">?</span><span class="WHIT"> </span><span class="STRN">"#"</span><span class="PUNC">+</span><span class="NAME">this._hash</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="STRN">""</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'>1298</span> </span><span class="WHIT">		</span><span class="PUNC">}</span><span class="WHIT">
 <span class='line'>1299</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="WHIT">
-<span class='line'>1300</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span></pre></body></html>
+<span class='line'>1300</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1301</span> </span><span class="COMM">/**
+<span class='line'>1302</span> * @name Platform
+<span class='line'>1303</span> * @class
+<span class='line'>1304</span> * Информации о платформе на которой запущен скрипт
+<span class='line'>1305</span> * @memberOf tools
+<span class='line'>1306</span> * @example
+<span class='line'>1307</span> * // return name of user platform
+<span class='line'>1308</span> * alert(tools.Platform.name); 
+<span class='line'>1309</span> * @description
+<span class='line'>1310</span> */</span><span class="WHIT">
+<span class='line'>1311</span> </span><span class="NAME">Class</span><span class="PUNC">(</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1312</span> </span><span class="WHIT">	</span><span class="NAME">name</span><span class="PUNC">:</span><span class="STRN">"Platform"</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1313</span> </span><span class="WHIT">	</span><span class="NAME">type</span><span class="PUNC">:</span><span class="STRN">"interface"</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1314</span> </span><span class="WHIT">	</span><span class="NAME">pack</span><span class="PUNC">:</span><span class="NAME">tools</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1315</span> </span><span class="WHIT">	</span><span class="COMM">/**
+<span class='line'>1316</span> 	* @name constructor
+<span class='line'>1317</span> 	* @memberOf tools.Platform
+<span class='line'>1318</span> 	* @description
+<span class='line'>1319</span> 	* &lt;b>Конструктор класса&lt;/b> : &lt;i>Да&lt;/i>
+<span class='line'>1320</span> 	*/</span><span class="WHIT">
+<span class='line'>1321</span> </span><span class="WHIT">	</span><span class="NAME">constructor</span><span class="PUNC">:</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1322</span> </span><span class="WHIT">	</span><span class="NAME">public</span><span class="PUNC">:</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1323</span> </span><span class="WHIT">		</span><span class="COMM">/**
+<span class='line'>1324</span> 		* @name name
+<span class='line'>1325</span> 		* @memberOf tools.Platform
+<span class='line'>1326</span> 		* @description
+<span class='line'>1327</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Публичная&lt;/i>
+<span class='line'>1328</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>String&lt;/i>
+<span class='line'>1329</span> 		* &lt;br/>&lt;b>Значение:&lt;/b> &lt;i>Linux/FreeBSD/Mac/Win/SunOS/iPod/Other&lt;/i>
+<span class='line'>1330</span> 		* &lt;br/>Возвращает имя пользовательской оси или строку Other
+<span class='line'>1331</span> 		*/</span><span class="WHIT">
+<span class='line'>1332</span> </span><span class="WHIT">		</span><span class="NAME">name</span><span class="PUNC">:</span><span class="PUNC">(</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1333</span> </span><span class="WHIT">			</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">name</span><span class="PUNC">=</span><span class="NAME">navigator.platform.match</span><span class="PUNC">(</span><span class="REGX">/(Linux|FreeBSD|Mac|Win|SunOS)/i</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1334</span> </span><span class="WHIT">			</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">name</span><span class="PUNC">[</span><span class="NUMB">1</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1335</span> </span><span class="WHIT">				</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">name</span><span class="PUNC">[</span><span class="NUMB">1</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1336</span> </span><span class="WHIT">			</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>1337</span> </span><span class="WHIT">			</span><span class="KEYW">else</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1338</span> </span><span class="WHIT">				</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">window.orientation</span><span class="WHIT"> </span><span class="PUNC">!=</span><span class="WHIT"> </span><span class="NAME">undefined</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">?</span><span class="WHIT"> </span><span class="STRN">"iPod"</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="STRN">"Other"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1339</span> </span><span class="WHIT">			</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>1340</span> </span><span class="WHIT">		</span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1341</span> </span><span class="WHIT">		</span><span class="COMM">/**
+<span class='line'>1342</span> 		* @name linux
+<span class='line'>1343</span> 		* @memberOf tools.Platform
+<span class='line'>1344</span> 		* @description
+<span class='line'>1345</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Публичная&lt;/i>
+<span class='line'>1346</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>Boolean&lt;/i>
+<span class='line'>1347</span> 		* &lt;br/>true, если линукс
+<span class='line'>1348</span> 		*/</span><span class="WHIT">
+<span class='line'>1349</span> </span><span class="WHIT">		</span><span class="NAME">linux</span><span class="PUNC">:</span><span class="PUNC">(</span><span class="NAME">navigator.platform.indexOf</span><span class="PUNC">(</span><span class="STRN">"Linux"</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">!=</span><span class="WHIT"> </span><span class="PUNC">-</span><span class="NUMB">1</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1350</span> </span><span class="WHIT">		</span><span class="COMM">/**
+<span class='line'>1351</span> 		* @name freebsd
+<span class='line'>1352</span> 		* @memberOf tools.Platform
+<span class='line'>1353</span> 		* @description
+<span class='line'>1354</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Публичная&lt;/i>
+<span class='line'>1355</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>Boolean&lt;/i>
+<span class='line'>1356</span> 		* &lt;br/>true, если freebsd
+<span class='line'>1357</span> 		*/</span><span class="WHIT">
+<span class='line'>1358</span> </span><span class="WHIT">		</span><span class="NAME">freebsd</span><span class="PUNC">:</span><span class="PUNC">(</span><span class="NAME">navigator.platform.indexOf</span><span class="PUNC">(</span><span class="STRN">"FreeBSD"</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">!=</span><span class="WHIT"> </span><span class="PUNC">-</span><span class="NUMB">1</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1359</span> </span><span class="WHIT">		</span><span class="COMM">/**
+<span class='line'>1360</span> 		* @name mac
+<span class='line'>1361</span> 		* @memberOf tools.Platform
+<span class='line'>1362</span> 		* @description
+<span class='line'>1363</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Публичная&lt;/i>
+<span class='line'>1364</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>Boolean&lt;/i>
+<span class='line'>1365</span> 		* &lt;br/>true, если mac
+<span class='line'>1366</span> 		*/</span><span class="WHIT">
+<span class='line'>1367</span> </span><span class="WHIT">		</span><span class="NAME">mac</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">navigator.platform.indexOf</span><span class="PUNC">(</span><span class="STRN">"Mac"</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">!=</span><span class="WHIT"> </span><span class="PUNC">-</span><span class="NUMB">1</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1368</span> </span><span class="WHIT">		</span><span class="COMM">/**
+<span class='line'>1369</span> 		* @name windows
+<span class='line'>1370</span> 		* @memberOf tools.Platform
+<span class='line'>1371</span> 		* @description
+<span class='line'>1372</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Публичная&lt;/i>
+<span class='line'>1373</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>Boolean&lt;/i>
+<span class='line'>1374</span> 		* &lt;br/>true, если windows
+<span class='line'>1375</span> 		*/</span><span class="WHIT">
+<span class='line'>1376</span> </span><span class="WHIT">		</span><span class="NAME">windows</span><span class="PUNC">:</span><span class="PUNC">(</span><span class="NAME">navigator.platform.indexOf</span><span class="PUNC">(</span><span class="STRN">"Win"</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">!=</span><span class="WHIT"> </span><span class="PUNC">-</span><span class="NUMB">1</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1377</span> </span><span class="WHIT">		</span><span class="COMM">/**
+<span class='line'>1378</span> 		* @name ipod
+<span class='line'>1379</span> 		* @memberOf tools.Platform
+<span class='line'>1380</span> 		* @description
+<span class='line'>1381</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Публичная&lt;/i>
+<span class='line'>1382</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>Boolean&lt;/i>
+<span class='line'>1383</span> 		* &lt;br/>true, если ipod
+<span class='line'>1384</span> 		*/</span><span class="WHIT">
+<span class='line'>1385</span> </span><span class="WHIT">		</span><span class="NAME">ipod</span><span class="PUNC">:</span><span class="PUNC">(</span><span class="NAME">window.orientation</span><span class="WHIT"> </span><span class="PUNC">!=</span><span class="WHIT"> </span><span class="NAME">undefined</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1386</span> </span><span class="WHIT">		</span><span class="COMM">/**
+<span class='line'>1387</span> 		* @name other
+<span class='line'>1388</span> 		* @memberOf tools.Platform
+<span class='line'>1389</span> 		* @description
+<span class='line'>1390</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Публичная&lt;/i>
+<span class='line'>1391</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>Boolean&lt;/i>
+<span class='line'>1392</span> 		* &lt;br/>true, если не одна из осей включенных в интерфейс
+<span class='line'>1393</span> 		*/</span><span class="WHIT">
+<span class='line'>1394</span> </span><span class="WHIT">		</span><span class="NAME">other</span><span class="PUNC">:</span><span class="STRN">"~!(this.linux || this.freebsd || this.mac || this.windows || this.ipod || this.sun)~"</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1395</span> </span><span class="WHIT">		</span><span class="COMM">/**
+<span class='line'>1396</span> 		* @name sun
+<span class='line'>1397</span> 		* @memberOf tools.Platform
+<span class='line'>1398</span> 		* @description
+<span class='line'>1399</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Публичная&lt;/i>
+<span class='line'>1400</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>Boolean&lt;/i>
+<span class='line'>1401</span> 		* &lt;br/>true, если sun
+<span class='line'>1402</span> 		*/</span><span class="WHIT">
+<span class='line'>1403</span> </span><span class="WHIT">		</span><span class="NAME">sun</span><span class="PUNC">:</span><span class="PUNC">(</span><span class="NAME">navigator.platform.indexOf</span><span class="PUNC">(</span><span class="STRN">"SunOS"</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">!=</span><span class="WHIT"> </span><span class="PUNC">-</span><span class="NUMB">1</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1404</span> </span><span class="WHIT">		</span><span class="COMM">/**
+<span class='line'>1405</span> 		* @name arch
+<span class='line'>1406</span> 		* @memberOf tools.Platform
+<span class='line'>1407</span> 		* @description
+<span class='line'>1408</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Публичная&lt;/i>
+<span class='line'>1409</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>String&lt;/i>
+<span class='line'>1410</span> 		* &lt;br/>&lt;b>Значение:&lt;/b> &lt;i>i586/x86_64/Other&lt;/i>
+<span class='line'>1411</span> 		* &lt;br/>Значение архитектуры пользовательской машины
+<span class='line'>1412</span> 		*/</span><span class="WHIT">
+<span class='line'>1413</span> </span><span class="WHIT">		</span><span class="NAME">arch</span><span class="PUNC">:</span><span class="PUNC">(</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1414</span> </span><span class="WHIT">			</span><span class="KEYW">switch</span><span class="PUNC">(</span><span class="KEYW">true</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1415</span> </span><span class="WHIT">				</span><span class="KEYW">case</span><span class="WHIT"> </span><span class="PUNC">!</span><span class="PUNC">!</span><span class="PUNC">(</span><span class="NAME">navigator.platform.match</span><span class="PUNC">(</span><span class="REGX">/32|i586/i</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">:</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1416</span> </span><span class="WHIT">					</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="STRN">"i586"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1417</span> </span><span class="WHIT">				</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>1418</span> </span><span class="WHIT">				</span><span class="KEYW">break</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1419</span> </span><span class="WHIT">				</span><span class="KEYW">case</span><span class="WHIT"> </span><span class="PUNC">!</span><span class="PUNC">!</span><span class="PUNC">(</span><span class="NAME">navigator.platform.match</span><span class="PUNC">(</span><span class="REGX">/64/i</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">:</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1420</span> </span><span class="WHIT">					</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="STRN">"x86_64"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1421</span> </span><span class="WHIT">				</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>1422</span> </span><span class="WHIT">				</span><span class="KEYW">break</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1423</span> </span><span class="WHIT">				</span><span class="KEYW">default</span><span class="PUNC">:</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1424</span> </span><span class="WHIT">					</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="STRN">"Other"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1425</span> </span><span class="WHIT">				</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>1426</span> </span><span class="WHIT">			</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>1427</span> </span><span class="WHIT">			</span><span class="NAME">console.log</span><span class="PUNC">(</span><span class="NAME">arch32</span><span class="PUNC">,</span><span class="NAME">arch64</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>1428</span> </span><span class="WHIT">		</span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>1429</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>1430</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1431</span> </span><span class="COMM">/**
+<span class='line'>1432</span> * @name Flash
+<span class='line'>1433</span> * @class
+<span class='line'>1434</span> * Информация о поддержки flash в браузере
+<span class='line'>1435</span> * @memberOf tools
+<span class='line'>1436</span> * @example
+<span class='line'>1437</span> * // return boolean-like information about enable flash in browser
+<span class='line'>1438</span> * alert(tools.Flash.enable);
+<span class='line'>1439</span> * @description
+<span class='line'>1440</span> */</span><span class="WHIT">
+<span class='line'>1441</span> </span><span class="NAME">Class</span><span class="PUNC">(</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1442</span> </span><span class="WHIT">	</span><span class="NAME">name</span><span class="PUNC">:</span><span class="STRN">"Flash"</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1443</span> </span><span class="WHIT">	</span><span class="NAME">type</span><span class="PUNC">:</span><span class="STRN">"interface"</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1444</span> </span><span class="WHIT">	</span><span class="NAME">pack</span><span class="PUNC">:</span><span class="NAME">tools</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1445</span> </span><span class="WHIT">	</span><span class="COMM">/**
+<span class='line'>1446</span> 	* @name constructor
+<span class='line'>1447</span> 	* @memberOf tools.Flash
+<span class='line'>1448</span> 	* @description
+<span class='line'>1449</span> 	* &lt;b>Конструктор класса&lt;/b> : &lt;i>Да&lt;/i>
+<span class='line'>1450</span> 	*/</span><span class="WHIT">
+<span class='line'>1451</span> </span><span class="WHIT">	</span><span class="NAME">constructor</span><span class="PUNC">:</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1452</span> </span><span class="WHIT">	</span><span class="NAME">public</span><span class="PUNC">:</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1453</span> </span><span class="WHIT">		</span><span class="COMM">/**
+<span class='line'>1454</span> 		* @name enable
+<span class='line'>1455</span> 		* @memberOf tools.Flash
+<span class='line'>1456</span> 		* @description
+<span class='line'>1457</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Публичная&lt;/i>
+<span class='line'>1458</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>Boolean&lt;/i>
+<span class='line'>1459</span> 		* &lt;br/>Возвращает true, если в браузере включен flash player
+<span class='line'>1460</span> 		*/</span><span class="WHIT">
+<span class='line'>1461</span> </span><span class="WHIT">		</span><span class="NAME">enable</span><span class="PUNC">:</span><span class="PUNC">(</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1462</span> </span><span class="WHIT">			</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">tools.browser.IE</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1463</span> </span><span class="WHIT">				</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="PUNC">!</span><span class="PUNC">!</span><span class="PUNC">(</span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">ActiveXObject</span><span class="PUNC">(</span><span class="STRN">'ShockwaveFlash.ShockwaveFlash'</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1464</span> </span><span class="WHIT">					</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1465</span> </span><span class="WHIT">				</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>1466</span> </span><span class="WHIT">			</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>1467</span> </span><span class="WHIT">			</span><span class="KEYW">else</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1468</span> </span><span class="WHIT">				</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="PUNC">!</span><span class="PUNC">!</span><span class="PUNC">(</span><span class="NAME">navigator.plugins</span><span class="PUNC">[</span><span class="STRN">'Shockwave Flash'</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1469</span> </span><span class="WHIT">			</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>1470</span> </span><span class="WHIT">		</span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1471</span> </span><span class="WHIT">		</span><span class="COMM">/**
+<span class='line'>1472</span> 		* @name version
+<span class='line'>1473</span> 		* @memberOf tools.Flash
+<span class='line'>1474</span> 		* @description
+<span class='line'>1475</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Публичная&lt;/i>
+<span class='line'>1476</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>Number&lt;/i>
+<span class='line'>1477</span> 		* &lt;br/>Вызывает защищенную функцию данного объекта и возвращает версию флэш плэйера
+<span class='line'>1478</span> 		*/</span><span class="WHIT">
+<span class='line'>1479</span> </span><span class="WHIT">		</span><span class="NAME">version</span><span class="PUNC">:</span><span class="STRN">"~this._version()~"</span><span class="WHIT">
+<span class='line'>1480</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1481</span> </span><span class="WHIT">	</span><span class="NAME">protected</span><span class="PUNC">:</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1482</span> </span><span class="WHIT">		</span><span class="COMM">/**
+<span class='line'>1483</span> 		* @name _version
+<span class='line'>1484</span> 		* @memberOf tools.Flash
+<span class='line'>1485</span> 		* @function
+<span class='line'>1486</span> 		* @description
+<span class='line'>1487</span> 		* &lt;b>Область видимости&lt;/b> : &lt;i>Защищенная&lt;/i>
+<span class='line'>1488</span> 		* &lt;br/>&lt;b>Тип данных:&lt;/b> &lt;i>Number&lt;/i>
+<span class='line'>1489</span> 		* &lt;br/>Возвращает версию флэш плэйера
+<span class='line'>1490</span> 		*/</span><span class="WHIT">
+<span class='line'>1491</span> </span><span class="WHIT">		</span><span class="NAME">_version</span><span class="PUNC">:</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1492</span> </span><span class="WHIT">			</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">this.enable</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1493</span> </span><span class="WHIT">				</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">tools.browser.IE</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1494</span> </span><span class="WHIT">					</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">ActiveX</span><span class="PUNC">=</span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">ActiveXObject</span><span class="PUNC">(</span><span class="STRN">'ShockwaveFlash.ShockwaveFlash'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">GetVariable</span><span class="PUNC">(</span><span class="STRN">'$version'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">match</span><span class="PUNC">(</span><span class="REGX">/\d+/g</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1495</span> </span><span class="WHIT">					</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">ActiveX</span><span class="PUNC">[</span><span class="NUMB">0</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">&&</span><span class="WHIT"> </span><span class="NAME">ActiveX</span><span class="PUNC">[</span><span class="NUMB">1</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1496</span> </span><span class="WHIT">						</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">parseFloat</span><span class="PUNC">(</span><span class="NAME">ActiveX</span><span class="PUNC">[</span><span class="NUMB">0</span><span class="PUNC">]</span><span class="PUNC">+</span><span class="STRN">"."</span><span class="PUNC">+</span><span class="NAME">ActiveX</span><span class="PUNC">[</span><span class="NUMB">1</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1497</span> </span><span class="WHIT">					</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>1498</span> </span><span class="WHIT">					</span><span class="KEYW">else</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1499</span> </span><span class="WHIT">						</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">ActiveX</span><span class="PUNC">[</span><span class="NUMB">0</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1500</span> </span><span class="WHIT">					</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>1501</span> </span><span class="WHIT">				</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>1502</span> </span><span class="WHIT">				</span><span class="KEYW">else</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1503</span> </span><span class="WHIT">					</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">StdX</span><span class="PUNC">=</span><span class="NAME">navigator.plugins</span><span class="PUNC">[</span><span class="STRN">'Shockwave Flash'</span><span class="PUNC">]</span><span class="PUNC">.</span><span class="NAME">description.match</span><span class="PUNC">(</span><span class="REGX">/\d+/g</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1504</span> </span><span class="WHIT">					</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">StdX</span><span class="PUNC">[</span><span class="NUMB">0</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">&&</span><span class="WHIT"> </span><span class="NAME">StdX</span><span class="PUNC">[</span><span class="NUMB">1</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1505</span> </span><span class="WHIT">						</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">parseFloat</span><span class="PUNC">(</span><span class="NAME">StdX</span><span class="PUNC">[</span><span class="NUMB">0</span><span class="PUNC">]</span><span class="PUNC">+</span><span class="STRN">"."</span><span class="PUNC">+</span><span class="NAME">StdX</span><span class="PUNC">[</span><span class="NUMB">1</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1506</span> </span><span class="WHIT">					</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>1507</span> </span><span class="WHIT">					</span><span class="KEYW">else</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1508</span> </span><span class="WHIT">						</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">StdX</span><span class="PUNC">[</span><span class="NUMB">0</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1509</span> </span><span class="WHIT">					</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>1510</span> </span><span class="WHIT">				</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>1511</span> </span><span class="WHIT">			</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>1512</span> </span><span class="WHIT">			</span><span class="KEYW">else</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1513</span> </span><span class="WHIT">				</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NUMB">0</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1514</span> </span><span class="WHIT">			</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>1515</span> </span><span class="WHIT">		</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>1516</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>1517</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span></pre></body></html>
