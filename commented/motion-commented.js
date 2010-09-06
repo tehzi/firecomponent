@@ -32,8 +32,8 @@ Class({
 	* <b>Конструктор класса</b> : <i>Да</i>
 	*/
 	constructor : function(object, params){
+		console.log(this.instances);
 		object.each(function(){
-			console.log(typeof params.property);
 			if (typeof params.property == "object"){
 				var n;
 				var props = params.property;
@@ -46,20 +46,25 @@ Class({
 						}
 					}
 					console.log(_params);
-					temp = new motion.Instance($(this), _params);
+					this.instances.push(new motion.Instance($(this), _params));
 				}
 			}
 			else{
-				temp = new motion.Instance($(this), params);
+				console.log(this.instances);
+				this.instances.instance = new motion.Instance($(this), params);
 			}
 		});
+		console.log(this.instances);
 	},
-	public : {},
-	protected : {
+	public : {
+		instances : {
+			"some2" : "some2value"
+		},
 		defaultInterval : 10,
 		defaultDuration : 1000,
+	},
+	protected : {
 		update : function (targetObject, property, val){
-			console.log('changing '+property+' to '+val);
 			targetObject.css(property, val);
 		},
 		tweeningArray : function (first, last, step){
@@ -68,7 +73,6 @@ Class({
 			for (var i = first, j = 0; j < l; i += step, j++){
 				a.push(i);
 			}
-			console.log('l='+l+' length='+a.length);
 			if (a[l] != last) {a.push(last);}
 			return a;
 		},
@@ -76,19 +80,19 @@ Class({
 			var step = (last-first)*interval/duration;
 			return step;
 		},
-		getDefaultValue : funtion(object, param){
+		getDefaultValue : function(object, param){
 			var p;
 			switch (param){
 				case 'width':
-					p = object.width();	break;
+					p = object.width();		break;
 				case 'height':
-					p = object.height();	break;
+					p = object.height();		break;
 				case 'top':
-					p = object.position().x;break;
+					p = object.position().top;	break;
 				case 'left':
-					p = object.position().y;break;
+					p = object.position().left;	break;
 				default :
-					p = object().css(param) || 0;break;
+					p = object().css(param) || 0;	break;
 			}
 			return p;
 		}
