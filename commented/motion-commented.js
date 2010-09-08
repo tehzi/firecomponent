@@ -64,9 +64,7 @@ Class({
 	},
 	protected : {
 		update : function (targetObject, property, val){
-			(function(){
-				targetObject.css(property, val);
-			})(targetObject, property, val)
+			targetObject.css(property, val);
 		},
 		tweeningArray : function (first, last, step){
 			var a = [];
@@ -168,12 +166,13 @@ Class({
 		this.targetObject = object;
 		this.property = params.property;
 		this.params = params;
+		this.timer.bind('timer', this.tick);
 	},
 	private : {
 		step : 0,
 		array : [],
 		nowAt : 1,
-		timer : {},
+		timer : new tools.Timer(),
 		targetObject : {},
 		params : {},
 		property : "",
@@ -220,8 +219,10 @@ Class({
 				
 				this.step = this.parent.step(this.from, this.to, this.interval, this.duration);
 				this.array = this.parent.tweeningArray(this.from, this.to, this.step);
-				this.timer = new tools.Timer(this.interval, this.array.length-1);
-				this.timer.bind('timer', this.tick);
+				this.timer.delay=this.interval;
+				this.timer.repeatCount=this.array.length-1;
+// 				this.timer = (this.interval, this.array.length-1);
+// 				this.timer.bind('timer', this.tick);
 				this.timer.start();
 			}
 		}
