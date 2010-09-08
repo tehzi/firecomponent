@@ -43,9 +43,9 @@ Class({
 				insName = 'ins_'+i;
 				for (m in _params){
 					if (typeof _params[m] == "object"){
-						_params[m] = (_params[m][n] != undefined) 
-						? _params[m][n] 
-						: (_params[m].pop() || _params[m]);
+						_params[m] = (_params[m][n] != undefined) ? 
+							_params[m][n] : 
+							(_params[m].pop() || _params[m]);
 					}
 				}
 				if (_params.name != undefined){
@@ -152,33 +152,9 @@ Class({
 	* <b>Конструктор класса</b> : <i>Да</i>
 	*/
 	constructor : function(object, params) {
+		this.targetObject = object;
 		this.property = params.property;
-		this.from = (params.from == undefined) ? this.parent.getDefaultValue(object, this.property) : params.from;
-		if (typeof this.from == "string"){
-			switch (from.substring(from.length-2)){
-				case "px":
-					this.from = Number(from.substring(0, from.length-2));
-				break;
-				default : this.from = 0; break;
-			}
-		}
-		this.to = params.to;
-		if(!(this.to == undefined)){
-			if (typeof this.to == "string"){
-				switch (this.to[0]){
-					case "+": this.to = from + Number(to.substring(1)); break;
-					case "-": this.to = from - Number(to.substring(1)); break;
-				}
-			}
-			this.interval = params.interval || this.parent.defaultInterval;
-			this.duration = params.duration || this.parent.defaultDuration;
-			
-			this.targetObject = object;
-			this.step = this.parent.step(this.from, this.to, this.interval, this.duration);
-			this.array = this.parent.tweeningArray(this.from, this.to, this.step);
-			this.timer = new tools.Timer(this.interval, this.array.length-1);
-			this.timer.bind('timer', this.tick);
-		}
+		this.params = params;
 	},
 	private : {
 		step : 0,
@@ -186,6 +162,7 @@ Class({
 		nowAt : 1,
 		timer : {},
 		targetObject : {},
+		params : {},
 		property : "",
 		from : 0,
 		to : 0,
@@ -194,9 +171,45 @@ Class({
 		tick : function (){
 			this.parent.update(this.targetObject, this.property, this.array[this.nowAt]);
 			this.nowAt++;
-		},
+		}
+		
+	},
+	public : {
 		start : function (){
-			this.timer.start();
+			this.nowAt = 1;
+			this.from = (this.params.from == undefined) ?
+				this.parent.getDefaultValue(this.targetObject, this.property) :
+				this.params.from;
+			if (typeof this.from == "string"){
+				switch (from.substring(from.length-2)){
+					case "px":
+						this.from = Number(from.substring(0, from.length-2));
+					break;
+					default : this.from = 0; break;
+				}
+			}
+			this.to = this.params.to;
+			if(!(this.to == undefined)){
+				if (typeof this.to == "string"){
+					switch (this.to[0]){
+						case "+": 
+							this.to = this.from + Number(to.substring(1));
+							break;
+						case "-": 
+							this.to = this.from - Number(to.substring(1));
+							break;
+					}
+				}
+				this.interval = this.params.interval || this.parent.defaultInterval;
+				this.duration = this.params.duration || this.parent.defaultDuration;
+				
+				
+				this.step = this.parent.step(this.from, this.to, this.interval, this.duration);
+				this.array = this.parent.tweeningArray(this.from, this.to, this.step);
+				this.timer = new tools.Timer(this.interval, this.array.length-1);
+				this.timer.bind('timer', this.tick);
+				this.timer.start();
+			}
 		}
 	}
 })
