@@ -64,7 +64,9 @@ Class({
 	},
 	protected : {
 		update : function (targetObject, property, val){
-			targetObject.css(property, val);
+			(function(){
+				targetObject.css(property, val);
+			})(targetObject, property, val)
 		},
 		tweeningArray : function (first, last, step){
 			var a = [];
@@ -180,6 +182,7 @@ Class({
 		interval : 0,
 		duration : 0,
 		tick : function (){
+// 			console.log(this.targetObject, this.property, this.array[this.nowAt])
 			this.parent.update(this.targetObject, this.property, this.array[this.nowAt]);
 			this.nowAt++;
 		}
