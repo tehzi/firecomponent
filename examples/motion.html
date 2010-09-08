@@ -12,45 +12,53 @@
 		<script type="text/javascript" src="../commented/Class-commented.js"></script>
 		<script type="text/javascript" src="../commented/tools-commented.js"></script>
 		<script type="text/javascript" src="../commented/motion-commented.js"></script>
-		<script type="text/javascript">
-//<![CDATA[
-$(document).ready(function(){
-	var Animator = new motion.Animator($('#animatable'), {
-		property : 'opacity',
-		to : [0, .5, 1],
-		name : ['opacityNone', 'opacityHalf', 'opacityFull']
-	});
-	$('#butOpacity0').click(function() {
-		Animator.start('opacityNone');
-	});
-	$('#butOpacity1').click(function() {
-		Animator.start('opacityHalf');
-	});
-	$('#butOpacity2').click(function() {
-		Animator.start('opacityFull');
-	});
-});
-//]]>
-		</script>
 	</head>
 	<body>
 	<style>
-		#animatable {
+		.animatable {
 			width: 200px; 
 			height: 200px; 
 			background-color: red; 
 			border: 1px solid black; 
-			position: relative
+			position: relative;
+			float: left;
 		}
 	</style>
 		<div id="examples">
 		<h2>Простая демонстрация анимации одного свойства</h2>
-			<div id="animatable" style="">
+			<div class="animatable" style="">
 			<p>Some animatable content</p>			
 			</div>
-			<button id="butOpacity0">opacity 0</button>
-			<button id="butOpacity1">opacity 0.5</button>
-			<button id="butOpacity2">opacity 1</button>
+			<div class="animatable" style="">
+			<p>Some animatable content</p>			
+			</div>
 		</div>
+			<button onclick="A.start('heightFirstHalf')">first to .5</button>
+			<button onclick="A.start('heightSecondHalf')">second to .5</button>
+			<button onclick="A.start('heightAllHalf')">all to .5</button><br>
+			<button onclick="A.start('heightFirstFull')">first to 1</button>
+			<button onclick="A.start('heightSecondFull')">second to 1</button>
+			<button onclick="A.start('heightAllFull')">all to 1</button>
+		
+		<script type="text/javascript">
+//<![CDATA[
+	var A = new motion.Animator();
+	A.add($('.animatable'), {
+		property : 'height',
+		to : [100, 200],
+		name : ['heightAllHalf', 'heightAllFull']
+	});
+	A.add($('.animatable').first(), {
+		property : 'height',
+		to : [100, 200],
+		name : ['heightFirstHalf', 'heightFirstFull']
+	});
+	A.add($('.animatable').last(), {
+		property : 'height',
+		to : [100, 200],
+		name : ['heightSecondHalf', 'heightSecondFull']
+	})
+//]]>
+		</script>
 	</body>
 </html>

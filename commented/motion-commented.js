@@ -32,38 +32,9 @@ Class({
 	* <b>Конструктор класса</b> : <i>Да</i>
 	*/
 	constructor : function(object, params){
-		if (typeof params.property == "object" || typeof params.to == "object"){
-			var m;
-			var n;
-			var i = 0;
-			var insName = '';
-			var holder = (typeof params.property == "object") ? "property" : "to";
-			for (n in params[holder]){
-				var _params = new tools.copy(params);
-				insName = 'ins_'+i;
-				for (m in _params){
-					if (typeof _params[m] == "object"){
-						_params[m] = (_params[m][n] != undefined) ? 
-							_params[m][n] : 
-							(_params[m].pop() || _params[m]);
-					}
-				}
-				if (_params.name != undefined){
-					insName = _params.name;
-				}
-				if (this.instances[insName] == undefined){
-					this.instances[insName] = [];
-				}
-				this.instances[insName].push(new motion.Instance(object, _params));
-				console.log(new motion.Instance(object, _params));
-				i++;
-			}
+		if (object != undefined){
+			this.add(object, params);
 		}
-		else{
-			insName = (params.name == undefined) ? 'ins_0' : params.name;
-			this.instances[insName] = [new motion.Instance(object, params)];
-		};
-		console.log(this.instances);
 	},
 	public : {
 		instances :{},
@@ -80,6 +51,14 @@ Class({
 			}
 			else {
 				this._start(this.instances[insName]);
+			}
+		},
+		add : function (JQobject, params){
+			var i;
+			var object = {};
+			for (i = 0; i<JQobject.length; i++){
+				object = JQobject.eq(i);
+				this._add(object, params);
 			}
 		}
 	},
@@ -119,7 +98,7 @@ Class({
 					p = object.css(param) || 0;
 					break;
 			}
-			p = p.replace(',', '.');
+			p = (typeof p == "string") ? p.replace(',', '.') : p;
 			return Number(p);
 		},
 		_start : function (p){
@@ -127,6 +106,38 @@ Class({
 			for (m in p){
 				p[m].start();
 			}
+		},
+		_add : function (object, params){
+			if (typeof params.property == "object" || typeof params.to == "object"){
+				var m;
+				var n;
+				var i = 0;
+				var insName = '';
+				var holder = (typeof params.property == "object") ? "property" : "to";
+				for (n in params[holder]){
+					var _params = new tools.copy(params);
+					insName = 'ins_'+i;
+					for (m in _params){
+						if (typeof _params[m] == "object"){
+							_params[m] = (_params[m][n] != undefined) ? 
+								_params[m][n] : 
+								(_params[m].pop() || _params[m]);
+						}
+					}
+					if (_params.name != undefined){
+						insName = _params.name;
+					}
+					if (this.instances[insName] == undefined){
+						this.instances[insName] = [];
+					}
+					this.instances[insName].push(new motion.Instance(object, _params));
+					i++;
+				}
+			}
+			else{
+				insName = (params.name == undefined) ? 'ins_0' : params.name;
+				this.instances[insName] = [new motion.Instance(object, params)];
+			};
 		}
 	}
 });
