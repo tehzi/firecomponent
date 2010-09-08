@@ -15,19 +15,19 @@
 		<script type="text/javascript">
 //<![CDATA[
 $(document).ready(function(){
-	$('#slideLeft').click(function() {
-		new motion.Animator($('#animatable'), {
-			property: "left", 
-			to : '-200',
-			interval : 100
-		});
+	var Animator = new motion.Animator($('#animatable'), {
+		property : 'opacity',
+		to : [0, .5, 1],
+		name : ['opacityNone', 'opacityHalf', 'opacityFull']
 	});
-	$('#slideRight').click(function() {
-		new motion.Animator($('#animatable'), {
-			property: "left", 
-			to : '+200',
-			interval : 10
-		});
+	$('#butOpacity0').click(function() {
+		Animator.start('opacityNone');
+	});
+	$('#butOpacity1').click(function() {
+		Animator.start('opacityHalf');
+	});
+	$('#butOpacity2').click(function() {
+		Animator.start('opacityFull');
 	});
 });
 //]]>
@@ -48,8 +48,9 @@ $(document).ready(function(){
 			<div id="animatable" style="">
 			<p>Some animatable content</p>			
 			</div>
-			<button id="slideLeft">200 px влево</button>
-			<button id="slideRight">200 px вправо</button>
+			<button id="butOpacity0">opacity 0</button>
+			<button id="butOpacity1">opacity 0.5</button>
+			<button id="butOpacity2">opacity 1</button>
 		</div>
 	</body>
 </html>

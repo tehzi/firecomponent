@@ -32,36 +32,56 @@ Class({
 	* <b>Конструктор класса</b> : <i>Да</i>
 	*/
 	constructor : function(object, params){
-		console.log(this.instances);
-		object.each(function(){
-			if (typeof params.property == "object"){
-				var n;
-				var props = params.property;
-				for (n in props){
-					var _params = new tools.copy(params);
-					_params.property = _params.property[n];
-					for (m in _params){
-						if (typeof _params[m] == "object" && m != 'property'){
-							_params[m] = (_params[m][n] != undefined) ? _params[m][n] : (_params[m].pop() || _params[m]);
-						}
+		if (typeof params.property == "object" || typeof params.to == "object"){
+			var m;
+			var n;
+			var i = 0;
+			var insName = '';
+			var holder = (typeof params.property == "object") ? "property" : "to";
+			for (n in params[holder]){
+				var _params = new tools.copy(params);
+				insName = 'ins_'+i;
+				for (m in _params){
+					if (typeof _params[m] == "object"){
+						_params[m] = (_params[m][n] != undefined) 
+						? _params[m][n] 
+						: (_params[m].pop() || _params[m]);
 					}
-					console.log(_params);
-					this.instances.push(new motion.Instance($(this), _params));
 				}
+				if (_params.name != undefined){
+					insName = _params.name;
+				}
+				if (this.instances[insName] == undefined){
+					this.instances[insName] = [];
+				}
+				this.instances[insName].push(new motion.Instance(object, _params));
+				console.log(new motion.Instance(object, _params));
+				i++;
 			}
-			else{
-				console.log(this.instances);
-				this.instances.instance = new motion.Instance($(this), params);
-			}
-		});
+		}
+		else{
+			insName = (params.name == undefined) ? 'ins_0' : params.name;
+			this.instances[insName] = [new motion.Instance(object, params)];
+		};
 		console.log(this.instances);
 	},
 	public : {
-		instances : {
-			"some2" : "some2value"
-		},
+		instances :{},
 		defaultInterval : 10,
 		defaultDuration : 1000,
+		start : function (insName){
+			insName = (insName == undefined) ? 'all' : insName;
+			if (insName == 'all') {
+				var n;
+				for (var n in this.instances){
+					this._start(this.instances[n]);
+					console.log(n);
+				}
+			}
+			else {
+				this._start(this.instances[insName]);
+			}
+		}
 	},
 	protected : {
 		update : function (targetObject, property, val){
@@ -84,17 +104,29 @@ Class({
 			var p;
 			switch (param){
 				case 'width':
-					p = object.width();		break;
+					p = object.width();	
+					break;
 				case 'height':
-					p = object.height();		break;
+					p = object.height();	
+					break;
 				case 'top':
-					p = object.position().top;	break;
+					p = object.position().x;
+					break;
 				case 'left':
-					p = object.position().left;	break;
+					p = object.position().y;
+					break;
 				default :
-					p = object().css(param) || 0;	break;
+					p = object.css(param) || 0;
+					break;
 			}
-			return p;
+			p = p.replace(',', '.');
+			return Number(p);
+		},
+		_start : function (p){
+			var m;
+			for (m in p){
+				p[m].start();
+			}
 		}
 	}
 });
@@ -121,34 +153,31 @@ Class({
 	*/
 	constructor : function(object, params) {
 		this.property = params.property;
-		var from = (params.from == undefined) ? this.parent.getDefaultValue(object, this.property) : params.from;
-		if (typeof from == "string"){
+		this.from = (params.from == undefined) ? this.parent.getDefaultValue(object, this.property) : params.from;
+		if (typeof this.from == "string"){
 			switch (from.substring(from.length-2)){
 				case "px":
-					from = Number(from.substring(0, from.length-2));
+					this.from = Number(from.substring(0, from.length-2));
 				break;
-				default : from = 0; break;
+				default : this.from = 0; break;
 			}
 		}
-		var to = params.to;
-		if(!(to == undefined)){
-			if (typeof to == "string"){
-				switch (to[0]){
-					case "+": to = from + Number(to.substring(1)); break;
-					case "-": to = from - Number(to.substring(1)); break;
+		this.to = params.to;
+		if(!(this.to == undefined)){
+			if (typeof this.to == "string"){
+				switch (this.to[0]){
+					case "+": this.to = from + Number(to.substring(1)); break;
+					case "-": this.to = from - Number(to.substring(1)); break;
 				}
 			}
-			var interval = params.interval || this.parent.defaultInterval;
-			var duration = params.duration || this.parent.defaultDuration;
+			this.interval = params.interval || this.parent.defaultInterval;
+			this.duration = params.duration || this.parent.defaultDuration;
 			
 			this.targetObject = object;
-			this.step = this.parent.step(from, to, interval, duration);
-			this.array = this.parent.tweeningArray(from, to, this.step);
-			console.log(this.step);
-			console.log(this.array);
-			this.timer = new tools.Timer(interval, this.array.length-1);
+			this.step = this.parent.step(this.from, this.to, this.interval, this.duration);
+			this.array = this.parent.tweeningArray(this.from, this.to, this.step);
+			this.timer = new tools.Timer(this.interval, this.array.length-1);
 			this.timer.bind('timer', this.tick);
-			this.timer.start();
 		}
 	},
 	private : {
@@ -158,9 +187,16 @@ Class({
 		timer : {},
 		targetObject : {},
 		property : "",
+		from : 0,
+		to : 0,
+		interval : 0,
+		duration : 0,
 		tick : function (){
 			this.parent.update(this.targetObject, this.property, this.array[this.nowAt]);
 			this.nowAt++;
+		},
+		start : function (){
+			this.timer.start();
 		}
 	}
 })
