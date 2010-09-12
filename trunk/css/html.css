@@ -1,0 +1,16 @@
+.tag, span.tag-name{
+	font-weight : bold;
+}
+
+span.tag-name{
+	color : #222112;
+	font-weight : bold;
+}
+
+.attr_name{
+	
+}
+
+.attr_val{
+	
+}
