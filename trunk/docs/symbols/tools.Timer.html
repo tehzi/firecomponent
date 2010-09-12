@@ -1,0 +1,770 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="generator" content="JsDoc Toolkit" />
+		
+		<title>JsDoc Reference - tools.Timer</title>
+
+		<style type="text/css">
+			/* default.css */
+body
+{
+	font: 12px "Lucida Grande", Tahoma, Arial, Helvetica, sans-serif;
+	width: 800px;
+}
+
+.header
+{
+	clear: both;
+	background-color: #ccc;
+	padding: 8px;
+}
+
+h1
+{
+	font-size: 150%;
+	font-weight: bold;
+	padding: 0;
+	margin: 1em 0 0 .3em;
+}
+
+hr
+{
+	border: none 0;
+	border-top: 1px solid #7F8FB1;
+	height: 1px;
+}
+
+pre.code
+{
+	display: block;
+	padding: 8px;
+	border: 1px dashed #ccc;
+}
+
+#index
+{
+	margin-top: 24px;
+	float: left;
+	width: 160px;
+	position: absolute;
+	left: 8px;
+	background-color: #F3F3F3;
+	padding: 8px;
+}
+
+#content
+{
+	margin-left: 190px;
+	width: 600px;
+}
+
+.classList
+{
+	list-style-type: none;
+	padding: 0;
+	margin: 0 0 0 8px;
+	font-family: arial, sans-serif;
+	font-size: 1em;
+	overflow: auto;
+}
+
+.classList li
+{
+	padding: 0;
+	margin: 0 0 8px 0;
+}
+
+.summaryTable { width: 100%; }
+
+h1.classTitle
+{
+	font-size:170%;
+	line-height:130%;
+}
+
+h2 { font-size: 110%; }
+caption, div.sectionTitle
+{
+	background-color: #7F8FB1;
+	color: #fff;
+	font-size:130%;
+	text-align: left;
+	padding: 2px 6px 2px 6px;
+	border: 1px #7F8FB1 solid;
+}
+
+div.sectionTitle { margin-bottom: 8px; }
+.summaryTable thead { display: none; }
+
+.summaryTable td
+{
+	vertical-align: top;
+	padding: 4px;
+	border-bottom: 1px #7F8FB1 solid;
+	border-right: 1px #7F8FB1 solid;
+}
+
+/*col#summaryAttributes {}*/
+.summaryTable td.attributes
+{
+	border-left: 1px #7F8FB1 solid;
+	width: 140px;
+	text-align: right;
+}
+
+td.attributes, .fixedFont
+{
+	line-height: 15px;
+	color: #002EBE;
+	font-family: "Courier New",Courier,monospace;
+	font-size: 13px;
+}
+
+.summaryTable td.nameDescription
+{
+	text-align: left;
+	font-size: 13px;
+	line-height: 15px;
+}
+
+.summaryTable td.nameDescription, .description
+{
+	line-height: 15px;
+	padding: 4px;
+	padding-left: 4px;
+}
+
+.summaryTable { margin-bottom: 8px; }
+
+ul.inheritsList
+{
+	list-style: square;
+	margin-left: 20px;
+	padding-left: 0;
+}
+
+.detailList {
+	margin-left: 20px; 
+	line-height: 15px;
+}
+.detailList dt { margin-left: 20px; }
+
+.detailList .heading
+{
+	font-weight: bold;
+	padding-bottom: 6px;
+	margin-left: 0;
+}
+
+.light, td.attributes, .light a:link, .light a:visited
+{
+	color: #777;
+	font-style: italic;
+}
+
+.fineprint
+{
+	text-align: right;
+	font-size: 10px;
+}
+		</style>
+	</head>
+
+	<body>
+<!-- ============================== header ================================= -->	
+		<!-- begin static/header.html -->
+		<div id="header">
+</div>
+		<!-- end static/header.html -->
+
+<!-- ============================== classes index ============================ -->
+		<div id="index">
+			<!-- begin publish.classesIndex -->
+			<div align="center"><a href="../index.html">Классы</a>
+| <a href="../files.html">Файлы</a></div>
+<hr />
+<h2>Список классов:</h2>
+<ul class="classList">
+	
+	<li><a href="../symbols/__Class__.html">__Class__</a></li>
+	
+	<li><i><a href="../symbols/_global_.html">_global_</a></i></li>
+	
+	<li><a href="../symbols/Class.html">Class</a></li>
+	
+	<li><a href="../symbols/ClassModel.html">ClassModel</a></li>
+	
+	<li><a href="../symbols/ieFix.html">ieFix</a></li>
+	
+	<li><a href="../symbols/motion.html">motion</a></li>
+	
+	<li><a href="../symbols/motion.Animator.html">motion.Animator</a></li>
+	
+	<li><a href="../symbols/motion.Instance.html">motion.Instance</a></li>
+	
+	<li><a href="../symbols/tools.html">tools</a></li>
+	
+	<li><a href="../symbols/tools.browser.html">tools.browser</a></li>
+	
+	<li><a href="../symbols/tools.CookieManager.html">tools.CookieManager</a></li>
+	
+	<li><a href="../symbols/tools.eventDispatcher.html">tools.eventDispatcher</a></li>
+	
+	<li><a href="../symbols/tools.Flash.html">tools.Flash</a></li>
+	
+	<li><a href="../symbols/tools.Platform.html">tools.Platform</a></li>
+	
+	<li><a href="../symbols/tools.Timer.html">tools.Timer</a></li>
+	
+	<li><a href="../symbols/tools.Url.html">tools.Url</a></li>
+	
+</ul>
+<hr />
+			<!-- end publish.classesIndex -->
+		</div>
+		
+		<div id="content">
+<!-- ============================== class title ============================ -->
+			<h1 class="classTitle">
+				
+				Class tools.Timer
+			</h1>
+
+<!-- ============================== class summary ========================== -->			
+			<p class="description">
+				
+				
+			
+				Простой таймер облегчающий работу с периодичными функциями
+				
+				
+					<br /><i>Объявлен в файле: </i> <a href="../symbols/src/_home_www_docs_zinc.lo_tools_firecomponent_commented_tools-commented.js.html">tools-commented.js</a>.
+				
+			</p>
+
+<!-- ============================== constructor summary ==================== -->			
+			
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class tools.Timer.">
+				<caption>Class Summary</caption>
+				<thead>
+					<tr>
+						<th scope="col">Constructor Attributes</th>
+						<th scope="col">Constructor Name and Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="attributes">&nbsp;</td>
+						<td class="nameDescription" >
+							<div class="fixedFont">
+								<b><a href="../symbols/tools.Timer.html#constructor">tools.Timer</a></b>()
+							</div>
+							<div class="description"><br/><b>Наследует</b> : <i>tools.eventDispatcher</i>
+<br/><b>Событие</b> : <i>timer</i>
+<br/>Срабатывает каждые this.delay миллисекунд
+<br/><b>Событие</b> : <i>timerComplete</i>
+<br/>Срабатывает когда таймер пройдет количество циклов указанной в переменной repeatCount</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+
+<!-- ============================== properties summary ===================== -->
+			
+				
+				
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class tools.Timer.">
+					<caption>Все свойства</caption>
+					<thead>
+						<tr>
+							<th scope="col">Field Attributes</th>
+							<th scope="col">Field Name and Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Timer.<b><a href="../symbols/tools.Timer.html#.currentCount">currentCount</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Int</i>
+<br/>Общее число срабатываний таймера с момента его запуска с нуля.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Timer.<b><a href="../symbols/tools.Timer.html#.delay">delay</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Int</i>
+<br/>Задержка в миллисекундах между событиями таймера.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Timer.<b><a href="../symbols/tools.Timer.html#.eventList">eventList</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Защищенная</i>
+<br/><b>Тип данных:</b> <i>Array</i>
+<br/>Список событий таймера</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Timer.<b><a href="../symbols/tools.Timer.html#.repeatCount">repeatCount</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Int</i>
+<br/>Общее число запусков, на которое настроен таймер.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Timer.<b><a href="../symbols/tools.Timer.html#.running">running</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Текущее состояние таймера: если таймер выполняется, то true, в противном случае false.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.Timer.<b><a href="../symbols/tools.Timer.html#.timeLink">timeLink</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>Mixed</i>
+<br/>Номер Интервала</div>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				
+				
+				
+			
+
+<!-- ============================== methods summary ======================== -->
+			
+				
+				
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class tools.Timer.">
+					<caption>Все методы</caption>
+					<thead>
+						<tr>
+							<th scope="col">Method Attributes</th>
+							<th scope="col">Method Name and Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">tools.Timer.<b><a href="../symbols/tools.Timer.html#.constructor">constructor</a></b>(delay, repeatCount)
+								</div>
+								<div class="description"><b>Конструктор класса</b> : <i>Да</i></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">tools.Timer.<b><a href="../symbols/tools.Timer.html#.halt">halt</a></b>()
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/>Останавливает таймер
+<br/><b>Тип данных:</b> <i>Void</i>
+<br/><i>Примечание: свойтсво stop недоступно в ie</i></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">tools.Timer.<b><a href="../symbols/tools.Timer.html#.start">start</a></b>()
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Void</i>
+<br/>Запускает таймер</div>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				
+				
+				
+			
+<!-- ============================== events summary ======================== -->
+			
+
+<!-- ============================== constructor details ==================== -->		
+			
+			<div class="details"><a name="constructor"> </a>
+				<div class="sectionTitle">
+					Class  Описание
+				</div>
+				
+				<div class="fixedFont">
+						<b>tools.Timer</b>()
+				</div>
+				
+				<div class="description">
+					<br/><b>Наследует</b> : <i>tools.eventDispatcher</i>
+<br/><b>Событие</b> : <i>timer</i>
+<br/>Срабатывает каждые this.delay миллисекунд
+<br/><b>Событие</b> : <i>timerComplete</i>
+<br/>Срабатывает когда таймер пройдет количество циклов указанной в переменной repeatCount
+					
+				</div>
+				
+				
+				
+				<pre class="code">// Таймер повторится 5 раз с интервало в 2 секунды
+var timer=new tools.Timer(2000,5);
+// Каждые 2 секунды
+timer.bind("timer",function(){
+	//do somethink
+});
+// В конце 5-го цикла
+timer.bind("timerComplete",function(){
+	//do somethink
+});
+timer.start();</pre>
+				
+				
+				
+				
+					
+					
+					
+					
+					
+					
+					
+
+			</div>
+			
+
+<!-- ============================== field details ========================== -->		
+			
+				<div class="sectionTitle">
+					Описание свойств
+				</div>
+				
+					<a name=".currentCount"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Timer.</span><b>currentCount</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Int</i>
+<br/>Общее число срабатываний таймера с момента его запуска с нуля.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Значение по умолчанию:</dt>
+							<dd>
+								0
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
+					<a name=".delay"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Timer.</span><b>delay</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Int</i>
+<br/>Задержка в миллисекундах между событиями таймера.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Значение по умолчанию:</dt>
+							<dd>
+								0
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
+					<a name=".eventList"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Timer.</span><b>eventList</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Защищенная</i>
+<br/><b>Тип данных:</b> <i>Array</i>
+<br/>Список событий таймера
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".repeatCount"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Timer.</span><b>repeatCount</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Int</i>
+<br/>Общее число запусков, на которое настроен таймер.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Значение по умолчанию:</dt>
+							<dd>
+								0
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
+					<a name=".running"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Timer.</span><b>running</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Текущее состояние таймера: если таймер выполняется, то true, в противном случае false.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Значение по умолчанию:</dt>
+							<dd>
+								false
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
+					<a name=".timeLink"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Timer.</span><b>timeLink</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Приватная</i>
+<br/><b>Тип данных:</b> <i>Mixed</i>
+<br/>Номер Интервала
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					
+				
+			
+
+<!-- ============================== method details ========================= -->		
+			
+				<div class="sectionTitle">
+					Описание методов
+				</div>
+				
+					<a name=".constructor"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Timer.</span><b>constructor</b>(delay, repeatCount)
+					
+					</div>
+					<div class="description">
+						<b>Конструктор класса</b> : <i>Да</i>
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Параметры:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>delay</b>
+									
+								</dt>
+								<dd>Задержка в миллисекундах между событиями таймера.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>repeatCount</b>
+									
+								</dt>
+								<dd>Общее число запусков, на которое настроен таймер.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".halt"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Timer.</span><b>halt</b>()
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/>Останавливает таймер
+<br/><b>Тип данных:</b> <i>Void</i>
+<br/><i>Примечание: свойтсво stop недоступно в ie</i>
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".start"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.Timer.</span><b>start</b>()
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Void</i>
+<br/>Запускает таймер
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					
+				
+			
+			
+<!-- ============================== event details ========================= -->		
+			
+			
+			<hr />
+		</div>
+
+		
+<!-- ============================== footer ================================= -->
+		<div class="fineprint" style="clear:both">
+			
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu Sep 02 2010 09:53:51 GMT+0400 (MSD)
+		</div>
+	</body>
+</html>

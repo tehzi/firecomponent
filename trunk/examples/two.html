@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="ru">
+	<head>
+		<title>[EDITOR]</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="copyright" href="http://www.gnu.org/copyleft/fdl.html" />
+		<meta name="author" content="zi, 2010" />
+		<style type="text/css">
+@import "../css/style.css";
+		</style>
+		<script type="text/javascript" src="../jquery/jquery.js"></script>
+		<script type="text/javascript" src="../commented/Class-commented.js"></script>
+		<script type="text/javascript" src="../commented/tools-commented.js"></script>
+		<script type="text/javascript" src="../editor/editorLibs.js"></script>
+		<script type="text/javascript" src="../jquery/fire.js"></script>
+		<!-- 	Компоненты	 -->
+		<script type="text/javascript">
+// <![CDATA[
+$(document).ready(function(){
+	$("textarea.editor").fire({
+		path:"/firecomponent"
+	});
+});
+// ]]>
+		</script>
+	</head>
+	<body>
+		<textarea class="editor" style="width:500px;height:300px;"></textarea>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<textarea class="editor" style="width:500px;height:300px;"></textarea>
+	</body>
+</html>

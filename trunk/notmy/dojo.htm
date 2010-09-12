@@ -1,0 +1,141 @@
+<html>
+<head>
+	<title>A Crazy Getter/Setter Hack</title>
+	<link rel="stylesheet" type="text/css" 
+		href="http://o.aolcdn.com/dojo/1.0.2/dojo/resources/dojo.css">
+	<script type="text/javascript" djConfig="isDebug: true"
+		src="http://o.aolcdn.com/dojo/1.0.2/dojo/dojo.xd.js"></script>
+
+	<script language="VBScript" type="text/VBScript"> 
+		Function dj_exec_vb_global(code)
+			ExecuteGlobal(code)
+		End Function
+	</script>
+
+	<script language="JScript" type="text/javascript">
+
+		lettable = function(settables, defaults, getterBuilder, setterBuilder){
+			var firstUpper = function(str){
+				return (str.charAt(0).toUpperCase()+str.substring(1));
+			}
+			defaults = defaults||{};
+			getterBuilder = getterBuilder||function(i){ 
+				var li = i+"__"; 
+				return function(){ 
+					// console.debug("default getter for", i, "value:", this[li]);
+					return this[li]; }
+			};
+
+			setterBuilder = setterBuilder||function(i){ 
+				var li = i+"__";
+				return function(v){ return this[li] = v; }
+			};
+
+			var tmp;
+			if(!dojo.isIE){
+				tmp = function(){};
+				var p = tmp.prototype;
+				dojo.forEach(settables, function(i){
+					var uci = firstUpper(i);
+					p.__defineGetter__(i, defaults["get"+uci]||getterBuilder(i));
+					p.__defineSetter__(i, defaults["set"+uci]||setterBuilder(i));
+				});
+				return tmp;
+			}else{
+				// to make this work on IE, we resort to some extreme
+				// measures...aka: dirty, dirty VBScript
+				
+				// first, generate a unique name for this class on the VB side
+				var tname = "dj_lettable_"+(lettable.inc++);
+				var gtname = tname+"_dj_getter";
+				var cParts = [
+					"Class "+tname,
+					"	Public letOn__",
+					"	Public getOn__",
+				];
+				dojo.forEach(settables, function(i){
+					var uci = firstUpper(i);
+					var getName = lettable.getAnon(defaults["get"+uci]||getterBuilder(i));
+					var setName = lettable.setAnon(defaults["set"+uci]||setterBuilder(i));
+					var pi = i+"__";
+					cParts.push(
+						"	Public "+pi,
+						"	Public Property Let "+i+"(val)",
+						"		letOn__ = \""+i+"\"",
+						"		"+pi+" = val",
+						"		Call "+setName+"(me)",
+						"	End Property",
+						"	Public Property Get "+i,
+						"		getOn__ = \""+i+"\"",
+						"		Call "+getName+"(me)",
+						"		"+i+" = "+pi,
+						"	End Property"
+					);
+				});
+				cParts.push("End Class");
+				cParts.push(
+					"Function "+gtname+"()",
+					"	Dim tmp",
+					"	Set tmp = New "+tname,
+					"	Set "+gtname+" = tmp",
+					"End Function"
+				);
+
+				dj_exec_vb_global(cParts.join("\n"));
+
+				tmp = function(){
+					return window[gtname]();
+				}
+			}
+			return tmp;
+		}
+
+		lettable.anon = {};
+		lettable.inc = 0;
+		lettable.getAnon = function(f){
+			var n = "lettable_"+this.inc++;
+			window[n] = function(me){ return f.call(me); };
+			return n;
+		}
+		lettable.setAnon = function(f){
+			var n = "lettable_"+this.inc++;
+			window[n] = function(me){ 
+				return f.call(me, me[me.letOn__+"__"]);
+			};
+			return n;
+		}
+
+		dojo.addOnLoad(function(){
+			var Foo = lettable(
+				["foo", "bar", "baz"], 
+				{
+					setFoo: function(value){
+						this.foo__ = value;
+						console.debug("setting foo");
+					},
+					getFoo: function(){
+						console.debug("getting foo");
+						return this.foo__;
+					}
+				}
+			);
+			var tmp = new Foo();
+			tmp.foo = "howdy!";
+			tmp.bar = "hey there!";
+			tmp.baz = "...";
+			var tmp2 = new Foo();
+			tmp2.foo = "....";
+			tmp2.bar = "....";
+			tmp2.baz = "....";
+			console.debug(tmp.foo == "howdy!");
+			console.debug(tmp.bar == "hey there!");
+			console.debug(tmp.baz == "...");
+			console.debug(tmp2.foo == "....");
+			console.debug(tmp2.baz == "....");
+		});
+	</script>
+
+</head>
+<body>
+</body>
+</html>
