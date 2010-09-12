@@ -1,8 +1,9 @@
 /**
 * @fileoverview
 * Пакет ООП утилит для jquery, в программе использован хак <a href="http://alex.dojotoolkit.org/08/jscript/lettable.html">dojo</a>.
+* Тестируется в браузерах ie6, ie7, ie8, opera 10.60, chrome 4, firefox 3.6.6.
 * @author <a href="mailto:zi.white.drago@gmail.com">Zi White</a>
-* @version 0.1.1, $Revision$
+* @version 0.1.2, $Revision$
 */
 try{
 	var __Class__={
@@ -345,50 +346,64 @@ try{
 						if(!parentObject.final){
 							instance.parent={};
 							for(var key in parentObject.protected){
-								if(typeof parentObject.protected[key]=="string"){
-									var match=parentObject.protected[key].match(/^~([^~]+)~$/i);
-									var match1;
-									var match2;
-									if(match){
-										match1=match[1].match(/^(.*)$/i);
-										match2=match[1].match(/^this$/i);
-										if(match1){
-											instance.parent[key]=eval(match1[0].replace(/this/g,"instance"));
+								if(typeof parentObject.protected[key]=="function"){
+									instance.parent[key]=function(){
+										return parentObject.protected[key].apply(instance,arguments);
+									}
+								}
+								else{
+									if(typeof parentObject.protected[key]=="string"){
+										var match=parentObject.protected[key].match(/^~([^~]+)~$/i);
+										var match1;
+										var match2;
+										if(match){
+											match1=match[1].match(/^(.*)$/i);
+											match2=match[1].match(/^this$/i);
+											if(match1){
+												instance.parent[key]=eval(match1[0].replace(/this/g,"instance"));
+											}
+											if(match2){
+												instance.parent[key]=instance;
+											}
 										}
-										if(match2){
-											instance.parent[key]=instance;
+										else{
+											instance.parent[key]=parentObject.protected[key];
 										}
 									}
 									else{
 										instance.parent[key]=parentObject.protected[key];
 									}
-								}
-								else{
 									instance.parent[key]=parentObject.protected[key];
 								}
-								instance.parent[key]=parentObject.protected[key];
 							}
 							for(var key in parentObject.public){
-								if(typeof parentObject.public[key]=="string"){
-									var match=parentObject.public[key].match(/^~([^~]+)~$/i);
-									var match1;
-									var match2;
-									if(match){
-										match1=match[1].match(/^(.*)$/i);
-										match2=match[1].match(/^this$/i);
-										if(match1){
-											instance.parent[key]=eval(match1[0].replace(/this/g,"instance"));
+								if(typeof parentObject.public[key]=="function"){
+									instance.parent[key]=function(){
+										return parentObject.public[key].apply(instance,arguments);
+									}
+								}
+								else{
+									if(typeof parentObject.public[key]=="string"){
+										var match=parentObject.public[key].match(/^~([^~]+)~$/i);
+										var match1;
+										var match2;
+										if(match){
+											match1=match[1].match(/^(.*)$/i);
+											match2=match[1].match(/^this$/i);
+											if(match1){
+												instance.parent[key]=eval(match1[0].replace(/this/g,"instance"));
+											}
+											if(match2){
+												instance.parent[key]=instance;
+											}
 										}
-										if(match2){
-											instance.parent[key]=instance;
+										else{
+											instance.parent[key]=parentObject.public[key];
 										}
 									}
 									else{
 										instance.parent[key]=parentObject.public[key];
 									}
-								}
-								else{
-									instance.parent[key]=parentObject.public[key];
 								}
 							}
 // 							instance.parent=!parentObject.pack ? eval("new "+className+"('@!!')") : new parentObject.pack[className]("@!!");

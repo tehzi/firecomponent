@@ -11,19 +11,15 @@
 		<script type="text/javascript" src="../jquery/jquery.js"></script>
 		<script type="text/javascript" src="../commented/Class-commented.js"></script>
 		<script type="text/javascript" src="../commented/tools-commented.js"></script>
+		<script type="text/javascript" src="../editor/editorLibs.js"></script>
+		<script type="text/javascript" src="../jquery/fire.js"></script>
 		<!-- 	Компоненты	 -->
-<!-- 		<script type="text/javascript" src="./components/main.js"></script> -->
-<!-- 		<script type="text/javascript" src="./components/highlighting.js"></script> -->
-		<!-- 	Классы	 -->
-<!-- 		<script type="text/javascript" src="./class/browsers.ie.class.js"></script> -->
-<!-- 		<script type="text/javascript" src="./class/browsers.other.class.js"></script> -->
-<!-- 		<script type="text/javascript" src="./class/htmlArena.class.js"></script> -->
-<!-- 		<script type="text/javascript" src="./class/textProcesor.class.js"></script> -->
-		<!-- 	Main	 -->
-<!-- 		<script type="text/javascript" src="./fire.js"></script> -->
 		<script type="text/javascript">
 // <![CDATA[
 $(document).ready(function(){
+	$("textarea.editor").fire({
+		path:"/firecomponent"
+	});
 });
 // ]]>
 		</script>

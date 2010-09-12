@@ -220,9 +220,8 @@ Class({
 				this.step = this.parent.step(this.from, this.to, this.interval, this.duration);
 				this.array = this.parent.tweeningArray(this.from, this.to, this.step);
 				this.timer.delay=this.interval;
+				this.timer.currentCount=0;
 				this.timer.repeatCount=this.array.length-1;
-// 				this.timer = (this.interval, this.array.length-1);
-// 				this.timer.bind('timer', this.tick);
 				this.timer.start();
 			}
 		}
