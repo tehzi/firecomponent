@@ -607,9 +607,11 @@ try{
 							instance.parent={};
 							for(var key in parentObject.protected){
 								if(typeof parentObject.protected[key]=="function"){
-									instance.parent[key]=function(){
-										return parentObject.protected[key].apply(instance,arguments);
-									}
+									(function(key,parentObject,instance){
+										instance.parent[key]=function(){
+											return parentObject.protected[key].apply(instance,arguments);
+										}
+									})(key,parentObject,instance);
 								}
 								else{
 									if(typeof parentObject.protected[key]=="string"){
@@ -638,9 +640,11 @@ try{
 							}
 							for(var key in parentObject.public){
 								if(typeof parentObject.public[key]=="function"){
-									instance.parent[key]=function(){
-										return parentObject.public[key].apply(instance,arguments);
-									}
+									(function(key,parentObject,instance){
+										instance.parent[key]=function(){
+											return parentObject.public[key].apply(instance,arguments);
+										}
+									})(key,parentObject,instance);
 								}
 								else{
 									if(typeof parentObject.public[key]=="string"){
