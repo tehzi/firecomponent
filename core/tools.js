@@ -53,14 +53,14 @@ Class({
 			}
 			return name;
 		})(),
-		IE:"~this.browser=='Internet Explorer'~",
-		IE6:"~this.IE && this.intertrigoBrowserVersion()=='6.0'~",
-		IE7:"~this.IE && this.intertrigoBrowserVersion()=='7.0'~",
-		IE8:"~this.IE && this.intertrigoBrowserVersion()=='8.0'~",
 		Opera:"~this.browser=='Opera'~",
 		Firefox:"~this.browser=='Firefox'~",
 		Chrome:"~this.browser=='Chrome'~",
 		Safari:"~this.browser=='Safari'~",
+		IE:"~this.browser=='Internet Explorer'~",
+		IE6:"~this.IE && this.intertrigoBrowserVersion()=='6.0'~",
+		IE7:"~this.IE && this.intertrigoBrowserVersion()=='7.0'~",
+		IE8:"~this.IE && this.intertrigoBrowserVersion()=='8.0'~",
 		browserVersion:"~this.intertrigoBrowserVersion()~"
 	},
 	protected:{

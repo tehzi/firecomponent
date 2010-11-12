@@ -95,42 +95,6 @@ Class({
 			return name;
 		})(),
 		/**
-		* @name IE
-		* @memberOf tools.browser
-		* @description
-		* <b>Область видимости</b> : <i>Публичная</i>
-		* <br/><b>Тип данных:</b> <i>Boolean</i>
-		* <br/>Проверяет является ли браузер членом семейства Internet Explorer
-		*/
-		IE:"~this.browser=='Internet Explorer'~",
-		/**
-		* @name IE6
-		* @memberOf tools.browser
-		* @description
-		* <b>Область видимости</b> : <i>Публичная</i>
-		* <br/><b>Тип данных:</b> <i>Boolean</i>
-		* <br/>Проверяет является ли браузер Internet Explorer'ом 6 версии
-		*/
-		IE6:"~this.IE && this.intertrigoBrowserVersion()=='6.0'~",
-		/**
-		* @name IE7
-		* @memberOf tools.browser
-		* @description
-		* <b>Область видимости</b> : <i>Публичная</i>
-		* <br/><b>Тип данных:</b> <i>Boolean</i>
-		* <br/>Проверяет является ли браузер Internet Explorer'ом 7 версии
-		*/
-		IE7:"~this.IE && this.intertrigoBrowserVersion()=='7.0'~",
-		/**
-		* @name IE8
-		* @memberOf tools.browser
-		* @description
-		* <b>Область видимости</b> : <i>Публичная</i>
-		* <br/><b>Тип данных:</b> <i>Boolean</i>
-		* <br/>Проверяет является ли браузер Internet Explorer'ом 8 версии
-		*/
-		IE8:"~this.IE && this.intertrigoBrowserVersion()=='8.0'~",
-		/**
 		* @name Opera
 		* @memberOf tools.browser
 		* @description
@@ -166,6 +130,42 @@ Class({
 		* <br/>Проверяет является ли браузер Safari
 		*/
 		Safari:"~this.browser=='Safari'~",
+		/**
+		* @name IE
+		* @memberOf tools.browser
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Boolean</i>
+		* <br/>Проверяет является ли браузер членом семейства Internet Explorer
+		*/
+		IE:"~this.browser=='Internet Explorer'~",
+		/**
+		* @name IE6
+		* @memberOf tools.browser
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Boolean</i>
+		* <br/>Проверяет является ли браузер Internet Explorer'ом 6 версии
+		*/
+		IE6:"~this.IE && this.intertrigoBrowserVersion()=='6.0'~",
+		/**
+		* @name IE7
+		* @memberOf tools.browser
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Boolean</i>
+		* <br/>Проверяет является ли браузер Internet Explorer'ом 7 версии
+		*/
+		IE7:"~this.IE && this.intertrigoBrowserVersion()=='7.0'~",
+		/**
+		* @name IE8
+		* @memberOf tools.browser
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Boolean</i>
+		* <br/>Проверяет является ли браузер Internet Explorer'ом 8 версии
+		*/
+		IE8:"~this.IE && this.intertrigoBrowserVersion()=='8.0'~",
 		/**
 		* @name browserVersion
 		* @memberOf tools.browser
