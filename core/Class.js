@@ -2,7 +2,7 @@
 * @fileoverview
 * Пакет ООП утилит для jquery, в программе использован хак <a href="http://alex.dojotoolkit.org/08/jscript/lettable.html">dojo</a>.
 * Тестируется в браузерах ie6, ie7, ie8, opera 10.60, chrome 4, firefox 3.6.6.
-* @author <a href="mailto:zi.white.drago@gmail.com">Zi White</a>
+* @author <a href="mailto:zi.white.drago@gmail.com">zi white</a>
 * @version 0.1.2, $Revision$
 */
 try{
@@ -114,141 +114,173 @@ try{
 		}
       }
 	Class=function(object){
-			var final=false;
-			var pack;
-			var parent=false;
-			var implements=[];
-			var constructor;
-			var  public={};
-			var  protected={};
-			var  private={};
-			var  type="class";
-			var get={};
-			var set={};
-			var  name;
-			var className;
-			var parentObject;
-			var childObject;
-			var history=[[],[]];
-			{/** Проверяем валидность всех условий */
-				if(!ClassModel.IE && !ClassModel.OTHER){
-					throw({number:2,description:" Браузер не поддерживает не одну из прелогаемых моделей работы"});
-				}
-				if(object.type=="class" || object.type=="interface"){
-					type=object.type;
-				}
-				if(object.final && typeof object.final=="boolean"){
-					final=object.final;
-				}
-				if(object.name && /[a-z0-9_]/i.test(object.name)){
-					name=object.name;
-				}
-				else{
-					throw({number:0,description:"Отсутствует или неверное имя класса"});
-				}
-				if(typeof object.parent=="function"){
-					parent=object.parent;
-				}
-				if(!object.constructor || typeof object.constructor!="function"){
-					throw({number:1,description:"Отсутствует конструктор"});
-				}
-				else{
-					constructor=object.constructor;
-				}
-				if(typeof object.public=="object"){
-					public=object.public;
-				}
-				if(typeof object.protected=="object"){
-					protected=object.protected;
-				}
-				if(typeof object.private=="object"){
-					private=object.private;
-				}
-				if(typeof object.get=="object"){
-					get=object.get;
-				}
-				if(typeof object.set=="object"){
-					set=object.set;
-				}
-				for(var i=0;typeof object.implements=="object" && i<object.implements.length;i++){
-					if(typeof object.implements[i]=="object"){
-						implements.push(object.implements[i]);
-					}
-				}
-				if(typeof object.pack=="object"){
-					pack=object.pack;
+		var final=false;
+		var pack;
+		var parent=false;
+		var implements=[];
+		var constructor;
+		var  public={};
+		var  protected={};
+		var  private={};
+		var  type="class";
+		var get={};
+		var set={};
+		var  name;
+		var className;
+		var parentObject;
+		var childObject;
+		var history=[[],[]];
+		{/** Проверяем валидность всех условий */
+			if(!ClassModel.IE && !ClassModel.OTHER){
+				throw({number:2,description:" Браузер не поддерживает не одну из прелогаемых моделей работы"});
+			}
+			if(object.type=="class" || object.type=="interface"){
+				type=object.type;
+			}
+			if(object.final && typeof object.final=="boolean"){
+				final=object.final;
+			}
+			if(object.name && /[a-z0-9_]/i.test(object.name)){
+				name=object.name;
+			}
+			else{
+				throw({number:0,description:"Отсутствует или неверное имя класса"});
+			}
+			if(typeof object.parent=="function"){
+				parent=object.parent;
+			}
+			if(!object.constructor || typeof object.constructor!="function"){
+				throw({number:1,description:"Отсутствует конструктор"});
+			}
+			else{
+				constructor=object.constructor;
+			}
+			if(typeof object.public=="object"){
+				public=object.public;
+			}
+			if(typeof object.protected=="object"){
+				protected=object.protected;
+			}
+			if(typeof object.private=="object"){
+				private=object.private;
+			}
+			if(typeof object.get=="object"){
+				get=object.get;
+			}
+			if(typeof object.set=="object"){
+				set=object.set;
+			}
+			for(var i=0;typeof object.implements=="object" && i<object.implements.length;i++){
+				if(typeof object.implements[i]=="object"){
+					implements.push(object.implements[i]);
 				}
 			}
-			__Class__[name]={
-				public:(function(public,implements,parent){
-					var object={};
-					var name;
-					for(var key in public){
-						object[key]=public[key];
-					}
-					if(parent){
-						name=getClassName(parent);
-						for(var key in __Class__[name].public){
-							if(!object[key]){
-								object[key]=__Class__[name].public[key];
-							}
-						}
-					}
-					if(implements.length>0){
-						for(var i=0;i<implements.length;i++){
-							for(var key in implements[i].public){
-								if(!object[key]){
-									object[key]=implements[i].public[key];
-								}
-							}
-						}
-					}
-					return object;
-				})(public,implements,parent),
-				protected:(function(protected,implements,parent){
-					var object={};
-					var name;
-					for(var key in protected){
-						object[key]=protected[key];
-					}
-					if(parent){
-						name=getClassName(parent);
-						for(var key in __Class__[name].protected){
-							if(!object[key]){
-								object[key]=__Class__[name].protected[key];
-							}
-						}
-					}
-					if(implements.length>0){
-						for(var i=0;i<implements.length;i++){
-							for(var key in implements[i].protected){
-								if(!object[key]){
-									object[key]=implements[i].protected[key];
-								}
-							}
-						}
-					}
-					return object;
-				})(protected,implements,parent),
-				private:private,
-				get:get,
-				set:set,
-				type:type,
-				final:final,
-				parent:parent,
-				name:name,
-				pack:pack,
-				constructor:constructor,
-				VBid: ++__Class__.VBid
-			};
-			if(ClassModel.IE){
-				ieFix.addMethod("typeString");
-				ieFix.addMethod("getClone");
-				childObject=__Class__[name];
+			if(typeof object.pack=="object"){
+				pack=object.pack;
+			}
+		}
+		__Class__[name]={
+			public:(function(public,implements,parent){
+				var object={};
+				var name;
+				for(var key in public){
+					object[key]=public[key];
+				}
 				if(parent){
-					className=getClassName(parent);
+					name=getClassName(parent);
+					for(var key in __Class__[name].public){
+						if(!object[key]){
+							object[key]=__Class__[name].public[key];
+						}
+					}
+				}
+				if(implements.length>0){
+					for(var i=0;i<implements.length;i++){
+						for(var key in implements[i].public){
+							if(!object[key]){
+								object[key]=implements[i].public[key];
+							}
+						}
+					}
+				}
+				return object;
+			})(public,implements,parent),
+			protected:(function(protected,implements,parent){
+				var object={};
+				var name;
+				for(var key in protected){
+					object[key]=protected[key];
+				}
+				if(parent){
+					name=getClassName(parent);
+					for(var key in __Class__[name].protected){
+						if(!object[key]){
+							object[key]=__Class__[name].protected[key];
+						}
+					}
+				}
+				if(implements.length>0){
+					for(var i=0;i<implements.length;i++){
+						for(var key in implements[i].protected){
+							if(!object[key]){
+								object[key]=implements[i].protected[key];
+							}
+						}
+					}
+				}
+				return object;
+			})(protected,implements,parent),
+			private:private,
+			get:get,
+			set:set,
+			type:type,
+			final:final,
+			parent:parent,
+			implements:implements,
+			name:name,
+			pack:pack,
+			constructor:constructor,
+			VBid: ++__Class__.VBid
+		};
+		if(parent){
+			className=getClassName(parent);
+			parentObject=__Class__[className];
+			implementsLoop:for(var i=0;i<parentObject.implements.length;i++){
+				for(var i1=0;i1<implements.length;i1++){
+					if(parentObject.implements[i]===implements[i1]){
+						continue implementsLoop;
+					}
+				}
+				implements.push(parentObject.implements[i]);
+			}
+		}
+		if(ClassModel.IE){
+			ieFix.addMethod("typeString");
+			ieFix.addMethod("getClone");
+			childObject=__Class__[name];
+			if(parent){
+				className=getClassName(parent);
+				parentObject=__Class__[className];
+				if(parentObject && !parentObject.final){
+					for(var key in parentObject.public){
+						if(!(public[key] || private[key] || protected[key]) && $.inArray(key,history[0])==-1){
+							history[0].push(key);
+							if(typeof parentObject.public[key]=="function"){
+								ieFix.addMethod(key);
+							}
+							else{
+								ieFix.addGet(key);
+								ieFix.addSet(key);
+							}
+						}
+					}
+				}
+			}
+			for(var i=0;i<implements.length;i++){
+				className=getClassName(implements[i]);
+				if(__Class__[className]){
 					parentObject=__Class__[className];
-					if(parentObject && !parentObject.final){
+					if(parentObject.public){
 						for(var key in parentObject.public){
 							if(!(public[key] || private[key] || protected[key]) && $.inArray(key,history[0])==-1){
 								history[0].push(key);
@@ -263,231 +295,132 @@ try{
 						}
 					}
 				}
-				for(var i=0;i<implements.length;i++){
-					className=getClassName(implements[i]);
-					if(__Class__[className]){
-						parentObject=__Class__[className];
-						if(parentObject.public){
-							for(var key in parentObject.public){
-								if(!(public[key] || private[key] || protected[key]) && $.inArray(key,history[0])==-1){
-									history[0].push(key);
-									if(typeof parentObject.public[key]=="function"){
-										ieFix.addMethod(key);
-									}
-									else{
-										ieFix.addGet(key);
-										ieFix.addSet(key);
-									}
-								}
-							}
-						}
-					}
+			}
+			for(var key in public){
+				if(typeof public[key]=="function"){
+					ieFix.addMethod(key);
 				}
-				for(var key in public){
-					if(typeof public[key]=="function"){
-						ieFix.addMethod(key);
-					}
-					else{
-						ieFix.addGet(key);
-						ieFix.addSet(key);
-					}
-				}
-				for(var key in get){
+				else{
 					ieFix.addGet(key);
-				}
-				for(var key in set){
 					ieFix.addSet(key);
 				}
-				ieFix.newVBClass(__Class__[name].VBid);
 			}
-			var abstract;
-			if(type=="class"){
-				abstract=function(){
-					history=[[],[]];
-					var instance={};
-					var getClone=(function(){
-						return function(){
-							var name=getClassName(this);
-							if(arguments[0]){
-								var cloneFrom=arguments[0];
-								for(key in cloneFrom){
-									if(typeof cloneFrom[key]!="function"){
-										this[key]=cloneFrom[key];
-									}
+			for(var key in get){
+				ieFix.addGet(key);
+			}
+			for(var key in set){
+				ieFix.addSet(key);
+			}
+			ieFix.newVBClass(__Class__[name].VBid);
+		}
+		var abstract;
+		if(type=="class"){
+			abstract=function(){
+				history=[[],[]];
+				var instance={};
+				var getClone=(function(){
+					return function(){
+						var name=getClassName(this);
+						if(arguments[0]){
+							var cloneFrom=arguments[0];
+							for(key in cloneFrom){
+								if(typeof cloneFrom[key]!="function"){
+									this[key]=cloneFrom[key];
 								}
-								return false;
+							}
+							return false;
+						}
+						else{
+							var cloneClassInfo=__Class__[name];
+							var cloneClass=!cloneClassInfo.pack ? eval("new "+name+"('@!!')") : new cloneClassInfo.pack[className]("@!!");
+							cloneClass.getClone(this);
+							return cloneClass;
+						}
+					}
+				}).call(instance);
+				childObject=__Class__[name];
+				if(ClassModel.IE){
+					var IEprototype=ieFix.newIns(__Class__[name].VBid);
+					IEprototype["typeString"]=function(){
+						return "[class "+name+"]";
+					}
+					IEprototype["getClone"]=getClone;
+				}
+				if(ClassModel.OTHER){
+					var OTHERprototype={};
+					OTHERprototype["typeString"]=function(){
+						return "[class "+name+"]";
+					}
+					OTHERprototype["getClone"]=getClone;
+				}
+				if(parent){
+					className=getClassName(parent);
+					parentObject=__Class__[className];
+					if(!parentObject.final){
+						instance.parent={};
+						for(var key in parentObject.protected){
+							if(typeof parentObject.protected[key]=="function"){
+								(function(key,parentObject,instance){
+									instance.parent[key]=function(){
+										return parentObject.protected[key].apply(instance,arguments);
+									}
+								})(key,parentObject,instance);
 							}
 							else{
-								var cloneClassInfo=__Class__[name];
-								var cloneClass=!cloneClassInfo.pack ? eval("new "+name+"('@!!')") : new cloneClassInfo.pack[className]("@!!");
-								cloneClass.getClone(this);
-								return cloneClass;
+								instance.parent[key]=parentObject.protected[key];
 							}
 						}
-					}).call(instance);
-					childObject=__Class__[name];
-					if(ClassModel.IE){
-						var IEprototype=ieFix.newIns(__Class__[name].VBid);
-						IEprototype["typeString"]=function(){
-							return "[class "+name+"]";
-						}
-						IEprototype["getClone"]=getClone;
-					}
-					if(ClassModel.OTHER){
-						var OTHERprototype={};
-						OTHERprototype["typeString"]=function(){
-							return "[class "+name+"]";
-						}
-						OTHERprototype["getClone"]=getClone;
-					}
-					if(parent){
-						className=getClassName(parent);
-						parentObject=__Class__[className];
-						if(!parentObject.final){
-							instance.parent={};
-							for(var key in parentObject.protected){
-								if(typeof parentObject.protected[key]=="function"){
-									(function(key,parentObject,instance){
-										instance.parent[key]=function(){
-											return parentObject.protected[key].apply(instance,arguments);
-										}
-									})(key,parentObject,instance);
-								}
-								else{
-									instance.parent[key]=parentObject.protected[key];
-								}
+						for(var key in parentObject.public){
+							if(typeof parentObject.public[key]=="function"){
+								(function(key,parentObject,instance){
+									instance.parent[key]=function(){
+										return parentObject.public[key].apply(instance,arguments);
+									}
+								})(key,parentObject,instance);
 							}
-							for(var key in parentObject.public){
-								if(typeof parentObject.public[key]=="function"){
-									(function(key,parentObject,instance){
-										instance.parent[key]=function(){
-											return parentObject.public[key].apply(instance,arguments);
-										}
-									})(key,parentObject,instance);
-								}
-								else{
-									instance.parent[key]=parentObject.public[key];
-								}
+							else{
+								instance.parent[key]=parentObject.public[key];
 							}
+						}
 // 							instance.parent=!parentObject.pack ? eval("new "+className+"('@!!')") : new parentObject.pack[className]("@!!");
-							(function(parentObject,instance,parentClassName,name){
-								var i=0;
-								var rName=name;
-								var method;
-								instance.Super=function(){
-									i++;
-									if(i<2 || !instance.Super.prototype.times){
-										parentObject.constructor.apply(instance,arguments);
-									}
-									else{
-										for(var S=1;S<=i;S++){
-											if(getClassName(__Class__[rName].parent)){
-												rName=getClassName(__Class__[rName].parent);
-											}
-											else{
-												break;
-											}
-											if(S==i){
-												__Class__[rName].constructor.apply(instance,arguments);
-											}
-										}
-									}
+						(function(parentObject,instance,parentClassName,name){
+							var i=0;
+							var rName=name;
+							var method;
+							instance.Super=function(){
+								i++;
+								if(i<2 || !instance.Super.prototype.times){
+									parentObject.constructor.apply(instance,arguments);
 								}
-								instance.Super.prototype.times=true;
-							})(parentObject,instance,className,name);
-							if(parentObject){
-								if(parentObject.protected){
-									for(var key in parentObject.protected){
-										if(!(public[key] || private[key] || protected[key]) && $.inArray(key,history[1])==-1){
-											history[1].push(key);
-											(function(instance,key,parentObject){
-												if(typeof parentObject.protected[key]=="function"){
-													instance[key]=function(){
-														return parentObject.protected[key].apply(instance,arguments);
-													}
-												}
-												else{
-													instance[key]=parentObject.protected[key];
-												}
-											})(instance,key,parentObject);
+								else{
+									for(var S=1;S<=i;S++){
+										if(getClassName(__Class__[rName].parent)){
+											rName=getClassName(__Class__[rName].parent);
 										}
-									}
-								}
-								if(parentObject.public){
-									for(var key in parentObject.public){
-										if(!(public[key] || private[key] || protected[key]) && $.inArray(key,history[1])==-1){
-											history[1].push(key);
-											if(typeof parentObject.public[key]=="function"){
-												var method=parentObject.public[key];
-												(function(method,instance,key){
-													instance[key]=function(){
-														return method.apply(instance,arguments);
-													}
-													if(ClassModel.OTHER){
-														OTHERprototype[key]=function(){
-															return method.apply(instance,arguments);
-														}
-													}
-													if(ClassModel.IE){
-														IEprototype[key]=function(){
-															return method.apply(instance,arguments);
-														}
-													}
-												})(method,instance,key);
-											}
-											else{
-												instance[key]=parentObject.public[key];
-												if(ClassModel.OTHER){
-													(function(OTHERprototype,key,instance,name){
-														OTHERprototype.__defineGetter__(key,function(prop){
-															return instance[key];
-														});
-													})(OTHERprototype,key,instance,name);
-													(function(OTHERprototype,key,instance,name){
-														OTHERprototype.__defineSetter__(key,function(val){
-															instance[key]=val;
-														});
-													})(OTHERprototype,key,instance,name);
-												}
-												if(ClassModel.IE){
-													(function(IEprototype,key,instance,name){
-														IEprototype["get_"+key]=function(){
-															return instance[key];
-														}
-													})(IEprototype,key,instance,name);
-													(function(IEprototype,key,instance,name){
-														IEprototype["set_"+key]=function(val){
-															instance[key]=val;
-														}
-													})(IEprototype,key,instance,name);
-												}
-											}
+										else{
+											break;
+										}
+										if(S==i){
+											__Class__[rName].constructor.apply(instance,arguments);
 										}
 									}
 								}
 							}
-						}
-					}
-					for(var i=0;i<implements.length;i++){
-						className=getClassName(implements[i]);
-						if(__Class__[className]){
-							parentObject=__Class__[className];
-							if(parentObject.constructor){
-								parentObject.constructor();
-							}
+							instance.Super.prototype.times=true;
+						})(parentObject,instance,className,name);
+						if(parentObject){
 							if(parentObject.protected){
 								for(var key in parentObject.protected){
 									if(!(public[key] || private[key] || protected[key]) && $.inArray(key,history[1])==-1){
 										history[1].push(key);
 										(function(instance,key,parentObject){
 											if(typeof parentObject.protected[key]=="function"){
-												var method=parentObject.protected[key];
 												instance[key]=function(){
-													return method.apply(instance,arguments);
+													return parentObject.protected[key].apply(instance,arguments);
 												}
 											}
 											else{
-												instance[key]=parentObject.public[key];
+												instance[key]=parentObject.protected[key];
 											}
 										})(instance,key,parentObject);
 									}
@@ -547,243 +480,323 @@ try{
 							}
 						}
 					}
-					for(var key in private){
-						if(typeof private[key]=="function"){
-							(function(method,instance){
-								instance[key]=function(){
-									return method.apply(instance,arguments);
+				}
+				for(var i=0;i<implements.length;i++){
+					className=getClassName(implements[i]);
+					if(__Class__[className]){
+						parentObject=__Class__[className];
+						if(parentObject.constructor){
+							parentObject.constructor();
+						}
+						if(parentObject.protected){
+							for(var key in parentObject.protected){
+								if(!(public[key] || private[key] || protected[key]) && $.inArray(key,history[1])==-1){
+									history[1].push(key);
+									(function(instance,key,parentObject){
+										if(typeof parentObject.protected[key]=="function"){
+											var method=parentObject.protected[key];
+											instance[key]=function(){
+												return method.apply(instance,arguments);
+											}
+										}
+										else{
+											instance[key]=parentObject.public[key];
+										}
+									})(instance,key,parentObject);
 								}
-							})(private[key],instance);
+							}
 						}
-						else{
-							instance[key]=private[key];
-						}
-					}
-					for(var key in protected){
-						if(typeof protected[key]=="function"){
-							(function(method,instance){
-								instance[key]=function(){
-									return method.apply(instance,arguments);
-								}
-							})(protected[key],instance);
-						}
-						else{
-							instance[key]=protected[key];
-						}
-					}
-					for(var key in public){
-						if(typeof public[key]=="function"){
-							var method=public[key];
-							(function(method,instance,key,OTHERprototype,IEprototype){
-								instance[key]=function(){
-									return method.apply(instance,arguments);
-								}
-								if(ClassModel.OTHER){
-									OTHERprototype[key]=function(){
-										return method.apply(instance,arguments);
+						if(parentObject.public){
+							for(var key in parentObject.public){
+								if(!(public[key] || private[key] || protected[key]) && $.inArray(key,history[1])==-1){
+									history[1].push(key);
+									if(typeof parentObject.public[key]=="function"){
+										var method=parentObject.public[key];
+										(function(method,instance,key){
+											instance[key]=function(){
+												return method.apply(instance,arguments);
+											}
+											if(ClassModel.OTHER){
+												OTHERprototype[key]=function(){
+													return method.apply(instance,arguments);
+												}
+											}
+											if(ClassModel.IE){
+												IEprototype[key]=function(){
+													return method.apply(instance,arguments);
+												}
+											}
+										})(method,instance,key);
+									}
+									else{
+										instance[key]=parentObject.public[key];
+										if(ClassModel.OTHER){
+											(function(OTHERprototype,key,instance,name){
+												OTHERprototype.__defineGetter__(key,function(prop){
+													return instance[key];
+												});
+											})(OTHERprototype,key,instance,name);
+											(function(OTHERprototype,key,instance,name){
+												OTHERprototype.__defineSetter__(key,function(val){
+													instance[key]=val;
+												});
+											})(OTHERprototype,key,instance,name);
+										}
+										if(ClassModel.IE){
+											(function(IEprototype,key,instance,name){
+												IEprototype["get_"+key]=function(){
+													return instance[key];
+												}
+											})(IEprototype,key,instance,name);
+											(function(IEprototype,key,instance,name){
+												IEprototype["set_"+key]=function(val){
+													instance[key]=val;
+												}
+											})(IEprototype,key,instance,name);
+										}
 									}
 								}
-								if(ClassModel.IE){
-									IEprototype[key]=function(){
-										return method.apply(instance,arguments);
-									}
-								}
-							})(method,instance,key,OTHERprototype,IEprototype);
+							}
 						}
-						else{
-							instance[key]=public[key];
+					}
+				}
+				for(var key in private){
+					if(typeof private[key]=="function"){
+						(function(method,instance){
+							instance[key]=function(){
+								return method.apply(instance,arguments);
+							}
+						})(private[key],instance);
+					}
+					else{
+						instance[key]=private[key];
+					}
+				}
+				for(var key in protected){
+					if(typeof protected[key]=="function"){
+						(function(method,instance){
+							instance[key]=function(){
+								return method.apply(instance,arguments);
+							}
+						})(protected[key],instance);
+					}
+					else{
+						instance[key]=protected[key];
+					}
+				}
+				for(var key in public){
+					if(typeof public[key]=="function"){
+						var method=public[key];
+						(function(method,instance,key,OTHERprototype,IEprototype){
+							instance[key]=function(){
+								return method.apply(instance,arguments);
+							}
 							if(ClassModel.OTHER){
-								(function(OTHERprototype,key,instance,name){
-									OTHERprototype.__defineGetter__(key,function(prop){
-										return instance[key];
-									});
-								})(OTHERprototype,key,instance,name);
-								(function(OTHERprototype,key,instance,name){
-									OTHERprototype.__defineSetter__(key,function(val){
-										instance[key]=val;
-									});
-								})(OTHERprototype,key,instance,name);
+								OTHERprototype[key]=function(){
+									return method.apply(instance,arguments);
+								}
 							}
 							if(ClassModel.IE){
-								(function(IEprototype,key,instance,name){
-									IEprototype["get_"+key]=function(){
-										return instance[key];
-									}
-								})(IEprototype,key,instance,name);
-								(function(IEprototype,key,instance,name){
-									IEprototype["set_"+key]=function(val){
-										instance[key]=val;
-									}
-								})(IEprototype,key,instance,name);
+								IEprototype[key]=function(){
+									return method.apply(instance,arguments);
+								}
 							}
-						}
+						})(method,instance,key,OTHERprototype,IEprototype);
 					}
-					for(var key in get){
-						instance[key]=get[key].call(instance,key);
+					else{
+						instance[key]=public[key];
+						if(ClassModel.OTHER){
+							(function(OTHERprototype,key,instance,name){
+								OTHERprototype.__defineGetter__(key,function(prop){
+									return instance[key];
+								});
+							})(OTHERprototype,key,instance,name);
+							(function(OTHERprototype,key,instance,name){
+								OTHERprototype.__defineSetter__(key,function(val){
+									instance[key]=val;
+								});
+							})(OTHERprototype,key,instance,name);
+						}
 						if(ClassModel.IE){
 							(function(IEprototype,key,instance,name){
 								IEprototype["get_"+key]=function(){
-									return get[key].call(instance,key);
+									return instance[key];
+								}
+							})(IEprototype,key,instance,name);
+							(function(IEprototype,key,instance,name){
+								IEprototype["set_"+key]=function(val){
+									instance[key]=val;
 								}
 							})(IEprototype,key,instance,name);
 						}
-						if(ClassModel.OTHER){
-							(function(OTHERprototype,key,instance,name){
-								OTHERprototype.__defineGetter__(key,function(){
-									return get[key].call(instance,key);
-								});
-							})(OTHERprototype,key,instance,name);
+					}
+				}
+				for(var key in get){
+					instance[key]=get[key].call(instance,key);
+					if(ClassModel.IE){
+						(function(IEprototype,key,instance,name){
+							IEprototype["get_"+key]=function(){
+								return get[key].call(instance,key);
+							}
+						})(IEprototype,key,instance,name);
+					}
+					if(ClassModel.OTHER){
+						(function(OTHERprototype,key,instance,name){
+							OTHERprototype.__defineGetter__(key,function(){
+								return get[key].call(instance,key);
+							});
+						})(OTHERprototype,key,instance,name);
+					}
+				}
+				for(var key in set){ 
+					if(ClassModel.IE){
+						(function(IEprototype,key,instance,name){
+							IEprototype["set_"+key]=function(val){
+								return set[key].call(instance,key,val);
+							}
+						})(IEprototype,key,instance);
+					}
+					if(ClassModel.OTHER){
+						(function(OTHERprototype,key,instance,name){
+							OTHERprototype.__defineSetter__(key,function(val){
+								return set[key].call(instance,key,val);
+							});
+						})(OTHERprototype,key,instance,name);
+					}
+				}
+				for(var key in instance){
+					if(typeof instance[key]=="string"){
+						var match=instance[key].match(/^~([^~]+)~$/i);
+						var match1;
+						var match2;
+						if(match){
+							match1=match[1].match(/^(.*)$/i);
+							match2=match[1].match(/^this$/i);
+							if(match1){
+								instance[key]=eval(match1[0].replace(/this/g,"instance"));
+							}
+							if(match2){
+								instance[key]=interface;
+							}
 						}
 					}
-					for(var key in set){ 
+				}
+				if(arguments[0]!="@!!"){
+					constructor.apply(instance,arguments);
+				}
+				if(ClassModel.IE){
+					return IEprototype;
+				}
+				if(ClassModel.OTHER){
+					return OTHERprototype;
+				}
+			}
+			if(pack){
+				pack[name]=abstract;
+			}
+			else{
+				window[name]=abstract
+			}
+			return abstract;
+		}
+		if(type=="interface"){
+			var abstract=(function(private,protected,public,name,constructor){
+				var interface={};
+				abstract={};
+				if(ClassModel.IE){
+					var IEobject=ieFix.newIns(__Class__[name].VBid);
+					IEobject["typeString"]=function(){
+						return "[interface "+name+"]";
+					}
+				}
+				if(ClassModel.OTHER){
+					var OTHERobject={};
+					abstract["typeString"]=function(){
+						return "[interface "+name+"]";
+					}
+				}
+				for(var key in private){
+					interface[key]=private[key];
+				}
+				for(var key in protected){
+					interface[key]=protected[key];
+				}
+				for(var key in public){
+					if(typeof public[key]=="function"){
+						interface[key]=public[key];
+						var method=public[key];
 						if(ClassModel.IE){
-							(function(IEprototype,key,instance,name){
-								IEprototype["set_"+key]=function(val){
-									return set[key].call(instance,key,val);
-								}
-							})(IEprototype,key,instance);
+							IEobject[key]=function(){
+								return method.apply(interface,arguments);
+							}
 						}
 						if(ClassModel.OTHER){
-							(function(OTHERprototype,key,instance,name){
-								OTHERprototype.__defineSetter__(key,function(val){
-									return set[key].call(instance,key,val);
+							abstract[key]=function(){
+								return method.apply(interface,arguments);
+							}
+						}
+					}
+					else{
+						interface[key]=public[key];
+						if(ClassModel.IE){
+							(function(IEobject,key,interface,name){
+								IEobject["get_"+key]=function(){
+									return interface[key];
+								}
+							})(IEobject,key,interface,name);
+							(function(IEobject,key,interface,name){
+								IEobject["set_"+key]=function(val){
+									interface[key]=val;
+								}
+							})(IEobject,key,interface,name);
+						}
+						if(ClassModel.OTHER){
+							(function(OTHERobject,key,interface,name){
+								OTHERobject.__defineGetter__(key,function(val){
+									return interface[key];
 								});
-							})(OTHERprototype,key,instance,name);
+							})(abstract,key,interface,name);
+							(function(OTHERobject,key,interface,name){
+								OTHERobject.__defineSetter__(key,function(val){
+									interface[key]=val;
+								});
+							})(abstract,key,interface,name);
 						}
-					}
-					for(var key in instance){
-						if(typeof instance[key]=="string"){
-							var match=instance[key].match(/^~([^~]+)~$/i);
-							var match1;
-							var match2;
-							if(match){
-								match1=match[1].match(/^(.*)$/i);
-								match2=match[1].match(/^this$/i);
-								if(match1){
-									instance[key]=eval(match1[0].replace(/this/g,"instance"));
-								}
-								if(match2){
-									instance[key]=interface;
-								}
-							}
-						}
-					}
-					if(arguments[0]!="@!!"){
-						constructor.apply(instance,arguments);
-					}
-					if(ClassModel.IE){
-						return IEprototype;
-					}
-					if(ClassModel.OTHER){
-						return OTHERprototype;
 					}
 				}
-				if(pack){
-					pack[name]=abstract;
+				for(var key in interface){
+					if(typeof interface[key]=="string"){
+						var match=interface[key].match(/^~([^~]+)~$/i);
+						var match1;
+						var match2;
+						if(match){
+							match1=match[1].match(/^(.*)$/i);
+							match2=match[1].match(/^this$/i);
+							if(match1){
+								interface[key]=eval(match1[0].replace(/this/g,"interface"));
+							}
+							if(match2){
+								interface[key]=interface;
+							}
+						}
+					}
 				}
-				else{
-					window[name]=abstract
+				if(ClassModel.IE){
+					abstract=IEobject;
 				}
-				return abstract;
-			}
-			if(type=="interface"){
-				var abstract=(function(private,protected,public,name,constructor){
-					var interface={};
-					abstract={};
-					if(ClassModel.IE){
-						var IEobject=ieFix.newIns(__Class__[name].VBid);
-						IEobject["typeString"]=function(){
-							return "[interface "+name+"]";
-						}
-					}
-					if(ClassModel.OTHER){
-						var OTHERobject={};
-						abstract["typeString"]=function(){
-							return "[interface "+name+"]";
-						}
-					}
-					for(var key in private){
-						interface[key]=private[key];
-					}
-					for(var key in protected){
-						interface[key]=protected[key];
-					}
-					for(var key in public){
-						if(typeof public[key]=="function"){
-							interface[key]=public[key];
-							var method=public[key];
-							if(ClassModel.IE){
-								IEobject[key]=function(){
-									return method.apply(interface,arguments);
-								}
-							}
-							if(ClassModel.OTHER){
-								abstract[key]=function(){
-									return method.apply(interface,arguments);
-								}
-							}
-						}
-						else{
-							interface[key]=public[key];
-							if(ClassModel.IE){
-								(function(IEobject,key,interface,name){
-									IEobject["get_"+key]=function(){
-										return interface[key];
-									}
-								})(IEobject,key,interface,name);
-								(function(IEobject,key,interface,name){
-									IEobject["set_"+key]=function(val){
-										interface[key]=val;
-									}
-								})(IEobject,key,interface,name);
-							}
-							if(ClassModel.OTHER){
-								(function(OTHERobject,key,interface,name){
-									OTHERobject.__defineGetter__(key,function(val){
-										return interface[key];
-									});
-								})(abstract,key,interface,name);
-								(function(OTHERobject,key,interface,name){
-									OTHERobject.__defineSetter__(key,function(val){
-										interface[key]=val;
-									});
-								})(abstract,key,interface,name);
-							}
-						}
-					}
-					for(var key in interface){
-						if(typeof interface[key]=="string"){
-							var match=interface[key].match(/^~([^~]+)~$/i);
-							var match1;
-							var match2;
-							if(match){
-								match1=match[1].match(/^(.*)$/i);
-								match2=match[1].match(/^this$/i);
-								if(match1){
-									interface[key]=eval(match1[0].replace(/this/g,"interface"));
-								}
-								if(match2){
-									interface[key]=interface;
-								}
-							}
-						}
-					}
-					if(ClassModel.IE){
-						abstract=IEobject;
-					}
 // 					if(constructor) constructor.call(interface);
-					return abstract;
-				})(private,protected,public,name,constructor);
-				if(pack){
-					pack[name]=abstract;
-				}
-				else{
-					window[name]=abstract
-				}
 				return abstract;
+			})(private,protected,public,name,constructor);
+			if(pack){
+				pack[name]=abstract;
 			}
+			else{
+				window[name]=abstract
+			}
+			return abstract;
 		}
 	}
+}
 catch(err){
 	__Class__.error.push(err);
 	if(console){
