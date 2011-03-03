@@ -14,8 +14,20 @@
 		<script type="text/javascript">
 //<![CDATA[
 $(document).ready(function(){
+	Class({/* browser */
+		type:"interface",
+		name:"browser",
+		public:{
+			firefox:function(){
+				$("#examples").html($("#examples").html()+"I'm method from interface"+"<br/>");
+				return "firefox";
+			},
+			publicProperty:123
+		}
+	});
 	var Main=Class({/* A */
 		name:"A",
+		implements:[browser],
 		constructor:function(a,b){
 			$("#examples").html($("#examples").html()+"I'm A and my constructor and my arguments is "+a+", "+b+"<br/>");
 			$("body").click(this.A_method);
@@ -23,6 +35,7 @@ $(document).ready(function(){
 		public:{
 			A_method:function(e){
 				$("#examples").html($("#examples").html()+"My this is this of class A and this.publicProperty is "+this.publicProperty+"<br/>");
+				return "123";
 			},
 			publicProperty:1
 		},
@@ -42,20 +55,10 @@ $(document).ready(function(){
 			}
 		}
 	});
-	Class({/* browser */
-		type:"interface",
-		name:"browser",
-		public:{
-			firefox:function(){
-				$("#examples").html($("#examples").html()+"I'm method from interface"+"<br/>");
-			},
-			publicProperty:123
-		}
-	});
 	Class({/* B */
 		name:"B",
 		parent:A,
-		implements:[browser],
+// 		implements:[browser],
 		constructor:function(a,b){
 			this.Super(a,b);
 		}
@@ -77,7 +80,6 @@ $(document).ready(function(){
 	a.b=567;
 	//Создаём класс B
 	var b=new B("1","2");
-	b.firefox();
 	$("#examples").html($("#examples").html()+"Extends property from A: "+b.publicProperty+"<br/>");
 	new Main("8","9").b=456;
 	//Создаём класс С
