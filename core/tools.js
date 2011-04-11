@@ -61,6 +61,7 @@ Class({
 		IE6:"~this.IE && this.intertrigoBrowserVersion()=='6.0'~",
 		IE7:"~this.IE && this.intertrigoBrowserVersion()=='7.0'~",
 		IE8:"~this.IE && this.intertrigoBrowserVersion()=='8.0'~",
+		IE9:"~this.IE && this.intertrigoBrowserVersion()=='9.0'~",
 		browserVersion:"~this.intertrigoBrowserVersion()~"
 	},
 	protected:{
@@ -582,13 +583,18 @@ Class({
 	constructor:function(){},
 	public:{
 		enable:(function(){
-			if(tools.browser.IE){
-				if(!!(new ActiveXObject('ShockwaveFlash.ShockwaveFlash'))){
-					return true;
+			try{
+				if(tools.browser.IE){
+					if(!!(new ActiveXObject('ShockwaveFlash.ShockwaveFlash'))){
+						return true;
+					}
+				}
+				else{
+					return !!(navigator.plugins['Shockwave Flash']);
 				}
 			}
-			else{
-				return !!(navigator.plugins['Shockwave Flash']);
+			catch(err){
+				return false;
 			}
 		})(),
 		version:"~this._version()~"

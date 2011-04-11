@@ -167,6 +167,15 @@ Class({
 		*/
 		IE8:"~this.IE && this.intertrigoBrowserVersion()=='8.0'~",
 		/**
+		* @name IE8
+		* @memberOf tools.browser
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Boolean</i>
+		* <br/>Проверяет является ли браузер Internet Explorer'ом 9 версии
+		*/
+		IE9:"~this.IE && this.intertrigoBrowserVersion()=='9.0'~",
+		/**
 		* @name browserVersion
 		* @memberOf tools.browser
 		* @description
@@ -1459,13 +1468,18 @@ Class({
 		* <br/>Возвращает true, если в браузере включен flash player
 		*/
 		enable:(function(){
-			if(tools.browser.IE){
-				if(!!(new ActiveXObject('ShockwaveFlash.ShockwaveFlash'))){
-					return true;
+			try{
+				if(tools.browser.IE){
+					if(!!(new ActiveXObject('ShockwaveFlash.ShockwaveFlash'))){
+						return true;
+					}
+				}
+				else{
+					return !!(navigator.plugins['Shockwave Flash']);
 				}
 			}
-			else{
-				return !!(navigator.plugins['Shockwave Flash']);
+			catch(err){
+				return false;
 			}
 		})(),
 		/**
