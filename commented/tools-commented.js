@@ -1109,7 +1109,7 @@ Class({
 			}
 		},
 		query:function(key,val){
-			if(val.match(/\?([^#]*)/i)){
+			if(val.match(/^[^#\/]=[^#\/]/i)){
 				this._query=val;
 				this.urlReload();
 			}
