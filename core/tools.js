@@ -466,6 +466,12 @@ Class({
 				this.urlReload();
 			}
 		},
+		dir:function(key,val){
+			if(val.match(/\.\.?$|(?:[^?#\/]*\/)*/i)){
+				this._directory=val;
+				this.urlReload();
+			}
+		},
 		file:function(key,val){
 			if(val.match(/[^?#\/]+/i)){
 				this._file=val;
@@ -474,7 +480,7 @@ Class({
 		},
 		query:function(key,val){
 			if(val.match(/\?([^#]*)/i)){
-				this._file=query;
+				this._query=val;
 				this.urlReload();
 			}
 		},
