@@ -21,13 +21,19 @@ $(document).ready(function(){
 		implements:[tools.browser],
 		constructor:function(){}
 	});
-	var timer=new tools.Timer(2000,2);
+	var timer1=new tools.Timer(2000);
+	var timer2=new tools.Timer(2000);
 	var _some=function(e,currentCount){
 // 		if(timer.currentCount==5) timer.stop();
 	}
-	timer.bind("timer",_some);
-	timer.unbind("timerComplete",function(e,currentCount){});
-	timer.start()
+	timer1.bind("timer",function(e,currentCount){
+		console.log("timer1",currentCount)
+	});
+	timer2.bind("timer",function(e,currentCount){
+		console.log("timer2",currentCount)
+	});
+	timer1.start()
+	timer2.start()
 	var cookie=new tools.CookieManager();
 	var url=new tools.Url();
 	console.log(tools.Flash.version)

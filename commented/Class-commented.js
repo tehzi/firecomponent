@@ -948,7 +948,8 @@ try{
 				}
 				/** Вызываем конструктор */
 				if(arguments[0]!="@!!"){
-					constructor.apply(instance,arguments);
+					var _constructor=constructor;
+					_constructor.apply(instance,arguments);
 				}
 				/** 
 				* Если это IE, тогда возвращаем новую копию класса из области видимости 
