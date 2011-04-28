@@ -682,7 +682,8 @@ try{
 					}
 				}
 				if(arguments[0]!="@!!"){
-					constructor.apply(instance,arguments);
+					var _constructor=constructor;
+					_constructor.apply(instance,arguments);
 				}
 				if(ClassModel.IE){
 					return IEprototype;
