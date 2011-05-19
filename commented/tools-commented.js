@@ -2,7 +2,7 @@
 * @fileoverview
 * Пакет содержит набор утилит разработаных для проекта firecomponent
 * @author <a href="mailto:zi.white.drago@gmail.com">zi white</a>
-* @version 0.1.1, $Revision$
+* @version 0.1.10, $Revision$
 */
 if(!Date.prototype.lastMonthDay){
 	Date.prototype.lastMonthDay=function(month, year){
@@ -167,7 +167,7 @@ Class({
 		*/
 		IE8:"~this.IE && this.intertrigoBrowserVersion()=='8.0'~",
 		/**
-		* @name IE8
+		* @name IE9
 		* @memberOf tools.browser
 		* @description
 		* <b>Область видимости</b> : <i>Публичная</i>
@@ -180,17 +180,26 @@ Class({
 		* @memberOf tools.browser
 		* @description
 		* <b>Область видимости</b> : <i>Публичная</i>
-		* <br/><b>Тип данных:</b> <i>String</i>
-		* <br/>Возвращает строку c версией браузера
+		* <br/><b>Тип данных:</b> <i>Float</i>
+		* <br/>Возвращает число с точкой аналогичное версии браузера
 		*/
-		browserVersion:"~this.intertrigoBrowserVersion()~"
+		browserVersion:"~this.intertrigoBrowserVersion()~",
+		/**
+		* @name v
+		* @memberOf tools.browser
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Float</i>
+		* <br/>Возвращает число с точкой аналогичное версии браузера
+		*/
+		v:"~this.browserVersion~"
 	},
 	protected:{
 		/**
 		* @name intertrigoBrowserVersion
 		* @function
 		* @memberOf tools.browser
-		* @type String
+		* @type float
 		* @description
 		* <b>Область видимости</b> : <i>Защищенная</i>
 		* <br/><b>Тип данных:</b> <i>String</i>
@@ -204,7 +213,7 @@ Class({
 				var version_detect=agent.match(/msie ([0-9]+\.[0-9]+)/i);
 			}
 			if(this.Opera){
-				var version_detect=parseFloat(window.opera.version());
+				var version_detect=window.opera.version();
 			}
 			if(this.Firefox){
 				var version_detect=agent.match(/firefox\/([0-9]+\.[0-9]+\.[0-9]+)/i);
@@ -217,13 +226,13 @@ Class({
 			}
 			if(version_detect){
 				if(version_detect[1]){
-					version=version_detect[1];
+					version=version_detect[1].replace(/^([0-9]+\.[0-9]+)\.([0-9]+)/,"$100$2");
 				}
 				else{
 					version=version_detect;
 				}
 			}
-			return version;
+			return parseFloat(version);
 		}
 	}
 });
