@@ -2,7 +2,7 @@
 * @fileoverview
 * Пакет содержит набор утилит разработаных для проекта firecomponent
 * @author <a href="mailto:zi.white.drago@gmail.com">zi white</a>
-* @version 0.1.1, $Revision$
+* @version 0.1.10, $Revision$
 */
 if(!Date.prototype.lastMonthDay){
 	Date.prototype.lastMonthDay=function(month, year){
@@ -62,7 +62,8 @@ Class({
 		IE7:"~this.IE && this.intertrigoBrowserVersion()=='7.0'~",
 		IE8:"~this.IE && this.intertrigoBrowserVersion()=='8.0'~",
 		IE9:"~this.IE && this.intertrigoBrowserVersion()=='9.0'~",
-		browserVersion:"~this.intertrigoBrowserVersion()~"
+		browserVersion:"~this.intertrigoBrowserVersion()~",
+		v:"~this.browserVersion~"
 	},
 	protected:{
 		intertrigoBrowserVersion:function(){
@@ -73,7 +74,7 @@ Class({
 				var version_detect=agent.match(/msie ([0-9]+\.[0-9]+)/i);
 			}
 			if(this.Opera){
-				var version_detect=parseFloat(window.opera.version());
+				var version_detect=window.opera.version();
 			}
 			if(this.Firefox){
 				var version_detect=agent.match(/firefox\/([0-9]+\.[0-9]+\.[0-9]+)/i);
@@ -86,13 +87,13 @@ Class({
 			}
 			if(version_detect){
 				if(version_detect[1]){
-					version=version_detect[1];
+					version=version_detect[1].replace(/^([0-9]+\.[0-9]+)\.([0-9]+)/,"$100$2");
 				}
 				else{
 					version=version_detect;
 				}
 			}
-			return version;
+			return parseFloat(version);
 		}
 	}
 });
