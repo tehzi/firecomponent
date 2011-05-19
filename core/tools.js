@@ -86,7 +86,7 @@ Class({
 				var version_detect=agent.match(/version\/([0-9]+\.[0-9]+)/i);
 			}
 			if(version_detect){
-				if(version_detect[1]){
+				if(version_detect[1] && typeof version_detect=="object"){
 					version=version_detect[1].replace(/^([0-9]+\.[0-9]+)\.([0-9]+)/,"$100$2");
 				}
 				else{
