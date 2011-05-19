@@ -2,7 +2,7 @@
 * @fileoverview
 * Пакет содержит набор утилит разработаных для проекта firecomponent
 * @author <a href="mailto:zi.white.drago@gmail.com">zi white</a>
-* @version 0.1.10, $Revision: 150 $
+* @version 0.1.10, $Revision: 152 $
 */
 if(!Date.prototype.lastMonthDay){
 	Date.prototype.lastMonthDay=function(month, year){
@@ -58,10 +58,10 @@ Class({
 		Chrome:"~this.browser=='Chrome'~",
 		Safari:"~this.browser=='Safari'~",
 		IE:"~this.browser=='Internet Explorer'~",
-		IE6:"~this.IE && this.intertrigoBrowserVersion()=='6.0'~",
-		IE7:"~this.IE && this.intertrigoBrowserVersion()=='7.0'~",
-		IE8:"~this.IE && this.intertrigoBrowserVersion()=='8.0'~",
-		IE9:"~this.IE && this.intertrigoBrowserVersion()=='9.0'~",
+		IE6:"~this.IE && this.intertrigoBrowserVersion()==6~",
+		IE7:"~this.IE && this.intertrigoBrowserVersion()==7~",
+		IE8:"~this.IE && this.intertrigoBrowserVersion()==8~",
+		IE9:"~this.IE && this.intertrigoBrowserVersion()==9~",
 		browserVersion:"~this.intertrigoBrowserVersion()~",
 		v:"~this.browserVersion~"
 	},
