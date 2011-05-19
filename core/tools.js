@@ -1,7 +1,7 @@
 /**
 * @fileoverview
 * Пакет содержит набор утилит разработаных для проекта firecomponent
-* @author <a href="mailto:zi.white.drago@gmail.com">Zi White</a>
+* @author <a href="mailto:zi.white.drago@gmail.com">zi white</a>
 * @version 0.1.1, $Revision$
 */
 if(!Date.prototype.lastMonthDay){
@@ -73,7 +73,7 @@ Class({
 				var version_detect=agent.match(/msie ([0-9]+\.[0-9]+)/i);
 			}
 			if(this.Opera){
-				var version_detect=agent.match(/opera\/([0-9]+\.[0-9]+)/i);
+				var version_detect=parseFloat(window.opera.version());
 			}
 			if(this.Firefox){
 				var version_detect=agent.match(/firefox\/([0-9]+\.[0-9]+\.[0-9]+)/i);
@@ -87,6 +87,9 @@ Class({
 			if(version_detect){
 				if(version_detect[1]){
 					version=version_detect[1];
+				}
+				else{
+					version=version_detect;
 				}
 			}
 			return version;
