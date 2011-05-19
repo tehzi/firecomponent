@@ -2,7 +2,7 @@
 * @fileoverview
 * Пакет содержит набор утилит разработаных для проекта firecomponent
 * @author <a href="mailto:zi.white.drago@gmail.com">zi white</a>
-* @version 0.1.10, $Revision: 149 $
+* @version 0.1.10, $Revision: 150 $
 */
 if(!Date.prototype.lastMonthDay){
 	Date.prototype.lastMonthDay=function(month, year){
@@ -86,7 +86,7 @@ Class({
 				var version_detect=agent.match(/version\/([0-9]+\.[0-9]+)/i);
 			}
 			if(version_detect){
-				if(version_detect[1]){
+				if(version_detect[1] && typeof version_detect=="object"){
 					version=version_detect[1].replace(/^([0-9]+\.[0-9]+)\.([0-9]+)/,"$100$2");
 				}
 				else{
