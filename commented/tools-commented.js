@@ -147,7 +147,7 @@ Class({
 		* <br/><b>Тип данных:</b> <i>Boolean</i>
 		* <br/>Проверяет является ли браузер Internet Explorer'ом 6 версии
 		*/
-		IE6:"~this.IE && this.intertrigoBrowserVersion()=='6.0'~",
+		IE6:"~this.IE && this.intertrigoBrowserVersion()==6~",
 		/**
 		* @name IE7
 		* @memberOf tools.browser
@@ -156,7 +156,7 @@ Class({
 		* <br/><b>Тип данных:</b> <i>Boolean</i>
 		* <br/>Проверяет является ли браузер Internet Explorer'ом 7 версии
 		*/
-		IE7:"~this.IE && this.intertrigoBrowserVersion()=='7.0'~",
+		IE7:"~this.IE && this.intertrigoBrowserVersion()==7~",
 		/**
 		* @name IE8
 		* @memberOf tools.browser
@@ -165,7 +165,7 @@ Class({
 		* <br/><b>Тип данных:</b> <i>Boolean</i>
 		* <br/>Проверяет является ли браузер Internet Explorer'ом 8 версии
 		*/
-		IE8:"~this.IE && this.intertrigoBrowserVersion()=='8.0'~",
+		IE8:"~this.IE && this.intertrigoBrowserVersion()==8~",
 		/**
 		* @name IE9
 		* @memberOf tools.browser
@@ -174,7 +174,7 @@ Class({
 		* <br/><b>Тип данных:</b> <i>Boolean</i>
 		* <br/>Проверяет является ли браузер Internet Explorer'ом 9 версии
 		*/
-		IE9:"~this.IE && this.intertrigoBrowserVersion()=='9.0'~",
+		IE9:"~this.IE && this.intertrigoBrowserVersion()==9~",
 		/**
 		* @name browserVersion
 		* @memberOf tools.browser
