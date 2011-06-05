@@ -20,6 +20,17 @@ if(!String.prototype.go){
 		location.href=this;
 	}
 }
+if(!Array.prototype.fullMask){
+	Array.prototype.fullMask=function(){
+		var ret=0;
+		for(var i=0;i<this.length;i++){
+			if(typeof this[i]=="number"){
+				ret|=this[i];
+			}
+		}
+		return ret;
+	}
+}
 var tools={
 	Copy : function () {},
 	copy : function (obj){
@@ -63,13 +74,24 @@ Class({
 		IE8:"~this.IE && this.intertrigoBrowserVersion()==8~",
 		IE9:"~this.IE && this.intertrigoBrowserVersion()==9~",
 		browserVersion:"~this.intertrigoBrowserVersion()~",
-		v:"~this.browserVersion~"
+		v:"~this.browserVersion~",
+		IEMask:"~this.IEMaskArray.fullMask()~",
+		IE6Id:"~this.IEMaskArray[0]~",
+		IE7Id:"~this.IEMaskArray[1]~",
+		IE8Id:"~this.IEMaskArray[2]~",
+		IE9Id:"~this.IEMaskArray[3]~",
+		currentIEId:"~this.detectIEId()~"
 	},
 	protected:{
+		IEMaskArray:[
+			0x00000001,
+			0x00000002,
+			0x00000004,
+			0x00000008
+		],
 		intertrigoBrowserVersion:function(){
 			var version="None";
 			var agent=navigator.userAgent.toLowerCase();
-			version=agent
 			if(this.IE){
 				var version_detect=agent.match(/msie ([0-9]+\.[0-9]+)/i);
 			}
@@ -94,6 +116,23 @@ Class({
 				}
 			}
 			return parseFloat(version);
+		},
+		detectIEId:function(){
+			if(this.IE){
+				if(this.IE9){
+					return this.IEMaskArray[3];
+				}
+				if(this.IE8){
+					return this.IEMaskArray[2];
+				}
+				if(this.IE7){
+					return this.IEMaskArray[1];
+				}
+				if(this.IE6){
+					return this.IEMaskArray[0];
+				}
+			}
+			return 0;
 		}
 	}
 });
