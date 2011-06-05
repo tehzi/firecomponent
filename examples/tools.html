@@ -32,15 +32,15 @@ $(document).ready(function(){
 	timer2.bind("timer",function(e,currentCount){
 		console.log("timer2",currentCount)
 	});
-	timer1.start()
-	timer2.start()
+// 	timer1.start()
+// 	timer2.start()
 	var cookie=new tools.CookieManager();
 	var url=new tools.Url();
-	console.log(tools.Flash.version)
+	console.log("IE id:",tools.browser.currentIEId)
 	url.bind("hash",function(){
 		
 	});
-	console.log(tools.browser)
+	console.log(tools.browser.IE6)
 });
 //]]>
 		</script>

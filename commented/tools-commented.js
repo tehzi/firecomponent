@@ -20,6 +20,17 @@ if(!String.prototype.go){
 		location.href=this;
 	}
 }
+if(!Array.prototype.fullMask){
+	Array.prototype.fullMask=function(){
+		var ret=0;
+		for(var i=0;i<this.length;i++){
+			if(typeof this[i]=="number"){
+				ret|=this[i];
+			}
+		}
+		return ret;
+	}
+}
 /**
 * @namespace
 * Пакет предоставляет набор утилит для проекта firecomponent 
@@ -192,9 +203,78 @@ Class({
 		* <br/><b>Тип данных:</b> <i>Float</i>
 		* <br/>Возвращает число с точкой аналогичное версии браузера
 		*/
-		v:"~this.browserVersion~"
+		v:"~this.browserVersion~",
+		/**
+		* @name IEMask
+		* @memberOf tools.browser
+		* @description 
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Array</i>
+		* <br/>Проверяет является ли браузер Oper'ой
+		*/
+		IEMask:"~this.IEMaskArray.fullMask()~",
+		/**
+		* @name IE6Id
+		* @memberOf tools.browser
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Number</i>
+		* <br/>Итендификатор ie6
+		*/
+		IE6Id:"~this.IEMaskArray[0]~",
+		/**
+		* @name IE7Id
+		* @memberOf tools.browser
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Number</i>
+		* <br/>Итендификатор ie7
+		*/
+		IE7Id:"~this.IEMaskArray[1]~",
+		/**
+		* @name IE8Id
+		* @memberOf tools.browser
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Number</i>
+		* <br/>Итендификатор ie8
+		*/
+		IE8Id:"~this.IEMaskArray[2]~",
+		/**
+		* @name IE9Id
+		* @memberOf tools.browser
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Number</i>
+		* <br/>Итендификатор ie9
+		*/
+		IE9Id:"~this.IEMaskArray[3]~",
+		/**
+		* @name currentIEId
+		* @memberOf tools.browser
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Number</i>
+		* <br/>Текущий итендификатор ie
+		*/
+		currentIEId:"~this.detectIEId()~"
 	},
 	protected:{
+		/**
+		* @name IEMaskArray
+		* @memberOf tools.browser
+		* @description
+		* <b>Область видимости</b> : <i>Защищенная</i>
+		* <br/><b>Тип данных:</b> <i>Array</i> 
+		* <br/>Массив данных содержащий битовые обозначения браузеров.
+		* Первый эллемент ie6, второй ie7 и тд.
+		*/
+		IEMaskArray:[
+			0x00000001,
+			0x00000002,
+			0x00000004,
+			0x00000008
+		],
 		/**
 		* @name intertrigoBrowserVersion
 		* @function
@@ -208,7 +288,6 @@ Class({
 		intertrigoBrowserVersion:function(){
 			var version="None";
 			var agent=navigator.userAgent.toLowerCase();
-			version=agent
 			if(this.IE){
 				var version_detect=agent.match(/msie ([0-9]+\.[0-9]+)/i);
 			}
@@ -233,6 +312,33 @@ Class({
 				}
 			}
 			return parseFloat(version);
+		},
+		/**
+		* @name detectIEId
+		* @function
+		* @memberOf tools.browser
+		* @type Number
+		* @description
+		* <b>Область видимости</b> : <i>Защищенная</i>
+		* <br/><b>Тип данных:</b> <i>Number</i>
+		* <br/>Определяет id Браузера ie
+		*/
+		detectIEId:function(){
+			if(this.IE){
+				if(this.IE9){
+					return this.IEMaskArray[3];
+				}
+				if(this.IE8){
+					return this.IEMaskArray[2];
+				}
+				if(this.IE7){
+					return this.IEMaskArray[1];
+				}
+				if(this.IE6){
+					return this.IEMaskArray[0];
+				}
+			}
+			return 0;
 		}
 	}
 });
