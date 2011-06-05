@@ -500,7 +500,7 @@ try{
 											}
 										}
 										else{
-											instance[key]=parentObject.public[key];
+											instance[key]=parentObject.protected[key];
 										}
 									})(instance,key,parentObject);
 								}
