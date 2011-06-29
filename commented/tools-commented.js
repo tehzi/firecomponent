@@ -296,6 +296,9 @@ Class({
 			}
 			if(this.Firefox){
 				var version_detect=agent.match(/firefox\/([0-9]+\.[0-9]+\.[0-9]+)/i);
+				if(!version_detect){
+					var version_detect=agent.match(/firefox\/([0-9]+\.[0-9]+)/i);
+				}
 			}
 			if(this.Chrome){
 				var version_detect=agent.match(/chrome\/([0-9]+\.[0-9]+)/i);
