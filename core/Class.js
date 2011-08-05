@@ -3,7 +3,7 @@
 * Пакет ООП утилит для jquery, в программе использован хак <a href="http://alex.dojotoolkit.org/08/jscript/lettable.html">dojo</a>.
 * Тестируется в браузерах ie6, ie7, ie8, opera 10.60, chrome 4, firefox 3.6.6.
 * @author <a href="mailto:zi.white.drago@gmail.com">zi white</a>
-* @version 0.1.13, $Revision$
+* @version 0.1.14, $Revision$
 */
 try{
 	var __Class__={
@@ -297,19 +297,23 @@ try{
 				}
 			}
 			for(var key in public){
-				if(typeof public[key]=="function"){
+				if(typeof public[key]=="function" && $.inArray(key,history[0])==-1){
 					ieFix.addMethod(key);
 				}
-				else{
+				else if($.inArray(key,history[0])==-1){
 					ieFix.addGet(key);
 					ieFix.addSet(key);
 				}
 			}
 			for(var key in get){
-				ieFix.addGet(key);
+				if($.inArray(key,history[0])==-1){
+					ieFix.addGet(key);
+				}
 			}
 			for(var key in set){
-				ieFix.addSet(key);
+				if($.inArray(key,history[0])==-1){
+					ieFix.addSet(key);
+				}
 			}
 			ieFix.newVBClass(__Class__[name].VBid);
 		}
