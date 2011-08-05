@@ -297,19 +297,23 @@ try{
 				}
 			}
 			for(var key in public){
-				if(typeof public[key]=="function"){
+				if(typeof public[key]=="function" && $.inArray(key,history[0])==-1){
 					ieFix.addMethod(key);
 				}
-				else{
+				else if($.inArray(key,history[0])==-1){
 					ieFix.addGet(key);
 					ieFix.addSet(key);
 				}
 			}
 			for(var key in get){
-				ieFix.addGet(key);
+				if($.inArray(key,history[0])==-1){
+					ieFix.addGet(key);
+				}
 			}
 			for(var key in set){
-				ieFix.addSet(key);
+				if($.inArray(key,history[0])==-1){
+					ieFix.addSet(key);
+				}
 			}
 			ieFix.newVBClass(__Class__[name].VBid);
 		}
