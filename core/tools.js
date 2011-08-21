@@ -2,7 +2,7 @@
 * @fileoverview
 * Пакет содержит набор утилит разработаных для проекта firecomponent
 * @author <a href="mailto:zi.white.drago@gmail.com">zi white</a>
-* @version 0.1.10, $Revision$
+* @version 0.1.15, $Revision$
 */
 if(!Date.prototype.lastMonthDay){
 	Date.prototype.lastMonthDay=function(month, year){
@@ -80,7 +80,13 @@ Class({
 		IE7Id:"~this.IEMaskArray[1]~",
 		IE8Id:"~this.IEMaskArray[2]~",
 		IE9Id:"~this.IEMaskArray[3]~",
-		currentIEId:"~this.detectIEId()~"
+		currentIEId:"~this.detectIEId()~",
+		browser_engine:"~this.detect_browser_engine()~",
+		gecko:"~this.detect_browser_engine()=='gecko'~",
+		presto:"~this.detect_browser_engine()=='presto'~",
+		webkit:"~this.detect_browser_engine()=='webkit'~",
+		khtml:"~this.detect_browser_engine()=='khtml'~",
+		trident:"~this.detect_browser_engine()=='trident'~"
 	},
 	protected:{
 		IEMaskArray:[
@@ -136,6 +142,13 @@ Class({
 				}
 			}
 			return 0;
+		},
+		detect_browser_engine:function(){
+			var detect='none';
+			if(detecting=navigator.userAgent.match(/(gecko|presto|webkit|khtml|trident)/i)){
+				detect=detecting[0].toLowerCase();
+			}
+			return detect;
 		}
 	}
 });
