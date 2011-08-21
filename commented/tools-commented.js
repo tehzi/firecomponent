@@ -257,7 +257,61 @@ Class({
 		* <br/><b>Тип данных:</b> <i>Number</i>
 		* <br/>Текущий итендификатор ie
 		*/
-		currentIEId:"~this.detectIEId()~"
+		currentIEId:"~this.detectIEId()~",
+		/**
+		* @name browser_engine
+		* @memberOf tools.browser
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>String</i>
+		* <br/>Возвращает строку с версией браузера
+		*/
+		browser_engine:"~this.detect_browser_engine()~",
+		/**
+		* @name gecko
+		* @memberOf tools.browser
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Boolean</i>
+		* <br/>Возвращает true, если движок gecko
+		*/
+		gecko:"~this.detect_browser_engine()=='gecko'~",
+		/**
+		* @name presto
+		* @memberOf tools.browser
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Boolean</i>
+		* <br/>Возвращает true, если движок presto
+		*/
+		presto:"~this.detect_browser_engine()=='presto'~",
+		/**
+		* @name webkit
+		* @memberOf tools.browser
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Boolean</i>
+		* <br/>Возвращает true, если движок webkit
+		*/
+		webkit:"~this.detect_browser_engine()=='webkit'~",
+		/**
+		* @name khtml
+		* @memberOf tools.browser
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Boolean</i>
+		* <br/>Возвращает true, если движок khtml
+		*/
+		khtml:"~this.detect_browser_engine()=='khtml'~",
+		/**
+		* @name trident
+		* @memberOf tools.browser
+		* @description
+		* <b>Область видимости</b> : <i>Публичная</i>
+		* <br/><b>Тип данных:</b> <i>Boolean</i>
+		* <br/>Возвращает true, если движок trident
+		*/
+		trident:"~this.detect_browser_engine()=='trident'~"
 	},
 	protected:{
 		/**
@@ -342,6 +396,23 @@ Class({
 				}
 			}
 			return 0;
+		},
+		/**
+		* @name detect_browser_engine
+		* @function
+		* @memberOf tools.browser
+		* @type String
+		* @description
+		* <b>Область видимости</b> : <i>Защищенная</i>
+		* <br/><b>Тип данных:</b> <i>String</i>
+		* <br/>Опеределяет движок браузера
+		*/
+		detect_browser_engine:function(){
+			var detect='none';
+			if(detecting=navigator.userAgent.match(/(gecko|presto|webkit|khtml|trident)/i)){
+				detect=detecting[0].toLowerCase();
+			}
+			return detect;
 		}
 	}
 });
