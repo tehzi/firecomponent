@@ -478,6 +478,10 @@ Class({
 					});
 					$(this).unbind(_event,_function);
 				}
+				return;
+			}
+			if(typeof _event=="string" && arguments.length==1){
+				$(this).unbind(_event);
 			}
 		}
 	},
