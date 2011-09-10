@@ -565,7 +565,7 @@ Class({
 		timer:new tools.Timer(1000),
 		hashEvent:function(e){
 			if(this.stdHash!=location.hash){
-				this.dispatch("hash",this.stdHash,location.hash);
+				this.dispatch("hash",[this.stdHash,location.hash]);
 				this.stdHash=location.hash;
 			}
 		},

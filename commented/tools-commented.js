@@ -1352,7 +1352,7 @@ Class({
 		*/
 		hashEvent:function(e){
 			if(this.stdHash!=location.hash){
-				this.dispatch("hash",this.stdHash,location.hash);
+				this.dispatch("hash",[this.stdHash,location.hash]);
 				this.stdHash=location.hash;
 			}
 		},
