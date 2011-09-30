@@ -31,6 +31,22 @@ if(!Array.prototype.fullMask){
 		return ret;
 	}
 }
+if(!Array.prototype.forEach){
+	Array.prototype.forEach=function(callback,object){
+		for(var i=0;i<this.length && typeof callback=='function';i++) callback.call(typeof object=='object'?object:window,this[i],i,this);
+	}
+}
+if(!Array.prototype.filter){
+	Array.prototype.filter=function(callback,object){
+		var arr=[];
+		for(var i=0;i<this.length && typeof callback=='function';i++){
+			if(callback.call(typeof object=='object'?object:window,this[i],i,this)){
+				arr.push(this[i]);
+			}
+		}
+		return arr;
+	}
+}
 /**
 * @namespace
 * Пакет предоставляет набор утилит для проекта firecomponent 
