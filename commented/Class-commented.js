@@ -653,6 +653,7 @@ try{
 							var method;
 							instance.Super=function(){
 								i++;
+								rName=name;
 								if(i<2 || !instance.Super.prototype.times){
 									parentObject.constructor.apply(instance,arguments);
 								}

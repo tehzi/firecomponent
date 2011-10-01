@@ -33,7 +33,7 @@ if(!Array.prototype.fullMask){
 }
 if(!Array.prototype.forEach){
 	Array.prototype.forEach=function(callback,object){
-		for(var i=0;i<this.length && typeof callback=='function';i++) callback.call(typeof object=='object'?object:window,this[i],i,this);
+		for(var i=0;i<this.length && typeof callback=='function';i++) if(callback.call(typeof object=='object'?object:window,this[i],i,this));
 	}
 }
 if(!Array.prototype.filter){
