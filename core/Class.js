@@ -3,7 +3,7 @@
 * Пакет ООП утилит для jquery, в программе использован хак <a href="http://alex.dojotoolkit.org/08/jscript/lettable.html">dojo</a>.
 * Тестируется в браузерах ie6, ie7, ie8, opera 10.60, chrome 4, firefox 3.6.6.
 * @author <a href="mailto:zi.white.drago@gmail.com">zi white</a>
-* @version 0.1.14, $Revision: 168 $
+* @version 0.1.14, $Revision: 169 $
 */
 var Class;
 (function(){
