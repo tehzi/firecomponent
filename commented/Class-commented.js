@@ -623,6 +623,30 @@ var Class;
 						parentObject=__Class__[className];
 						if(!parentObject.final){
 							instance.parent={};
+							for(var key in parentObject.protected){
+								if(typeof parentObject.protected[key]=="function"){
+									(function(key,parentObject,instance){
+										instance.parent[key]=function(){
+											return parentObject.protected[key].apply(instance,arguments);
+										}
+									})(key,parentObject,instance);
+								}
+								else{
+									instance.parent[key]=parentObject.protected[key];
+								}
+							}
+							for(var key in parentObject.public){
+								if(typeof parentObject.public[key]=="function"){
+									(function(key,parentObject,instance){
+										instance.parent[key]=function(){
+											return parentObject.public[key].apply(instance,arguments);
+										}
+									})(key,parentObject,instance);
+								}
+								else{
+									instance.parent[key]=parentObject.public[key];
+								}
+							}
 							(function(parentObject,instance,parentClassName,name){
 								var i=0;
 								var rName=name;
