@@ -362,6 +362,44 @@ var Class;
 						parentObject=__Class__[className];
 						if(!parentObject.final){
 							instance.parent={};
+							for(var key in parentObject.protected){
+								if(typeof parentObject.protected[key]=="function"){
+									(function(key,parentObject,instance){
+										instance.parent[key]=function(){
+											return parentObject.protected[key].apply(instance,arguments);
+										}
+									})(key,parentObject,instance);
+								}
+								else{
+									if(typeof parentObject.protected[key]=='object'){
+										var copy=function(){}
+										copy.prototype=parentObject.protected[key];
+										instance.parent[key]=(parentObject.protected[key] instanceof Array)?parentObject.protected[key].slice(0):new copy();
+									}
+									else{
+										instance.parent[key]=parentObject.protected[key];
+									}
+								}
+							}
+							for(var key in parentObject.public){
+								if(typeof parentObject.public[key]=="function"){
+									(function(key,parentObject,instance){
+										instance.parent[key]=function(){
+											return parentObject.public[key].apply(instance,arguments);
+										}
+									})(key,parentObject,instance);
+								}
+								else{
+									if(typeof parentObject.public[key]=='object'){
+										var copy=function(){}
+										copy.prototype=parentObject.public[key];
+										instance.parent[key]=(parentObject.public[key] instanceof Array)?parentObject.public[key].slice(0):new copy();
+									}
+									else{
+										instance.parent[key]=parentObject.public[key];
+									}
+								}
+							}
 							(function(parentObject,instance,parentClassName,name){
 								var i=0;
 								var rName=name;
@@ -403,7 +441,7 @@ var Class;
 													if(typeof parentObject.protected[key]=='object'){
 														var copy=function(){}
 														copy.prototype=parentObject.protected[key];
-														instance[key]=new copy();
+														instance[key]=(parentObject.protected[key] instanceof Array)?parentObject.protected[key].slice(0):new copy();
 													}
 													else{
 														instance[key]=parentObject.protected[key];
@@ -448,7 +486,7 @@ var Class;
 															if(typeof val=='object'){
 																var copy=function(){}
 																copy.prototype=val;
-																instance[key]=new copy();
+																instance[key]=(val instanceof Array)?val.slice(0):new copy();
 															}
 															else{
 																instance[key]=val;
@@ -467,7 +505,7 @@ var Class;
 															if(typeof val=='object'){
 																var copy=function(){}
 																copy.prototype=val;
-																instance[key]=new copy();
+																instance[key]=(val instanceof Array)?val.slice(0):new copy();
 															}
 															else{
 																instance[key]=val;
@@ -504,7 +542,7 @@ var Class;
 												if(typeof parentObject.protected[key]=='object'){
 													var copy=function(){}
 													copy.prototype=parentObject.protected[key];
-													instance[key]=new copy();
+													instance[key]=(parentObject.protected[key] instanceof Array)?parentObject.protected[key].slice(0):new copy();
 												}
 												else{
 													instance[key]=parentObject.protected[key];
@@ -549,7 +587,7 @@ var Class;
 														if(typeof val=='object'){
 															var copy=function(){}
 															copy.prototype=val;
-															instance[key]=new copy();
+															instance[key]=(val instanceof Array)?val.slice(0):new copy();
 														}
 														else{
 															instance[key]=val;
@@ -568,7 +606,7 @@ var Class;
 														if(typeof val=='object'){
 															var copy=function(){}
 															copy.prototype=val;
-															instance[key]=new copy();
+															instance[key]=(val instanceof Array)?val.slice(0):new copy();
 														}
 														else{
 															instance[key]=val;
@@ -594,7 +632,7 @@ var Class;
 							if(typeof private[key]=='object'){
 								var copy=function(){}
 								copy.prototype=private[key];
-								instance[key]=new copy();
+								instance[key]=(private[key] instanceof Array)?private[key].slice(0):new copy();
 							}
 							else{
 								instance[key]=private[key];
@@ -613,7 +651,7 @@ var Class;
 							if(typeof protected[key]=='object'){
 								var copy=function(){}
 								copy.prototype=protected[key];
-								instance[key]=new copy();
+								instance[key]=(protected[key] instanceof Array)?protected[key].slice(0):new copy();
 							}
 							else{
 								instance[key]=protected[key];
@@ -652,7 +690,7 @@ var Class;
 										if(typeof val=='object'){
 											var copy=function(){}
 											copy.prototype=val;
-											instance[key]=new copy();
+											instance[key]=(val instanceof Array)?val.slice(0):new copy();
 										}
 										else{
 											instance[key]=val;
@@ -671,7 +709,7 @@ var Class;
 										if(typeof val=='object'){
 											var copy=function(){}
 											copy.prototype=val;
-											instance[key]=new copy();
+											instance[key]=(val instanceof Array)?val.slice(0):new copy();
 										}
 										else{
 											instance[key]=val;
