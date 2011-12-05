@@ -50,7 +50,7 @@ if(!Array.prototype.filter){
 var tools={
 	Copy : function () {},
 	copy : function (obj){
-			tools.Copy.prototype = obj;
+		tools.Copy.prototype = obj;
 		return new tools.Copy();
 	}
 };
