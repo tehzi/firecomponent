@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="ru">
+	<head>
+		<title>[REQUEST example]</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="copyright" href="http://www.gnu.org/copyleft/fdl.html" />
+		<meta name="author" content="zi, 2010" />
+		<style type="text/css">
+@import "../../css/style.css";
+		</style>
+		<script type="text/javascript" src="../../jquery/jquery.js"></script>
+		<script type="text/javascript" src="../../commented/Class-commented.js"></script>
+		<script type="text/javascript" src="../../commented/tools-commented.js"></script>
+		<script type="text/javascript" src="../../request/request.firecomponent.js"></script>
+		<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function(){
+	var req=new request.Ajax('/firecomponent/trunk/examples/request/example.json');
+	req.method='GET';
+	req.bind('start',function(){ $('#examples').html($('#examples').html()+'<div>start</div>'); });
+	req.bind('stop',function(){ $('#examples').html($('#examples').html()+'<div>stop</div>'); });
+	req.send(null,function(r){ $('#examples').html($('#examples').html()+'<div>'+r+'</div>'); });
+});
+//]]>
+		</script>
+	</head>
+	<body>
+		<div id="examples"></div>
+		<textarea>
+$(document).ready(function(){
+	var req=new request.Ajax('/firecomponent/trunk/examples/request/example.json');
+	req.method='GET';
+	req.bind('start',function(){ $('#examples').html($('#examples').html()+'<div>start</div>'); });
+	req.bind('stop',function(){ $('#examples').html($('#examples').html()+'<div>stop</div>'); });
+	req.send(null,function(r){ $('#examples').html($('#examples').html()+'<div>'+r+'</div>'); });
+});
+		</textarea>
+	</body>
+</html>

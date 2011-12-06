@@ -11,9 +11,6 @@
 		<script type="text/javascript" src="../jquery/jquery.js"></script>
 		<script type="text/javascript" src="../commented/Class-commented.js"></script>
 		<script type="text/javascript" src="../commented/tools-commented.js"></script>
-<!-- 		<script type="text/javascript" src="../core/hash.firecomponent.js"></script> -->
-<!-- 		<script type="text/javascript" src="../eng/Class.js"></script> -->
-<!-- 		<script type="text/javascript" src="../eng/tools.js"></script> -->
 		<script type="text/javascript">
 //<![CDATA[
 $(document).ready(function(){
@@ -22,27 +19,27 @@ $(document).ready(function(){
 		implements:[tools.browser],
 		constructor:function(){}
 	});
-	var timer1=new tools.Timer(2000,5);
-	var timer2=new tools.Timer(2000,5);
-	var _some=function(e,currentCount){
-// 		if(timer.currentCount==5) timer.stop();
-	}
-	timer1.bind("timer",function(e,currentCount){
-		console.log("timer1",currentCount)
-	});
-	timer2.bind("timer",function(e,currentCount){
-		console.log("timer2",currentCount)
-	});
-// 	timer1.start()
-// 	timer2.start()
-	new some()
-	var cookie=new tools.CookieManager();
-	var url=new tools.Url();
-	console.log("IE id:",tools.browser.currentIEId)
-	url.bind("hash",function(){
-		
-	});
-	console.log(tools.browser.IE6)
+// 	var timer1=new tools.Timer(2000,5);
+// 	var timer2=new tools.Timer(2000,5);
+// 	var _some=function(e,currentCount){
+// // 		if(timer.currentCount==5) timer.stop();
+// 	}
+// 	timer1.bind("timer",function(e,currentCount){
+// 		console.log("timer1",currentCount)
+// 	});
+// 	timer2.bind("timer",function(e,currentCount){
+// 		console.log("timer2",currentCount)
+// 	});
+// // 	timer1.start()
+// // 	timer2.start()
+// 	new some()
+// 	var cookie=new tools.CookieManager();
+// 	var url=new tools.Url();
+// 	console.log("IE id:",tools.browser.currentIEId)
+// 	url.bind("hash",function(){
+// 		
+// 	});
+// 	console.log(tools.browser.IE6)
 });
 //]]>
 		</script>

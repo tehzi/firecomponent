@@ -47,25 +47,21 @@ if(!Array.prototype.filter){
 		return arr;
 	}
 }
+if(!Array.prototype.indexOf){
+	Array.prototype.indexOf=function(elemToSearch,fromIndex){
+		for(fromIndex=(fromIndex?fromIndex<0?Math.max(0,this.length+fromIndex):fromIndex:0);fromIndex<this.length;fromIndex++){
+			if(fromIndex in this && this[fromIndex]===elemToSearch) return fromIndex;
+		}
+		return -1;
+	}
+}
 /**
 * @namespace
-* Пакет предоставляет набор утилит для проекта firecomponent 
+* Пакет предоставляет набор утилит для проекта firecomponent
 * @description
 * <b>Тип данных:</b> <i>Object</i>
 */
-var tools={
-	Copy : function () {},
-	/**
-	* @param {Object} obj любой объект для копирования.
-	* @description
-	* <b>Тип данных:</b> <i>Object</i> <br>
-	* Утилита для копирования объектов.
-	*/
-	copy : function (obj){
-			tools.Copy.prototype = obj;
-		return new tools.Copy();
-	}
-};
+var tools={};
 /**
 * @name browser
 * @class
@@ -223,7 +219,7 @@ Class({
 		/**
 		* @name IEMask
 		* @memberOf tools.browser
-		* @description 
+		* @description
 		* <b>Область видимости</b> : <i>Публичная</i>
 		* <br/><b>Тип данных:</b> <i>Array</i>
 		* <br/>Число с битами всех поддерживаемых версий интернет эксплорера
@@ -335,7 +331,7 @@ Class({
 		* @memberOf tools.browser
 		* @description
 		* <b>Область видимости</b> : <i>Защищенная</i>
-		* <br/><b>Тип данных:</b> <i>Array</i> 
+		* <br/><b>Тип данных:</b> <i>Array</i>
 		* <br/>Массив данных содержащий битовые обозначения браузеров.
 		* Первый эллемент ie6, второй ie7 и тд.
 		*/
@@ -435,7 +431,7 @@ Class({
 /**
 * @name eventDispatcher
 * @class
-* Абстрактный класс для добавление в другие классы функций предоставляющих создание и обработку пользовательских событий 
+* Абстрактный класс для добавление в другие классы функций предоставляющих создание и обработку пользовательских событий
 * @memberOf tools
 * @description
 */
@@ -822,7 +818,7 @@ Class({
 		* <br/>Сидоним для add
 		* @see tools.CookieManager#add
 		*/
-		val:function(name,val){	
+		val:function(name,val){
 			if(arguments.length==1){
 				if(this.ls[name]){
 					return this.ls[name];
@@ -1103,7 +1099,7 @@ Class({
 * <br/><b>Наследует</b> : <i>tools.eventDispatcher</i>
 * <br/><b>Событие</b> : <i>hash</i>
 * Срабатывает при изменение hash-адреса
-* <br/>Парсинг и управление адресом страницы или пользовательским адресом, 
+* <br/>Парсинг и управление адресом страницы или пользовательским адресом,
 * событие изменение hash адреса, переход на другие страницы
 * @example
 * // Создаем копию класса
@@ -1532,7 +1528,7 @@ Class({
 * @memberOf tools
 * @example
 * // return name of user platform
-* alert(tools.Platform.name); 
+* alert(tools.Platform.name);
 * @description
 */
 Class({
