@@ -3,7 +3,7 @@
 * Пакет ООП утилит для jquery, в программе использован хак <a href="http://alex.dojotoolkit.org/08/jscript/lettable.html">dojo</a>.
 * Тестируется в браузерах ie6, ie7, ie8, opera 10.60, chrome 4, firefox 3.6.6.
 * @author <a href="mailto:zi.white.drago@gmail.com">zi white</a>
-* @version 0.1.14, $Revision$
+* @version 0.1.21, $Revision$
 */
 var Class;
 (function(){
@@ -635,7 +635,7 @@ var Class;
 									if(typeof parentObject.protected[key]=='object'){
 										var copy=function(){}
 										copy.prototype=parentObject.protected[key];
-										instance.parent[key]=(parentObject.protected[key] instanceof Array)?parentObject.protected[key].slice(0):new copy();
+										instance.parent[key]=(parentObject.protected[key] instanceof Array)?parentObject.protected[key].slice(0):ClassModel.IE?parentObject.protected[key]:new copy();
 									}
 									else{
 										instance.parent[key]=parentObject.protected[key];
@@ -654,7 +654,7 @@ var Class;
 									if(typeof parentObject.public[key]=='object'){
 										var copy=function(){}
 										copy.prototype=parentObject.public[key];
-										instance.parent[key]=(parentObject.public[key] instanceof Array)?parentObject.public[key].slice(0):new copy();
+										instance.parent[key]=(parentObject.public[key] instanceof Array)?parentObject.public[key].slice(0):ClassModel.IE?parentObject.public[key]:new copy();
 									}
 									else{
 										instance.parent[key]=parentObject.public[key];
@@ -702,7 +702,7 @@ var Class;
 													if(typeof parentObject.protected[key]=='object'){
 														var copy=function(){}
 														copy.prototype=parentObject.protected[key];
-														instance[key]=(parentObject.protected[key] instanceof Array)?parentObject.protected[key].slice(0):new copy();
+														instance[key]=(parentObject.protected[key] instanceof Array)?parentObject.protected[key].slice(0):ClassModel.IE?parentObject.protected[key]:new copy();
 													}
 													else{
 														instance[key]=parentObject.protected[key];
@@ -747,7 +747,7 @@ var Class;
 															if(typeof val=='object'){
 																var copy=function(){}
 																copy.prototype=val;
-																instance[key]=(val instanceof Array)?val.slice(0):new copy();
+																instance[key]=(val instanceof Array)?val.slice(0):ClassModel.IE?val:new copy();
 															}
 															else{
 																instance[key]=val;
@@ -766,7 +766,7 @@ var Class;
 															if(typeof val=='object'){
 																var copy=function(){}
 																copy.prototype=val;
-																instance[key]=(val instanceof Array)?val.slice(0):new copy();
+																instance[key]=(val instanceof Array)?val.slice(0):ClassModel.IE?val:new copy();
 															}
 															else{
 																instance[key]=val;
@@ -807,7 +807,7 @@ var Class;
 												if(typeof parentObject.protected[key]=='object'){
 													var copy=function(){}
 													copy.prototype=parentObject.protected[key];
-													instance[key]=(parentObject.protected[key] instanceof Array)?parentObject.protected[key].slice(0):new copy();
+													instance[key]=(parentObject.protected[key] instanceof Array)?parentObject.protected[key].slice(0):ClassModel.IE?parentObject.protected[key]:new copy();
 												}
 												else{
 													instance[key]=parentObject.protected[key];
@@ -852,7 +852,7 @@ var Class;
 														if(typeof val=='object'){
 															var copy=function(){}
 															copy.prototype=val;
-															instance[key]=(val instanceof Array)?val.slice(0):new copy();
+															instance[key]=(val instanceof Array)?val.slice(0):ClassModel.IE?val:new copy();
 														}
 														else{
 															instance[key]=val;
@@ -871,7 +871,7 @@ var Class;
 														if(typeof val=='object'){
 															var copy=function(){}
 															copy.prototype=val;
-															instance[key]=(val instanceof Array)?val.slice(0):new copy();
+															instance[key]=(val instanceof Array)?val.slice(0):ClassModel.IE?val:new copy();
 														}
 														else{
 															instance[key]=val;
@@ -898,7 +898,7 @@ var Class;
 							if(typeof private[key]=='object'){
 								var copy=function(){}
 								copy.prototype=private[key];
-								instance[key]=(private[key] instanceof Array)?private[key].slice(0):new copy();
+								instance[key]=(private[key] instanceof Array)?private[key].slice(0):ClassModel.IE?private[key]:new copy();
 							}
 							else{
 								instance[key]=private[key];
@@ -917,7 +917,7 @@ var Class;
 							if(typeof protected[key]=='object'){
 								var copy=function(){}
 								copy.prototype=protected[key];
-								instance[key]=(protected[key] instanceof Array)?protected[key].slice(0):new copy();
+								instance[key]=(protected[key] instanceof Array)?protected[key].slice(0):ClassModel.IE?protected[key]:new copy();
 							}
 							else{
 								instance[key]=protected[key];
@@ -956,7 +956,7 @@ var Class;
 										if(typeof val=='object'){
 											var copy=function(){}
 											copy.prototype=val;
-											instance[key]=(val instanceof Array)?val.slice(0):new copy();
+											instance[key]=(val instanceof Array)?val.slice(0):ClassModel.IE?val:new copy();
 										}
 										else{
 											instance[key]=val;
@@ -975,7 +975,7 @@ var Class;
 										if(typeof val=='object'){
 											var copy=function(){}
 											copy.prototype=val;
-											instance[key]=(val instanceof Array)?val.slice(0):new copy();
+											instance[key]=(val instanceof Array)?val.slice(0):ClassModel.IE?val:new copy();
 										}
 										else{
 											instance[key]=val;

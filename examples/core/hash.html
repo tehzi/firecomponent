@@ -1,1 +1,33 @@
- 
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="ru">
+	<head>
+		<title>[TOOLS example]</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="copyright" href="http://www.gnu.org/copyleft/fdl.html" />
+		<meta name="author" content="zi, 2010" />
+		<style type="text/css">
+@import "../../css/style.css";
+		</style>
+		<script type="text/javascript" src="../../jquery/jquery.js"></script>
+		<script type="text/javascript" src="../../commented/Class-commented.js"></script>
+		<script type="text/javascript" src="../../commented/tools-commented.js"></script>
+		<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function(){
+	var url=new tools.Url;
+	url.bind('hash',function(e,hash){ $('#examples').html($('#examples').html()+'<div>'+hash+'</div>'); });
+});
+//]]>
+		</script>
+	</head>
+	<body>
+		<a href='#1'>1</a>
+		<br/>
+		<a href='#2'>2</a>
+		<br/>
+		<div id="examples"></div>
+		<textarea>
+
+		</textarea>
+	</body>
+</html> 
