@@ -33,7 +33,7 @@ if(!Array.prototype.fullMask){
 }
 if(!Array.prototype.forEach){
 	Array.prototype.forEach=function(callback,object){
-		for(var i=0;i<this.length && typeof callback=='function';i++) callback.call(typeof object=='object'?object:window,this[i],i,this);
+		for(var i=0;i<this.length && typeof callback=='function';i++) if(callback.call(typeof object=='object'?object:window,this[i],i,this));
 	}
 }
 if(!Array.prototype.filter){
@@ -47,13 +47,15 @@ if(!Array.prototype.filter){
 		return arr;
 	}
 }
-var tools={
-	Copy : function () {},
-	copy : function (obj){
-			tools.Copy.prototype = obj;
-		return new tools.Copy();
+if(!Array.prototype.indexOf){
+	Array.prototype.indexOf=function(elemToSearch,fromIndex){
+		for(fromIndex=(fromIndex?fromIndex<0?Math.max(0,this.length+fromIndex):fromIndex:0);fromIndex<this.length;fromIndex++){
+			if(fromIndex in this && this[fromIndex]===elemToSearch) return fromIndex;
+		}
+		return -1;
 	}
-};
+}
+var tools={};
 Class({
 	name:"browser",
 	type:"interface",
@@ -280,7 +282,7 @@ Class({
 		defaultTime:"Mon, 01-Jan-2020 00:00:00 GMT",
 		defaultPath:"/",
 		rm:"~this._remove~",
-		val:function(name,val){	
+		val:function(name,val){
 			if(arguments.length==1){
 				if(this.ls[name]){
 					return this.ls[name];
