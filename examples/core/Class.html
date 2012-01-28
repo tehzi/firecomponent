@@ -4,13 +4,13 @@
 		<title>[Class example]</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="copyright" href="http://www.gnu.org/copyleft/fdl.html" />
-		<meta name="author" content="zi, 2010" />
+		<meta name="author" content="zi, 2012" />
 		<style type="text/css">
 @import "../../css/style.css";
 		</style>
 		<script type="text/javascript" src="../../jquery/jquery.js"></script>
-<!-- 		<script type="text/javascript" src="../eng/Class.js"></script> -->
-		<script type="text/javascript" src="../../commented/Class-commented.js"></script>
+		<script type="text/javascript" src="../../core/Class.js"></script>
+<!-- 		<script type="text/javascript" src="../../commented/Class-commented.js"></script> -->
 		<script type="text/javascript">
 //<![CDATA[
 $(document).ready(function(){
@@ -33,6 +33,10 @@ $(document).ready(function(){
 			$("#examples").click(this.A_method);
 		},
 		public:{
+			var_test:"1",
+			test:function(){
+				this.var_test="A";
+			},
 			A_method:function(e){
 				$("#examples").html($("#examples").html()+"My this is this of class A and this.publicProperty is "+this.publicProperty+"<br/>");
 				return "123";
@@ -61,6 +65,13 @@ $(document).ready(function(){
 // 		implements:[browser],
 		constructor:function(a,b){
 			this.Super(a,b);
+		},
+		public:{
+			var_test:"1",
+			test:function(){
+				this.parents.A.test();
+				$("#examples").html($("#examples").html()+"Extends property from A: "+this.var_test+"<br/>");
+			}
 		}
 	});
 	Class({/* C */
@@ -71,7 +82,8 @@ $(document).ready(function(){
 		},
 		public:{
 			publicProperty:2,
-			name:"C"
+			name:"C",
+			var_test:"1"
 		}
 	});
 	//Создаём класс A
@@ -86,6 +98,8 @@ $(document).ready(function(){
 	var c=new C();
 	c.A_method();
 	c.publicProperty=6;
+	c.test();
+	console.log(c.var_test)
 	var clone_instance=c.getClone();
 });
 //]]>
