@@ -520,53 +520,51 @@ var Class;
 								}
 							}
 						}
-						if(typeof __Class__[className].parent=="function"){
-							var granny_name=getClassName(__Class__[className].parent);
-							instance.parents={};
-							do{
-								var granny=__Class__[granny_name];
-								instance.parents[granny_name]={};
-								for(var key in granny.protected){
-									if(typeof granny.protected[key]=="function"){
-										(function(key,granny,instance){
-											instance.parents[granny_name][key]=function(){
-												return granny.protected[key].apply(instance,arguments);
-											}
-										})(key,granny,instance);
-									}
-									else{
-										if(typeof granny.protected[key]=='object'){
-											var copy=function(){}
-											copy.prototype=granny.protected[key];
-											instance.parents[granny_name][key]=(granny.protected[key] instanceof Array)?granny.protected[key].slice(0):ClassModel.IE?granny.protected[key]:new copy();
+						instance.parents={};
+						do{
+							var granny_name=granny_name?getClassName(__Class__[className].parent):className;
+							var granny=__Class__[granny_name];
+							instance.parents[granny_name]={};
+							for(var key in granny.protected){
+								if(typeof granny.protected[key]=="function"){
+									(function(key,granny,instance){
+										instance.parents[granny_name][key]=function(){
+											return granny.protected[key].apply(instance,arguments);
 										}
-										else{
-											instance.parents[granny_name][key]=granny.protected[key];
-										}
-									}
+									})(key,granny,instance);
 								}
-								for(var key in granny.public){
-									if(typeof granny.public[key]=="function"){
-										(function(key,granny,instance){
-											instance.parents[granny_name][key]=function(){
-												return granny.public[key].apply(instance,arguments);
-											}
-										})(key,granny,instance);
+								else{
+									if(typeof granny.protected[key]=='object'){
+										var copy=function(){}
+										copy.prototype=granny.protected[key];
+										instance.parents[granny_name][key]=(granny.protected[key] instanceof Array)?granny.protected[key].slice(0):ClassModel.IE?granny.protected[key]:new copy();
 									}
 									else{
-										if(typeof granny.public[key]=='object'){
-											var copy=function(){}
-											copy.prototype=granny.public[key];
-											instance.parents[granny_name][key]=(granny.public[key] instanceof Array)?granny.public[key].slice(0):ClassModel.IE?granny.public[key]:new copy();
-										}
-										else{
-											instance.parents[granny_name][key]=parentObject.public[key];
-										}
+										instance.parents[granny_name][key]=granny.protected[key];
 									}
 								}
 							}
-							while(granny_name=getClassName(__Class__[granny_name].parent));
+							for(var key in granny.public){
+								if(typeof granny.public[key]=="function"){
+									(function(key,granny,instance){
+										instance.parents[granny_name][key]=function(){
+											return granny.public[key].apply(instance,arguments);
+										}
+									})(key,granny,instance);
+								}
+								else{
+									if(typeof granny.public[key]=='object'){
+										var copy=function(){}
+										copy.prototype=granny.public[key];
+										instance.parents[granny_name][key]=(granny.public[key] instanceof Array)?granny.public[key].slice(0):ClassModel.IE?granny.public[key]:new copy();
+									}
+									else{
+										instance.parents[granny_name][key]=parentObject.public[key];
+									}
+								}
+							}
 						}
+						while(typeof __Class__[granny_name].parent=="function");
 					}
 					for(var i=0;i<implements.length;i++){
 						className=getClassName(implements[i]);
