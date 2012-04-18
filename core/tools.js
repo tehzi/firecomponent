@@ -4,57 +4,6 @@
 * @author <a href="mailto:zi.white.drago@gmail.com">zi white</a>
 * @version 0.1.15, $Revision$
 */
-if(!Date.prototype.lastMonthDay){
-	Date.prototype.lastMonthDay=function(month, year){
-		var d=new Date(year ? year : this.getFullYear(), month ? month  : this.getMonth() + 1, 0);
-		return d.getDate();
-	};
-}
-if(!Date.prototype.lastYearDay){
-	Date.prototype.lastYearDay=function(year){
-		return new Date().lastMonthDay(2,year)==28 ? 365 : 366;
-	};
-}
-if(!String.prototype.go){
-	String.prototype.go=function(){
-		location.href=this;
-	}
-}
-if(!Array.prototype.fullMask){
-	Array.prototype.fullMask=function(){
-		var ret=0;
-		for(var i=0;i<this.length;i++){
-			if(typeof this[i]=="number"){
-				ret|=this[i];
-			}
-		}
-		return ret;
-	}
-}
-if(!Array.prototype.forEach){
-	Array.prototype.forEach=function(callback,object){
-		for(var i=0;i<this.length && typeof callback=='function';i++) if(callback.call(typeof object=='object'?object:window,this[i],i,this));
-	}
-}
-if(!Array.prototype.filter){
-	Array.prototype.filter=function(callback,object){
-		var arr=[];
-		for(var i=0;i<this.length && typeof callback=='function';i++){
-			if(callback.call(typeof object=='object'?object:window,this[i],i,this)){
-				arr.push(this[i]);
-			}
-		}
-		return arr;
-	}
-}
-if(!Array.prototype.indexOf){
-	Array.prototype.indexOf=function(elemToSearch,fromIndex){
-		for(fromIndex=(fromIndex?fromIndex<0?Math.max(0,this.length+fromIndex):fromIndex:0);fromIndex<this.length;fromIndex++){
-			if(fromIndex in this && this[fromIndex]===elemToSearch) return fromIndex;
-		}
-		return -1;
-	}
-}
 var tools={};
 Class({
 	name:"browser",
