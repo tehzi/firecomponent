@@ -4,7 +4,7 @@
 * In programm used dojo hack  <a href="http://alex.dojotoolkit.org/08/jscript/lettable.html">dojo</a>.
 * Testing in ie6+, opera 9.5+, google chrome, safari, android browser, firefox 3+ and some khtml and webkit browser.
 * @author <a href="mailto:zi.white.drago@gmail.com">zi white</a>
-* @version 0.1.21
+* @version 0.1.22
 */
 var Class;
 function getClassName(Class){
@@ -18,6 +18,57 @@ function getClassName(Class){
 	}
 }
 (function(){
+	if(!Date.prototype.lastMonthDay){
+	Date.prototype.lastMonthDay=function(month, year){
+		var d=new Date(year ? year : this.getFullYear(), month ? month  : this.getMonth() + 1, 0);
+		return d.getDate();
+		};
+	}
+	if(!Date.prototype.lastYearDay){
+		Date.prototype.lastYearDay=function(year){
+			return new Date().lastMonthDay(2,year)==28 ? 365 : 366;
+		};
+	}
+	if(!String.prototype.go){
+		String.prototype.go=function(){
+			location.href=this;
+		}
+	}
+	if(!Array.prototype.fullMask){
+		Array.prototype.fullMask=function(){
+			var ret=0;
+			for(var i=0;i<this.length;i++){
+				if(typeof this[i]=="number"){
+					ret|=this[i];
+				}
+			}
+			return ret;
+		}
+	}
+	if(!Array.prototype.forEach){
+		Array.prototype.forEach=function(callback,object){
+			for(var i=0;i<this.length && typeof callback=='function';i++) if(callback.call(typeof object=='object'?object:window,this[i],i,this));
+		}
+	}
+	if(!Array.prototype.filter){
+		Array.prototype.filter=function(callback,object){
+			var arr=[];
+			for(var i=0;i<this.length && typeof callback=='function';i++){
+				if(callback.call(typeof object=='object'?object:window,this[i],i,this)){
+					arr.push(this[i]);
+				}
+			}
+			return arr;
+		}
+	}
+	if(!Array.prototype.indexOf){
+		Array.prototype.indexOf=function(elemToSearch,fromIndex){
+			for(fromIndex=(fromIndex?fromIndex<0?Math.max(0,this.length+fromIndex):fromIndex:0);fromIndex<this.length;fromIndex++){
+				if(fromIndex in this && this[fromIndex]===elemToSearch) return fromIndex;
+			}
+			return -1;
+		}
+	}
 	try{
 		var __Class__={
 			error:[],
@@ -372,7 +423,7 @@ function getClassName(Class){
 									})(key,parentObject,instance);
 								}
 								else{
-									if(typeof parentObject.protected[key]=='object'){
+									if(parentObject.protected[key]!==null && [(new Object).constructor,(new Array).constructor].indexOf(parentObject.protected[key].constructor)>-1){
 										var copy=function(){}
 										copy.prototype=parentObject.protected[key];
 										instance.parent[key]=(parentObject.protected[key] instanceof Array)?parentObject.protected[key].slice(0):ClassModel.IE?parentObject.protected[key]:new copy();
@@ -391,7 +442,7 @@ function getClassName(Class){
 									})(key,parentObject,instance);
 								}
 								else{
-									if(typeof parentObject.public[key]=='object'){
+									if(parentObject.public[key]!==null && [(new Object).constructor,(new Array).constructor].indexOf(parentObject.public[key].constructor)>-1){
 										var copy=function(){}
 										copy.prototype=parentObject.public[key];
 										instance.parent[key]=(parentObject.public[key] instanceof Array)?parentObject.public[key].slice(0):ClassModel.IE?parentObject.public[key]:new copy();
@@ -439,7 +490,7 @@ function getClassName(Class){
 													}
 												}
 												else{
-													if(typeof parentObject.protected[key]=='object'){
+													if(parentObject.protected[key]!==null && [(new Object).constructor,(new Array).constructor].indexOf(parentObject.protected[key].constructor)>-1){
 														var copy=function(){}
 														copy.prototype=parentObject.protected[key];
 														instance[key]=(parentObject.protected[key] instanceof Array)?parentObject.protected[key].slice(0):ClassModel.IE?parentObject.protected[key]:new copy();
@@ -534,7 +585,7 @@ function getClassName(Class){
 									})(key,granny,instance);
 								}
 								else{
-									if(typeof granny.protected[key]=='object'){
+									if(granny.protected[key]!==null && [(new Object).constructor,(new Array).constructor].indexOf(granny.protected[key].constructor)>-1){
 										var copy=function(){}
 										copy.prototype=granny.protected[key];
 										instance.parents[granny_name][key]=(granny.protected[key] instanceof Array)?granny.protected[key].slice(0):ClassModel.IE?granny.protected[key]:new copy();
@@ -553,7 +604,7 @@ function getClassName(Class){
 									})(key,granny,instance);
 								}
 								else{
-									if(typeof granny.public[key]=='object'){
+									if(granny.public[key]!==null && [(new Object).constructor,(new Array).constructor].indexOf(granny.public[key].constructor)>-1){
 										var copy=function(){}
 										copy.prototype=granny.public[key];
 										instance.parents[granny_name][key]=(granny.public[key] instanceof Array)?granny.public[key].slice(0):ClassModel.IE?granny.public[key]:new copy();
@@ -585,7 +636,7 @@ function getClassName(Class){
 												}
 											}
 											else{
-												if(typeof parentObject.protected[key]=='object'){
+												if(parentObject.protected[key]!==null && [(new Object).constructor,(new Array).constructor].indexOf(parentObject.protected[key].constructor)>-1){
 													var copy=function(){}
 													copy.prototype=parentObject.protected[key];
 													instance[key]=(parentObject.protected[key] instanceof Array)?parentObject.protected[key].slice(0):ClassModel.IE?parentObject.protected[key]:new copy();
@@ -675,7 +726,8 @@ function getClassName(Class){
 							})(private[key],instance);
 						}
 						else{
-							if(typeof private[key]=='object'){
+							
+							if(private[key]!==null && [(new Object).constructor,(new Array).constructor].indexOf(private[key].constructor)>-1){
 								var copy=function(){}
 								copy.prototype=private[key];
 								instance[key]=(private[key] instanceof Array)?private[key].slice(0):ClassModel.IE?private[key]:new copy();
@@ -694,7 +746,7 @@ function getClassName(Class){
 							})(protected[key],instance);
 						}
 						else{
-							if(typeof protected[key]=='object'){
+							if(protected[key]!==null && [(new Object).constructor,(new Array).constructor].indexOf(protected[key].constructor)>-1){
 								var copy=function(){}
 								copy.prototype=protected[key];
 								instance[key]=(protected[key] instanceof Array)?protected[key].slice(0):ClassModel.IE?protected[key]:new copy();

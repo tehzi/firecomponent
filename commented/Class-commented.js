@@ -4,10 +4,77 @@
 * In programm used dojo hack  <a href="http://alex.dojotoolkit.org/08/jscript/lettable.html">dojo</a>.
 * Testing in ie6+, opera 9.5+, google chrome, safari, android browser, firefox 3+ and some khtml and webkit browser.
 * @author <a href="mailto:zi.white.drago@gmail.com">zi white</a>
-* @version 0.1.21
+* @version 0.1.22
 */
 var Class;
+/**
+* @param {Mixed} Class Ссылка на класс
+* @returns {String}
+* @description
+* Функция возвращает строку с названием класса
+*/
+function getClassName(Class){
+	if(typeof Class=="function"){
+		var name=new Class("@!!").typeString().match(/^\[(?:class|interface)\s([a-z0-9_]+)\]$/i);
+		if(name[1]) return name[1];
+	}
+	if(typeof Class=="object"){
+		var name=Class.typeString().match(/^\[(?:class|interface)\s([a-z0-9_]+)\]$/i);
+		if(name[1]) return name[1];
+	}
+}
 (function(){
+	if(!Date.prototype.lastMonthDay){
+	Date.prototype.lastMonthDay=function(month, year){
+		var d=new Date(year ? year : this.getFullYear(), month ? month  : this.getMonth() + 1, 0);
+		return d.getDate();
+		};
+	}
+	if(!Date.prototype.lastYearDay){
+		Date.prototype.lastYearDay=function(year){
+			return new Date().lastMonthDay(2,year)==28 ? 365 : 366;
+		};
+	}
+	if(!String.prototype.go){
+		String.prototype.go=function(){
+			location.href=this;
+		}
+	}
+	if(!Array.prototype.fullMask){
+		Array.prototype.fullMask=function(){
+			var ret=0;
+			for(var i=0;i<this.length;i++){
+				if(typeof this[i]=="number"){
+					ret|=this[i];
+				}
+			}
+			return ret;
+		}
+	}
+	if(!Array.prototype.forEach){
+		Array.prototype.forEach=function(callback,object){
+			for(var i=0;i<this.length && typeof callback=='function';i++) if(callback.call(typeof object=='object'?object:window,this[i],i,this));
+		}
+	}
+	if(!Array.prototype.filter){
+		Array.prototype.filter=function(callback,object){
+			var arr=[];
+			for(var i=0;i<this.length && typeof callback=='function';i++){
+				if(callback.call(typeof object=='object'?object:window,this[i],i,this)){
+					arr.push(this[i]);
+				}
+			}
+			return arr;
+		}
+	}
+	if(!Array.prototype.indexOf){
+		Array.prototype.indexOf=function(elemToSearch,fromIndex){
+			for(fromIndex=(fromIndex?fromIndex<0?Math.max(0,this.length+fromIndex):fromIndex:0);fromIndex<this.length;fromIndex++){
+				if(fromIndex in this && this[fromIndex]===elemToSearch) return fromIndex;
+			}
+			return -1;
+		}
+	}
 	try{
 		/**
 		* @namespace
@@ -215,22 +282,6 @@ var Class;
 			var ieFix={};
 		}
 		/**
-		* @param {Mixed} Class Ссылка на класс
-		* @returns {String}
-		* @description
-		* Функция возвращает строку с названием класса
-		*/
-		function getClassName(Class){
-			if(typeof Class=="function"){
-				var name=new Class("@!!").typeString().match(/^\[(?:class|interface)\s([a-z0-9_]+)\]$/i);
-				if(name[1]) return name[1];
-			}
-			if(typeof Class=="object"){
-				var name=Class.typeString().match(/^\[(?:class|interface)\s([a-z0-9_]+)\]$/i);
-				if(name[1]) return name[1];
-			}
-		}
-		/**
 		* @class Это плагин для создания классического ООП в jquery
 		* @param {Object} object информация о методах и свойствах класса
 		* @throws <b>Exception</b> 0 Отсутствует или неверное имя класса
@@ -304,6 +355,7 @@ var Class;
 			* <br/> Набор публичных свойств и методов нового класса
 			*/
 			var  public={};
+			var public={};
 			/**
 			* @default <i>new Object()</i>
 			* @description
@@ -311,7 +363,7 @@ var Class;
 			* <br/><b>Присутствие для нового класса:</b> <i>Необязательное</i>
 			* <br/> Набор защищенных свойств и методов нового класса
 			*/
-			var  protected={};
+			var protected={};
 			/**
 			* @default <i>new Object()</i>
 			* @description
@@ -319,7 +371,7 @@ var Class;
 			* <br/><b>Присутствие для нового класса:</b> <i>Необязательное</i>
 			* <br/> Набор приватных свойств и методов нового класса
 			*/
-			var  private={};
+			var private={};
 			/**
 			* @default <i>class</i>
 			* @description
@@ -328,7 +380,7 @@ var Class;
 			* <br/><b>Возможные значения:</b> <i>class</i>, <i>interface</i>
 			* <br/>Тип создаваемого объекта класс или интерфейс
 			*/
-			var  type="class";
+			var type="class";
 			/**
 			* @default <i>new Object()</i>
 			* @description
@@ -350,7 +402,7 @@ var Class;
 			* <br/><b>Присутствие для нового класса:</b> <i>Обязательное</i>
 			* <br/>Название класса, значение проверяется по regexp-маске /[a-z0-9_]/i
 			*/
-			var  name;
+			var name;
 			/**
 			* <br/><b>Тип данных:</b> <i>String</i>
 			* <br/><b>Присутствие для нового класса:</b> <i>Необязательное</i>
@@ -633,7 +685,7 @@ var Class;
 									})(key,parentObject,instance);
 								}
 								else{
-									if(typeof parentObject.protected[key]=='object'){
+									if(parentObject.protected[key]!==null && [(new Object).constructor,(new Array).constructor].indexOf(parentObject.protected[key].constructor)>-1){
 										var copy=function(){}
 										copy.prototype=parentObject.protected[key];
 										instance.parent[key]=(parentObject.protected[key] instanceof Array)?parentObject.protected[key].slice(0):ClassModel.IE?parentObject.protected[key]:new copy();
@@ -652,7 +704,7 @@ var Class;
 									})(key,parentObject,instance);
 								}
 								else{
-									if(typeof parentObject.public[key]=='object'){
+									if(parentObject.public[key]!==null && [(new Object).constructor,(new Array).constructor].indexOf(parentObject.public[key].constructor)>-1){
 										var copy=function(){}
 										copy.prototype=parentObject.public[key];
 										instance.parent[key]=(parentObject.public[key] instanceof Array)?parentObject.public[key].slice(0):ClassModel.IE?parentObject.public[key]:new copy();
@@ -700,7 +752,7 @@ var Class;
 													}
 												}
 												else{
-													if(typeof parentObject.protected[key]=='object'){
+													if(parentObject.protected[key]!==null && [(new Object).constructor,(new Array).constructor].indexOf(parentObject.protected[key].constructor)>-1){
 														var copy=function(){}
 														copy.prototype=parentObject.protected[key];
 														instance[key]=(parentObject.protected[key] instanceof Array)?parentObject.protected[key].slice(0):ClassModel.IE?parentObject.protected[key]:new copy();
@@ -781,53 +833,51 @@ var Class;
 								}
 							}
 						}
-						if(typeof __Class__[className].parent=="function"){
-							var granny_name=getClassName(__Class__[className].parent);
-							instance.parents={};
-							do{
-								var granny=__Class__[granny_name];
-								instance.parents[granny_name]={};
-								for(var key in granny.protected){
-									if(typeof granny.protected[key]=="function"){
-										(function(key,granny,instance){
-											instance.parents[granny_name][key]=function(){
-												return granny.protected[key].apply(instance,arguments);
-											}
-										})(key,granny,instance);
-									}
-									else{
-										if(typeof granny.protected[key]=='object'){
-											var copy=function(){}
-											copy.prototype=granny.protected[key];
-											instance.parents[granny_name][key]=(granny.protected[key] instanceof Array)?granny.protected[key].slice(0):ClassModel.IE?granny.protected[key]:new copy();
+						instance.parents={};
+						do{
+							var granny_name=granny_name?getClassName(__Class__[granny_name].parent):className;
+							var granny=__Class__[granny_name];
+							instance.parents[granny_name]={};
+							for(var key in granny.protected){
+								if(typeof granny.protected[key]=="function"){
+									(function(key,granny,instance){
+										instance.parents[granny_name][key]=function(){
+											return granny.protected[key].apply(instance,arguments);
 										}
-										else{
-											instance.parents[granny_name][key]=granny.protected[key];
-										}
-									}
+									})(key,granny,instance);
 								}
-								for(var key in granny.public){
-									if(typeof granny.public[key]=="function"){
-										(function(key,granny,instance){
-											instance.parents[granny_name][key]=function(){
-												return granny.public[key].apply(instance,arguments);
-											}
-										})(key,granny,instance);
+								else{
+									if(granny.protected[key]!==null && [(new Object).constructor,(new Array).constructor].indexOf(granny.protected[key].constructor)>-1){
+										var copy=function(){}
+										copy.prototype=granny.protected[key];
+										instance.parents[granny_name][key]=(granny.protected[key] instanceof Array)?granny.protected[key].slice(0):ClassModel.IE?granny.protected[key]:new copy();
 									}
 									else{
-										if(typeof granny.public[key]=='object'){
-											var copy=function(){}
-											copy.prototype=granny.public[key];
-											instance.parents[granny_name][key]=(granny.public[key] instanceof Array)?granny.public[key].slice(0):ClassModel.IE?granny.public[key]:new copy();
-										}
-										else{
-											instance.parents[granny_name][key]=parentObject.public[key];
-										}
+										instance.parents[granny_name][key]=granny.protected[key];
 									}
 								}
 							}
-							while(granny_name=getClassName(__Class__[granny_name].parent));
+							for(var key in granny.public){
+								if(typeof granny.public[key]=="function"){
+									(function(key,granny,instance){
+										instance.parents[granny_name][key]=function(){
+											return granny.public[key].apply(instance,arguments);
+										}
+									})(key,granny,instance);
+								}
+								else{
+									if(granny.public[key]!==null && [(new Object).constructor,(new Array).constructor].indexOf(granny.public[key].constructor)>-1){
+										var copy=function(){}
+										copy.prototype=granny.public[key];
+										instance.parents[granny_name][key]=(granny.public[key] instanceof Array)?granny.public[key].slice(0):ClassModel.IE?granny.public[key]:new copy();
+									}
+									else{
+										instance.parents[granny_name][key]=parentObject.public[key];
+									}
+								}
+							}
 						}
+						while(typeof __Class__[granny_name].parent=="function");
 					}
 					/**
 					* @ignore
@@ -852,7 +902,7 @@ var Class;
 												}
 											}
 											else{
-												if(typeof parentObject.protected[key]=='object'){
+												if(parentObject.protected[key]!==null && [(new Object).constructor,(new Array).constructor].indexOf(parentObject.protected[key].constructor)>-1){
 													var copy=function(){}
 													copy.prototype=parentObject.protected[key];
 													instance[key]=(parentObject.protected[key] instanceof Array)?parentObject.protected[key].slice(0):ClassModel.IE?parentObject.protected[key]:new copy();
@@ -943,7 +993,8 @@ var Class;
 							})(private[key],instance);
 						}
 						else{
-							if(typeof private[key]=='object'){
+							
+							if(private[key]!==null && [(new Object).constructor,(new Array).constructor].indexOf(private[key].constructor)>-1){
 								var copy=function(){}
 								copy.prototype=private[key];
 								instance[key]=(private[key] instanceof Array)?private[key].slice(0):ClassModel.IE?private[key]:new copy();
@@ -962,7 +1013,7 @@ var Class;
 							})(protected[key],instance);
 						}
 						else{
-							if(typeof protected[key]=='object'){
+							if(protected[key]!==null && [(new Object).constructor,(new Array).constructor].indexOf(protected[key].constructor)>-1){
 								var copy=function(){}
 								copy.prototype=protected[key];
 								instance[key]=(protected[key] instanceof Array)?protected[key].slice(0):ClassModel.IE?protected[key]:new copy();
