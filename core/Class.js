@@ -4,7 +4,7 @@
 * In programm used dojo hack  <a href="http://alex.dojotoolkit.org/08/jscript/lettable.html">dojo</a>.
 * Testing in ie6+, opera 9.5+, google chrome, safari, android browser, firefox 3+ and some khtml and webkit browser.
 * @author <a href="mailto:zi.white.drago@gmail.com">zi white</a>
-* @version 0.1.22
+* @version 0.1.23
 */
 var Class;
 function getClassName(Class){
@@ -12,7 +12,7 @@ function getClassName(Class){
 		var name=new Class("@!!").typeString().match(/^\[(?:class|interface)\s([a-z0-9_]+)\]$/i);
 		if(name[1]) return name[1];
 	}
-	if(typeof Class=="object"){
+	if(typeof Class=="object" && Class.typeString){
 		var name=Class.typeString().match(/^\[(?:class|interface)\s([a-z0-9_]+)\]$/i);
 		if(name[1]) return name[1];
 	}
@@ -872,9 +872,11 @@ function getClassName(Class){
 						_constructor.apply(instance,arguments);
 					}
 					if(ClassModel.IE){
+						instance.public=IEprototype;
 						return IEprototype;
 					}
 					if(ClassModel.OTHER){
+						instance.public=OTHERprototype;
 						return OTHERprototype;
 					}
 				}
