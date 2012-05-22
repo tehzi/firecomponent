@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="ru">
+	<head>
+		<title>[Animation example]</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="copyright" href="http://www.gnu.org/copyleft/fdl.html" />
+		<meta name="author" content="zi, 2012" />
+		<style type="text/css">
+@import "../css/style.css";
+		</style>
+		<script type="text/javascript" src="../jquery/jquery.js"></script>
+		<script type="text/javascript" src="../core/Class.js"></script>
+		<script type="text/javascript" src="../core/tools.js"></script>
+		<script type="text/javascript" src="../core/motion.js"></script>
+	</head>
+	<body>
+	<style>
+		.animatable {
+			width: 200px; 
+			height: 200px; 
+			background-color: red; 
+			border: 1px solid black; 
+			position: relative;
+			float: left;
+		}
+	</style>
+		<div id="examples">
+		<h2>Простая демонстрация анимации одного свойства</h2>
+			<div class="animatable" style="">
+			<p>Some animatable content</p>			
+			</div>
+			<div class="animatable" style="">
+			<p>Some animatable content</p>			
+			</div>
+		</div>
+			<button onclick="A.start('heightFirstHalf')">first to .5</button>
+			<button onclick="A.start('heightSecondHalf')">second to .5</button>
+			<button onclick="A.start('heightAllHalf')">all to .5</button><br>
+			<button onclick="A.start('heightFirstFull')">first to 1</button>
+			<button onclick="A.start('heightSecondFull')">second to 1</button>
+			<button onclick="A.start('heightAllFull')">all to 1</button>
+		
+		<script type="text/javascript">
+//<![CDATA[
+	var A = new motion.Animator();
+	A.add($('.animatable'), {
+		property : 'height',
+		to : [100, 200],
+		name : ['heightAllHalf', 'heightAllFull']
+	});
+	A.add($('.animatable').first(), {
+		property : 'height',
+		to : [100, 200],
+		name : ['heightFirstHalf', 'heightFirstFull']
+	});
+	A.add($('.animatable').last(), {
+		property : 'height',
+		to : [100, 200],
+		name : ['heightSecondHalf', 'heightSecondFull']
+	})
+//]]>
+		</script>
+	</body>
+</html>

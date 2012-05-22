@@ -1,0 +1,1427 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="generator" content="JsDoc Toolkit" />
+		
+		<title>JsDoc Reference - tools.browser</title>
+
+		<style type="text/css">
+			/* default.css */
+body
+{
+	font: 12px "Lucida Grande", Tahoma, Arial, Helvetica, sans-serif;
+	width: 800px;
+}
+
+.header
+{
+	clear: both;
+	background-color: #ccc;
+	padding: 8px;
+}
+
+h1
+{
+	font-size: 150%;
+	font-weight: bold;
+	padding: 0;
+	margin: 1em 0 0 .3em;
+}
+
+hr
+{
+	border: none 0;
+	border-top: 1px solid #7F8FB1;
+	height: 1px;
+}
+
+pre.code
+{
+	display: block;
+	padding: 8px;
+	border: 1px dashed #ccc;
+}
+
+#index
+{
+	margin-top: 24px;
+	float: left;
+	width: 160px;
+	position: absolute;
+	left: 8px;
+	background-color: #F3F3F3;
+	padding: 8px;
+}
+
+#content
+{
+	margin-left: 190px;
+	width: 600px;
+}
+
+.classList
+{
+	list-style-type: none;
+	padding: 0;
+	margin: 0 0 0 8px;
+	font-family: arial, sans-serif;
+	font-size: 1em;
+	overflow: auto;
+}
+
+.classList li
+{
+	padding: 0;
+	margin: 0 0 8px 0;
+}
+
+.summaryTable { width: 100%; }
+
+h1.classTitle
+{
+	font-size:170%;
+	line-height:130%;
+}
+
+h2 { font-size: 110%; }
+caption, div.sectionTitle
+{
+	background-color: #7F8FB1;
+	color: #fff;
+	font-size:130%;
+	text-align: left;
+	padding: 2px 6px 2px 6px;
+	border: 1px #7F8FB1 solid;
+}
+
+div.sectionTitle { margin-bottom: 8px; }
+.summaryTable thead { display: none; }
+
+.summaryTable td
+{
+	vertical-align: top;
+	padding: 4px;
+	border-bottom: 1px #7F8FB1 solid;
+	border-right: 1px #7F8FB1 solid;
+}
+
+/*col#summaryAttributes {}*/
+.summaryTable td.attributes
+{
+	border-left: 1px #7F8FB1 solid;
+	width: 140px;
+	text-align: right;
+}
+
+td.attributes, .fixedFont
+{
+	line-height: 15px;
+	color: #002EBE;
+	font-family: "Courier New",Courier,monospace;
+	font-size: 13px;
+}
+
+.summaryTable td.nameDescription
+{
+	text-align: left;
+	font-size: 13px;
+	line-height: 15px;
+}
+
+.summaryTable td.nameDescription, .description
+{
+	line-height: 15px;
+	padding: 4px;
+	padding-left: 4px;
+}
+
+.summaryTable { margin-bottom: 8px; }
+
+ul.inheritsList
+{
+	list-style: square;
+	margin-left: 20px;
+	padding-left: 0;
+}
+
+.detailList {
+	margin-left: 20px; 
+	line-height: 15px;
+}
+.detailList dt { margin-left: 20px; }
+
+.detailList .heading
+{
+	font-weight: bold;
+	padding-bottom: 6px;
+	margin-left: 0;
+}
+
+.light, td.attributes, .light a:link, .light a:visited
+{
+	color: #777;
+	font-style: italic;
+}
+
+.fineprint
+{
+	text-align: right;
+	font-size: 10px;
+}
+		</style>
+	</head>
+
+	<body>
+<!-- ============================== header ================================= -->	
+		<!-- begin static/header.html -->
+		<div id="header">
+</div>
+		<!-- end static/header.html -->
+
+<!-- ============================== classes index ============================ -->
+		<div id="index">
+			<!-- begin publish.classesIndex -->
+			<div align="center"><a href="../index.html">Class Index</a>
+| <a href="../files.html">File Index</a></div>
+<hr />
+<h2>Classes</h2>
+<ul class="classList">
+	
+	<li><a href="../symbols/__Class__.html">__Class__</a></li>
+	
+	<li><i><a href="../symbols/_global_.html">_global_</a></i></li>
+	
+	<li><a href="../symbols/Class.html">Class</a></li>
+	
+	<li><a href="../symbols/ClassModel.html">ClassModel</a></li>
+	
+	<li><a href="../symbols/ieFix.html">ieFix</a></li>
+	
+	<li><a href="../symbols/tools.html">tools</a></li>
+	
+	<li><a href="../symbols/tools.browser.html">tools.browser</a></li>
+	
+	<li><a href="../symbols/tools.CookieManager.html">tools.CookieManager</a></li>
+	
+	<li><a href="../symbols/tools.eventDispatcher.html">tools.eventDispatcher</a></li>
+	
+	<li><a href="../symbols/tools.Flash.html">tools.Flash</a></li>
+	
+	<li><a href="../symbols/tools.Platform.html">tools.Platform</a></li>
+	
+	<li><a href="../symbols/tools.Timer.html">tools.Timer</a></li>
+	
+	<li><a href="../symbols/tools.Url.html">tools.Url</a></li>
+	
+</ul>
+<hr />
+			<!-- end publish.classesIndex -->
+		</div>
+		
+		<div id="content">
+<!-- ============================== class title ============================ -->
+			<h1 class="classTitle">
+				
+				Class tools.browser
+			</h1>
+
+<!-- ============================== class summary ========================== -->			
+			<p class="description">
+				
+				
+			
+				Интерфейс, предоставляющий информацию для работы с текущей версией браузера
+				
+				
+					<br /><i>Defined in: </i> <a href="../symbols/src/_home_www_docs_zinc.lo_tools_firecomponent_trunk_commented_tools-commented.js.html">tools-commented.js</a>.
+				
+			</p>
+
+<!-- ============================== constructor summary ==================== -->			
+			
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class tools.browser.">
+				<caption>Class Summary</caption>
+				<thead>
+					<tr>
+						<th scope="col">Constructor Attributes</th>
+						<th scope="col">Constructor Name and Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="attributes">&nbsp;</td>
+						<td class="nameDescription" >
+							<div class="fixedFont">
+								<b><a href="../symbols/tools.browser.html#constructor">tools.browser</a></b>()
+							</div>
+							<div class="description"></div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+
+<!-- ============================== properties summary ===================== -->
+			
+				
+				
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class tools.browser.">
+					<caption>Field Summary</caption>
+					<thead>
+						<tr>
+							<th scope="col">Field Attributes</th>
+							<th scope="col">Field Name and Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.browser">browser</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/><b>Значение:</b> <i>Another/Firefox/Opera/Safari/Chrome/Internet Explorer</i>
+<br/>Возвращает строку с названием браузера</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.browser_engine">browser_engine</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Возвращает строку с версией браузера</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.browserVersion">browserVersion</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Float</i>
+<br/>Возвращает число с точкой аналогичное версии браузера</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.Chrome">Chrome</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Проверяет является ли браузер Chrome'ом</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.constructor">constructor</a></b>
+								</div>
+								<div class="description"><b>Конструктор класса</b> : <i>Да</i></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.currentIEId">currentIEId</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Number</i>
+<br/>Текущий итендификатор ie</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.Firefox">Firefox</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Проверяет является ли браузер Firefox'ом</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.gecko">gecko</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Возвращает true, если движок gecko</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.IE">IE</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Проверяет является ли браузер членом семейства Internet Explorer</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.IE6">IE6</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Проверяет является ли браузер Internet Explorer'ом 6 версии</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.IE6Id">IE6Id</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Number</i>
+<br/>Итендификатор ie6</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.IE7">IE7</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Проверяет является ли браузер Internet Explorer'ом 7 версии</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.IE7Id">IE7Id</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Number</i>
+<br/>Итендификатор ie7</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.IE8">IE8</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Проверяет является ли браузер Internet Explorer'ом 8 версии</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.IE8Id">IE8Id</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Number</i>
+<br/>Итендификатор ie8</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.IE9">IE9</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Проверяет является ли браузер Internet Explorer'ом 9 версии</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.IE9Id">IE9Id</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Number</i>
+<br/>Итендификатор ie9</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.IEMask">IEMask</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Array</i>
+<br/>Число с битами всех поддерживаемых версий интернет эксплорера</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.IEMaskArray">IEMaskArray</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Защищенная</i>
+<br/><b>Тип данных:</b> <i>Array</i> 
+<br/>Массив данных содержащий битовые обозначения браузеров.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.khtml">khtml</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Возвращает true, если движок khtml</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.Opera">Opera</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Проверяет является ли браузер Oper'ой</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.presto">presto</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Возвращает true, если движок presto</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.Safari">Safari</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Проверяет является ли браузер Safari</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.trident">trident</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Возвращает true, если движок trident</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.v">v</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Float</i>
+<br/>Возвращает число с точкой аналогичное версии браузера</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								tools.browser.<b><a href="../symbols/tools.browser.html#.webkit">webkit</a></b>
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Возвращает true, если движок webkit</div>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				
+				
+				
+			
+
+<!-- ============================== methods summary ======================== -->
+			
+				
+				
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class tools.browser.">
+					<caption>Method Summary</caption>
+					<thead>
+						<tr>
+							<th scope="col">Method Attributes</th>
+							<th scope="col">Method Name and Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">tools.browser.<b><a href="../symbols/tools.browser.html#.detect_browser_engine">detect_browser_engine</a></b>()
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Защищенная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Опеределяет движок браузера</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">tools.browser.<b><a href="../symbols/tools.browser.html#.detectIEId">detectIEId</a></b>()
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Защищенная</i>
+<br/><b>Тип данных:</b> <i>Number</i>
+<br/>Определяет id Браузера ie</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">tools.browser.<b><a href="../symbols/tools.browser.html#.intertrigoBrowserVersion">intertrigoBrowserVersion</a></b>()
+								</div>
+								<div class="description"><b>Область видимости</b> : <i>Защищенная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Определяет версию браузера</div>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				
+				
+				
+			
+<!-- ============================== events summary ======================== -->
+			
+
+<!-- ============================== constructor details ==================== -->		
+			
+			<div class="details"><a name="constructor"> </a>
+				<div class="sectionTitle">
+					Class Detail
+				</div>
+				
+				<div class="fixedFont">
+						<b>tools.browser</b>()
+				</div>
+				
+				<div class="description">
+					
+					
+				</div>
+				
+				
+				
+				<pre class="code">	Class({
+		name:"some",
+		implements:[tools.browser],
+		constructor:function(){}
+	});
+	alert(new some().IE)</pre>
+				
+				
+				
+				
+					
+					
+					
+					
+					
+					
+					
+
+			</div>
+			
+
+<!-- ============================== field details ========================== -->		
+			
+				<div class="sectionTitle">
+					Field Detail
+				</div>
+				
+					<a name=".browser"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>browser</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/><b>Значение:</b> <i>Another/Firefox/Opera/Safari/Chrome/Internet Explorer</i>
+<br/>Возвращает строку с названием браузера
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".browser_engine"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>browser_engine</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Возвращает строку с версией браузера
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".browserVersion"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>browserVersion</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Float</i>
+<br/>Возвращает число с точкой аналогичное версии браузера
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".Chrome"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>Chrome</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Проверяет является ли браузер Chrome'ом
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".constructor"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>constructor</b>
+					
+					</div>
+					<div class="description">
+						<b>Конструктор класса</b> : <i>Да</i>
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".currentIEId"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>currentIEId</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Number</i>
+<br/>Текущий итендификатор ie
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".Firefox"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>Firefox</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Проверяет является ли браузер Firefox'ом
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".gecko"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>gecko</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Возвращает true, если движок gecko
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".IE"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>IE</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Проверяет является ли браузер членом семейства Internet Explorer
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".IE6"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>IE6</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Проверяет является ли браузер Internet Explorer'ом 6 версии
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".IE6Id"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>IE6Id</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Number</i>
+<br/>Итендификатор ie6
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".IE7"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>IE7</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Проверяет является ли браузер Internet Explorer'ом 7 версии
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".IE7Id"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>IE7Id</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Number</i>
+<br/>Итендификатор ie7
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".IE8"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>IE8</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Проверяет является ли браузер Internet Explorer'ом 8 версии
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".IE8Id"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>IE8Id</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Number</i>
+<br/>Итендификатор ie8
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".IE9"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>IE9</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Проверяет является ли браузер Internet Explorer'ом 9 версии
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".IE9Id"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>IE9Id</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Number</i>
+<br/>Итендификатор ie9
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".IEMask"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>IEMask</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Array</i>
+<br/>Число с битами всех поддерживаемых версий интернет эксплорера
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".IEMaskArray"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>IEMaskArray</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Защищенная</i>
+<br/><b>Тип данных:</b> <i>Array</i> 
+<br/>Массив данных содержащий битовые обозначения браузеров.
+Первый эллемент ie6, второй ie7 и тд.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".khtml"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>khtml</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Возвращает true, если движок khtml
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".Opera"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>Opera</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Проверяет является ли браузер Oper'ой
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".presto"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>presto</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Возвращает true, если движок presto
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".Safari"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>Safari</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Проверяет является ли браузер Safari
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".trident"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>trident</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Возвращает true, если движок trident
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".v"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>v</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Float</i>
+<br/>Возвращает число с точкой аналогичное версии браузера
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".webkit"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">tools.browser.</span><b>webkit</b>
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Публичная</i>
+<br/><b>Тип данных:</b> <i>Boolean</i>
+<br/>Возвращает true, если движок webkit
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					
+				
+			
+
+<!-- ============================== method details ========================= -->		
+			
+				<div class="sectionTitle">
+					Method Detail
+				</div>
+				
+					<a name=".detect_browser_engine"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{String}</span>
+					<span class="light">tools.browser.</span><b>detect_browser_engine</b>()
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Защищенная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Опеределяет движок браузера
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".detectIEId"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Number}</span>
+					<span class="light">tools.browser.</span><b>detectIEId</b>()
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Защищенная</i>
+<br/><b>Тип данных:</b> <i>Number</i>
+<br/>Определяет id Браузера ie
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".intertrigoBrowserVersion"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{float}</span>
+					<span class="light">tools.browser.</span><b>intertrigoBrowserVersion</b>()
+					
+					</div>
+					<div class="description">
+						<b>Область видимости</b> : <i>Защищенная</i>
+<br/><b>Тип данных:</b> <i>String</i>
+<br/>Определяет версию браузера
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					
+				
+			
+			
+<!-- ============================== event details ========================= -->		
+			
+			
+			<hr />
+		</div>
+
+		
+<!-- ============================== footer ================================= -->
+		<div class="fineprint" style="clear:both">
+			
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Mon Aug 22 2011 00:28:55 GMT+0400 (MSD)
+		</div>
+	</body>
+</html>

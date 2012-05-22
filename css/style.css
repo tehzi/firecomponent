@@ -1,0 +1,28 @@
+html,body{
+	padding:0;
+	margin:0;
+}
+
+div.fireWS{
+	border : 1px solid #eee;
+}
+
+div.firePanel{
+	border-bottom : 1px solid #eee;
+}
+
+div.fireMode{
+	border-top : 1px solid #eee;
+}
+
+iframe{
+	padding : 0px;
+	margin : 0px;
+}
+
+textarea{
+	position:absolute;
+	bottom:0;
+	width:99%;
+	height:300px;
+}

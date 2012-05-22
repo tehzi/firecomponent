@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="ru">
+	<head>
+		<title>[Class example]</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="copyright" href="http://www.gnu.org/copyleft/fdl.html" />
+		<meta name="author" content="zi, 2012" />
+		<style type="text/css">
+@import "../../css/style.css";
+		</style>
+		<script type="text/javascript" src="../../jquery/jquery.js"></script>
+		<script type="text/javascript" src="../../core/Class.js"></script>
+<!-- 		<script type="text/javascript" src="../../commented/Class-commented.js"></script> -->
+		<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function(){
+	Class({/* browser */
+		type:"interface",
+		name:"browser",
+		public:{
+			firefox:function(){
+				$("#examples").html($("#examples").html()+"I'm method from interface"+"<br/>");
+				return "firefox";
+			},
+			publicProperty:123
+		}
+	});
+	var Main=Class({/* A */
+		name:"A",
+		implements:[browser],
+		constructor:function(a,b){
+			$("#examples").html($("#examples").html()+"I'm A and my constructor and my arguments is "+a+", "+b+"<br/>");
+			$("#examples").click(this.A_method);
+		},
+		public:{
+			var_test:"1",
+			test:function(){
+				this.var_test="A";
+			},
+			A_method:function(e){
+				$("#examples").html($("#examples").html()+"My this is this of class A and this.publicProperty is "+this.publicProperty+"<br/>");
+				return "123";
+			},
+			publicProperty:1
+		},
+		protected:{
+			A_method_protected:function(){
+				$("#examples").html($("#examples").html()+"I'm protected method.");
+			},
+			date:new Date(),
+			std:{}
+		},
+		get:{
+			a:function(key){
+				return key;
+			}
+		},
+		set:{
+			b:function(key,val){
+				$("#examples").html($("#examples").html()+" "+key+":"+val+"<br/>");
+			}
+		}
+	});
+	Class({/* B */
+		name:"B",
+		parent:A,
+// 		implements:[browser],
+		constructor:function(a,b){
+			this.Super(a,b);
+		},
+		public:{
+			var_test:"1",
+			test:function(){
+				this.parents.A.test();
+				$("#examples").html($("#examples").html()+"Extends property from A: "+this.var_test+"<br/>");
+			}
+		}
+	});
+	Class({/* C */
+		name:"C",
+		parent:B,
+		constructor:function(){
+			this.Super();
+		},
+		public:{
+			publicProperty:2,
+			name:"C",
+			var_test:"1"
+		}
+	});
+	//Создаём класс A
+	var a=new A("123","567");
+	$("#examples").html($("#examples").html()+"A get method from A: "+a.a+"<br/>");
+	a.b=567;
+	//Создаём класс B
+	var b=new B("1","2");
+	$("#examples").html($("#examples").html()+"Extends property from A: "+b.publicProperty+"<br/>");
+	new Main("8","9").b=456;
+	//Создаём класс С
+	var c=new C();
+	c.A_method();
+	c.publicProperty=6;
+	c.test();
+	console.log(c.var_test)
+	var clone_instance=c.getClone();
+});
+//]]>
+		</script>
+	</head>
+	<body>
+		<div id="examples">&nbsp;</div>
+				<textarea>
+	Class({/* browser */
+		type:"interface",
+		name:"browser",
+		public:{
+			firefox:function(){
+				$("#examples").html($("#examples").html()+"I'm method from interface"+"<br/>");
+				return "firefox";
+			},
+			publicProperty:123
+		}
+	});
+	var Main=Class({/* A */
+		name:"A",
+		implements:[browser],
+		constructor:function(a,b){
+			$("#examples").html($("#examples").html()+"I'm A and my constructor and my arguments is "+a+", "+b+"<br/>");
+			$("body").click(this.A_method);
+		},
+		public:{
+			A_method:function(e){
+				$("#examples").html($("#examples").html()+"My this is this of class A and this.publicProperty is "+this.publicProperty+"<br/>");
+				return "123";
+			},
+			publicProperty:1
+		},
+		protected:{
+			A_method_protected:function(){
+				$("#examples").html($("#examples").html()+"I'm protected method.");
+			}
+		},
+		get:{
+			a:function(key){
+				return key;
+			}
+		},
+		set:{
+			b:function(key,val){
+				$("#examples").html($("#examples").html()+" "+key+":"+val+"<br/>");
+			}
+		}
+	});
+	Class({/* B */
+		name:"B",
+		parent:A,
+// 		implements:[browser],
+		constructor:function(a,b){
+			this.Super(a,b);
+		}
+	});
+	Class({/* C */
+		name:"C",
+		parent:B,
+		constructor:function(){
+			this.Super();
+		},
+		public:{
+			publicProperty:2,
+			name:"C"
+		}
+	});
+	//Создаём класс A
+	var a=new A("123","567");
+	$("#examples").html($("#examples").html()+"A get method from A: "+a.a+"<br/>");
+	a.b=567;
+	//Создаём класс B
+	var b=new B("1","2");
+	$("#examples").html($("#examples").html()+"Extends property from A: "+b.publicProperty+"<br/>");
+	new Main("8","9").b=456;
+	//Создаём класс С
+	var c=new C();
+	c.A_method();
+	c.publicProperty=6;
+	var clone_instance=c.getClone();
+});
+		</textarea>
+	</body>
+</html>

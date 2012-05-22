@@ -7,6 +7,12 @@
 * @version 0.1.22
 */
 var Class;
+/**
+* @param {Mixed} Class Ссылка на класс
+* @returns {String}
+* @description
+* Функция возвращает строку с названием класса
+*/
 function getClassName(Class){
 	if(typeof Class=="function"){
 		var name=new Class("@!!").typeString().match(/^\[(?:class|interface)\s([a-z0-9_]+)\]$/i);
@@ -70,30 +76,112 @@ function getClassName(Class){
 		}
 	}
 	try{
+		/**
+		* @namespace
+		* Информация о содержимом и работе классов
+		* @example
+		* __Class__.имя класса.public.метод();
+		*/
 		var __Class__={
+			/**
+			* @default <i>false</i>
+			* @description
+			* <b>Тип данных:</b> <i>Array</i>
+			* <br/>Массив с ошибками, возникающими при работе с классами
+			*/
 			error:[],
+			/**
+			* @default <i>0</i>
+			* <b>Тип данных:</b> <i>Number</i>
+			* <br/>Номер последнего созданного класса в VBscript
+			*/
 			VBid:0
 		};
+		/**
+		* @namespace
+		* Модель работы классов
+		*/
 		var ClassModel={
+			/**
+			* <b>Тип данных:</b> <i>Boolean</i>
+			* <br/> Работаем в ie
+			*/
 			IE:!!window.ActiveXObject,
+			/**
+			* <b>Тип данных:</b> <i>Boolean</i>
+			* <br/> Работаем в других браузерах
+			*/
 			OTHER:	!!(Object.__defineSetter__ && Object.__defineGetter__)
 		};
+		/**  Объявляем переменные только для IE */
 		if(ClassModel.IE){
+			/**
+			* @namespace
+			* Создание и управление работой ООП модели в ie
+			* @description
+			* Управление VB-классом в javascript
+			* <br/><i>Присутствует только в IE</i>
+			*/
 			var ieFix={
+				/**
+				* @default <i>document.createElement("iframe")</i>
+				* @description
+				* <b>Тип данных:</b> <i>DomNode</i>
+				* <br/> Создаёт новый dom-узел IFRAME
+				*/
 				iframe:document.createElement("iframe"),
+				/**
+				* @default <i>new String()</i>
+				* @description
+				* <br/><b>Тип данных:</b> <i>String</i>
+				* <br/>VBscript-строка
+				*/
 				code:"",
+				/**
+				* @param {String} code  Строка с кодом VBscript
+				* @param {Mixed} isObject При создании объекта в языка VBscript данная
+				* переменная отвечает за создания свойства содержащего объект
+				* @type Object
+				* @description
+				* Возвращает VBscript-объект c возможностью установки и получения
+				* свойств
+				*/
 				evaluate:function(code, isObject){
 					return this.iframe.contentWindow.evaluate(code, !!isObject);
 				},
+				/**
+				* @param {String} code  Строка с кодом VBscript
+				* @type Void
+				* @description
+				* Выполняет строку в области видимости VBscript
+				*/
 				execute:function(code){
 					this.iframe.contentWindow.execute(code);
 				},
+				/**
+				* @param {String} prop Название свойства
+				* @type Void
+				* @description
+				* Добавляет публичное свойство для нового класса
+				*/
 				addProp:function(prop){
 					this.code+="\tPublic "+prop+"\n";
 				},
+				/**
+				* @param {String} prop Название метода
+				* @type Void
+				* @description
+				* Добавляет новый метод.
+				*/
 				addMethod:function(prop){
 					this.code+="\tPublic "+prop+"\n";
 				},
+				/**
+				* @param {String} prop Название Getter'а
+				* @type Void
+				* @description
+				* Добавляет новый Getter.
+				*/
 				addGet:function(prop){
 					this.code+=
 					"\tPublic Property Get "+prop+"\n"+
@@ -108,6 +196,12 @@ function getClassName(Class){
 					"\tEnd Property\n"+
 					"\tPublic get_"+prop+"\n";
 				},
+				/**
+				* @param {String} prop Название Setter'а
+				* @type Void
+				* @description
+				* Добавляет новый Setter.
+				*/
 				addSet:function(prop){
 					this.code+=
 					"\tPublic Property Let "+prop+"(val)\n"+
@@ -118,6 +212,12 @@ function getClassName(Class){
 					"\tEnd Property\n"+
 					"\tPublic set_"+prop+"\n";
 				},
+				/**
+				* @type Void
+				* @param {Number} VBid Номер класса
+				* @description
+				* Создаёт новый класс
+				*/
 				newVBClass:function(VBid){
 					this.execute(
 						"Class Class_"+VBid+"\n"+
@@ -126,9 +226,20 @@ function getClassName(Class){
 					);
 					this.code="";
 				},
+				/**
+				* @type Mixed
+				* @param {Number} VBid Номер класса
+				* @description
+				* Возращает новую копию класса
+				*/
 				newIns:function(VBid){
 					return this.evaluate("New Class_"+VBid,true);
 				},
+				/**
+				* @type Void
+				* @description
+				* Добавляет в область видимости VBscript класс прокси
+				*/
 				addTypeProxy:function(){
 					this.execute(
 						"Class TypeProxy\n"+
@@ -144,6 +255,7 @@ function getClassName(Class){
 					);
 				}
 			};
+			/** Добавляем фрейм в документ */
 			$(ieFix.iframe).hide();
 			$("head").append(ieFix.iframe);
 			ieFix.iframe.contentWindow.document.write(
@@ -156,7 +268,9 @@ function getClassName(Class){
 				"</head><body></body></html>"
 			);
 			ieFix.iframe.contentWindow.document.close();
+			/** Добавляем прокси */
 			ieFix.addTypeProxy();
+			/** Проверяем работает ли вызов функции из области видимости VBscript */
 			try{
 				ieFix.evaluate('true');
 			}
@@ -167,23 +281,155 @@ function getClassName(Class){
 		else{
 			var ieFix={};
 		}
+		/**
+		* @class Это плагин для создания классического ООП в jquery
+		* @param {Object} object информация о методах и свойствах класса
+		* @throws <b>Exception</b> 0 Отсутствует или неверное имя класса
+		* @throws <b>Exception</b> 1 Отсутствует конструктор
+		* @throws <b>Exception</b> 2 Браузер не поддерживает не одну из прелогаемых моделей работы
+		* @throws <b>Exception</b> 3 Браузер семейства ie не поддерживает VBscript
+		* @throws <b>Exception</b> 4 Неверный тип свойства final
+		* @example
+		* Class({
+		*	final<sup><a href="#-final">[1]</a></sup>:false,
+		*	pack<sup><a href="#-pack">[2]</a></sup>:tools,
+		*	parent<sup><a href="#-parent">[3]</a></sup>:false,
+		* 	implements<sup><a href="#-implements">[4]</a></sup>:false,
+		* 	name<sup><a href="#-name">[5]</a></sup>:"A",
+		*	constructor<sup><a href="#-constructor">[6]</a></sup>:function(a,b){},
+		*	public<sup><a href="#-public">[7]</a></sup>:{
+		*		sample:function(){},
+		*		sample2:"~this.sample==123~"
+		*	},
+		*	protected<sup><a href="#-protected">[8]</a></sup>:{},
+		*	private<sup><a href="#-private">[9]</a></sup>:{},
+		*	set<sup><a href="#-set">[10]</a></sup>:{},
+		*	get<sup><a href="#-get">[11]</a></sup>:{}
+		* }
+		* var instance=new A(123,123);
+		* instance.sample();
+		*/
 		Class=function(object){
+			/**
+			* @default <i>false</i>
+			* @description
+			* <b>Тип данных:</b> <i>Boolean</i>
+			* <br/><b>Присутствие для нового класса:</b> <i>Необязательное</i>
+			* <br/>Является ли класс финальным экземпляром, возможно ли его дальнейшее наследование
+			*/
 			var final=false;
+			/**
+			* @description
+			* <b>Тип данных:</b> <i>Object</i>
+			* <br/><b>Присутствие для нового класса:</b> <i>Необязательное</i>
+			* <br/>Добавляет класс в пакет
+			*/
 			var pack;
+			/**
+			* @default <i>false</i>
+			* @description
+			* <br/><b>Тип данных:</b> <i>Boolean</i>|<i>Mixed</i>
+			* <br/><b>Присутствие для нового класса:</b> <i>Необязательное</i>
+			* <br/>Родительский класс
+			*/
 			var parent=false;
+			/**
+			* @default <i>new Array()</i>
+			* @description
+			* <br/><b>Тип данных:</b> <i>Array</i>
+			* <br/><b>Присутствие для нового класса:</b> <i>Необязательное</i>
+			* <br/>Наследуемые Интерфейсы данного класса
+			*/
 			var implements=[];
+			/**
+			* <br/><b>Тип данных:</b> <i>Mixed</i>
+			* <br/><b>Присутствие для нового класса:</b> <i>Обязательное</i>
+			* <br/>Указывает конструктор нового класса
+			*/
 			var constructor;
+			/**
+			* @default <i>new Object()</i>
+			* @description
+			*  <br/><b>Тип данных:</b> <i>Object</i>
+			* <br/><b>Присутствие для нового класса:</b> <i>Необязательное</i>
+			* <br/> Набор публичных свойств и методов нового класса
+			*/
+			var  public={};
 			var public={};
+			/**
+			* @default <i>new Object()</i>
+			* @description
+			* <br/><b>Тип данных:</b> <i>Object</i>
+			* <br/><b>Присутствие для нового класса:</b> <i>Необязательное</i>
+			* <br/> Набор защищенных свойств и методов нового класса
+			*/
 			var protected={};
+			/**
+			* @default <i>new Object()</i>
+			* @description
+			* <br/><b>Тип данных:</b> <i>Object</i>
+			* <br/><b>Присутствие для нового класса:</b> <i>Необязательное</i>
+			* <br/> Набор приватных свойств и методов нового класса
+			*/
 			var private={};
+			/**
+			* @default <i>class</i>
+			* @description
+			* <br/><b>Присутствие для нового класса:</b> <i>Необязательное</i>
+			* <br/><b>Тип данных:</b> <i>String</i>
+			* <br/><b>Возможные значения:</b> <i>class</i>, <i>interface</i>
+			* <br/>Тип создаваемого объекта класс или интерфейс
+			*/
 			var type="class";
+			/**
+			* @default <i>new Object()</i>
+			* @description
+			* <br/><b>Тип данных:</b> <i>Object</i>
+			* <br/><b>Присутствие для нового класса:</b> <i>Необязательное</i>
+			* <br/>Набор Getter'ов нового класса
+			*/
 			var get={};
+			/**
+			* @default <i>new Object()</i>
+			* @description
+			* <br/><b>Тип данных:</b> <i>Object</i>
+			* <br/><b>Присутствие для нового класса:</b> <i>Необязательное</i>
+			* <br/>Набор Setter'ов нового класса
+			*/
 			var set={};
+			/**
+			* <br/><b>Тип данных:</b> <i>String</i>
+			* <br/><b>Присутствие для нового класса:</b> <i>Обязательное</i>
+			* <br/>Название класса, значение проверяется по regexp-маске /[a-z0-9_]/i
+			*/
 			var name;
+			/**
+			* <br/><b>Тип данных:</b> <i>String</i>
+			* <br/><b>Присутствие для нового класса:</b> <i>Необязательное</i>
+			* <br/>Название интерфейса
+			*/
 			var className;
+			/**
+			* <br/><b>Тип данных:</b> <i>Mixed</i>
+			* <br/><b>Присутствие для нового класса:</b> <i>Необязательное</i>
+			* <br/>Наследуемый объект в истории
+			*/
 			var parentObject;
+			/**
+			* <br/><b>Тип данных:</b> <i>Mixed</i>
+			* <br/><b>Присутствие для нового класса:</b> <i>Необязательное</i>
+			* <br/>Текущий класс в истории
+			*/
 			var childObject;
+			/**
+			* @default <i>new Array(new Array(),new Array())</i>
+			* @description
+			* <br/><b>Тип данных:</b> <i>Array</i>
+			* <br/><b>Присутствие для нового класса:</b> <i>Необязательное</i>
+			* <br/>Содержит все уже используемые наследуемые методы и свойства
+			*/
 			var history=[[],[]];
+			/** Проверяем валидность всех условий */
 			if(!ClassModel.IE && !ClassModel.OTHER){
 				throw({number:2,description:" Браузер не поддерживает не одну из прелогаемых моделей работы"});
 			}
@@ -231,6 +477,7 @@ function getClassName(Class){
 			if(typeof object.pack=="object"){
 				pack=object.pack;
 			}
+			/** Добавляем новый класс в историю */
 			__Class__[name]={
 				public:(function(public,implements,parent){
 					var object={};
@@ -306,10 +553,12 @@ function getClassName(Class){
 					implements.push(parentObject.implements[i]);
 				}
 			}
+			/** Создаем класс для IE */
 			if(ClassModel.IE){
 				ieFix.addMethod("typeString");
 				ieFix.addMethod("getClone");
 				childObject=__Class__[name];
+				/** Наследование в IE */
 				if(parent){
 					className=getClassName(parent);
 					parentObject=__Class__[className];
@@ -328,6 +577,10 @@ function getClassName(Class){
 						}
 					}
 				}
+				/**
+				* @ignore
+				* Интерфейсы в IE
+				*/
 				for(var i=0;i<implements.length;i++){
 					className=getClassName(implements[i]);
 					if(__Class__[className]){
@@ -348,6 +601,7 @@ function getClassName(Class){
 						}
 					}
 				}
+				/** Заполнение в IE */
 				for(var key in public){
 					if(typeof public[key]=="function" && $.inArray(key,history[0])==-1){
 						ieFix.addMethod(key);
@@ -369,10 +623,16 @@ function getClassName(Class){
 				}
 				ieFix.newVBClass(__Class__[name].VBid);
 			}
+			/** Абстрактное представление объекта */ 
 			var abstract;
+			/** Создаем Javascript класс */
 			if(type=="class"){
 				abstract=function(){
 					history=[[],[]];
+					/**
+					* @ignore
+					* Создаем область видимости для класса
+					*/
 					var instance={};
 					var getClone=(function(){
 						return function(){
@@ -402,6 +662,7 @@ function getClassName(Class){
 						}
 						IEprototype["getClone"]=getClone;
 					}
+					/** Если не IE создаем новую копию класса */
 					if(ClassModel.OTHER){
 						var OTHERprototype={};
 						OTHERprototype["typeString"]=function(){
@@ -409,6 +670,7 @@ function getClassName(Class){
 						}
 						OTHERprototype["getClone"]=getClone;
 					}
+					/** Наследование */
 					if(parent){
 						className=getClassName(parent);
 						parentObject=__Class__[className];
@@ -617,6 +879,10 @@ function getClassName(Class){
 						}
 						while(typeof __Class__[granny_name].parent=="function");
 					}
+					/**
+					* @ignore
+					* Интерфейсы
+					*/
 					for(var i=0;i<implements.length;i++){
 						className=getClassName(implements[i]);
 						if(__Class__[className]){
@@ -717,6 +983,7 @@ function getClassName(Class){
 							}
 						}
 					}
+					/** Заполняем область видимости */
 					for(var key in private){
 						if(typeof private[key]=="function"){
 							(function(method,instance){
@@ -867,17 +1134,27 @@ function getClassName(Class){
 							}
 						}
 					}
+					/** Вызываем конструктор */
 					if(arguments[0]!="@!!"){
 						var _constructor=constructor;
 						_constructor.apply(instance,arguments);
 					}
+					/**
+					* Если это IE, тогда возвращаем новую копию класса из области видимости
+					* VBscript
+					*/
 					if(ClassModel.IE){
 						return IEprototype;
 					}
+					/**
+					* Если это не IE, тогда возвращаем новую копию класса из области видимости
+					* Javascript
+					*/
 					if(ClassModel.OTHER){
 						return OTHERprototype;
 					}
 				}
+				/** Добавляем класс в пакет */
 				if(pack){
 					pack[name]=abstract;
 				}
@@ -896,6 +1173,7 @@ function getClassName(Class){
 							return "[interface "+name+"]";
 						}
 					}
+					/** Если не IE создаем новую копию класса */
 					if(ClassModel.OTHER){
 						var OTHERobject={};
 						abstract["typeString"]=function(){
@@ -970,11 +1248,13 @@ function getClassName(Class){
 							}
 						}
 					}
+					/** Объект в теле window равен объекту созданным при помощи IE */
 					if(ClassModel.IE){
 						abstract=IEobject;
 					}
 					return abstract;
 				})(private,protected,public,name,constructor);
+				/** Добавляем интерфейс в пакет */
 				if(pack){
 					pack[name]=abstract;
 				}
