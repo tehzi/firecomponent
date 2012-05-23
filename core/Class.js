@@ -373,7 +373,7 @@ function getClassName(Class){
 			if(type=="class"){
 				abstract=function(){
 					history=[[],[]];
-					var instance={};
+					var instance={public:{}};
 					var getClone=(function(){
 						return function(){
 							var name=getClassName(this);
@@ -396,18 +396,14 @@ function getClassName(Class){
 					}).call(instance);
 					childObject=__Class__[name];
 					if(ClassModel.IE){
-						var IEprototype=ieFix.newIns(__Class__[name].VBid);
-						IEprototype["typeString"]=function(){
-							return "[class "+name+"]";
-						}
-						IEprototype["getClone"]=getClone;
+						instance.public=ieFix.newIns(__Class__[name].VBid);
+						instance.public["typeString"]=function(){ return "[class "+name+"]"; }
+						instance.public["getClone"]=getClone;
 					}
 					if(ClassModel.OTHER){
-						var OTHERprototype={};
-						OTHERprototype["typeString"]=function(){
-							return "[class "+name+"]";
-						}
-						OTHERprototype["getClone"]=getClone;
+						instance.public={};
+						instance.public["typeString"]=function(){ return "[class "+name+"]"; }
+						instance.public["getClone"]=getClone;
 					}
 					if(parent){
 						className=getClassName(parent);
@@ -514,12 +510,12 @@ function getClassName(Class){
 														return method.apply(instance,arguments);
 													}
 													if(ClassModel.OTHER){
-														OTHERprototype[key]=function(){
+														instance.public[key]=function(){
 															return method.apply(instance,arguments);
 														}
 													}
 													if(ClassModel.IE){
-														IEprototype[key]=function(){
+														instance.public[key]=function(){
 															return method.apply(instance,arguments);
 														}
 													}
@@ -528,13 +524,13 @@ function getClassName(Class){
 											else{
 												instance[key]=parentObject.public[key];
 												if(ClassModel.OTHER){
-													(function(OTHERprototype,key,instance,name){
-														OTHERprototype.__defineGetter__(key,function(prop){
+													(function(public,key,instance,name){
+														public.__defineGetter__(key,function(prop){
 															return instance[key];
 														});
-													})(OTHERprototype,key,instance,name);
-													(function(OTHERprototype,key,instance,name){
-														OTHERprototype.__defineSetter__(key,function(val){
+													})(public,key,instance,name);
+													(function(public,key,instance,name){
+														public.__defineSetter__(key,function(val){
 															if(typeof val=='object'){
 																var copy=function(){}
 																copy.prototype=val;
@@ -544,16 +540,16 @@ function getClassName(Class){
 																instance[key]=val;
 															}
 														});
-													})(OTHERprototype,key,instance,name);
+													})(instance.public,key,instance,name);
 												}
 												if(ClassModel.IE){
-													(function(IEprototype,key,instance,name){
-														IEprototype["get_"+key]=function(){
+													(function(public,key,instance,name){
+														public["get_"+key]=function(){
 															return instance[key];
 														}
-													})(IEprototype,key,instance,name);
-													(function(IEprototype,key,instance,name){
-														IEprototype["set_"+key]=function(val){
+													})(instance.public,key,instance,name);
+													(function(public,key,instance,name){
+														public["set_"+key]=function(val){
 															if(typeof val=='object'){
 																var copy=function(){}
 																copy.prototype=val;
@@ -563,7 +559,7 @@ function getClassName(Class){
 																instance[key]=val;
 															}
 														}
-													})(IEprototype,key,instance,name);
+													})(instance.public,key,instance,name);
 												}
 											}
 										}
@@ -660,12 +656,12 @@ function getClassName(Class){
 													return method.apply(instance,arguments);
 												}
 												if(ClassModel.OTHER){
-													OTHERprototype[key]=function(){
+													instance.public[key]=function(){
 														return method.apply(instance,arguments);
 													}
 												}
 												if(ClassModel.IE){
-													IEprototype[key]=function(){
+													instance.public[key]=function(){
 														return method.apply(instance,arguments);
 													}
 												}
@@ -674,13 +670,13 @@ function getClassName(Class){
 										else{
 											instance[key]=parentObject.public[key];
 											if(ClassModel.OTHER){
-												(function(OTHERprototype,key,instance,name){
-													OTHERprototype.__defineGetter__(key,function(prop){
+												(function(public,key,instance,name){
+													public.__defineGetter__(key,function(prop){
 														return instance[key];
 													});
-												})(OTHERprototype,key,instance,name);
-												(function(OTHERprototype,key,instance,name){
-													OTHERprototype.__defineSetter__(key,function(val){
+												})(instance.public,key,instance,name);
+												(function(public,key,instance,name){
+													public.__defineSetter__(key,function(val){
 														if(typeof val=='object'){
 															var copy=function(){}
 															copy.prototype=val;
@@ -690,16 +686,16 @@ function getClassName(Class){
 															instance[key]=val;
 														}
 													});
-												})(OTHERprototype,key,instance,name);
+												})(instance.public,key,instance,name);
 											}
 											if(ClassModel.IE){
-												(function(IEprototype,key,instance,name){
-													IEprototype["get_"+key]=function(){
+												(function(public,key,instance,name){
+													public["get_"+key]=function(){
 														return instance[key];
 													}
-												})(IEprototype,key,instance,name);
-												(function(IEprototype,key,instance,name){
-													IEprototype["set_"+key]=function(val){
+												})(instance.public,key,instance,name);
+												(function(public,key,instance,name){
+													public["set_"+key]=function(val){
 														if(typeof val=='object'){
 															var copy=function(){}
 															copy.prototype=val;
@@ -709,7 +705,7 @@ function getClassName(Class){
 															instance[key]=val;
 														}
 													}
-												})(IEprototype,key,instance,name);
+												})(instance.public,key,instance,name);
 											}
 										}
 									}
@@ -759,32 +755,25 @@ function getClassName(Class){
 					for(var key in public){
 						if(typeof public[key]=="function"){
 							var method=public[key];
-							(function(method,instance,key,OTHERprototype,IEprototype){
+							(function(method,instance,key,public){
 								instance[key]=function(){
 									return method.apply(instance,arguments);
 								}
-								if(ClassModel.OTHER){
-									OTHERprototype[key]=function(){
-										return method.apply(instance,arguments);
-									}
+								public[key]=function(){
+									return method.apply(instance,arguments);
 								}
-								if(ClassModel.IE){
-									IEprototype[key]=function(){
-										return method.apply(instance,arguments);
-									}
-								}
-							})(method,instance,key,OTHERprototype,IEprototype);
+							})(method,instance,key,instance.public);
 						}
 						else{
 							instance[key]=public[key];
 							if(ClassModel.OTHER){
-								(function(OTHERprototype,key,instance,name){
-									OTHERprototype.__defineGetter__(key,function(prop){
+								(function(public,key,instance,name){
+									public.__defineGetter__(key,function(prop){
 										return instance[key];
 									});
-								})(OTHERprototype,key,instance,name);
-								(function(OTHERprototype,key,instance,name){
-									OTHERprototype.__defineSetter__(key,function(val){
+								})(instance.public,key,instance,name);
+								(function(public,key,instance,name){
+									public.__defineSetter__(key,function(val){
 										if(typeof val=='object'){
 											var copy=function(){}
 											copy.prototype=val;
@@ -794,16 +783,16 @@ function getClassName(Class){
 											instance[key]=val;
 										}
 									});
-								})(OTHERprototype,key,instance,name);
+								})(instance.public,key,instance,name);
 							}
 							if(ClassModel.IE){
-								(function(IEprototype,key,instance,name){
-									IEprototype["get_"+key]=function(){
+								(function(public,key,instance,name){
+									public["get_"+key]=function(){
 										return instance[key];
 									}
-								})(IEprototype,key,instance,name);
-								(function(IEprototype,key,instance,name){
-									IEprototype["set_"+key]=function(val){
+								})(instance.public,key,instance,name);
+								(function(public,key,instance,name){
+									public["set_"+key]=function(val){
 										if(typeof val=='object'){
 											var copy=function(){}
 											copy.prototype=val;
@@ -813,41 +802,41 @@ function getClassName(Class){
 											instance[key]=val;
 										}
 									}
-								})(IEprototype,key,instance,name);
+								})(instance.public,key,instance,name);
 							}
 						}
 					}
 					for(var key in get){
 						instance[key]=get[key].call(instance,key);
 						if(ClassModel.IE){
-							(function(IEprototype,key,instance,name){
-								IEprototype["get_"+key]=function(){
+							(function(public,key,instance,name){
+								public["get_"+key]=function(){
 									return get[key].call(instance,key);
 								}
-							})(IEprototype,key,instance,name);
+							})(instance.public,key,instance,name);
 						}
 						if(ClassModel.OTHER){
-							(function(OTHERprototype,key,instance,name){
-								OTHERprototype.__defineGetter__(key,function(){
+							(function(public,key,instance,name){
+								public.__defineGetter__(key,function(){
 									return get[key].call(instance,key);
 								});
-							})(OTHERprototype,key,instance,name);
+							})(instance.public,key,instance,name);
 						}
 					}
 					for(var key in set){
 						if(ClassModel.IE){
-							(function(IEprototype,key,instance,name){
-								IEprototype["set_"+key]=function(val){
+							(function(public,key,instance,name){
+								public["set_"+key]=function(val){
 									return set[key].call(instance,key,val);
 								}
-							})(IEprototype,key,instance);
+							})(instance.public,key,instance);
 						}
 						if(ClassModel.OTHER){
-							(function(OTHERprototype,key,instance,name){
-								OTHERprototype.__defineSetter__(key,function(val){
+							(function(public,key,instance,name){
+								public.__defineSetter__(key,function(val){
 									return set[key].call(instance,key,val);
 								});
-							})(OTHERprototype,key,instance,name);
+							})(instance.public,key,instance,name);
 						}
 					}
 					for(var key in instance){
@@ -871,14 +860,7 @@ function getClassName(Class){
 						var _constructor=constructor;
 						_constructor.apply(instance,arguments);
 					}
-					if(ClassModel.IE){
-						instance.public=IEprototype;
-						return IEprototype;
-					}
-					if(ClassModel.OTHER){
-						instance.public=OTHERprototype;
-						return OTHERprototype;
-					}
+					return instance.public;
 				}
 				if(pack){
 					pack[name]=abstract;
