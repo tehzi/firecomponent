@@ -4,7 +4,7 @@
 * In programm used dojo hack  <a href="http://alex.dojotoolkit.org/08/jscript/lettable.html">dojo</a>.
 * Testing in ie6+, opera 9.5+, google chrome, safari, android browser, firefox 3+ and some khtml and webkit browser.
 * @author <a href="mailto:zi.white.drago@gmail.com">zi white</a>
-* @version 0.1.24
+* @version 0.1.25
 */
 var Class;
 function getClassName(Class){

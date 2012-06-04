@@ -2,7 +2,7 @@
 * @fileoverview
 * Пакет содержит набор утилит разработаных для проекта firecomponent
 * @author <a href="mailto:zi.white.drago@gmail.com">zi white</a>
-* @version 0.1.15, $Revision$
+* @version 0.1.25
 */
 if(!tools) var tools={};
 Class({
