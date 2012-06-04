@@ -18,57 +18,17 @@ function getClassName(Class){
 	}
 }
 (function(){
-	if(!Date.prototype.lastMonthDay){
-	Date.prototype.lastMonthDay=function(month, year){
-		var d=new Date(year ? year : this.getFullYear(), month ? month  : this.getMonth() + 1, 0);
-		return d.getDate();
-		};
-	}
-	if(!Date.prototype.lastYearDay){
-		Date.prototype.lastYearDay=function(year){
-			return new Date().lastMonthDay(2,year)==28 ? 365 : 366;
-		};
-	}
-	if(!String.prototype.go){
-		String.prototype.go=function(){
-			location.href=this;
-		}
-	}
-	if(!Array.prototype.fullMask){
-		Array.prototype.fullMask=function(){
-			var ret=0;
-			for(var i=0;i<this.length;i++){
-				if(typeof this[i]=="number"){
-					ret|=this[i];
-				}
-			}
-			return ret;
-		}
-	}
-	if(!Array.prototype.forEach){
-		Array.prototype.forEach=function(callback,object){
-			for(var i=0;i<this.length && typeof callback=='function';i++) if(callback.call(typeof object=='object'?object:window,this[i],i,this));
-		}
-	}
-	if(!Array.prototype.filter){
-		Array.prototype.filter=function(callback,object){
-			var arr=[];
-			for(var i=0;i<this.length && typeof callback=='function';i++){
-				if(callback.call(typeof object=='object'?object:window,this[i],i,this)){
-					arr.push(this[i]);
-				}
-			}
-			return arr;
-		}
-	}
-	if(!Array.prototype.indexOf){
-		Array.prototype.indexOf=function(elemToSearch,fromIndex){
-			for(fromIndex=(fromIndex?fromIndex<0?Math.max(0,this.length+fromIndex):fromIndex:0);fromIndex<this.length;fromIndex++){
-				if(fromIndex in this && this[fromIndex]===elemToSearch) return fromIndex;
-			}
-			return -1;
-		}
-	}
+	if(!Array.prototype.forEach) Array.prototype.forEach=function(callback,thisObject){ for(var i=0;i<this.length && typeof callback=='function';i++) if(callback.call(typeof thisObject=='object'?thisObject:window,this[i],i,this)); };
+	if(!Array.prototype.every) Array.prototype.every=function(callback,thisObject){ var passed=true; try{ this.forEach(function(elem,i,arr){ passed=!!callback.call(thisObject,elem,i,arr); if(!passed) throw true; },thisObject); } catch(err){}; return everyReturn; };
+	if(!Array.prototype.filter) Array.prototype.filter=function(callback,thisObject){ var filtered=[]; [].forEach.call(this,function(elem,i,arr){ if(callback.call(thisObject,elem,i,arr)); filtered.push(elem); },thisObject); return filtered; };
+	if(!Array.prototype.indexOf) Array.prototype.indexOf=function(elemToSearch,fromIndex){ for(fromIndex=(fromIndex?fromIndex<0?Math.max(0,this.length+fromIndex):fromIndex:0);fromIndex<this.length;fromIndex++) if(fromIndex in this && this[fromIndex]===elemToSearch) return fromIndex; return -1; };
+	if(!Array.prototype.lastIndexOf) Array.prototype.lastIndexOf=function(elemToSearch,fromIndex){ var arr=this.slice.apply(this,(fromIndex!==undefined && fromIndex>0)?[0,fromIndex+1]:[0]); for(var i=arr.length-1;i>-1;i--) if(arr[i]===elemToSearch) return i; };
+	if(!Array.prototype.map) Array.prototype.map=function(callback,thisObject){ var passed=[]; [].forEach.call(this,function(elem,i,arr){ passed.push(callback.call(thisObject,elem,i,arr)); },thisObject); return passed; };
+	if(!Array.prototype.some) Array.prototype.some=function(callback,thisObject){ var passed=false;[].forEach.call(this,function(elem,i,arr){ if(callback.call(thisObject,elem,i,arr)) passed=true; },thisObject); return passed; };
+	if(!Array.prototype.fullMask) Array.prototype.fullMask=function(){ var mask=0; [].forEach.call(this,function(elem){ mask|=elem; }); return mask; };
+	if(!String.prototype.go) String.prototype.go=function(){ location.href=this; };
+	if(!Date.prototype.lastMonthDay) Date.prototype.lastMonthDay=function(){ return new Date(this.getFullYear(),this.getMonth(),0).getDate(); };
+	if(!Date.prototype.lastYearDay) Date.prototype.lastYearDay=function(){ return new Date(this.getFullYear(),2).lastMonthDay()==28?365:366; };
 	try{
 		var __Class__={
 			error:[],
@@ -89,41 +49,35 @@ function getClassName(Class){
 					this.iframe.contentWindow.execute(code);
 				},
 				addProp:function(prop){
-					this.code+="\tPublic "+prop+"\n";
+					this.code+="\tPublic ["+prop+"]\n";
 				},
 				addMethod:function(prop){
-					this.code+="\tPublic "+prop+"\n";
+					this.code+="\tPublic ["+prop+"]\n";
 				},
 				addGet:function(prop){
-					this.code+=
-					"\tPublic Property Get "+prop+"\n"+
-					"\t\tDim proxy\n"+
-					"\t\tSet proxy = new TypeProxy\n"+
-					"\t\tproxy.load(get_"+prop+"(me))\n"+
-					"\t\tIf IsObject(proxy.value) Then\n"+
-					"\t\t\tSet "+prop+" = proxy.value\n"+
-					"\t\tElse\n"+
-					"\t\t\t"+prop+" = proxy.value\n"+
-					"\t\tEnd If\n"+
-					"\tEnd Property\n"+
-					"\tPublic get_"+prop+"\n";
+					this.code+="\tPublic Property Get ["+prop+"]\n\
+					\t\tDim proxy\n\
+					\t\tSet proxy = new TypeProxy\n\
+					\t\tproxy.load(get_"+prop+"(me))\n\
+					\t\tIf IsObject(proxy.value) Then\n\
+					\t\t\tSet ["+prop+"] = proxy.value\n\
+					\t\tElse\n\
+					\t\t\t"+prop+" = proxy.value\n\
+					\t\tEnd If\n\
+					\tEnd Property\n\
+					\tPublic get_"+prop+"\n";
 				},
 				addSet:function(prop){
-					this.code+=
-					"\tPublic Property Let "+prop+"(val)\n"+
-					"\t\tCall set_"+ prop +"(val)\n"+
-					"\tEnd Property\n"+
-					"\tPublic Property Set "+prop+"(val)\n"+
-					"\t\tCall set_"+prop+"(val)\n"+
-					"\tEnd Property\n"+
-					"\tPublic set_"+prop+"\n";
+					this.code+="\tPublic Property Let ["+prop+"](val)\n\
+					\t\tCall set_"+ prop +"(val)\n\
+					\tEnd Property\n\
+					\tPublic Property Set ["+prop+"](val)\n\
+					\t\tCall set_"+prop+"(val)\n\
+					\tEnd Property\n\
+					\tPublic set_"+prop+"\n";
 				},
 				newVBClass:function(VBid){
-					this.execute(
-						"Class Class_"+VBid+"\n"+
-						this.code+
-						"\nEnd Class\n"
-					);
+					this.execute("Class Class_"+VBid+"\n"+this.code+"\nEnd Class\n");
 					this.code="";
 				},
 				newIns:function(VBid){
@@ -131,29 +85,29 @@ function getClassName(Class){
 				},
 				addTypeProxy:function(){
 					this.execute(
-						"Class TypeProxy\n"+
-						"\tPublic value\n"+
-						"\tPublic Function load(val)\n"+
-						"\t\tIf IsObject(val) Then\n"+
-						"\t\t\tSet value = val\n"+
-						"\t\tElse\n"+
-						"\t\t\tvalue = val\n"+
-						"\t\tEnd If\n"+
-						"\tEnd Function\n"+
-						"End Class\n"
+						"Class TypeProxy\n\
+						\tPublic value\n\
+						\tPublic Function load(val)\n\
+						\t\tIf IsObject(val) Then\n\
+						\t\t\tSet value = val\n\
+						\t\tElse\n\
+						\t\t\tvalue = val\n\
+						\t\tEnd If\n\
+						\tEnd Function\n\
+						End Class\n"
 					);
 				}
 			};
 			$(ieFix.iframe).hide();
 			$("head").append(ieFix.iframe);
 			ieFix.iframe.contentWindow.document.write(
-				"<html><head><title>VBiframe</title>\n"+
-				"<script type='text/vbscript'>\n"+
-				"Function execute(code)\nExecuteGlobal(code)\nEnd Function\n"+
-				"Function evaluate(code,isObject)\nIf isObject Then\nSet evaluate = Eval(code)\n"+
-				"Else\nevaluate = Eval(code)\nEnd If\nEnd Function\n"+
-				"</script>"+
-				"</head><body></body></html>"
+				"<html><head><title>VBiframe</title>\n\
+				<script type='text/vbscript'>\n\
+				Function execute(code)\nExecuteGlobal(code)\nEnd Function\n\
+				Function evaluate(code,isObject)\nIf isObject Then\nSet evaluate = Eval(code)\n\
+				Else\nevaluate = Eval(code)\nEnd If\nEnd Function\n\
+				</script>\
+				</head><body></body></html>"
 			);
 			ieFix.iframe.contentWindow.document.close();
 			ieFix.addTypeProxy();
@@ -161,7 +115,7 @@ function getClassName(Class){
 				ieFix.evaluate('true');
 			}
 			catch(err){
-				throw({number:2,description:"Браузер семейства ie не поддерживает VBscript"});
+				throw({number:2,description:"Browser does not support vbscript"});
 			}
 		}
 		else{
@@ -185,7 +139,7 @@ function getClassName(Class){
 			var childObject;
 			var history=[[],[]];
 			if(!ClassModel.IE && !ClassModel.OTHER){
-				throw({number:2,description:" Браузер не поддерживает не одну из прелогаемых моделей работы"});
+				throw({number:2,description:" Browser does not support no one model of work"});
 			}
 			if(object.type=="class" || object.type=="interface"){
 				type=object.type;
@@ -197,13 +151,13 @@ function getClassName(Class){
 				name=object.name;
 			}
 			else{
-				throw({number:0,description:"Отсутствует или неверное имя класса"});
+				throw({number:0,description:"No or wrong name of class"});
 			}
 			if(typeof object.parent=="function"){
 				parent=object.parent;
 			}
 			if(!object.constructor || typeof object.constructor!="function"){
-				throw({number:1,description:"Отсутствует конструктор"});
+				throw({number:1,description:"No constructor"});
 			}
 			else{
 				constructor=object.constructor;
