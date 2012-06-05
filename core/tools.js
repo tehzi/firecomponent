@@ -522,7 +522,7 @@ Class({
 	protected:{
 		_version:function(){
 			if(this.enable){
-				if(tools.browser.IE){
+				if(tools.Browser.IE){
 					var ActiveX=new ActiveXObject('ShockwaveFlash.ShockwaveFlash').GetVariable('$version').match(/\d+/g);
 					return (ActiveX[0] && ActiveX[1])?parseFloat(ActiveX[0]+"."+ActiveX[1]):ActiveX[0];
 				}
