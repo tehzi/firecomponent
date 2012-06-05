@@ -511,7 +511,7 @@ Class({
 	public:{
 		enable:(function(){
 			try{
-				return (tools.browser.IE && new ActiveXObject('ShockwaveFlash.ShockwaveFlash'))?true:!!(navigator.plugins['Shockwave Flash']);
+				return (tools.Browser.IE && new ActiveXObject('ShockwaveFlash.ShockwaveFlash'))?true:!!(navigator.plugins['Shockwave Flash']);
 			}
 			catch(err){
 				return false;
