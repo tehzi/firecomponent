@@ -147,7 +147,7 @@ Class({
 			this.dispatch("timer",[++this.currentCount]);
 			if(this.repeatCount>0 && this.currentCount==this.repeatCount){
 				this.dispatch("timerComplete",[this.currentCount]);
-				this.halt();
+				this.stop();
 			}
 		}
 	}
