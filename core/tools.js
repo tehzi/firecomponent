@@ -481,19 +481,18 @@ Class({
 	name:"Platform",
 	type:"interface",
 	pack:tools,
-	constructor:function(){},
 	public:{
 		name:(function(){
 			var name=navigator.platform.match(/(Linux|FreeBSD|Mac|Win|SunOS)/i);
-			return (name[1])?name[1]:(window.orientation != undefined)?"iPod":"Other";
+			return (name && name[1])?name[1]:(window.orientation!=undefined)?"iPod":"Other";
 		})(),
-		linux:(navigator.platform.indexOf("Linux") != -1),
-		freebsd:(navigator.platform.indexOf("FreeBSD") != -1),
-		mac: (navigator.platform.indexOf("Mac") != -1),
-		windows:(navigator.platform.indexOf("Win") != -1),
-		ipod:(window.orientation != undefined),
+		linux:(navigator.platform.indexOf("Linux")!=-1),
+		freebsd:(navigator.platform.indexOf("FreeBSD")!=-1),
+		mac: (navigator.platform.indexOf("Mac")!=-1),
+		windows:(navigator.platform.indexOf("Win")!=-1),
+		ipad:(window.orientation!=undefined),
 		other:"~!(this.linux || this.freebsd || this.mac || this.windows || this.ipod || this.sun)~",
-		sun:(navigator.platform.indexOf("SunOS") != -1),
+		sun:(navigator.platform.indexOf("SunOS")!=-1),
 		arch:(function(){
 			switch(true){
 				case !!(navigator.platform.match(/32|i586/i)): return "i586"; break;
@@ -507,7 +506,6 @@ Class({
 	name:"Flash",
 	type:"interface",
 	pack:tools,
-	constructor:function(){},
 	public:{
 		enable:(function(){
 			try{
