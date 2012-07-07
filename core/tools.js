@@ -2,33 +2,22 @@
 * @fileoverview
 * Пакет содержит набор утилит разработаных для проекта firecomponent
 * @author <a href="mailto:zi.white.drago@gmail.com">zi white</a>
-* @version 0.1.15, $Revision$
+* @version 0.1.25
 */
-var tools={};
+if(!tools) var tools={};
 Class({
-	name:"browser",
+	name:"Browser",
 	type:"interface",
 	pack:tools,
-	constructor:function(){},
 	public:{
 		browser:(function(){
 			var name="Another";
 			var agent=navigator.userAgent.toLowerCase();
-			if(agent.search("firefox")>-1){
-				name="Firefox";
-			}
-			if(agent.search("opera")>-1){
-				name="Opera";
-			}
-			if(agent.search("safari")>-1){
-				name="Safari";
-			}
-			if(agent.search("chrome")>-1){
-				name="Chrome";
-			}
-			if(agent.search("msie")>-1){
-				name="Internet Explorer";
-			}
+			if(agent.search("firefox")>-1) name="Firefox";
+			if(agent.search("opera")>-1)   name="Opera";
+			if(agent.search("safari")>-1)  name="Safari";
+			if(agent.search("chrome")>-1)  name="Chrome";
+			if(agent.search("msie")>-1)    name="Internet Explorer";
 			return name;
 		})(),
 		Opera:"~this.browser=='Opera'~",
@@ -40,81 +29,48 @@ Class({
 		IE7:"~this.IE && this.intertrigoBrowserVersion()==7~",
 		IE8:"~this.IE && this.intertrigoBrowserVersion()==8~",
 		IE9:"~this.IE && this.intertrigoBrowserVersion()==9~",
-		browserVersion:"~this.intertrigoBrowserVersion()~",
-		v:"~this.browserVersion~",
+		version:"~this.intertrigoBrowserVersion()~",
 		IEMask:"~this.IEMaskArray.fullMask()~",
 		IE6Id:"~this.IEMaskArray[0]~",
 		IE7Id:"~this.IEMaskArray[1]~",
 		IE8Id:"~this.IEMaskArray[2]~",
 		IE9Id:"~this.IEMaskArray[3]~",
 		currentIEId:"~this.detectIEId()~",
-		browser_engine:"~this.detect_browser_engine()~",
-		gecko:"~this.detect_browser_engine()=='gecko'~",
-		presto:"~this.detect_browser_engine()=='presto'~",
-		webkit:"~this.detect_browser_engine()=='webkit'~",
-		khtml:"~this.detect_browser_engine()=='khtml'~",
-		trident:"~this.detect_browser_engine()=='trident'~"
+		browser_engine:"~this.detectBrowserEngine()~",
+		gecko:"~this.detectBrowserEngine()=='gecko'~",
+		presto:"~this.detectBrowserEngine()=='presto'~",
+		webkit:"~this.detectBrowserEngine()=='webkit'~",
+		khtml:"~this.detectBrowserEngine()=='khtml'~",
+		trident:"~this.detectBrowserEngine()=='trident'~"
 	},
 	protected:{
-		IEMaskArray:[
-			0x00000001,
-			0x00000002,
-			0x00000004,
-			0x00000008
-		],
+		IEMaskArray:[0x00000001,0x00000002,0x00000004,0x00000008],
 		intertrigoBrowserVersion:function(){
 			var version="None";
 			var agent=navigator.userAgent.toLowerCase();
-			if(this.IE){
-				var version_detect=agent.match(/msie ([0-9]+\.[0-9]+)/i);
-			}
-			if(this.Opera){
-				var version_detect=window.opera.version();
-			}
+			if(this.IE) var version_detect=agent.match(/msie ([0-9]+\.[0-9]+)/i);
+			if(this.Opera) var version_detect=window.opera.version();
 			if(this.Firefox){
 				var version_detect=agent.match(/firefox\/([0-9]+\.[0-9]+\.[0-9]+)/i);
-				if(!version_detect){
-					var version_detect=agent.match(/firefox\/([0-9]+\.[0-9]+)/i);
-				}
+				if(!version_detect) var version_detect=agent.match(/firefox\/([0-9]+\.[0-9]+)/i);
 			}
-			if(this.Chrome){
-				var version_detect=agent.match(/chrome\/([0-9]+\.[0-9]+)/i);
-			}
-			if(this.Safari){
-				var version_detect=agent.match(/version\/([0-9]+\.[0-9]+)/i);
-			}
-			if(version_detect){
-				if(version_detect[1] && typeof version_detect=="object"){
-					version=version_detect[1].replace(/^([0-9]+\.[0-9]+)\.([0-9]+)/,"$100$2");
-				}
-				else{
-					version=version_detect;
-				}
-			}
+			if(this.Chrome) var version_detect=agent.match(/chrome\/([0-9]+\.[0-9]+)/i);
+			if(this.Safari) var version_detect=agent.match(/version\/([0-9]+\.[0-9]+)/i);
+			if(version_detect) version=(version_detect[1] && typeof version_detect=="object")?version_detect[1].replace(/^([0-9]+\.[0-9]+)\.([0-9]+)/,"$100$2"):version_detect;
 			return parseFloat(version);
 		},
 		detectIEId:function(){
 			if(this.IE){
-				if(this.IE9){
-					return this.IEMaskArray[3];
-				}
-				if(this.IE8){
-					return this.IEMaskArray[2];
-				}
-				if(this.IE7){
-					return this.IEMaskArray[1];
-				}
-				if(this.IE6){
-					return this.IEMaskArray[0];
-				}
+				if(this.IE9) return this.IEMaskArray[3];
+				if(this.IE8) return this.IEMaskArray[2];
+				if(this.IE7) return this.IEMaskArray[1];
+				if(this.IE6) return this.IEMaskArray[0];
 			}
 			return 0;
 		},
-		detect_browser_engine:function(){
+		detectBrowserEngine:function(){
 			var detect='none';
-			if(detecting=navigator.userAgent.match(/(gecko|presto|webkit|khtml|trident)/i)){
-				detect=detecting[0].toLowerCase();
-			}
+			if(detecting=navigator.userAgent.match(/(gecko|presto|webkit|khtml|trident)/i)) detect=detecting[0].toLowerCase();
 			return detect;
 		}
 	}
@@ -124,9 +80,7 @@ Class({
 	name:"eventDispatcher",
 	constructor:function(){
 		this.eventAll={};
-		for(var i=0;i<this.eventList.length;i++){
-			this.eventAll[this.eventList[i]]=[];
-		}
+		for(var i=0;i<this.eventList.length;i++) this.eventAll[this.eventList[i]]=[];
 	},
 	public:{
 		bind:function(_event,_function){
@@ -140,16 +94,12 @@ Class({
 		unbind:function(_event,_function){
 			if(typeof _event=="string" && typeof _function=="function"){
 				if(this.eventAll[_event]){
-					this.eventAll[_event]=$.grep(this.eventAll[_event],function(key,i){
- 						return key!==_function;
-					});
+					this.eventAll[_event]=$.grep(this.eventAll[_event],function(key,i){ return key!==_function; });
 					$(this).unbind(_event,_function);
 				}
 				return;
 			}
-			if(typeof _event=="string" && arguments.length==1){
-				$(this).unbind(_event);
-			}
+			if(typeof _event=="string" && arguments.length==1) $(this).unbind(_event);
 		}
 	},
 	protected:{
@@ -157,14 +107,8 @@ Class({
 		eventAll:{},
 		dispatch:function(_event,_arr){
 			var __arr=[];
-			if(typeof _arr=="object"){
-				__arr=_arr;
-			}
-			if(typeof _event=="string"){
-				if(this.eventAll[_event]){
-					$(this).trigger(_event,__arr);
-				}
-			}
+			if(typeof _arr=="object") __arr=_arr;
+			if(typeof _event=="string" && this.eventAll[_event]) $(this).trigger(_event,__arr);
 		}
 	}
 });
@@ -174,12 +118,8 @@ Class({
 	name:"Timer",
 	constructor:function(delay,repeatCount){
 		this.Super();
-		if(typeof delay=="number"){
-			this.delay=delay;
-		}
-		if(typeof repeatCount=="number"){
-			this.repeatCount=repeatCount;
-		}
+		if(typeof delay=="number") this.delay=delay;
+		if(typeof repeatCount=="number") this.repeatCount=repeatCount;
 	},
 	public:{
 		currentCount:0,
@@ -193,7 +133,7 @@ Class({
 				this.timeLink=setInterval(this.timeExec,this.delay);
 			}
 		},
-		halt:function(){
+		stop:function(){
 			this.running=false;
 			clearInterval(this.timeLink);
 		}
@@ -207,7 +147,7 @@ Class({
 			this.dispatch("timer",[++this.currentCount]);
 			if(this.repeatCount>0 && this.currentCount==this.repeatCount){
 				this.dispatch("timerComplete",[this.currentCount]);
-				this.halt();
+				this.stop();
 			}
 		}
 	}
@@ -232,14 +172,7 @@ Class({
 		defaultPath:"/",
 		rm:"~this._remove~",
 		val:function(name,val){
-			if(arguments.length==1){
-				if(this.ls[name]){
-					return this.ls[name];
-				}
-				else{
-					return null;
-				}
-			}
+			if(arguments.length==1) return (this.ls[name])?this.ls[name]:null;
 			if(arguments.length==2){
 				this._add(name,val);
 				return null;
@@ -260,9 +193,7 @@ Class({
 	set:{
 		add:function(key,val){
 			if(this.cookieEnabled){
-				if(typeof val.name=="string" && (typeof val=="string" || typeof val=="number") && this.cookieEnabled){
-					this._add(val.name,val.val);
-				}
+				if(typeof val.name=="string" && (typeof val=="string" || typeof val=="number") && this.cookieEnabled) this._add(val.name,val.val);
 				if(typeof val=="object"){
 					if(val.name && val.val){
 						if(typeof val.name=="string" && (typeof val.val=="string" || typeof val.val=="number") && this.cookieEnabled){
@@ -273,9 +204,7 @@ Class({
 			}
 		},
 		remove:function(key,val){
-			if(this.cookieEnabled){
-				this._remove(val);
-			}
+			if(this.cookieEnabled) this._remove(val);
 		},
 		cookieEnabled:function(){}
 	},
@@ -366,35 +295,18 @@ Class({
 					if(optArr[1] && optArr[2]){
 						var currentTimeInt=parseInt(optArr[1]);
 						switch(optArr[2]){
-							case "m":{
-								endTime+=currentTimeInt*m;
-							}
-							break;
-							case "h":{
-								endTime+=currentTimeInt*h;
-							}
-							break;
-							case "d":{
-								endTime+=currentTimeInt*d;
-							}
-							break;
-							case "w":{
-								endTime+=currentTimeInt*w;
-							}
-							break;
-							case "M":{
+							case "m": endTime+=currentTimeInt*m; break;
+							case "h": endTime+=currentTimeInt*h; break;
+							case "d": endTime+=currentTimeInt*d; break;
+							case "w": endTime+=currentTimeInt*w; break;
+							case "M":
 								for(var j=0;j<currentTimeInt;j++){
 									var deltaDate=new Date(today.year,today.month+j);
 									var maxDay=Date.prototype.lastMonthDay(deltaDate.getMonth()+1,deltaDate.getFullYear());
 									endTime+=d*maxDay;
 								}
-							}
 							break;
-							case "Y":{
-								for(var j=1;j<=currentTimeInt;j++){
-									endTime+=d*Date.prototype.lastYearDay(today.year+j);
-								}
-							}
+							case "Y": for(var j=1;j<=currentTimeInt;j++) endTime+=d*Date.prototype.lastYearDay(today.year+j);
 							break;
 							default:
 						}
@@ -420,9 +332,7 @@ Class({
 	},
 	public:{
 		go:function(){
-			if(this._url){
-				location.href=this._url;
-			}
+			if(this._url) location.href=this._url;
 		}
 	},
 	get:{
@@ -563,12 +473,7 @@ Class({
 			}
 		},
 		urlReload:function(){
-			this._url=
-				this._scheme+"://"+
-				(!!this._user && !!this._password ? this._user+":"+this._password+"@" : "")+
-				this._host+this._directory+this._file+
-				(!!this._query ? "?"+this._query : "")+
-				(this._hash ? "#"+this._hash : "");
+			this._url=this._scheme+"://"+(!!this._user && !!this._password ? this._user+":"+this._password+"@" : "")+this._host+this._directory+this._file+(!!this._query ? "?"+this._query : "")+(this._hash ? "#"+this._hash : "");
 		}
 	}
 });
@@ -576,39 +481,24 @@ Class({
 	name:"Platform",
 	type:"interface",
 	pack:tools,
-	constructor:function(){},
 	public:{
 		name:(function(){
 			var name=navigator.platform.match(/(Linux|FreeBSD|Mac|Win|SunOS)/i);
-			if(name[1]){
-				return name[1];
-			}
-			else{
-				return (window.orientation != undefined) ? "iPod" : "Other";
-			}
+			return (name && name[1])?name[1]:(window.orientation!=undefined)?"iPod":"Other";
 		})(),
-		linux:(navigator.platform.indexOf("Linux") != -1),
-		freebsd:(navigator.platform.indexOf("FreeBSD") != -1),
-		mac: (navigator.platform.indexOf("Mac") != -1),
-		windows:(navigator.platform.indexOf("Win") != -1),
-		ipod:(window.orientation != undefined),
+		linux:(navigator.platform.indexOf("Linux")!=-1),
+		freebsd:(navigator.platform.indexOf("FreeBSD")!=-1),
+		mac: (navigator.platform.indexOf("Mac")!=-1),
+		windows:(navigator.platform.indexOf("Win")!=-1),
+		ipad:(window.orientation!=undefined),
 		other:"~!(this.linux || this.freebsd || this.mac || this.windows || this.ipod || this.sun)~",
-		sun:(navigator.platform.indexOf("SunOS") != -1),
+		sun:(navigator.platform.indexOf("SunOS")!=-1),
 		arch:(function(){
 			switch(true){
-				case !!(navigator.platform.match(/32|i586/i)):{
-					return "i586";
-				}
-				break;
-				case !!(navigator.platform.match(/64/i)):{
-					return "x86_64";
-				}
-				break;
-				default:{
-					return "Other";
-				}
+				case !!(navigator.platform.match(/32|i586/i)): return "i586"; break;
+				case !!(navigator.platform.match(/64/i)): return "x86_64"; break;
+				default: return "Other";
 			}
-			console.log(arch32,arch64)
 		})()
 	}
 });
@@ -616,18 +506,10 @@ Class({
 	name:"Flash",
 	type:"interface",
 	pack:tools,
-	constructor:function(){},
 	public:{
 		enable:(function(){
 			try{
-				if(tools.browser.IE){
-					if(!!(new ActiveXObject('ShockwaveFlash.ShockwaveFlash'))){
-						return true;
-					}
-				}
-				else{
-					return !!(navigator.plugins['Shockwave Flash']);
-				}
+				return (tools.Browser.IE && new ActiveXObject('ShockwaveFlash.ShockwaveFlash'))?true:!!(navigator.plugins['Shockwave Flash']);
 			}
 			catch(err){
 				return false;
@@ -638,23 +520,13 @@ Class({
 	protected:{
 		_version:function(){
 			if(this.enable){
-				if(tools.browser.IE){
+				if(tools.Browser.IE){
 					var ActiveX=new ActiveXObject('ShockwaveFlash.ShockwaveFlash').GetVariable('$version').match(/\d+/g);
-					if(ActiveX[0] && ActiveX[1]){
-						return parseFloat(ActiveX[0]+"."+ActiveX[1]);
-					}
-					else{
-						return ActiveX[0];
-					}
+					return (ActiveX[0] && ActiveX[1])?parseFloat(ActiveX[0]+"."+ActiveX[1]):ActiveX[0];
 				}
 				else{
 					var StdX=navigator.plugins['Shockwave Flash'].description.match(/\d+/g);
-					if(StdX[0] && StdX[1]){
-						return parseFloat(StdX[0]+"."+StdX[1]);
-					}
-					else{
-						return StdX[0];
-					}
+					return (StdX[0] && StdX[1])?parseFloat(StdX[0]+"."+StdX[1]):StdX[0];
 				}
 			}
 			else{
