@@ -108,7 +108,7 @@ Class({
 		dispatch:function(_event,_arr){
 			var __arr=[];
 			if(typeof _arr=="object") __arr=_arr;
-			if(typeof _event=="string" && this.eventAll[_event]) $(this).trigger(_event,__arr);
+			if(typeof _event=="string" && this.eventAll[_event]) $($(this)[0]).trigger(_event,__arr);
 		}
 	}
 });
