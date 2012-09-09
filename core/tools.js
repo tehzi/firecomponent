@@ -77,7 +77,7 @@ Class({
 });
 Class({
 	pack:tools,
-	name:"eventDispatcher",
+	name:"EventDispatcher",
 	constructor:function(){
 		this.eventAll={};
 		for(var i=0;i<this.eventList.length;i++) this.eventAll[this.eventList[i]]=[];
@@ -85,21 +85,27 @@ Class({
 	public:{
 		bind:function(_event,_function){
 			if(typeof _event=="string" && typeof _function=="function"){
-				if(this.eventAll[_event]){
+				_event=_event.split(' ');
+				_event.forEach(function(item){
+					if(this.eventAll[_event]===undefined) this.eventAll[_event]=[];
 					this.eventAll[_event].push(_function);
-					$(this).bind(_event,_function);
-				}
+				},this);
 			}
 		},
 		unbind:function(_event,_function){
-			if(typeof _event=="string" && typeof _function=="function"){
-				if(this.eventAll[_event]){
-					this.eventAll[_event]=$.grep(this.eventAll[_event],function(key,i){ return key!==_function; });
-					$(this).unbind(_event,_function);
-				}
+			if(typeof _event=="string"){
+				_event=_event.split(' ');
+				_event.forEach(function(item){
+					if(typeof _function=='function'){
+						this.eventAll[_event]=[].filter.call(this.eventAll[_event],function(el){ return el!==_function; });
+						if(this.eventAll[_event]==[]) delete this.eventAll[_event];
+					}
+					else{
+						delete this.eventAll[_event];
+					}
+				},this);
 				return;
 			}
-			if(typeof _event=="string" && arguments.length==1) $(this).unbind(_event);
 		}
 	},
 	protected:{
@@ -107,14 +113,21 @@ Class({
 		eventAll:{},
 		dispatch:function(_event,_arr){
 			var __arr=[];
+			var event=$.event.fix({});
 			if(typeof _arr=="object") __arr=_arr;
-			if(typeof _event=="string" && this.eventAll[_event]) $($(this)[0]).trigger(_event,__arr);
+			event.type=_event;
+			event.currentTarget=event.target=this;
+			event.isTrigger=true;
+			event.exclusive=true;
+			event.result=undefined;
+			if(typeof _event=='string') this.eventAll[_event].forEach(function(item){ item(event,__arr); });
+			return event.result;
 		}
 	}
 });
 Class({
 	pack:tools,
-	parent:tools.eventDispatcher,
+	parent:tools.EventDispatcher,
 	name:"Timer",
 	constructor:function(delay,repeatCount){
 		this.Super();
@@ -155,7 +168,7 @@ Class({
 Class({
 	name:"CookieManager",
 	pack:tools,
-	parent:tools.eventDispatcher,
+	parent:tools.EventDispatcher,
 	final:true,
 	constructor:function(){
 		if(this.cookieEnabled){
@@ -321,7 +334,7 @@ Class({
 Class({
 	name:"Url",
 	pack:tools,
-	parent:tools.eventDispatcher,
+	parent:tools.EventDispatcher,
 	final:true,
 	constructor:function(url){
 		this.Super();
