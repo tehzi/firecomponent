@@ -4,7 +4,7 @@
 * In programm used dojo hack  <a href="http://alex.dojotoolkit.org/08/jscript/lettable.html">dojo</a>.
 * Testing in ie6+, opera 9.5+, google chrome, safari, android browser, firefox 3+ and some khtml and webkit browser.
 * @author <a href="mailto:zi.white.drago@gmail.com">zi white</a>
-* @version 0.1.25
+* @version 0.1.26
 */
 var Class;
 function getClassName(Class){
@@ -567,8 +567,10 @@ function getClassName(Class){
 						}
 						while(typeof __Class__[granny_name].parent=="function");
 					}
+					instance.implements={};
 					for(var i=0;i<implements.length;i++){
 						className=getClassName(implements[i]);
+						instance.implements[className]={};
 						if(__Class__[className]){
 							parentObject=__Class__[className];
 							if(parentObject.constructor){
@@ -576,23 +578,43 @@ function getClassName(Class){
 							}
 							if(parentObject.protected){
 								for(var key in parentObject.protected){
-									if(!(public[key] || private[key] || protected[key]) && $.inArray(key,history[1])==-1){
+									if($.inArray(key,history[1])==-1){
+										var key_not_exist=!(public[key] || private[key] || protected[key]);
 										history[1].push(key);
 										(function(instance,key,parentObject){
 											if(typeof parentObject.protected[key]=="function"){
 												var method=parentObject.protected[key];
-												instance[key]=function(){
-													return method.apply(instance,arguments);
+												if(key_not_exist){
+													instance.implements[className][key]=instance[key]=function(){
+														return method.apply(instance,arguments);
+													}
+												}
+												else{
+													instance.implements[className][key]=function(){
+														return method.apply(instance,arguments);
+													}
 												}
 											}
 											else{
 												if(parentObject.protected[key]!==null && [(new Object).constructor,(new Array).constructor].indexOf(parentObject.protected[key].constructor)>-1){
 													var copy=function(){}
 													copy.prototype=parentObject.protected[key];
-													instance[key]=(parentObject.protected[key] instanceof Array)?parentObject.protected[key].slice(0):ClassModel.IE?parentObject.protected[key]:new copy();
+													if(key_not_exist){
+														instance.implements[className][key]=instance[key]=(parentObject.protected[key] instanceof Array)?
+															parentObject.protected[key].slice(0):ClassModel.IE?parentObject.protected[key]:new copy();
+													}
+													else{
+														instance.implements[className][key]=(parentObject.protected[key] instanceof Array)?
+															parentObject.protected[key].slice(0):ClassModel.IE?parentObject.protected[key]:new copy();
+													}
 												}
 												else{
-													instance[key]=parentObject.protected[key];
+													if(key_not_exist){
+														instance.implements[className][key]=instance[key]=parentObject.protected[key];
+													}
+													else{
+														instance.implements[className][key]=parentObject.protected[key];
+													}
 												}
 											}
 										})(instance,key,parentObject);
@@ -601,65 +623,82 @@ function getClassName(Class){
 							}
 							if(parentObject.public){
 								for(var key in parentObject.public){
-									if(!(public[key] || private[key] || protected[key]) && $.inArray(key,history[1])==-1){
+									if($.inArray(key,history[1])==-1){
+										var key_not_exist=!(public[key] || private[key] || protected[key]);
 										history[1].push(key);
 										if(typeof parentObject.public[key]=="function"){
 											var method=parentObject.public[key];
 											(function(method,instance,key){
-												instance[key]=function(){
-													return method.apply(instance,arguments);
-												}
-												if(ClassModel.OTHER){
-													instance.public[key]=function(){
+												if(key_not_exist){
+													instance.implements[className][key]=instance[key]=function(){
 														return method.apply(instance,arguments);
 													}
 												}
-												if(ClassModel.IE){
-													instance.public[key]=function(){
+												else{
+													instance.implements[className][key]=function(){
 														return method.apply(instance,arguments);
+													}
+												}
+												if(key_not_exist){
+													if(ClassModel.OTHER){
+														instance.implements[className][key]=instance.public[key]=function(){
+															return method.apply(instance,arguments);
+														}
+													}
+													if(ClassModel.IE){
+														instance.implements[className][key]=instance.public[key]=function(){
+															return method.apply(instance,arguments);
+														}
 													}
 												}
 											})(method,instance,key);
 										}
 										else{
-											instance[key]=parentObject.public[key];
-											if(ClassModel.OTHER){
-												(function(public,key,instance,name){
-													public.__defineGetter__(key,function(prop){
-														return instance[key];
-													});
-												})(instance.public,key,instance,name);
-												(function(public,key,instance,name){
-													public.__defineSetter__(key,function(val){
-														if(typeof val=='object'){
-															var copy=function(){}
-															copy.prototype=val;
-															instance[key]=(val instanceof Array)?val.slice(0):ClassModel.IE?val:new copy();
-														}
-														else{
-															instance[key]=val;
-														}
-													});
-												})(instance.public,key,instance,name);
+											if(key_not_exist){
+												instance.implements[className][key]=instance[key]=parentObject.public[key];
 											}
-											if(ClassModel.IE){
-												(function(public,key,instance,name){
-													public["get_"+key]=function(){
-														return instance[key];
-													}
-												})(instance.public,key,instance,name);
-												(function(public,key,instance,name){
-													public["set_"+key]=function(val){
-														if(typeof val=='object'){
-															var copy=function(){}
-															copy.prototype=val;
-															instance[key]=(val instanceof Array)?val.slice(0):ClassModel.IE?val:new copy();
+											else{
+												instance.implements[className][key]=parentObject.public[key];
+											}
+											if(key_not_exist){
+												if(ClassModel.OTHER){
+													(function(public,key,instance,name){
+														public.__defineGetter__(key,function(prop){
+															return instance[key];
+														});
+													})(instance.public,key,instance,name);
+													(function(public,key,instance,name){
+														public.__defineSetter__(key,function(val){
+															if(typeof val=='object'){
+																var copy=function(){}
+																copy.prototype=val;
+																instance[key]=(val instanceof Array)?val.slice(0):ClassModel.IE?val:new copy();
+															}
+															else{
+																instance[key]=val;
+															}
+														});
+													})(instance.public,key,instance,name);
+												}
+												if(ClassModel.IE){
+													(function(public,key,instance,name){
+														instance.implements[className][key]=public["get_"+key]=function(){
+															return instance[key];
 														}
-														else{
-															instance[key]=val;
+													})(instance.public,key,instance,name);
+													(function(public,key,instance,name){
+														public["set_"+key]=function(val){
+															if(typeof val=='object'){
+																var copy=function(){}
+																copy.prototype=val;
+																instance[key]=(val instanceof Array)?val.slice(0):ClassModel.IE?val:new copy();
+															}
+															else{
+																instance[key]=val;
+															}
 														}
-													}
-												})(instance.public,key,instance,name);
+													})(instance.public,key,instance,name);
+												}
 											}
 										}
 									}
@@ -676,7 +715,7 @@ function getClassName(Class){
 							})(private[key],instance);
 						}
 						else{
-							
+
 							if(private[key]!==null && [(new Object).constructor,(new Array).constructor].indexOf(private[key].constructor)>-1){
 								var copy=function(){}
 								copy.prototype=private[key];
