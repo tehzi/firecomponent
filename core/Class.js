@@ -578,7 +578,7 @@ function getClassName(Class){
 							}
 							if(parentObject.protected){
 								for(var key in parentObject.protected){
-									if($.inArray(key,history[1])==-1){
+									if($.inArray(key, history[1])==-1){
 										var key_not_exist=!(public[key] || private[key] || protected[key]);
 										history[1].push(key);
 										(function(instance,key,parentObject){
@@ -586,12 +586,12 @@ function getClassName(Class){
 												var method=parentObject.protected[key];
 												if(key_not_exist){
 													instance.implements[className][key]=instance[key]=function(){
-														return method.apply(instance,arguments);
+														return method.apply(instance, arguments);
 													}
 												}
 												else{
 													instance.implements[className][key]=function(){
-														return method.apply(instance,arguments);
+														return method.apply(instance, arguments);
 													}
 												}
 											}
@@ -618,6 +618,15 @@ function getClassName(Class){
 												}
 											}
 										})(instance,key,parentObject);
+									}
+									else{
+										if(typeof parentObject.protected[key]=="function"){
+											instance.implements[className][key]=function(){
+												return method.apply(instance, arguments);
+											}
+										} else{
+											instance.implements[className][key]=parentObject.protected[key];
+										}
 									}
 								}
 							}
@@ -702,6 +711,15 @@ function getClassName(Class){
 											}
 										}
 									}
+									else{
+										if(typeof parentObject.protected[key]=="function"){
+											instance.implements[className][key]=function(){
+												return method.apply(instance, arguments);
+											}
+										} else{
+											instance.implements[className][key]=parentObject.protected[key];
+										}
+									}
 								}
 							}
 						}
@@ -755,7 +773,7 @@ function getClassName(Class){
 								public[key]=function(){
 									return method.apply(instance,arguments);
 								}
-							})(method,instance,key,instance.public);
+							})(method, instance, key, instance.public);
 						}
 						else{
 							instance[key]=public[key];
