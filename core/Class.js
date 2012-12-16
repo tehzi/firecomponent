@@ -621,9 +621,12 @@ function getClassName(Class){
 									}
 									else{
 										if(typeof parentObject.protected[key]=="function"){
-											instance.implements[className][key]=function(){
-												return method.apply(instance, arguments);
-											}
+											(function(instance,key,parentObject){
+												var method=parentObject.protected[key];
+												instance.implements[className][key]=function(){
+													return method.apply(instance, arguments);
+												}
+											})(instance,key,parentObject);
 										} else{
 											instance.implements[className][key]=parentObject.protected[key];
 										}
@@ -713,9 +716,12 @@ function getClassName(Class){
 									}
 									else{
 										if(typeof parentObject.protected[key]=="function"){
-											instance.implements[className][key]=function(){
-												return method.apply(instance, arguments);
-											}
+											var method=parentObject.protected[key];
+											(function(method,instance,key){
+												instance.implements[className][key]=function(){
+													return method.apply(instance, arguments);
+												}
+											})(method, instance, key);
 										} else{
 											instance.implements[className][key]=parentObject.protected[key];
 										}
