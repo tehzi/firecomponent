@@ -143,6 +143,9 @@ Class({
 			if(this.delay>0){
 				this.currentCount=0;
 				this.running=true;
+				if(this.timeLink!==null){
+					clearInterval(this.timeLink);
+				}
 				this.timeLink=setInterval(this.timeExec,this.delay);
 			}
 		},
